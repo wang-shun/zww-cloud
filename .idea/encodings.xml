@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/zww-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-config" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-game" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-account" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-activity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-pay" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-produce-riskManagement" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zww-rest" charset="UTF-8" />
+  </component>
+</project>

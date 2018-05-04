@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zww-admin:war">
+    <output-path>$PROJECT_DIR$/zww-admin/target</output-path>
+    <root id="archive" name="zww-admin-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="zww-admin:war exploded" />
+    </root>
+  </artifact>
+</component>

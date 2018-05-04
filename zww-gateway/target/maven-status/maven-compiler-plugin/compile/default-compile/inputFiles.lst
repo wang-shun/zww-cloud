@@ -1,0 +1,6 @@
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\ZuulApplication.java
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\filter\DelegateRequestMatchingFilter.java
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\filter\ApiRequestMatchingFilter.java
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\security\WebSecurityConfig.java
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\filter\AccessFilter.java
+D:\java-workspace\365zww\zww-gateway\src\main\java\com\zww\gateway\GlobDataContext.java
