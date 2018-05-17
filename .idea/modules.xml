@@ -3,11 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/zww-admin/src/main/main.iml" filepath="$PROJECT_DIR$/zww-admin/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zww-core/src/main/main1.iml" filepath="$PROJECT_DIR$/zww-core/src/main/main1.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-generator/src/main/main2.iml" filepath="$PROJECT_DIR$/zww-generator/src/main/main2.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-rest/src/main/main3.iml" filepath="$PROJECT_DIR$/zww-rest/src/main/main3.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-rest/src/test/test.iml" filepath="$PROJECT_DIR$/zww-rest/src/test/test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zww-admin/src/test/test1.iml" filepath="$PROJECT_DIR$/zww-admin/src/test/test1.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-admin/zww-admin.iml" filepath="$PROJECT_DIR$/zww-admin/zww-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-api/zww-api.iml" filepath="$PROJECT_DIR$/zww-api/zww-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/zww-common/zww-common.iml" filepath="$PROJECT_DIR$/zww-common/zww-common.iml" />

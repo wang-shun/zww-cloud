@@ -3,8 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.stylefeng</groupId>
     <artifactId>zww-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
+    <version>1.0.0</version>
     <name>zww-parent</name>
     <packaging>pom</packaging>
 
@@ -71,7 +70,7 @@
         <aliyun-core.version>3.2.10</aliyun-core.version>
         <aliyun-mns.version>1.1.8</aliyun-mns.version>
         <aliyun-oss.version>2.7.0</aliyun-oss.version>
-        <aliyun-dysmsapi.version>1.0.0</aliyun-dysmsapi.version>
+        <aliyun-dysmsapi.version>1.1.0</aliyun-dysmsapi.version>
         <aliyun-sdk.version>20170307171631</aliyun-sdk.version>
     </properties>
 
@@ -134,11 +133,11 @@
     			<version>${jdom.version}</version>
 		</dependency>
         <!-- tcc 事务控制 -->
-        <dependency>
-            <groupId>org.bytesoft</groupId>
-            <artifactId>bytetcc-supports-springcloud</artifactId>
-            <version>0.4.1</version>
-        </dependency>
+            <dependency>
+                <groupId>org.bytesoft</groupId>
+                <artifactId>bytetcc-supports-springcloud</artifactId>
+                <version>0.4.1</version>
+            </dependency>
             
        <dependency>
             <groupId>org.projectlombok</groupId>
@@ -147,7 +146,7 @@
         </dependency>
         
        <dependency>
-            <groupId>com.aliyun.dysms</groupId>
+            <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>${aliyun-dysmsapi.version}</version>
         </dependency>
