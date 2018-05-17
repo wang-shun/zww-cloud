@@ -40,7 +40,7 @@ spring:
      max-idle: 8
      min-idle: 0
   profiles:
-    active: produce  # dev  test  produce  majia
+    active: produce  # dev  test  produce
   mvc:
     static-path-pattern: /static/**
     view:
