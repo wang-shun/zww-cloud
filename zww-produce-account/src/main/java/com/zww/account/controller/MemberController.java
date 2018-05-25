@@ -34,7 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Author: mwan Version: 1.1 Date: 2018/03/27 Description: 用户信息编辑管理控制层.
- * Copyright (c) 2018 365zww网络. All rights reserved.
+ * Copyright (c) 2018 网络. All rights reserved.
  */
 @RestController
 @RequestMapping(value = "/member/info")

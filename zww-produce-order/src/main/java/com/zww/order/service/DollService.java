@@ -13,7 +13,7 @@ import com.zww.common.ResultMap;
  * Version: 1.1
  * Date: 2018/03/27
  * Description: 娃娃机管理业务接口.
- * Copyright (c) 2018 365zww网络. All rights reserved.
+ * Copyright (c) 2018 网络. All rights reserved.
  */
 public interface DollService {
 

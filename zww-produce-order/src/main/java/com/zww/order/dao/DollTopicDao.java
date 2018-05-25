@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author lcc Version: 1.0 Date: 2018/3/26 Description: 用户Dao接口类. Copyright
- *         (c) 2018 365zww网络. All rights reserved.
+ *         (c) 2018 网络. All rights reserved.
  */
 public interface DollTopicDao {
 

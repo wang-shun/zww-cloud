@@ -9,7 +9,7 @@ import com.zww.api.model.SystemPref;
  * Version: 1.1
  * Date: 2018/03/23
  * Description: 系统参数表DAO层.
- * Copyright (c) 2018 zww365网络. All rights reserved.
+ * Copyright (c) 2018 网络. All rights reserved.
  */
 public interface SystemPrefDao {
     int deleteByPrimaryKey(String code);

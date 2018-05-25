@@ -43,7 +43,7 @@ import org.apache.commons.lang.StringUtils ;
  * Version: 1.1
  * Date: 2018/04/02
  * Description: 封装的http请求类.
- * Copyright (c) 2018 zww365网络. All rights reserved.
+ * Copyright (c) 2018 网络. All rights reserved.
  */  
 public class HttpClientUtil {
       
