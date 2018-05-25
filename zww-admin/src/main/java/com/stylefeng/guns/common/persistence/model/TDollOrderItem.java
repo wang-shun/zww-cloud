@@ -24,9 +24,9 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
 	@TableField("order_id")
-	private Integer orderId;
+	private Long orderId;
 	@TableField("doll_id")
 	private Integer dollId;
 	private Integer quantity;
@@ -65,19 +65,19 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 		this.dollImg = dollImg;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 

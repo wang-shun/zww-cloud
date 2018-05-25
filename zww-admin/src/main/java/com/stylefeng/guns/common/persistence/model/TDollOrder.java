@@ -25,7 +25,7 @@ public class TDollOrder extends Model<TDollOrder> {
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
     /**
      * 抓到娃娃后生成的订单编号
      */
@@ -212,11 +212,11 @@ public class TDollOrder extends Model<TDollOrder> {
 		this.street = street;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -24,7 +24,7 @@
 		from t_doll_order_item a LEFT JOIN doll_info b on a.doll_code=b.dollCode
 		where 1=1
 		<if test="#{orderId != null and orderId != ''}">
-			and a.order_id=#{orderId,jdbcType=INTEGER}
+			and a.order_id=#{orderId,jdbcType=LONG}
 		</if>
 		ORDER by id
 	</select>

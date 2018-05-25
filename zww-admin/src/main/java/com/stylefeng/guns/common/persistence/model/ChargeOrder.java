@@ -28,7 +28,7 @@ public class ChargeOrder extends Model<ChargeOrder> {
      * 唯一标识
      */
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
     /**
 	 * 订单编号
 	 */
@@ -129,11 +129,11 @@ public class ChargeOrder extends Model<ChargeOrder> {
 		this.memberNum = memberNum;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

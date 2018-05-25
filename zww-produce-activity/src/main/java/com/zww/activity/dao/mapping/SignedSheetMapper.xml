@@ -31,7 +31,7 @@
     select
     <include refid="Base_Column_List" />
      from signed_sheet
-    where member_id = #{memberId,jdbcType=INTEGER} order by signed_date desc LIMIT 1
+    where member_id = #{memberId,jdbcType=VARCHAR} order by signed_date desc LIMIT 1
   </select>
 
 	<insert id="insert" parameterType="com.zww.api.model.SignedSheet">

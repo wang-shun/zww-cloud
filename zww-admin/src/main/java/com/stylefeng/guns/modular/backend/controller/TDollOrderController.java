@@ -84,7 +84,7 @@ public class TDollOrderController extends BaseController {
     public Object goodsDetailList(String orderNum) {
 
         TDollOrder tDollOrder = tDollOrderService.selectByorderNum(orderNum);
-        Integer orderId = null;
+        Long orderId = null;
         if(tDollOrder != null){
             orderId = tDollOrder.getId();
         }
@@ -160,7 +160,7 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/callInDoll")
     @ResponseBody
-    public Object callInDoll(@RequestParam Integer tDollOrderId) {
+    public Object callInDoll(@RequestParam Long tDollOrderId) {
         TDollOrder tDollOrder = new TDollOrder();
         tDollOrder.setId(tDollOrderId);
         tDollOrder.setModifiedBy(ShiroKit.getUser().getId());
