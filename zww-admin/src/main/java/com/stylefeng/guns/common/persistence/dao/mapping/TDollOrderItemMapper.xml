@@ -30,7 +30,7 @@
 	</select>
 
 	<select id="selectByOrderId" resultType="map">
-		select *
+		select  id, order_id AS orderId, doll_id AS dollId, quantity, created_date AS createdDate, modified_date AS modifiedDate, doll_code AS dollCode
 		from t_doll_order_item where order_id = #{orderId}
 	</select>
 </mapper>
