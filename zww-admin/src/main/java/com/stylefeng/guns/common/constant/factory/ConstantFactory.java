@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.common.constant.cache.Cache;
 import com.stylefeng.guns.common.constant.cache.CacheKey;
+import com.stylefeng.guns.common.constant.state.ManagerLevel;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.constant.state.MenuStatus;
 import com.stylefeng.guns.common.persistence.dao.*;
@@ -37,6 +38,7 @@ public class ConstantFactory implements IConstantFactory {
     private DictMapper dictMapper = SpringContextHolder.getBean(DictMapper.class);
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
+    private TAgentMapper tAgentMapper = SpringContextHolder.getBean(TAgentMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
      
     public static IConstantFactory me() {
@@ -277,6 +279,15 @@ public class ConstantFactory implements IConstantFactory {
     }
 
     /**
+     * 获取代理商等级
+     */
+
+    @Override
+    public String getleveName(Integer level) {
+        return ManagerLevel.valueOf(level);
+    }
+
+    /**
      * 获取菜单状态
      */
      
@@ -349,6 +360,13 @@ public class ConstantFactory implements IConstantFactory {
         }
         return parentDeptIds;
     }
-
-
+    @Override
+    public String getAgentById(Integer agentId) {
+        TAgent tAgent = tAgentMapper.selectById(agentId);
+        if (tAgent == null) {
+            return null;
+        } else {
+            return tAgent.getNickName();
+        }
+    }
 }

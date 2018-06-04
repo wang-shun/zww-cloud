@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-05-31
  */
 public interface ITAgentService extends IService<TAgent> {
-	
+
+   TAgent getById(Integer id);
 }

@@ -4,6 +4,7 @@ import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.dao.TAgentMapper;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> implements ITAgentService {
-	
+
+    @Autowired
+    private  TAgentMapper tAgentMapper;
+
+    @Override
+    public TAgent getById(Integer id) {
+        return tAgentMapper.selectById(id);
+    }
 }

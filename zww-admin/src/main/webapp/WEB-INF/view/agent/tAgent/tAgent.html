@@ -9,12 +9,26 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <#NameCon id="condition" name="名称" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <#NameCon id="phone" name="手机号" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#TimeCon id="createTime" name="注册时间" isTime="false" pattern="YYYY-MM-DD"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="level" name="代理等级" >
+                                <option value="0">特级代理</option>
+                                <option value="1">一级代理</option>
+                                <option value="2">二级代理</option>
+                                <option value="3">三级代理</option>
+                            </#SelectCon>
+                            <div class="col-sm-1">
                                 <#button name="搜索" icon="fa-search" clickFun="TAgent.search()"/>
                             </div>
+                        </div>
                         </div>
                         <div class="hidden-xs" id="TAgentTableToolbar" role="group">
                             @if(shiro.hasPermission("/tAgent/add")){

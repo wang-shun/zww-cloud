@@ -13,4 +13,8 @@
 		<result column="version" property="version" />
 	</resultMap>
 
+	<select id="selectId" resultType="com.stylefeng.guns.common.persistence.model.Role" parameterType="java.lang.Integer">
+		 select id,num,pid,name,deptid,tips,version from sys_role where id = #{id}
+	</select>
+
 </mapper>

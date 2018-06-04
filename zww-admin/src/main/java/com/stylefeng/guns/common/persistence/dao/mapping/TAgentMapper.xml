@@ -25,4 +25,10 @@
         id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee, balance
     </sql>
 
+	<select id="selectById" resultType="TAgent"  parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from t_agent
+		WHERE id = #{id}
+	</select>
 </mapper>

@@ -6,14 +6,14 @@ package com.stylefeng.guns.common.constant.state;
  * @author fengshuonan
  * @Date 2017年1月10日 下午9:54:13
  */
-public enum ManagerStatus {
+public enum ManagerLevel {
 
-    OK(1, "启用"), FREEZED(2, "冻结"), DELETED(3, "失效");
+    Super(0, "特级"), ClassA(1, "一级"), SecondLevel(2, "二级"), ThRLEVEL(3, "三级");
 
     int code;
     String message;
 
-    ManagerStatus(int code, String message) {
+    ManagerLevel(int code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -38,7 +38,7 @@ public enum ManagerStatus {
         if (value == null) {
             return "";
         } else {
-            for (ManagerStatus ms : ManagerStatus.values()) {
+            for (ManagerLevel ms : ManagerLevel.values()) {
                 if (ms.getCode() == value) {
                     return ms.getMessage();
                 }

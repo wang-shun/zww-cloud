@@ -15,6 +15,8 @@ import java.util.Map;
 public class UserWarpper extends BaseControllerWarpper {
 
     public UserWarpper(List<Map<String, Object>> list) {
+
+
         super(list);
     }
 

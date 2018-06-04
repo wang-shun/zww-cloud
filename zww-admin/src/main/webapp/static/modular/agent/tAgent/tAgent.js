@@ -14,20 +14,22 @@ var TAgent = {
 TAgent.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户名', field: 'username', visible: true, align: 'center', valign: 'middle'},
-            {title: '密码', field: 'password', visible: true, align: 'center', valign: 'middle'},
-            {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
-            {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
-            {title: '代理等级（0特级 1 ， 2 ,  3）', field: 'level', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态 (0未开启，1正常 ，2失效)', field: 'status', visible: true, align: 'center', valign: 'middle'},
-            {title: '特级代理id', field: 'agentId', visible: true, align: 'center', valign: 'middle'},
-            {title: '一级代理id', field: 'agentOneId', visible: true, align: 'center', valign: 'middle'},
-            {title: '二级代理id', field: 'agentTwoId', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '最后修改时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'},
-            {title: '余额', field: 'balance', visible: true, align: 'center', valign: 'middle'}
+        {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '用户名', field: 'username', visible: false, align: 'center', valign: 'middle'},
+        {title: '密码', field: 'password', visible: false, align: 'center', valign: 'middle'},
+
+        {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
+        {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
+        {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
+       /* {title: '状态', field: 'status', visible: true, align: 'center', valign: 'middle'},*/
+        {title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'},
+        {title: '余额', field: 'balance', visible: true, align: 'center', valign: 'middle'},
+        {title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
+        {title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'},
+        {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
+        {title: '最后修改时间', field: 'updateTime', visible: false, align: 'center', valign: 'middle'},
+        {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
+        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true}
     ];
 };
 

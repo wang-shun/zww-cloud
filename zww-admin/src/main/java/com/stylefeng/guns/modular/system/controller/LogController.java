@@ -33,7 +33,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/log")
-public class LogController extends BaseController {
+public class
+LogController extends BaseController {
 
     private static String PREFIX = "/system/log/";
 

@@ -7,23 +7,20 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="username" name="用户名" value="${item.username}" underline="true"/>
-                            <#input id="password" name="密码" value="${item.password}" underline="true"/>
-                            <#input id="phone" name="手机号" value="${item.phone}" underline="true"/>
-                            <#input id="nickName" name="真实姓名" value="${item.nickName}" underline="true"/>
-                            <#input id="level" name="代理等级（0特级 1 ， 2 ,  3）" value="${item.level}" underline="true"/>
-                            <#input id="status" name="状态 (0未开启，1正常 ，2失效)" value="${item.status}" />
+                    <#input id="username" name="用户名" value="${item.username}" underline="true"/>
+                    <#input id="phone" name="手机号" value="${item.phone}" underline="true"/>
+                    <#input id="nickName" name="真实姓名" value="${item.nickName}" underline="true"/>
+
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="agentId" name="特级代理id" value="${item.agentId}" underline="true"/>
-                            <#input id="agentOneId" name="一级代理id" value="${item.agentOneId}" underline="true"/>
-                            <#input id="agentTwoId" name="二级代理id" value="${item.agentTwoId}" underline="true"/>
-                            <#input id="createTime" name="创建时间" value="${item.createTime}" underline="true"/>
-                            <#input id="updateTime" name="最后修改时间" value="${item.updateTime}" underline="true"/>
-                            <#input id="fee" name="费率" value="${item.fee}" underline="true"/>
-                            <#input id="balance" name="余额" value="${item.balance}" />
+
+                    <#input id="updateTime" name="最后修改时间" underline="true" type="date"
+                    value="${item.createTime}"
+                    clickFun="laydate({istime: false, format: 'YYYY-MM-DD'})" />
+                    <#input id="fee" name="费率" value="${item.fee}" underline="true"/>
+
+                    <#input id="id" name="" value="${item.id}" underline="true" type="hidden"/>
                 </div>
             </div>
 

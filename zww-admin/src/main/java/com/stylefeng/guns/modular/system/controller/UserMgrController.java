@@ -17,8 +17,6 @@ import com.stylefeng.guns.core.datascope.DataScope;
 import com.stylefeng.guns.core.db.Db;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.StringUtils;
@@ -40,12 +38,10 @@ import javax.naming.NoPermissionException;
 import javax.validation.Valid;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * 系统管理员控制器
@@ -216,7 +212,7 @@ public class UserMgrController extends BaseController {
         user.setPassword(ShiroKit.md5(user.getPassword(), user.getSalt()));
         user.setStatus(ManagerStatus.OK.getCode());
         user.setCreatetime(new Date());
-
+        user.setRoleid("18");
         this.userMapper.insert(UserFactory.createUser(user));
         return SUCCESS_TIP;
     }

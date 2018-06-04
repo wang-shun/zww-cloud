@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.stylefeng.guns.core.support.HttpKit.getIp;
@@ -65,6 +66,7 @@ public class LoginController extends BaseController {
         //获取用户头像
         Integer id = ShiroKit.getUser().getId();
         User user = userMapper.selectById(id);
+        ShiroKit.getSession().setAttribute("userL", user);
         String avatar = user.getAvatar();
         model.addAttribute("avatar", avatar);
 
@@ -95,6 +97,10 @@ public class LoginController extends BaseController {
         String password = super.getPara("password").trim();
         String remember = super.getPara("remember");
 
+
+     /*
+
+
         //验证验证码是否正确
         if (KaptchaUtil.getKaptchaOnOff()) {
             String kaptcha = super.getPara("kaptcha").trim();
@@ -102,7 +108,7 @@ public class LoginController extends BaseController {
             if (ToolUtil.isEmpty(kaptcha) || !kaptcha.equalsIgnoreCase(code)) {
                 throw new InvalidKaptchaException();
             }
-        }
+        }*/
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());

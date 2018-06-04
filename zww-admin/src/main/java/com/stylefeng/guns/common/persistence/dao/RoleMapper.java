@@ -12,5 +12,5 @@ import com.stylefeng.guns.common.persistence.model.Role;
  * @since 2017-07-11
  */
 public interface RoleMapper extends BaseMapper<Role> {
-
+      Role selectId(Integer id);
 }

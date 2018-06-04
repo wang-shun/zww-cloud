@@ -89,6 +89,11 @@ public interface IConstantFactory {
     String getStatusName(Integer status);
 
     /**
+     * 获取代理商等级
+     */
+    String getleveName(Integer status);
+
+    /**
      * 获取菜单状态
      */
     String getMenuStatusName(Integer status);
@@ -112,5 +117,7 @@ public interface IConstantFactory {
      * 获取所有父部门id
      */
     List<Integer> getParentDeptIds(Integer deptid);
+
+   String getAgentById(Integer agentId);
 
 }

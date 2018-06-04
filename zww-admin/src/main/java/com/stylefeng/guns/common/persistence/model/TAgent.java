@@ -85,6 +85,19 @@ public class TAgent extends Model<TAgent> {
      */
 	private Long balance;
 
+	/**
+	 * md5密码盐
+	 */
+	private String salt;
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getSalt() {
+
+		return salt;
+	}
 
 	public Integer getId() {
 		return id;
