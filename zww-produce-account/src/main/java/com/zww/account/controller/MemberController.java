@@ -87,7 +87,7 @@ public class MemberController {
                 String suffix = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
                 // 修改后完整的文件名称
                 String fileKey = StringUtils.getRandomUUID();
-                String NewFileKey = fileKey + "." + suffix;
+                String NewFileKey = "sys/" + fileKey + "." + suffix;
 
                 byte[] bytes = file.getBytes();
                 InputStream fileInputStream = new ByteArrayInputStream(bytes);
