@@ -13,4 +13,8 @@ public class ErrorTip extends Tip {
         this.code = code;
         this.message = message;
     }
+    public ErrorTip(){
+        super.code = 500;
+        super.message = "操作失败";
+    }
 }
