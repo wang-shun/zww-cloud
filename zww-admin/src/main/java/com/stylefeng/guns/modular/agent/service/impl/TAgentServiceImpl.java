@@ -22,7 +22,7 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
     private  TAgentMapper tAgentMapper;
 
     @Override
-    public TAgent getById(Integer id) {
-        return tAgentMapper.selectById(id);
+    public TAgent selectLevelById(Integer id) {
+        return tAgentMapper.selectLevelById(id);
     }
 }

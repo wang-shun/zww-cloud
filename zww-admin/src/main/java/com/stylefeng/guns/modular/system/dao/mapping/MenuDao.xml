@@ -28,79 +28,27 @@
 
 	<select id="menuTreeList" resultType="com.stylefeng.guns.core.node.ZTreeNode">
 		SELECT
-		m1.id AS id,
-		(
-		CASE
-		WHEN (m2.id = 0 OR m2.id IS NULL) THEN
-		0
-		ELSE
-		m2.id
-		END
-		) AS pId,
-		m1. NAME
-		AS NAME,
-		(
-		CASE
-		WHEN (m2.id = 0 OR m2.id IS NULL) THEN
-		'true'
-		ELSE
-		'false'
-		END
-		) as isOpen
-		FROM
-		sys_menu m1
-		LEFT join sys_menu m2 ON m1.pcode = m2. CODE
+		m1.id AS id,(CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0 ELSE m2.id	END) AS pId,
+		m1. NAME AS NAME,(CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 'true' ELSE 'false' END) as isOpen
+		FROM (SELECT id,NAME,pcode FROM sys_menu WHERE status=1) m1
+		LEFT join (SELECT id,CODE FROM sys_menu WHERE status=1) m2 ON m1.pcode = m2. CODE
 		ORDER BY
 		m1.id ASC
 	</select>
 
 	<select id="menuTreeListByMenuIds" resultType="com.stylefeng.guns.core.node.ZTreeNode">
-		SELECT
-		m1.id AS id,
-		(
-		CASE
-		WHEN (m2.id = 0 OR m2.id IS NULL) THEN
-		0
-		ELSE
-		m2.id
-		END
-		) AS pId,
-		m1. NAME AS NAME,
-		(
-		CASE
-		WHEN (m2.id = 0 OR m2.id IS
-		NULL) THEN
-		'true'
-		ELSE
-		'false'
-		END
-		) as isOpen,
-		(
-		CASE
-		WHEN (m3.ID = 0 OR m3.ID
-		IS NULL) THEN
-		'false'
-		ELSE
-		'true'
-		END
-		) "checked"
-		FROM
-		sys_menu m1
-		LEFT JOIN
-		sys_menu m2
-		ON m1.pcode = m2. CODE
-		left join (
-		SELECT
-		ID
-		FROM
-		sys_menu
-		WHERE
-		ID IN
+		SELECT	m1.id AS id,(CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 0	ELSE m2.id	END	) AS pId,
+		m1. NAME AS NAME,(CASE WHEN (m2.id = 0 OR m2.id IS NULL) THEN 'true' ELSE 'false'	END) as isOpen,
+		(CASE	WHEN (m3.id = 0 OR m3.id IS NULL) THEN 'false' ELSE 'true' END) "checked"
+		FROM (SELECT id,NAME,pcode FROM sys_menu WHERE status=1) m1
+		LEFT JOIN (SELECT id,code FROM sys_menu WHERE status=1) m2
+		ON m1.pcode = m2. code
+		left join ( SELECT id FROM sys_menu	WHERE ID IN
 		<foreach collection="list" index="index" item="i" open="("
 			separator="," close=")">
 			#{i}
 		</foreach>
-		) m3 on m1.id = m3.id
+		and status=1) m3 on m1.id = m3.id
 		ORDER BY
 		m1.id ASC
 	</select>

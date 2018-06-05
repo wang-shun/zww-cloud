@@ -62,9 +62,6 @@ public class TAgentController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-
-
-
         return PREFIX + "tAgent.html";
     }
 
@@ -112,7 +109,6 @@ public class TAgentController extends BaseController {
     public Object add(TAgent tAgent) {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
-        System.out.println("getTips:" +  role.getTips());
         //添加用户
         UserDto user = new UserDto();
 
@@ -120,7 +116,7 @@ public class TAgentController extends BaseController {
             tAgent.setLevel(0);
             user.setRoleid("2");
         }else{
-            TAgent tAgent1 =tAgentService.getById(userdto.getId());
+            TAgent tAgent1 =tAgentService.selectLevelById(userdto.getId());
             Integer level = tAgent1.getLevel();
             switch(level){
                 case 0: tAgent.setLevel(level+1);

@@ -22,8 +22,8 @@
   zww:
     datasource:
       url: jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
-      username: lz
-      password: Lz19958413
+      username: bruce
+      password: Xlq12345!
   muti-datasource:
     default-dataSource-name: dataSourceGuns #默认的数据源名称
     url: rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww_flowable?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false

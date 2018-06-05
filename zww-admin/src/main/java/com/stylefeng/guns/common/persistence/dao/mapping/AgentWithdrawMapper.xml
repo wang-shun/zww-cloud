@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.AgentWithdrawMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.AgentWithdraw">
+		<id column="id" property="id" />
+		<result column="trade_no" property="tradeNo" />
+		<result column="agentId" property="agentId" />
+		<result column="amount" property="amount" />
+		<result column="fee" property="fee" />
+		<result column="actual_amount" property="actualAmount" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="id_card_no" property="idCardNo" />
+		<result column="card_no" property="cardNo" />
+		<result column="remark" property="remark" />
+		<result column="status" property="status" />
+		<result column="create_date" property="createDate" />
+		<result column="confirm_date" property="confirmDate" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, trade_no AS tradeNo, agentId, amount, fee, actual_amount AS actualAmount, name, phone, id_card_no AS idCardNo, card_no AS cardNo, remark, status, create_date AS createDate, confirm_date AS confirmDate, update_date AS updateDate
+    </sql>
+
+	<select id="selectAgentWithdrow" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select
+		<include refid="Base_Column_List" />
+		from agent_withdraw	where 1=1
+		<if test="type == 0">
+			and status = 0
+		</if>
+		<if test="type == 1">
+			and status != 0
+		</if>
+		<if test="type == 2">
+			and status = #{status}
+		</if>
+		<if test="phone != null and phone != ''">
+			and phone = #{phone}
+		</if>
+		<if test="name != null and name != ''">
+			and name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="createDate != null and createDate != ''">
+			and DATEDIFF(create_date,#{createDate}) &gt;= 0
+		</if>
+		order by create_date DESC
+	</select>
+
+	<update id="updateStatusById" parameterType="com.stylefeng.guns.common.persistence.model.AgentWithdraw">
+		UPDATE agent_withdraw
+		SET status = #{status},
+		confirm_date = now(),update_date = now()
+		WHERE
+		id = #{id};
+	</update>
+</mapper>

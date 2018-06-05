@@ -13,5 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ITAgentService extends IService<TAgent> {
 
-   TAgent getById(Integer id);
+   TAgent selectLevelById(Integer id);
 }
