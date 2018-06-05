@@ -34,7 +34,7 @@ AgentWithdraw.initColumn = function () {
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
         {title: '身份证号', field: 'idCardNo', visible: true, align: 'center', valign: 'middle'},
         {title: '到账卡号', field: 'cardNo', visible: true, align: 'center', valign: 'middle'},
-        {title: '提现备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
+        {title: '审批备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
         {title: '提现状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
         {title: '确认时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'},
@@ -55,21 +55,27 @@ AgentWithdraw.check = function () {
         return true;
     }
 };
-
+AgentWithdraw.total = function () {
+    $.post(Feng.ctxPath + "/agentWithdraw/totle",function(result){
+           $("#undischarged").html(result.undischarged/100);//未清算
+           $("#notPutForward").html(result.notPutForward/100);//未提现
+           $("#alreadyPresented").html(result.alreadyPresented/100);//已提现
+    });
+};
 /**
- * 点击添加已审批
+ * 点击提现
  */
-/*AgentWithdraw.openAddAgentWithdraw = function () {
+AgentWithdraw.Withdraw = function () {
     var index = layer.open({
         type: 2,
-        title: '添加已审批',
-        area: ['800px', '420px'], //宽高
+        title: '提现',
+        area: ['500px', '320px'], //宽高
         fix: false, //不固定
         maxmin: true,
-        content: Feng.ctxPath + '/agentWithdraw/agentWithdraw_add'
+        content: Feng.ctxPath + '/agentWithdraw/withdrawPage'
     });
     this.layerIndex = index;
-};*/
+};
 
 /**
  * 打开查看已审批详情
@@ -109,14 +115,13 @@ AgentWithdraw.check = function () {
  */
 AgentWithdraw.search = function () {
     var queryData = {};
-    queryData['status'] = 0;
-    queryData['name'] = $("#name").val();
-    queryData['phone'] = $("#phone").val();
+    queryData['status'] = $("#status").val();
     queryData['createDate'] = $("#createDate").val();
     AgentWithdraw.table.refresh({query: queryData});
 };
 
 $(function () {
+    AgentWithdraw.total();
     var defaultColunms = AgentWithdraw.initColumn();
     var table = new BSTable(AgentWithdraw.id, "/agentWithdraw/list2", defaultColunms);
     table.setPaginationType("server");

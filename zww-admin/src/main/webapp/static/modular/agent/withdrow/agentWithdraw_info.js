@@ -63,20 +63,24 @@ AgentWithdrawInfoDlg.collectData = function() {
 }
 
 /**
- * 提交添加
+ * 提现
  */
-AgentWithdrawInfoDlg.addSubmit = function() {
+AgentWithdrawInfoDlg.Withdraw = function() {
 
     this.clearData();
     this.collectData();
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.AgentWithdraw.table.refresh();
-        AgentWithdrawInfoDlg.close();
+    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/withdraw", function(data){
+        if(data.code == 200 ){
+            Feng.success("提现成功!");
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
+        }else{
+            Feng.success(data.message);
+        }
     },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
+        Feng.error("提现失败!" + data.responseJSON.message + "!");
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();
@@ -92,9 +96,13 @@ AgentWithdrawInfoDlg.editSubmit = function() {
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.AgentWithdraw.table.refresh();
-        AgentWithdrawInfoDlg.close();
+        if(data.code == 200 ){
+            Feng.success("修改成功!");
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
+        }else{
+            Feng.success(data.message);
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });

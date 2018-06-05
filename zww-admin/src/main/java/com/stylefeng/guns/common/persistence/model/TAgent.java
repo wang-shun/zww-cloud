@@ -86,6 +86,12 @@ public class TAgent extends Model<TAgent> {
 	private Long balance;
 
 	/**
+	 * 冻结金额
+	 */
+	@TableField("balance_disabled")
+	private Long balanceDisabled;
+
+	/**
 	 * md5密码盐
 	 */
 	private String salt;
@@ -211,6 +217,16 @@ public class TAgent extends Model<TAgent> {
 		this.balance = balance;
 	}
 
+	public Long getBalanceDisabled() {
+		return balanceDisabled;
+	}
+
+	public void setBalanceDisabled(Long balanceDisabled) {
+		this.balanceDisabled = balanceDisabled;
+	}
+
+
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -233,6 +249,7 @@ public class TAgent extends Model<TAgent> {
 			", updateTime=" + updateTime +
 			", fee=" + fee +
 			", balance=" + balance +
+			", balanceDisabled=" + balanceDisabled +
 			"}";
 	}
 }

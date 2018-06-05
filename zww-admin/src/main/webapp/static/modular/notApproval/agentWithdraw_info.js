@@ -65,7 +65,7 @@ AgentWithdrawInfoDlg.collectData = function() {
 /**
  * 提交添加
  */
-AgentWithdrawInfoDlg.addSubmit = function() {
+/*AgentWithdrawInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
@@ -80,7 +80,7 @@ AgentWithdrawInfoDlg.addSubmit = function() {
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();
-}
+}*/
 
 /**
  * 提交修改

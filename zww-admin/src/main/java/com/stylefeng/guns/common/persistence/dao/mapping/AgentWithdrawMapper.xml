@@ -36,8 +36,11 @@
 		<if test="type == 1">
 			and status != 0
 		</if>
-		<if test="type == 2">
-			and status = #{status}
+		<if test="type == 2 and status != null ">
+			and status = #{status} and agentId = #{agentId}
+		</if>
+		<if test="type == 2 and status == null ">
+			 and agentId = #{agentId}
 		</if>
 		<if test="phone != null and phone != ''">
 			and phone = #{phone}
@@ -53,9 +56,18 @@
 
 	<update id="updateStatusById" parameterType="com.stylefeng.guns.common.persistence.model.AgentWithdraw">
 		UPDATE agent_withdraw
-		SET status = #{status},
-		confirm_date = now(),update_date = now()
+		SET status = #{status},remark = #{remark},confirm_date = now(),update_date = now()
 		WHERE
 		id = #{id};
 	</update>
+	<select id="getSumAmountByAgentId" resultType="com.stylefeng.guns.common.persistence.model.AgentWithdraw" parameterType="java.lang.Integer">
+		select sum(amount)amount
+		from agent_withdraw	where agentId = #{agentId} and (status =0 or status =1)
+	</select>
+	<select id="getAgentWithdrawById" resultType="com.stylefeng.guns.common.persistence.model.AgentWithdraw" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		 from agent_withdraw	where id = #{id}
+	</select>
+
 </mapper>

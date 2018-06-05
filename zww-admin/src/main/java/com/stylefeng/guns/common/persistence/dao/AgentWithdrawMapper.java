@@ -25,7 +25,11 @@ public interface AgentWithdrawMapper extends BaseMapper<AgentWithdraw> {
      * @return
      * @date 2017年2月12日 下午9:14:34
      */
-    List<Map<String, Object>> selectAgentWithdrow(@Param("page") Page<AgentWithdraw> page,@Param("type") Integer type, @Param("status") Integer status, @Param("name") String name, @Param("phone") String phone, @Param("createDate") String createDate);
+    List<Map<String, Object>> selectAgentWithdrow(@Param("page") Page<AgentWithdraw> page,@Param("agentId") Integer agentId,@Param("type") Integer type, @Param("status") Integer status, @Param("name") String name, @Param("phone") String phone, @Param("createDate") String createDate);
 
    int updateStatusById(AgentWithdraw agentWithdraw);
+
+    AgentWithdraw getSumAmountByAgentId(Integer agentId);
+
+    AgentWithdraw getAgentWithdrawById(Integer id);
 }

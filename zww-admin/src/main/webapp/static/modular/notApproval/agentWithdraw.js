@@ -33,16 +33,15 @@ AgentWithdraw.initColumn = function () {
                 }},
            // {title: '身份证号', field: 'idCardNo', visible: true, align: 'center', valign: 'middle'},
            // {title: '卡号', field: 'cardNo', visible: true, align: 'center', valign: 'middle'},
-            {title: '提现备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
+            {title: '审批备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
             {title: '提现状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
             {title: '确认时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'},
             {title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'},
         {
             title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
-                return '<button type="button" class="btn btn-primary button-margin" onclick="AgentWithdraw.update(' + row.id + ',1)" id=""><i class="fa fa-edit"></i>&nbsp;审批成功</button>' +
-                    '<button type="button" class="btn btn-danger button-margin" onclick="AgentWithdraw.update(' + row.id + ',2)" id=""><i class="fa fa-arrows-alt"></i>&nbsp;审批失败</button>';
-                // return '<button type="button" class="btn btn-danger button-margin" onclick="AgentWithdraw.update(' + row.id + ')" id=""><i class="fa fa-arrows-alt"></i>&nbsp;审批</button>';
+                return '<button type="button" class="btn btn-primary button-margin" onclick="AgentWithdraw.updateSuccess(' + row.id + ')" id=""><i class="fa fa-edit"></i>&nbsp;审批成功</button>' +
+                    '<button type="button" class="btn btn-danger button-margin" onclick="AgentWithdraw.updateFail(' + row.id + ')" id=""><i class="fa fa-arrows-alt"></i>&nbsp;审批失败</button>';
             }
         }
     ];
@@ -52,8 +51,8 @@ AgentWithdraw.initColumn = function () {
 /**
  * 审批
  */
-AgentWithdraw.update = function (id,status) {
-    var json ={"status":status,"withdrawId":id}
+AgentWithdraw.updateSuccess = function (id) {
+    var json ={"status":1,"withdrawId":id}
     $.post(Feng.ctxPath + "/agentWithdraw/updStatus",json,function(result){
         if(result.code == 0){
             Feng.error("审批失败!" + result.msg);
@@ -63,18 +62,18 @@ AgentWithdraw.update = function (id,status) {
         }
 
     });
-   //
-  /*  var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/updStatus",function (data) {
-        Feng.success("审批成功!");
-        AgentWithdraw.table.refresh();
-    }, function (data) {
-        Feng.error("审批失败!" + data.responseJSON.message + "!");
-    });*/
-  //  ajax.set("withdrawId", id);
-    //ajax.set("status", status);
-   // ajax.start();
 };
-
+AgentWithdraw.updateFail = function (id) {
+    var index = layer.open({
+        type: 2,
+        title: '审批失败理由',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/agentWithdraw/agentWithdraw_upd/' +id
+    });
+    this.layerIndex = index;
+};
 /**
  * 检查是否选中
  */

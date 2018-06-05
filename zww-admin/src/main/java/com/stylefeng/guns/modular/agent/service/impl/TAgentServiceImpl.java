@@ -22,7 +22,29 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
     private  TAgentMapper tAgentMapper;
 
     @Override
-    public TAgent selectLevelById(Integer id) {
-        return tAgentMapper.selectLevelById(id);
+    public TAgent selectTAgentById(Integer id) {
+        return tAgentMapper.selectTAgentById(id);
+    }
+
+    /**
+     * 修改账户信息
+     * @param balance 变动金额
+     * @param salt 1加余额 0减余额
+     * @param id 代理商id
+     * @return
+     */
+    @Override
+    public synchronized  void updateAmount(Long balance, int salt, Integer id) {
+        TAgent agent = tAgentMapper.selectTAgentById(id);
+        if(agent != null){
+            TAgent tAgent = new TAgent();
+            tAgent.setId(id);
+            if(salt == 0){
+                tAgent.setBalance(0l);//提现直接提完
+            }else{
+                tAgent.setBalance(agent.getBalance() + balance);//退回
+            }
+            tAgentMapper.updateAmount(tAgent);
+        }
     }
 }

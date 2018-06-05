@@ -116,7 +116,7 @@ public class TAgentController extends BaseController {
             tAgent.setLevel(0);
             user.setRoleid("2");
         }else{
-            TAgent tAgent1 =tAgentService.selectLevelById(userdto.getId());
+            TAgent tAgent1 =tAgentService.selectTAgentById(userdto.getId());
             Integer level = tAgent1.getLevel();
             switch(level){
                 case 0: tAgent.setLevel(level+1);
