@@ -1,11 +1,15 @@
 package com.stylefeng.guns.modular.agent.service.impl;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.dao.TAgentMapper;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -51,4 +55,20 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
             tAgentMapper.updateAmount(tAgent);
         }
     }
+
+    @Override
+    public Map getById(Integer id) {
+        return tAgentMapper.selectByIdAndLevel(id);
+    }
+
+    public List<Map<String, Object>> selectByLevel(Page<TAgent> page, String condition, String phone, String createTime, Integer level, Integer id) {
+        return tAgentMapper.selectByLevel(page,condition, phone, createTime, level, id);
+    }
+
+
+    public String selectByValue (String clod){
+        return tAgentMapper.selectByValue(clod);
+    }
+
+
 }

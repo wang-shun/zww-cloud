@@ -43,4 +43,47 @@
 	<update id="updateAmount" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
 		update t_agent set balance = #{balance} where id = #{id}
 	</update>
+
+
+
+	<select id="selectByIdAndLevel" resultType="map"  parameterType="java.lang.Integer">
+		select a.`level`as level,a.id,a.balance,a.balance_disabled balanceDisabled,a.fee as fee from sys_user s
+		left join sys_role r on s.roleid = r.id
+		left join t_agent a on s.account = a.username
+		where s.id = #{id}
+	</select>
+
+
+
+	<select id="selectByIdS" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		id, username, password, phone, nick_name , level, status, agent_id , agent_one_id , agent_two_id , create_time , update_time , fee, balance
+		from  t_agent where
+		id = #{id}
+	</select>
+
+
+
+	<select id="selectByValue" resultMap="java.lang.String" parameterType="java.lang.String">
+		select value from t_system_pref  where code = #{clod}
+	</select>
+
+
+
+	<!--根据条件查询-->
+	<select id="selectByLevel" resultType="map" parameterType="TAgent">
+		select
+		<include refid="Base_Column_List" />
+		from  t_agent
+		<trim prefix="where" prefixOverrides="and">
+			<if test="nickName!=null and nickName !=''">and nick_name =#{nickName}</if>
+			<if test="phone!=null and phone !=''">and phone =#{phone}</if>
+			<if test="createTime!=null and createTime !=''">and DATEDIFF(create_time,#{createTime}) &gt;= 0</if>
+			<if test="level!=null and level!=''">and level >#{level}</if>
+			<if test="id !=null">and agent_id = #{id} or agent_one_id=#{id} or agent_two_id = #{id}</if>
+		</trim>
+	</select>
+
+
+
 </mapper>
