@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.AgentChargeMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.AgentCharge">
+		<id column="id" property="id" />
+		<result column="order_id" property="orderId" />
+		<result column="agent_super_id" property="agentSuperId" />
+		<result column="agent_one_id" property="agentOneId" />
+		<result column="agent_two_id" property="agentTwoId" />
+		<result column="agent_three_id" property="agentThreeId" />
+		<result column="agent_super_fee" property="agentSuperFee" />
+		<result column="agent_one_fee" property="agentOneFee" />
+		<result column="agent_two_fee" property="agentTwoFee" />
+		<result column="agent_three_fee" property="agentThreeFee" />
+		<result column="agent_super_income" property="agentSuperIncome" />
+		<result column="agent_one_income" property="agentOneIncome" />
+		<result column="agent_two_income" property="agentTwoIncome" />
+		<result column="agent_three_income" property="agentThreeIncome" />
+		<result column="update_time" property="updateTime" />
+		<result column="create_time" property="createTime" />
+		<result column="status" property="status" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_id AS orderId, agent_super_id AS agentSuperId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, agent_three_id AS agentThreeId, agent_super_fee AS agentSuperFee, agent_one_fee AS agentOneFee, agent_two_fee AS agentTwoFee, agent_three_fee AS agentThreeFee, agent_super_income AS agentSuperIncome, agent_one_income AS agentOneIncome, agent_two_income AS agentTwoIncome, agent_three_income AS agentThreeIncome, update_time AS updateTime, create_time AS createTime, status
+    </sql>
+
+	<select id="getSumNotAmountByAgentId" resultType="com.stylefeng.guns.common.persistence.model.AgentCharge" parameterType="com.stylefeng.guns.common.persistence.model.AgentCharge">
+		select
+		<if test="agentSuperId != null and agentSuperId != 0">
+			sum(agent_super_income)agentSuperIncome
+		</if>
+		<if test="agentOneId != null and agentOneId != 0">
+			sum(agent_one_income)agentOneIncome
+		</if>
+		<if test="agentTwoId != null and agentTwoId != 0">
+			sum(agent_two_income)agentTwoIncome
+		</if>
+		<if test="agentThreeId != null and agentThreeId != 0">
+			sum(agent_three_income)agentThreeIncome
+		</if>
+		from agent_charge	where status = 0
+		<if test="agentSuperId != null and agentSuperId != 0">
+			and agent_super_id = #{agentSuperId}
+		</if>
+		<if test="agentOneId != null and agentOneId != 0">
+			and agent_one_id = #{agentOneId}
+		</if>
+		<if test="agentTwoId != null and agentTwoId != 0">
+			and agent_two_id = #{agentTwoId}
+		</if>
+		<if test="agentThreeId != null and agentThreeId != 0">
+			and agent_three_id = #{agentThreeId}
+		</if>
+	</select>
+
+</mapper>

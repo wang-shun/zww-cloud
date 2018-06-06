@@ -1,0 +1,44 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="orderId" name="订单ID" value="${item.orderId}" underline="true"/>
+                            <#input id="agentSuperId" name="特级代理" value="${item.agentSuperId}" underline="true"/>
+                            <#input id="agentOneId" name="一级代理" value="${item.agentOneId}" underline="true"/>
+                            <#input id="agentTwoId" name="二级代理" value="${item.agentTwoId}" underline="true"/>
+                            <#input id="agentThreeId" name="三级代理" value="${item.agentThreeId}" underline="true"/>
+                            <#input id="agentSuperFee" name="特级费率" value="${item.agentSuperFee}" underline="true"/>
+                            <#input id="agentOneFee" name="一级费率" value="${item.agentOneFee}" underline="true"/>
+                            <#input id="agentTwoFee" name="二级费率" value="${item.agentTwoFee}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="agentThreeFee" name="三级费率" value="${item.agentThreeFee}" underline="true"/>
+                            <#input id="agentSuperIncome" name="特级收入" value="${item.agentSuperIncome}" underline="true"/>
+                            <#input id="agentOneIncome" name="一级收入" value="${item.agentOneIncome}" underline="true"/>
+                            <#input id="agentTwoIncome" name="二级收入" value="${item.agentTwoIncome}" underline="true"/>
+                            <#input id="agentThreeIncome" name="三级收入" value="${item.agentThreeIncome}" underline="true"/>
+                            <#input id="updateTime" name="" value="${item.updateTime}" underline="true"/>
+                            <#input id="createTime" name="" value="${item.createTime}" underline="true"/>
+                            <#input id="status" name="(0未清算1已清算)" value="${item.status}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AgentChargeInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentChargeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agentCharge/agentCharge/agentCharge_info.js"></script>
+@}

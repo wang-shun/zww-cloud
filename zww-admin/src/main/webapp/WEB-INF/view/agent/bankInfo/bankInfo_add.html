@@ -1,0 +1,45 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" underline="true"/>
+                            <#input id="agentId" name="代理ID" underline="true"/>
+                            <#input id="cardBank" name="银行名称" underline="true"/>
+                            <#input id="cardSubBank" name="支行名称" underline="true"/>
+                            <#input id="cardProvince" name="银行省份" underline="true"/>
+                            <#input id="cardCity" name="银行城市" underline="true"/>
+                            <#input id="cardArea" name="银行区域" underline="true"/>
+                            <#input id="cardBankNo" name="联行号" underline="true"/>
+                            <#input id="cardNo" name="卡号"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="idCardNo" name="身份证" underline="true"/>
+                            <#input id="name" name="真实姓名" underline="true"/>
+                            <#input id="phone" name="银行手机号" underline="true"/>
+                            <#input id="idCardPicturePos" name="身份证正面" underline="true"/>
+                            <#input id="idCardPictureRev" name="身份证反面" underline="true"/>
+                            <#input id="idCardPicture" name="手持身份证" underline="true"/>
+                            <#input id="bankPicturePos" name="银行卡正面" underline="true"/>
+                            <#input id="createTime" name="银行添加时间" underline="true"/>
+                            <#input id="updateTime" name="修改时间" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BankInfoInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BankInfoInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agent/bankInfo/bankInfo_info.js"></script>
+@}

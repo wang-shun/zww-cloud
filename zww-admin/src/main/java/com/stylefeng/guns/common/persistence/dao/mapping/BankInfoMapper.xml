@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.BankInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.BankInfo">
+		<id column="id" property="id" />
+		<result column="agent_id" property="agentId" />
+		<result column="card_bank" property="cardBank" />
+		<result column="card_sub_bank" property="cardSubBank" />
+		<result column="card_province" property="cardProvince" />
+		<result column="card_city" property="cardCity" />
+		<result column="card_area" property="cardArea" />
+		<result column="card_bank_no" property="cardBankNo" />
+		<result column="card_no" property="cardNo" />
+		<result column="id_card_no" property="idCardNo" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+		<result column="id_card_picture_pos" property="idCardPicturePos" />
+		<result column="id_card_picture_rev" property="idCardPictureRev" />
+		<result column="id_card_picture" property="idCardPicture" />
+		<result column="bank_picture_pos" property="bankPicturePos" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, agent_id AS agentId, card_bank AS cardBank, card_sub_bank AS cardSubBank, card_province AS cardProvince, card_city AS cardCity, card_area AS cardArea, card_bank_no AS cardBankNo, card_no AS cardNo, id_card_no AS idCardNo, name, phone, id_card_picture_pos AS idCardPicturePos, id_card_picture_rev AS idCardPictureRev, id_card_picture AS idCardPicture, bank_picture_pos AS bankPicturePos, create_time AS createTime, update_time AS updateTime
+    </sql>
+
+	<select id="getBankInfoByAgentId" parameterType="java.lang.Integer" resultType="com.stylefeng.guns.common.persistence.model.BankInfo">
+		select
+		<include refid="Base_Column_List"/>
+		from bank_info where agent_id = #{agentId}
+	</select>
+
+</mapper>
