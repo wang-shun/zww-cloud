@@ -13,7 +13,9 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ITAgentService extends IService<TAgent> {
 
-   TAgent selectTAgentById(Integer id);
+   TAgent selectTAgentByUId(Integer uid);
 
    void updateAmount(Long amount,int salt,Integer id);
+
+   TAgent selectTAgentById(Integer id);
 }

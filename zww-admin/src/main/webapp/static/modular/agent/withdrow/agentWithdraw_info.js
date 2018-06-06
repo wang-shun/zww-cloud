@@ -73,9 +73,10 @@ AgentWithdrawInfoDlg.Withdraw = function() {
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/withdraw", function(data){
         if(data.code == 200 ){
-            Feng.success("提现成功!");
-            window.parent.AgentWithdraw.table.refresh();
-            AgentWithdrawInfoDlg.close();
+            Feng.success("提现成功!请等待财务审批");
+            window.location.reload();
+           // window.parent.AgentWithdraw.table.refresh();
+           // AgentWithdrawInfoDlg.close();
         }else{
             Feng.success(data.message);
         }

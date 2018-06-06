@@ -28,21 +28,55 @@
         id, order_id AS orderId, agent_super_id AS agentSuperId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, agent_three_id AS agentThreeId, agent_super_fee AS agentSuperFee, agent_one_fee AS agentOneFee, agent_two_fee AS agentTwoFee, agent_three_fee AS agentThreeFee, agent_super_income AS agentSuperIncome, agent_one_income AS agentOneIncome, agent_two_income AS agentTwoIncome, agent_three_income AS agentThreeIncome, update_time AS updateTime, create_time AS createTime, status
     </sql>
 
-	<select id="getSumNotAmountByAgentId" resultType="com.stylefeng.guns.common.persistence.model.AgentCharge" parameterType="com.stylefeng.guns.common.persistence.model.AgentCharge">
+	<select id="getSumAmountByAgentId" resultType="com.stylefeng.guns.common.persistence.model.AgentCharge" parameterType="com.stylefeng.guns.common.persistence.model.AgentCharge">
 		select
 		<if test="agentSuperId != null and agentSuperId != 0">
-			sum(agent_super_income)agentSuperIncome
+			IFNULL(sum(a.agent_super_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_super_income),0.00)
+			from agent_charge b where b.status =1 and a.agent_super_id=b.agent_super_id)agentOneIncome
 		</if>
 		<if test="agentOneId != null and agentOneId != 0">
-			sum(agent_one_income)agentOneIncome
+			IFNULL(sum(a.agent_one_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_one_income),0.00)
+			from agent_charge b where b.status =1 and a.agent_one_id=b.agent_one_id)agentOneIncome
 		</if>
 		<if test="agentTwoId != null and agentTwoId != 0">
-			sum(agent_two_income)agentTwoIncome
+			IFNULL(sum(a.agent_two_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_two_income),0.00)
+			from agent_charge b where b.status =1 and a.agent_two_id=b.agent_two_id)agentOneIncome
 		</if>
 		<if test="agentThreeId != null and agentThreeId != 0">
-			sum(agent_three_income)agentThreeIncome
+			IFNULL(sum(a.agent_three_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_three_income),0.00)
+			from agent_charge b where b.status =1 and a.agent_three_id=b.agent_three_id)agentOneIncome
 		</if>
-		from agent_charge	where status = 0
+		from agent_charge a	where a.status = 0
+		<if test="agentSuperId != null and agentSuperId != 0">
+			and a.agent_super_id = #{agentSuperId}
+		</if>
+		<if test="agentOneId != null and agentOneId != 0">
+			and a.agent_one_id = #{agentOneId}
+		</if>
+		<if test="agentTwoId != null and agentTwoId != 0">
+			and a.agent_two_id = #{agentTwoId}
+		</if>
+		<if test="agentThreeId != null and agentThreeId != 0">
+			and a.agent_three_id = #{agentThreeId}
+		</if>
+	</select>
+
+
+	<select id="getSumAmountByYesterday" resultType="com.stylefeng.guns.common.persistence.model.AgentCharge" parameterType="com.stylefeng.guns.common.persistence.model.AgentCharge">
+		select
+		<if test="agentSuperId != null and agentSuperId != 0">
+			IFNULL(sum(agent_super_income),0.00)agentSuperIncome
+		</if>
+		<if test="agentOneId != null and agentOneId != 0">
+			IFNULL(sum(agent_one_income),0.00)agentSuperIncome
+		</if>
+		<if test="agentTwoId != null and agentTwoId != 0">
+			IFNULL(sum(agent_two_income),0.00)agentSuperIncome
+		</if>
+		<if test="agentThreeId != null and agentThreeId != 0">
+			IFNULL(sum(agent_three_income),0.00)agentSuperIncome
+		</if>
+		from agent_charge where TO_DAYS(NOW())-TO_DAYS(create_time) =1
 		<if test="agentSuperId != null and agentSuperId != 0">
 			and agent_super_id = #{agentSuperId}
 		</if>
@@ -55,6 +89,37 @@
 		<if test="agentThreeId != null and agentThreeId != 0">
 			and agent_three_id = #{agentThreeId}
 		</if>
+	</select>
+
+	<select id="selectAgentCharge" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select a.agent_super_id agentSuperId,a.agent_one_id agentOneId,a.agent_two_id agentTwoId,a.agent_three_id agentThreeId,
+		<if test="level != null and agentId != null and level == 0">
+			a.agent_super_income agentIncome
+		</if>
+		<if test="level != null and agentId != null and level == 1">
+			a.agent_one_income agentIncome
+		</if>
+		<if test="level != null and agentId != null and level == 2">
+			a.agent_two_income  agentIncome
+		</if>
+		<if test="level != null and agentId != null and level == 3">
+			a.agent_three_income agentIncome
+		</if>
+		,a.create_time createTime,b.member_name memberName,a.status status,b.price amount
+		from agent_charge a,charge_order b	where a.order_id = b.id
+		<if test="level != null and agentId != null and level == 0">
+			and a.agent_super_id = #{agentId}
+		</if>
+		<if test="level != null and agentId != null and level == 1">
+			and a.agent_one_id = #{agentId}
+		</if>
+		<if test="level != null and agentId != null and level == 2">
+			and a.agent_two_id = #{agentId}
+		</if>
+		<if test="level != null and agentId != null and level == 3">
+			and a.agent_three_id = #{agentId}
+		</if>
+		order by create_time DESC
 	</select>
 
 </mapper>

@@ -109,11 +109,11 @@ Menu.search = function () {
 $(function () {
     var defaultColunms = Menu.initColumn();
     var table = new BSTreeTable(Menu.id, "/menu/list", defaultColunms);
-    table.setExpandColumn(2);
+    table.setExpandColumn(0);
     table.setIdField("id");
     table.setCodeField("code");
     table.setParentCodeField("pcode");
-    table.setExpandAll(true);
+    table.setExpandAll(false);
     table.init();
     Menu.table = table;
 });

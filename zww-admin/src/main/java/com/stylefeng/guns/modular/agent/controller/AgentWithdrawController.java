@@ -11,7 +11,7 @@ import com.stylefeng.guns.modular.agent.service.IAgentWithdrawService;
 import com.stylefeng.guns.modular.agent.service.IBankInfoService;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.stylefeng.guns.modular.agent.warpper.withdrawWarpper;
-import com.stylefeng.guns.modular.agentCharge.service.IAgentChargeService;
+import com.stylefeng.guns.modular.agent.service.IAgentChargeService;
 import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/agentWithdraw")
 public class AgentWithdrawController extends BaseController {
+    private String PREFIX = "/agent";
 
     @Autowired
     private IAgentWithdrawService agentWithdrawService;
@@ -48,14 +49,14 @@ public class AgentWithdrawController extends BaseController {
      */
     @RequestMapping("")
     public String agentWithdraw() {
-        return  "/agent/withdrow/agentWithdraw.html";
+        return  PREFIX +"/withdrow/agentWithdraw.html";
     }
     /**
      * 跳转到未审批管理首页
      */
     @RequestMapping("/noApproval")
     public String noApproval() {
-        return  "/notApproval/agentWithdraw.html";
+        return  PREFIX +"/notApproval/agentWithdraw.html";
     }
 
     /**
@@ -63,7 +64,7 @@ public class AgentWithdrawController extends BaseController {
      */
     @RequestMapping("/approval")
     public String approval() {
-        return "/approval/agentWithdraw.html";
+        return PREFIX +"/approval/agentWithdraw.html";
     }
 
     /**
@@ -72,13 +73,13 @@ public class AgentWithdrawController extends BaseController {
     @RequestMapping("/withdrawPage")
     public String withdrawPage( Model model) {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentById(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
         model.addAttribute("balance",(tAgent.getBalance() - tAgent.getBalanceDisabled())*0.01);
         TSystemPref MIN_WITHDRAW = systemPrefService.selectByCode("MIN_WITHDRAW");//最小提现金额(单位：分)
         TSystemPref SERVICE_CHARGE = systemPrefService.selectByCode("SERVICE_CHARGE");//手续费(单位：分)
-        model.addAttribute("MIN_WITHDRAW",MIN_WITHDRAW == null ? 100 : Long.valueOf(MIN_WITHDRAW.getValue())/100);
-        model.addAttribute("SERVICE_CHARGE",SERVICE_CHARGE == null ? 2 : Long.valueOf(SERVICE_CHARGE.getValue())/100);
-        return "/agent/withdrow/agentWithdraw_add.html";
+        model.addAttribute("MIN_WITHDRAW",MIN_WITHDRAW == null ? 100 : Long.valueOf(MIN_WITHDRAW.getValue())*0.01);
+        model.addAttribute("SERVICE_CHARGE",SERVICE_CHARGE == null ? 2 : Long.valueOf(SERVICE_CHARGE.getValue())*0.01);
+        return PREFIX +"/withdrow/agentWithdraw_add.html";
     }
 
     /**
@@ -88,7 +89,7 @@ public class AgentWithdrawController extends BaseController {
     @RequestMapping("/agentWithdraw_upd/{withdrawId}")
     public String tAgentUpdate(@PathVariable Integer withdrawId, Model model) {
         model.addAttribute("withdrawId",withdrawId);
-        return  "/notApproval/agentWithdraw_upd.html";
+        return  PREFIX +"/notApproval/agentWithdraw_upd.html";
     }
     /**
      * 获取未审批列表
@@ -125,7 +126,7 @@ public class AgentWithdrawController extends BaseController {
     public Object list2(Integer status,String createDate) {
         Page<AgentWithdraw> page = new PageFactory<AgentWithdraw>().defaultPage();
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentById(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
         List<Map<String, Object>> result =  agentWithdrawService.selectAgentWithdrow(page,tAgent.getId(),2,status,null,null,createDate);
         page.setRecords((List<AgentWithdraw>) new withdrawWarpper(result).warp());
         return  super.packForBT(page);
@@ -139,29 +140,21 @@ public class AgentWithdrawController extends BaseController {
     public Map<String, Object> totle() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentById(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
         long notPutForward = tAgent.getBalance() - tAgent.getBalanceDisabled();//可提现金额=总余额-冻结金额
         AgentWithdraw agentWithdraw = agentWithdrawService.getSumAmountByAgentId(tAgent.getId());
         AgentCharge agentCharge = new AgentCharge();
-        long undischarged = 0l;
         if(tAgent.getLevel() == 0){
             agentCharge.setAgentSuperId(tAgent.getId());
-            agentCharge = agentChargeService.getSumNotAmountByAgentId(agentCharge);
-            undischarged = agentCharge != null ? agentCharge.getAgentSuperIncome() : 0l;
         }else if(tAgent.getLevel() == 1){
             agentCharge.setAgentOneId(tAgent.getId());
-            agentCharge = agentChargeService.getSumNotAmountByAgentId(agentCharge);
-            undischarged =  agentCharge != null ? agentCharge.getAgentOneIncome() : 0l;
         }else if(tAgent.getLevel() == 2){
             agentCharge.setAgentTwoId(tAgent.getId());
-            agentCharge =  agentChargeService.getSumNotAmountByAgentId(agentCharge);
-            undischarged =  agentCharge != null ? agentCharge.getAgentTwoIncome() : 0l;
         }else{
             agentCharge.setAgentThreeId(tAgent.getId());
-            agentCharge =  agentChargeService.getSumNotAmountByAgentId(agentCharge);
-            undischarged =  agentCharge != null ? agentCharge.getAgentThreeIncome() : 0l;
         }
-        resultMap.put("undischarged", undischarged);//未清算
+        agentCharge = agentChargeService.getSumAmountByAgentId(agentCharge);
+        resultMap.put("undischarged", agentCharge.getAgentSuperIncome());//未清算
         resultMap.put("notPutForward", notPutForward);//未提现
         resultMap.put("alreadyPresented", agentWithdraw != null ? agentWithdraw.getAmount() : 0l);//已提现
         return resultMap;
@@ -172,7 +165,7 @@ public class AgentWithdrawController extends BaseController {
      */
     @PostMapping("/updStatus")
     @ResponseBody
-    public Map<String, Object> updStatus(Integer status ,Integer withdrawId) throws Exception{
+    public synchronized Map<String, Object> updStatus(Integer status ,Integer withdrawId) throws Exception{
          Map<String, Object> resultMap = new HashedMap<String, Object>();
          AgentWithdraw agentWithdraw = new AgentWithdraw();
          agentWithdraw.setId(withdrawId);
@@ -192,7 +185,7 @@ public class AgentWithdrawController extends BaseController {
 
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(AgentWithdraw agentWithdraw) {
+    public synchronized Object update(AgentWithdraw agentWithdraw) {
         agentWithdraw.setStatus(2);
         int i = agentWithdrawService.updateStatusById(agentWithdraw);
         if(i == 0)return super.ERROR_TIP;
@@ -209,9 +202,9 @@ public class AgentWithdrawController extends BaseController {
 
     @RequestMapping(value = "/withdraw")
     @ResponseBody
-    public Object withdraw() {
+    public synchronized Object withdraw() {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentById(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
         BankInfo bankInfo = bankInfoService.getBankInfoByAgentId(tAgent.getId());
         if(bankInfo == null || bankInfo.getCardNo() == null || bankInfo.getName() == null || bankInfo.getPhone() == null || bankInfo.getIdCardNo() == null) return new ErrorTip(500,"银行卡信息不全，请在手机端代理商管理上绑卡后再进行此操作!");
         Long balance = tAgent.getBalance()-tAgent.getBalanceDisabled();//余额(单位：分)
@@ -219,7 +212,7 @@ public class AgentWithdrawController extends BaseController {
         TSystemPref SERVICE_CHARGE = systemPrefService.selectByCode("SERVICE_CHARGE");
         long min = MIN_WITHDRAW == null ? 10000 : Long.valueOf(MIN_WITHDRAW.getValue());//最小提现金额(单位：分)
         long fee = SERVICE_CHARGE == null ? 200 : Long.valueOf(SERVICE_CHARGE.getValue());//手续费(单位：分)
-        if(balance < min) return new ErrorTip(500,"余额不足" + min/100 + "元,提现失败!");
+        if(balance < min) return new ErrorTip(500,"余额不足" + min*0.01 + "元,提现失败!");
         int i = agentWithdrawService.createAgentWithdraw(bankInfo,balance,fee);
         if(i == 0) return new ErrorTip(500,"插入失败,提现失败!");
         //减余额

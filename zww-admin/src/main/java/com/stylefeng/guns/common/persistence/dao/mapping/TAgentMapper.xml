@@ -26,14 +26,21 @@
         id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee, balance,balance_disabled AS balanceDisabled
     </sql>
 
-	<select id="selectTAgentById" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
+	<select id="selectTAgentByUId" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
 		select a.`level`as level,a.id,a.balance,a.balance_disabled balanceDisabled from sys_user s
 		left join sys_role r on s.roleid = r.id
 		left join t_agent a on s.account = a.username
-		where s.id = #{id}
+		where s.id = #{uid}
 	</select>
 
+	<select id="selectTAgentById" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
+		select
+		 <include refid="Base_Column_List"/>
+		 from  t_agent where id = #{id}
+	</select>
+
+
 	<update id="updateAmount" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
-		update balance = #{balance} from t_agent where id = #{id}
+		update t_agent set balance = #{balance} where id = #{id}
 	</update>
 </mapper>

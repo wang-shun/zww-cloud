@@ -13,6 +13,8 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface TAgentMapper extends BaseMapper<TAgent> {
 
+    TAgent selectTAgentByUId(Integer uid);
+
     TAgent selectTAgentById(Integer id);
 
     int updateAmount(TAgent tAgent);

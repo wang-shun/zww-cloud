@@ -22,10 +22,14 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
     private  TAgentMapper tAgentMapper;
 
     @Override
+    public TAgent selectTAgentByUId(Integer uid) {
+        return tAgentMapper.selectTAgentByUId(uid);
+    }
+
+    @Override
     public TAgent selectTAgentById(Integer id) {
         return tAgentMapper.selectTAgentById(id);
     }
-
     /**
      * 修改账户信息
      * @param balance 变动金额

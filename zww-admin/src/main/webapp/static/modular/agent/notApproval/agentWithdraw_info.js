@@ -1,5 +1,5 @@
 /**
- * 初始化已审批详情对话框
+ * 初始化未审批详情对话框
  */
 var AgentWithdrawInfoDlg = {
     agentWithdrawInfoData : {}
@@ -65,7 +65,7 @@ AgentWithdrawInfoDlg.collectData = function() {
 /**
  * 提交添加
  */
-AgentWithdrawInfoDlg.addSubmit = function() {
+/*AgentWithdrawInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
@@ -80,7 +80,7 @@ AgentWithdrawInfoDlg.addSubmit = function() {
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();
-}
+}*/
 
 /**
  * 提交修改
@@ -92,9 +92,13 @@ AgentWithdrawInfoDlg.editSubmit = function() {
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.AgentWithdraw.table.refresh();
-        AgentWithdrawInfoDlg.close();
+        if(data.code == 200 ){
+            Feng.success("修改成功!");
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
+        }else{
+            Feng.success(data.message);
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });

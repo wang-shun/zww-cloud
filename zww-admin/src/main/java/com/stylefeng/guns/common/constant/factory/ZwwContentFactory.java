@@ -4,7 +4,6 @@ import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -24,6 +23,8 @@ public class ZwwContentFactory {
 	private ShareInviteMapper shareInviteMapper = SpringContextHolder.getBean(ShareInviteMapper.class);;
 
 	private TDollMapper tDollMapper = SpringContextHolder.getBean(TDollMapper.class);;
+
+	private TAgentMapper agentMapper = SpringContextHolder.getBean(TAgentMapper.class);;
 
 	public static ZwwContentFactory me() {
 	        return SpringContextHolder.getBean("zwwContentFactory");
@@ -94,5 +95,10 @@ public class ZwwContentFactory {
 	public MemberVip getVipByMemberId(Integer userId) {
 		return memberVipMapper.selectListByMemberId(userId);
 	}
+
+	public TAgent selectTAgentById(Integer agentId) {
+		return agentMapper.selectTAgentById(agentId);
+	}
+
 
 }

@@ -14,10 +14,7 @@ var AgentWithdraw = {
 AgentWithdraw.initColumn = function () {
     return [
         {field: 'selectItem', radio: false},
-        // {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
-        {title: '交易流水号', field: 'tradeNo', visible: true, align: 'center', valign: 'middle'},
-       // {title: '代理ID', field: 'agentId', visible: true, align: 'center', valign: 'middle'},
-
+      //  {title: '交易流水号', field: 'tradeNo', visible: true, align: 'center', valign: 'middle'},
         {title: '提现金额', field: 'amount', visible: true, align: 'center', valign: 'middle',
             formatter:function (value,row,index) {
                 return value/100;
@@ -34,11 +31,11 @@ AgentWithdraw.initColumn = function () {
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
         {title: '身份证号', field: 'idCardNo', visible: true, align: 'center', valign: 'middle'},
         {title: '到账卡号', field: 'cardNo', visible: true, align: 'center', valign: 'middle'},
-        {title: '审批备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
         {title: '提现状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
+        {title: '审批备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
-        {title: '确认时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'},
-        {title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'}
+        {title: '确认时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'}
+        //{title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
