@@ -65,15 +65,24 @@ TAgentInfoDlg.collectData = function() {
  * 提交添加
  */
 TAgentInfoDlg.addSubmit = function() {
+    if(this.get("hidfee") < this.get("fee") ||  this.get("fee") < 0){
+        Feng.error("添加失败!扣率必须在0-" + this.get("hidfee") + "之间");
+        return;
+    }
 
     this.clearData();
     this.collectData();
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/tAgent/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.TAgent.table.refresh();
-        TAgentInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("添加成功!");
+            window.parent.TAgent.table.refresh();
+            TAgentInfoDlg.close();
+        }else{
+            Feng.error(data.message);
+        }
+
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
@@ -85,6 +94,10 @@ TAgentInfoDlg.addSubmit = function() {
  * 提交修改
  */
 TAgentInfoDlg.editSubmit = function() {
+    if(this.get("hidfee") < this.get("fee") ||  this.get("fee") < 0){
+        Feng.success("添加失败!扣率必须在0-" + this.get("hidfee") + "之间");
+        return;
+    }
 
     this.clearData();
     this.collectData();

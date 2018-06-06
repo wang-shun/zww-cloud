@@ -6,13 +6,17 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.Role;
+import com.stylefeng.guns.common.persistence.model.TSystemPref;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -46,6 +50,8 @@ public class TAgentController extends BaseController {
 
     @Autowired
     private ITAgentService tAgentService;
+    @Autowired
+    private ITSystemPrefService systemPrefService;
 
     @Resource
     private UserMgrDao managerDao;
@@ -69,6 +75,7 @@ public class TAgentController extends BaseController {
      */
     @RequestMapping("/tAgent_add")
     public String tAgentAdd(Model model) {
+        model.addAttribute("fee",getFee());
         return PREFIX + "tAgent_add.html";
     }
 
@@ -80,6 +87,7 @@ public class TAgentController extends BaseController {
     public String tAgentUpdate(@PathVariable Integer tAgentId, Model model) {
         TAgent tAgent = tAgentService.selectById(tAgentId);
         model.addAttribute("item",tAgent);
+        model.addAttribute("fee",getFee());
         LogObjectHolder.me().set(tAgent);
         return PREFIX + "tAgent_edit.html";
     }
@@ -90,42 +98,53 @@ public class TAgentController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(@RequestParam(required = false) String condition, @RequestParam(required = false) String phone, @RequestParam(required = false) String createTime, @RequestParam(required = false) Integer level) {
+    public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String phone, @RequestParam(required = false) String createTime, @RequestParam(required = false) Integer level) {
         Page<TAgent> page = new PageFactory<TAgent>().defaultPage();
         //设置查询的条件level,id
-        Integer _level = null;
-        Integer _id = null;
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        if(ToolUtil.isEmpty(level)){
-            Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
-            if("administrator".equals(role.getTips())){
-
-            }else{
-                Map map =tAgentService.getById(userdto.getId());
-                Integer levels =Integer.valueOf(map.get("level").toString());
-                _id = Integer.valueOf(map.get("id").toString());
-                switch(levels){
-                    case 0: _level = 0;
-                        break;
-                    case 1:_level = 1;
-                        break;
-                    case 2: _level = 2;
-                        break;
-                    case 3:throw new GunsException(BizExceptionEnum.REQUEST_NULL);
-                }
-            }
-        }else {
-            _level = level;
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        Integer type = null,agentId = null;
+        if("agent_super".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel(); agentId=tAgent.getId();
+        }else if("agent_one".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel();agentId=tAgent.getId();
+        }else if("agent_two".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel();agentId=tAgent.getId();
+        }else if("agent_three".equals(role.getTips())){
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        List<Map<String, Object>>  result= tAgentService.selectByLevel(page,condition,phone,createTime,_level,_id);
+        List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,phone,createTime,level,type,agentId);
         page.setRecords((List<TAgent>)new TagentWarpper(result).warp());
         return super.packForBT(page);
 
     }
 
+    //得到下级费率
+    private double getFee(){
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        String code = "";
+        if("administrator".equals(role.getTips())){
+            code = "AGENT_SUPER_FEE";
+        }else if("agent_super".equals(role.getTips())){
+            code = "AGENT_ONE_FEE";
+        }else if("agent_one".equals(role.getTips())){
+            code = "AGENT_TWO_FEE";
+        }else if("agent_two".equals(role.getTips())){
+            code = "AGENT_THREE_FEE";
+        }else{
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }
+        TSystemPref systemPref = systemPrefService.selectByCode(code);
+        return Double.valueOf(systemPref.getValue());
+    }
+
 
     //判断费率
-    private BigDecimal GetFee(TAgent tAgent, String clod){
+/*    private BigDecimal GetFee(TAgent tAgent, String clod){
         //费率为空时
         if(ToolUtil.isEmpty(tAgent.getFee())){
             String _value = tAgentService.selectByValue(clod);
@@ -149,7 +168,7 @@ public class TAgentController extends BaseController {
                 throw new GunsException(BizExceptionEnum.REQUEST_INVALIDATE);
             }
         }
-    }
+    }*/
 
     /**
      * 新增代理商管理
@@ -157,8 +176,15 @@ public class TAgentController extends BaseController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(TAgent tAgent) {
-
+    public Object add(TAgent tAgent) throws  Exception{
+        double defaultFee = getFee();
+        if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
+            return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
+        }
+        TAgent agent = tAgentService.selectTAgentByUsername(tAgent.getUsername());
+        if(agent != null ){
+            return  new ErrorTip(500,"添加失败!用户名已存在s");
+        }
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         //添加用户
         UserDto user = new UserDto();
@@ -168,26 +194,26 @@ public class TAgentController extends BaseController {
             tAgent.setLevel(0);
             user.setRoleid("2");
         }else{
-            Map map =tAgentService.getById(userdto.getId());
-            Integer level =Integer.valueOf(map.get("level").toString());
+            TAgent map =tAgentService.selectTAgentByUId(userdto.getId());
+            Integer level = map.getLevel();
             switch(level){
-                case 0: tAgent.setLevel(level+1);
+                case 0:
+                    tAgent.setLevel(level+1);
                     user.setRoleid("3");
-                    tAgent.setAgentId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setFee(this.GetFee(tAgent,"AGENT_ONE_FEE"));
+                    tAgent.setAgentId(map.getId());
                     break;
-                case 1: tAgent.setLevel(level+1);
+                case 1:
+                    tAgent.setLevel(level+1);
                     user.setRoleid("4");
-                    tAgent.setAgentId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setAgentOneId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setFee(this.GetFee(tAgent,"AGENT_TWO_FEE"));
+                    tAgent.setAgentId(map.getAgentId());
+                    tAgent.setAgentOneId(map.getId());
                     break;
-                case 2: tAgent.setLevel(level+1);
+                case 2:
+                    tAgent.setLevel(level+1);
                     user.setRoleid("5");
-                    tAgent.setAgentId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setAgentOneId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setAgentTwoId((long)Integer.valueOf(map.get("id").toString()));
-                    tAgent.setFee(this.GetFee(tAgent,"AGENT_THREE_FEE"));
+                    tAgent.setAgentId(map.getAgentId());
+                    tAgent.setAgentOneId(map.getAgentOneId());
+                    tAgent.setAgentTwoId(map.getId());
                     break;
                 case 3:throw new GunsException(BizExceptionEnum.REQUEST_NULL);
             }
@@ -203,7 +229,6 @@ public class TAgentController extends BaseController {
             tAgent.setPassword(ShiroKit.md5(tAgent.getPassword(),tAgent.getSalt()));
         }
         tAgent.setCreateTime(new Date());
-
         tAgent.setUpdateTime(new Date());
 
         user.setAccount(tAgent.getUsername());
@@ -239,6 +264,10 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TAgent tAgent) {
+        double defaultFee = getFee();
+        if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
+            return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
+        }
         tAgent.setUpdateTime(new Date());
         tAgentService.updateById(tAgent);
         return super.SUCCESS_TIP;
@@ -252,5 +281,29 @@ public class TAgentController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("tAgentId") Integer tAgentId) {
         return tAgentService.selectById(tAgentId);
+    }
+
+
+
+
+
+    /**
+     * 得到代理商等级
+     */
+    @PostMapping("/getlavel")
+    @ResponseBody
+    public Map<String, Object> totle() throws Exception{
+        Map<String, Object> resultMap = new HashedMap<String, Object>();
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        Integer type = null;
+        if("administrator".equals(role.getTips())){
+            type =0;
+        }else{
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel()+1;
+        }
+        resultMap.put("type", type);//未提现
+        return resultMap;
     }
 }

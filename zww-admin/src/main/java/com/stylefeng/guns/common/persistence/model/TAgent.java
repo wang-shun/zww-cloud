@@ -55,17 +55,17 @@ public class TAgent extends Model<TAgent> {
      * 特级代理id
      */
 	@TableField("agent_id")
-	private Long agentId;
+	private Integer agentId;
     /**
      * 一级代理id
      */
 	@TableField("agent_one_id")
-	private Long agentOneId;
+	private Integer agentOneId;
     /**
      * 二级代理id
      */
 	@TableField("agent_two_id")
-	private Long agentTwoId;
+	private Integer agentTwoId;
     /**
      * 创建时间
      */
@@ -79,7 +79,7 @@ public class TAgent extends Model<TAgent> {
     /**
      * 费率
      */
-	private BigDecimal fee;
+	private Double fee;
     /**
      * 余额
      */
@@ -161,27 +161,27 @@ public class TAgent extends Model<TAgent> {
 		this.status = status;
 	}
 
-	public Long getAgentId() {
+	public Integer getAgentId() {
 		return agentId;
 	}
 
-	public void setAgentId(Long agentId) {
+	public void setAgentId(Integer agentId) {
 		this.agentId = agentId;
 	}
 
-	public Long getAgentOneId() {
+	public Integer getAgentOneId() {
 		return agentOneId;
 	}
 
-	public void setAgentOneId(Long agentOneId) {
+	public void setAgentOneId(Integer agentOneId) {
 		this.agentOneId = agentOneId;
 	}
 
-	public Long getAgentTwoId() {
+	public Integer getAgentTwoId() {
 		return agentTwoId;
 	}
 
-	public void setAgentTwoId(Long agentTwoId) {
+	public void setAgentTwoId(Integer agentTwoId) {
 		this.agentTwoId = agentTwoId;
 	}
 
@@ -201,11 +201,11 @@ public class TAgent extends Model<TAgent> {
 		this.updateTime = updateTime;
 	}
 
-	public BigDecimal getFee() {
+	public Double getFee() {
 		return fee;
 	}
 
-	public void setFee(BigDecimal fee) {
+	public void setFee(Double fee) {
 		this.fee = fee;
 	}
 

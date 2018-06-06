@@ -64,24 +64,40 @@
 
 
 
-	<select id="selectByValue" resultMap="String" parameterType="java.lang.String">
+	<select id="selectByValue" resultType="String" parameterType="java.lang.String">
 		select value from t_system_pref  where code = #{clod}
 	</select>
 
-
+	<select id="selectTAgentByUsername" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from t_agent where username  = #{username}
+	</select>
 
 	<!--根据条件查询-->
-	<select id="selectByLevel" resultType="map" parameterType="TAgent">
+	<select id="selectByLevel" resultType="map" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
 		select
 		<include refid="Base_Column_List" />
-		from  t_agent
-		<trim prefix="where" prefixOverrides="and">
-			<if test="nickName!=null and nickName !=''">and nick_name =#{nickName}</if>
-			<if test="phone!=null and phone !=''">and phone =#{phone}</if>
-			<if test="createTime!=null and createTime !=''">and DATEDIFF(create_time,#{createTime}) &gt;= 0</if>
-			<if test="level!=null and level!=''">and level >#{level}</if>
-			<if test="id !=null">and agent_id = #{id} or agent_one_id=#{id} or agent_two_id = #{id}</if>
-		</trim>
+		from  t_agent where 1=1
+		<if test="agentId != null and type != null  and type == 0">
+			and agent_id =#{agentId}
+		</if>
+		<if test="agentId != null and type != null  and type == 1">
+			and agent_one_id =#{agentId}
+		</if>
+		<if test="agentId != null and type != null  and type == 2">
+			and agent_two_id =#{agentId}
+		</if>
+		<if test="nickName!=null and nickName !=''">
+			and nick_name =#{nickName}
+		</if>
+		<if test="phone!=null and phone !=''">
+			and phone =#{phone}
+		</if>
+		<if test="createTime!=null and createTime !=''">
+			and DATEDIFF(create_time,#{createTime}) &gt;= 0
+		</if>
+		<if test="level != null and level != '' ">
+			and level = #{level}
+		</if>
 	</select>
 
 

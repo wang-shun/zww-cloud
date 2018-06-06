@@ -15,7 +15,7 @@ AgentWithdraw.initColumn = function () {
     return [
       {field: 'selectItem', radio: false},
         // {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
-        {title: '交易流水号', field: 'tradeNo', visible: true, align: 'center', valign: 'middle'},
+       // {title: '交易流水号', field: 'tradeNo', visible: true, align: 'center', valign: 'middle'},
         // {title: '代理ID', field: 'agentId', visible: true, align: 'center', valign: 'middle'},
         {title: '真实姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},

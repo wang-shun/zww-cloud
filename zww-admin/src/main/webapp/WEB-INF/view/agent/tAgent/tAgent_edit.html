@@ -4,28 +4,22 @@
         <div class="form-horizontal">
 
             <input type="hidden" id="id" value="${item.id}">
-
+            <input type="hidden" id="hidfee" value="${fee}">
             <div class="row">
-                <div class="col-sm-6 b-r">
-                    <#input id="username" name="用户名" value="${item.username}" underline="true"/>
-                    <#input id="phone" name="手机号" value="${item.phone}" underline="true"/>
-                    <#input id="nickName" name="真实姓名" value="${item.nickName}" underline="true"/>
-
-                </div>
-
-                <div class="col-sm-6">
-
-                    <#input id="updateTime" name="最后修改时间" underline="true" type="date"
-                    value="${item.createTime}"
-                    clickFun="laydate({istime: false, format: 'YYYY-MM-DD'})" />
+                <div class="col-sm-12 b-r">
+                  <!--  <#input id="username" name="用户名" value="${item.username}" underline="true"/>-->
+                    <#input id="phone" name="手机号" value="${item.phone}" underline="true" disabled="disabled"/>
+                    <#input id="nickName" name="真实姓名" value="${item.nickName}" underline="true" disabled="disabled"/>
                     <#input id="fee" name="费率" value="${item.fee}" underline="true"/>
-
-                    <#input id="id" name="" value="${item.id}" underline="true" type="hidden"/>
                 </div>
+
+              <!--  <div class="col-sm-6">
+
+                </div>-->
             </div>
 
             <div class="row btn-group-m-t">
-                <div class="col-sm-10">
+                <div class="col-sm-10" style="text-align: center;">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TAgentInfoDlg.editSubmit()"/>
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TAgentInfoDlg.close()"/>
                 </div>

@@ -97,7 +97,7 @@ AgentWithdrawInfoDlg.editSubmit = function() {
             window.parent.AgentWithdraw.table.refresh();
             AgentWithdrawInfoDlg.close();
         }else{
-            Feng.success(data.message);
+            Feng.error(data.message);
         }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");

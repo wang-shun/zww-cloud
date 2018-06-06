@@ -14,9 +14,9 @@ var TAgent = {
 TAgent.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-        {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
-        {title: '用户名', field: 'username', visible: false, align: 'center', valign: 'middle'},
-        {title: '密码', field: 'password', visible: false, align: 'center', valign: 'middle'},
+       // {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        //{title: '用户名', field: 'username', visible: false, align: 'center', valign: 'middle'},
+       // {title: '密码', field: 'password', visible: false, align: 'center', valign: 'middle'},
 
         {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
@@ -27,9 +27,9 @@ TAgent.initColumn = function () {
         {title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
         {title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'},
         {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
-        {title: '最后修改时间', field: 'updateTime', visible: false, align: 'center', valign: 'middle'},
+      //  {title: '最后修改时间', field: 'updateTime', visible: false, align: 'center', valign: 'middle'},
         {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true}
+        {title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -70,7 +70,7 @@ TAgent.openTAgentDetail = function () {
         var index = layer.open({
             type: 2,
             title: '代理商管理详情',
-            area: ['800px', '420px'], //宽高
+            area: ['700px', '450px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/tAgent/tAgent_update/' + TAgent.seItem.id
@@ -99,25 +99,38 @@ TAgent.resetSearch = function () {
     $("#phone").val("");
     $("#createTime").val("");
     $("#condition").val("");
-    $("#level").val("全部");
-
+    $("#level").val("");
     TAgent.search();
 }
-
+TAgent.level = function () {
+    $.post(Feng.ctxPath + "/tAgent/getlavel",function(result){
+        var html = "<option value=''>全部</option>";
+       if(result.type == 0){
+           html += " <option value='0'>特级代理</option><option value=\"1\">一级代理</option><option value=\"2\">二级代理</option><option value=\"3\">三级代理</option>";
+       }else if(result.type == 1){
+           html += "<option value='1'>一级代理</option><option value=\"2\">二级代理</option><option value=\"3\">三级代理</option>";
+       }else if(result.type == 2){
+           html += "<option value='2'>二级代理</option><option value=\"3\">三级代理</option>";
+       }else if(result.type == 3){
+           html += "<option value='3'>三级代理</option>";
+       }
+        $("#level").html(html);
+    });
+};
 /**
  * 查询代理商管理列表
  */
 TAgent.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['name'] = $("#name").val();
     queryData['phone'] = $("#phone").val();
     queryData['createTime'] = $("#createTime").val();
     queryData['level'] = $("#level").val();
     TAgent.table.refresh({query: queryData});
 
 }
-
-    $(function () {
+$(function () {
+    TAgent.level();
     var defaultColunms = TAgent.initColumn();
     var table = new BSTable(TAgent.id, "/tAgent/list", defaultColunms);
     table.setPaginationType("server");
