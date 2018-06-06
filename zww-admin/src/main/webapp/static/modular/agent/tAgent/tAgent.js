@@ -95,18 +95,31 @@ TAgent.delete = function () {
     }
 };
 
+TAgent.resetSearch = function () {
+    $("#phone").val("");
+    $("#createTime").val("");
+    $("#condition").val("");
+    $("#level").val("全部");
+
+    TAgent.search();
+}
+
 /**
  * 查询代理商管理列表
  */
 TAgent.search = function () {
     var queryData = {};
     queryData['condition'] = $("#condition").val();
+    queryData['phone'] = $("#phone").val();
+    queryData['createTime'] = $("#createTime").val();
+    queryData['level'] = $("#level").val();
     TAgent.table.refresh({query: queryData});
-};
 
-$(function () {
+}
+
+    $(function () {
     var defaultColunms = TAgent.initColumn();
     var table = new BSTable(TAgent.id, "/tAgent/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     TAgent.table = table.init();
 });

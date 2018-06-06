@@ -64,7 +64,7 @@
 
 
 
-	<select id="selectByValue" resultMap="java.lang.String" parameterType="java.lang.String">
+	<select id="selectByValue" resultMap="String" parameterType="java.lang.String">
 		select value from t_system_pref  where code = #{clod}
 	</select>
 

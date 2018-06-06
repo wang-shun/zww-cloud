@@ -362,7 +362,7 @@ public class ConstantFactory implements IConstantFactory {
     }
     @Override
     public String getAgentById(Integer agentId) {
-        TAgent tAgent = tAgentMapper.selectById(agentId);
+        TAgent tAgent = tAgentMapper.selectByIdS(agentId);
         if (tAgent == null) {
             return null;
         } else {
