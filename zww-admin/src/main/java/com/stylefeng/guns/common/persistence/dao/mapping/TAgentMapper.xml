@@ -27,7 +27,10 @@
     </sql>
 
 	<select id="selectTAgentByUId" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
-		select a.`level`as level,a.id,a.balance,a.balance_disabled balanceDisabled,a.status,a.fee from sys_user s
+		 select
+		 a.id, a.username, a.password, a.phone, a.nick_name AS nickName, a.level, a.status, a.agent_id AS agentId, a.agent_one_id AS agentOneId,
+		 a.agent_two_id AS agentTwoId, a.create_time AS createTime, a.update_time AS updateTime, a.fee, a.balance,a.balance_disabled AS balanceDisabled
+         from sys_user s
 		left join sys_role r on s.roleid = r.id
 		left join t_agent a on s.account = a.username
 		where s.id = #{uid}
