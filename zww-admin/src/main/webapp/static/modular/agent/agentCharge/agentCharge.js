@@ -17,7 +17,10 @@ AgentCharge.initColumn = function () {
             {title: '消费者', field: 'memberName', visible: true, align: 'center', valign: 'middle'},
             {title: '推荐人', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
             {title: '充值金额(元)', field: 'amount', visible: true, align: 'center', valign: 'middle'},
-            {title: '收益', field: 'agentIncome', visible: true, align: 'center', valign: 'middle'},
+            {title: '收益(元)', field: 'agentIncome', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    return value/100;
+                }},
             {title: '清算状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'}
     ];

@@ -27,7 +27,7 @@
     </sql>
 
 	<select id="selectTAgentByUId" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
-		select a.`level`as level,a.id,a.balance,a.balance_disabled balanceDisabled from sys_user s
+		select a.`level`as level,a.id,a.balance,a.balance_disabled balanceDisabled,a.status from sys_user s
 		left join sys_role r on s.roleid = r.id
 		left join t_agent a on s.account = a.username
 		where s.id = #{uid}
@@ -75,7 +75,13 @@
 	<!--根据条件查询-->
 	<select id="selectByLevel" resultType="map" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
 		select
-		<include refid="Base_Column_List" />
+		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee
+		<if test="type == 10">
+			,(balance-balance_disabled)*0.01 AS balance
+		</if>
+		<if test="type != 10">
+			,"-" AS balance
+		</if>
 		from  t_agent where 1=1
 		<if test="agentId != null and type != null  and type == 0">
 			and agent_id =#{agentId}
@@ -84,8 +90,8 @@
 			and agent_one_id =#{agentId}
 		</if>
 		<if test="agentId != null and type != null  and type == 2">
-			and agent_two_id =#{agentId}
-		</if>
+		   and agent_two_id =#{agentId}
+	    </if>
 		<if test="nickName!=null and nickName !=''">
 			and nick_name =#{nickName}
 		</if>

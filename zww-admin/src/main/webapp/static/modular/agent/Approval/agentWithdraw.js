@@ -19,15 +19,15 @@ AgentWithdraw.initColumn = function () {
         // {title: '代理ID', field: 'agentId', visible: true, align: 'center', valign: 'middle'},
         {title: '真实姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
-        {title: '提现金额', field: 'amount', visible: true, align: 'center', valign: 'middle',
+        {title: '提现金额(元)', field: 'amount', visible: true, align: 'center', valign: 'middle',
             formatter:function (value,row,index) {
                 return value/100;
             }},
-        {title: '手续费', field: 'fee', visible: true, align: 'center', valign: 'middle',
+        {title: '手续费(元)', field: 'fee', visible: true, align: 'center', valign: 'middle',
             formatter:function (value,row,index) {
                 return value/100;
             }},
-        {title: '到账金额', field: 'actualAmount', visible: true, align: 'center', valign: 'middle',
+        {title: '到账金额(元)', field: 'actualAmount', visible: true, align: 'center', valign: 'middle',
             formatter:function (value,row,index) {
                 return value/100;
             }},

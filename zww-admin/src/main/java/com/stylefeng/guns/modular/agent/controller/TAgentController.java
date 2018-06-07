@@ -115,8 +115,11 @@ public class TAgentController extends BaseController {
             type=tAgent.getLevel();agentId=tAgent.getId();
         }else if("agent_three".equals(role.getTips())){
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }else if("administrator".equals(role.getTips())){
+            type = 10;
         }
         List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,phone,createTime,level,type,agentId);
+
         page.setRecords((List<TAgent>)new TagentWarpper(result).warp());
         return super.packForBT(page);
 
@@ -143,33 +146,6 @@ public class TAgentController extends BaseController {
     }
 
 
-    //判断费率
-/*    private BigDecimal GetFee(TAgent tAgent, String clod){
-        //费率为空时
-        if(ToolUtil.isEmpty(tAgent.getFee())){
-            String _value = tAgentService.selectByValue(clod);
-            return new  BigDecimal(_value);
-        }else {
-            User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-            Map map =tAgentService.getById(userdto.getId());
-            int _fee =Integer.valueOf(map.get("fee").toString());
-            int fee =tAgent.getFee().intValue();
-            if(_fee >= fee){
-                switch(_fee*10){
-                    case  4: if(fee>=0&&fee<=0.4 ){ return new BigDecimal(fee);}
-                        break;
-                    case  3:if(fee>=0&&fee<=0.3 ){ return new BigDecimal(fee);}
-                        break;
-                    case  2:if(fee>=0&&fee<=0.2 ){ return new BigDecimal(fee);}
-                        break;
-                }
-                return new BigDecimal(fee);
-            }else {
-                throw new GunsException(BizExceptionEnum.REQUEST_INVALIDATE);
-            }
-        }
-    }*/
-
     /**
      * 新增代理商管理
      */
@@ -177,13 +153,9 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(TAgent tAgent) throws  Exception{
-        double defaultFee = getFee();
-        if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
-            return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
-        }
         TAgent agent = tAgentService.selectTAgentByUsername(tAgent.getUsername());
         if(agent != null ){
-            return  new ErrorTip(500,"添加失败!用户名已存在s");
+            return  new ErrorTip(500,"添加失败!用户名已存在");
         }
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         //添加用户
@@ -191,10 +163,20 @@ public class TAgentController extends BaseController {
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         //cji管理员添加费率
         if("administrator".equals(role.getTips())){
+            double defaultFee = getFee();
+            if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
+                return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
+            }
+
             tAgent.setLevel(0);
             user.setRoleid("2");
         }else{
             TAgent map =tAgentService.selectTAgentByUId(userdto.getId());
+            double fee = map.getFee();
+            if (fee < tAgent.getFee() || tAgent.getFee() < 0){
+                return  new ErrorTip(500,"添加失败!扣率必须在0-" + fee + "之间");
+            }
+
             Integer level = map.getLevel();
             switch(level){
                 case 0:
@@ -221,11 +203,10 @@ public class TAgentController extends BaseController {
 
 
         //设置md5和盐
+        tAgent.setSalt(ShiroKit.getRandomSalt(5));
         if(ToolUtil.isEmpty(tAgent.getPassword())){
-            tAgent.setPassword(userdto.getPassword());
-            tAgent.setSalt(userdto.getSalt());
+            tAgent.setPassword(ShiroKit.md5("123456",tAgent.getSalt()));
         }else {
-            tAgent.setSalt(ShiroKit.getRandomSalt(5));
             tAgent.setPassword(ShiroKit.md5(tAgent.getPassword(),tAgent.getSalt()));
         }
         tAgent.setCreateTime(new Date());
@@ -243,19 +224,19 @@ public class TAgentController extends BaseController {
         return super.SUCCESS_TIP;
     }
 
-    /**
-     * 删除代理商管理
+   /**
+     * 修改代理商状态
      */
 
-    @RequestMapping(value = "/delete")
+   /*  @RequestMapping(value = "/statusUpdate")
     @ResponseBody
     public Object delete(@RequestParam Integer tAgentId) {
-        TAgent _tagent = tAgentService.selectById(tAgentId);
-        User user = managerDao.getByAccount(_tagent.getUsername());
-        this.managerDao.setStatus(user.getId(), ManagerStatus.DELETED.getCode());
+        TAgent tagent = new TAgent();
+        tagent.setId(tAgentId);
+        tagent.setStatus(0);
         tAgentService.deleteById(tAgentId);
         return SUCCESS_TIP;
-    }
+    }*/
 
     /**
      * 修改代理商管理
@@ -264,9 +245,20 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TAgent tAgent) {
-        double defaultFee = getFee();
-        if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
-            return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
+
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        if("administrator".equals(role.getTips())){
+            double defaultFee = getFee();
+            if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
+                return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
+            }
+        }else {
+            TAgent map = tAgentService.selectTAgentByUId(userdto.getId());
+            double fee = map.getFee();
+            if (fee < tAgent.getFee() || tAgent.getFee() < 0) {
+                return new ErrorTip(500, "添加失败!扣率必须在0-" + fee + "之间");
+            }
         }
         tAgent.setUpdateTime(new Date());
         tAgentService.updateById(tAgent);

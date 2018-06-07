@@ -5,15 +5,15 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <input type="hidden" id="hidfee" value="${fee}">
-                            <#input id="username" name="用户名" underline="true"/>
-                            <#input id="password" name="密码" underline="true"/>
-                            <#input id="phone" name="手机号" underline="true"/>
+                            <#input id="username" type="number" name="登录名" underline="true" placeholder="注意请使用手机号码作为登录名"/>
+                            <#input id="password" name="密码" underline="true" disabled="disabled" placeholder="默认密码为123456"/>
+                            <#input id="phone" type="number" name="手机号" underline="true"/>
 
                 </div>
 
                 <div class="col-sm-6">
                     <#input id="nickName" name="真实姓名" underline="true"/>
-                    <#input id="fee" name="费率" underline="true" value="${fee}"/>
+                    <#input id="fee" name="费率" underline="true" value="${fee}" type="number"/>
                 </div>
             </div>
 

@@ -4,13 +4,31 @@
         <div class="form-horizontal">
 
             <input type="hidden" id="id" value="${item.id}">
-            <input type="hidden" id="hidfee" value="${fee}">
             <div class="row">
                 <div class="col-sm-12 b-r">
                   <!--  <#input id="username" name="用户名" value="${item.username}" underline="true"/>-->
                     <#input id="phone" name="手机号" value="${item.phone}" underline="true" disabled="disabled"/>
                     <#input id="nickName" name="真实姓名" value="${item.nickName}" underline="true" disabled="disabled"/>
                     <#input id="fee" name="费率" value="${item.fee}" underline="true"/>
+                    <#SelectCon id="status" name="状态" value="${item.status}">
+                    @if(item.status ==1){
+                        <option value='1' selected>正常</option>
+                        <option value='2'>冻结</option>
+                        <option value='3'>失效</option>
+                    @}
+                    @if(item.status ==2){
+                        <option value='1'>正常</option>
+                        <option value='2' selected>冻结</option>
+                        <option value='3'>失效</option>
+                    @}
+                    @if(item.status ==3){
+                        <option value='1'>正常</option>
+                        <option value='2' >冻结</option>
+                        <option value='3' selected>失效</option>
+                    @}
+
+
+                </#SelectCon>
                 </div>
 
               <!--  <div class="col-sm-6">

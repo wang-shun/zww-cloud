@@ -23,7 +23,7 @@ TAgent.initColumn = function () {
         {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
        /* {title: '状态', field: 'status', visible: true, align: 'center', valign: 'middle'},*/
         {title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'},
-        {title: '余额', field: 'balance', visible: true, align: 'center', valign: 'middle'},
+        {title: '余额(元)', field: 'balance', visible: true, align: 'center', valign: 'middle'},
         {title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
         {title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'},
         {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
@@ -70,7 +70,7 @@ TAgent.openTAgentDetail = function () {
         var index = layer.open({
             type: 2,
             title: '代理商管理详情',
-            area: ['700px', '450px'], //宽高
+            area: ['700px', '500px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/tAgent/tAgent_update/' + TAgent.seItem.id
@@ -80,20 +80,27 @@ TAgent.openTAgentDetail = function () {
 };
 
 /**
- * 删除代理商管理
+ * 修改代理商管理
  */
-TAgent.delete = function () {
+/*TAgent.statusUpdate = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/tAgent/delete", function (data) {
-            Feng.success("删除成功!");
-            TAgent.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
+        parent.layer.confirm(tip, {
+            btn: ['确定', '取消']
+        }, function (index) {
+            var ajax = new $ax(Feng.ctxPath + "/tAgent/statusUpdate", function (data) {
+                Feng.success("状态更改成功!");
+                TAgent.table.refresh();
+            }, function (data) {
+                Feng.error("状态更改失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("tAgentId",this.seItem.id);
+            ajax.start();
+            parent.layer.close(index);
+        }, function (index) {
+            parent.layer.close(index);
         });
-        ajax.set("tAgentId",this.seItem.id);
-        ajax.start();
     }
-};
+};*/
 
 TAgent.resetSearch = function () {
     $("#phone").val("");

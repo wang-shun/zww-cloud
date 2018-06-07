@@ -2,9 +2,14 @@ package com.stylefeng.guns.modular.system.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.stylefeng.guns.common.exception.InvalidKaptchaException;
+import com.stylefeng.guns.common.persistence.dao.RoleMapper;
+import com.stylefeng.guns.common.persistence.dao.TAgentMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
+import com.stylefeng.guns.common.persistence.model.Role;
+import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.log.LogManager;
 import com.stylefeng.guns.core.log.factory.LogTaskFactory;
 import com.stylefeng.guns.core.mutidatasource.DSEnum;
@@ -44,6 +49,12 @@ public class LoginController extends BaseController {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    TAgentMapper agentMapper;
+
+    @Autowired
+    RoleMapper roleMapper;
+
     /**
      * 跳转到主页
      */
@@ -65,7 +76,20 @@ public class LoginController extends BaseController {
 
         //获取用户头像
         Integer id = ShiroKit.getUser().getId();
+
         User user = userMapper.selectById(id);
+
+        Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
+        //cji管理员添加费率
+        if(!"administrator".equals(role.getTips())){
+            TAgent tAgent = agentMapper.selectTAgentByUId(user.getId());
+            if (tAgent.getStatus() == 3) {
+                ShiroKit.getSubject().logout();
+                model.addAttribute("tips", "该账户已失效!");
+                return "/login.html";
+            }
+        }
+
         ShiroKit.getSession().setAttribute("userL", user);
         String avatar = user.getAvatar();
         model.addAttribute("avatar", avatar);
@@ -98,9 +122,6 @@ public class LoginController extends BaseController {
         String remember = super.getPara("remember");
 
 
-     /*
-
-
         //验证验证码是否正确
         if (KaptchaUtil.getKaptchaOnOff()) {
             String kaptcha = super.getPara("kaptcha").trim();
@@ -108,7 +129,7 @@ public class LoginController extends BaseController {
             if (ToolUtil.isEmpty(kaptcha) || !kaptcha.equalsIgnoreCase(code)) {
                 throw new InvalidKaptchaException();
             }
-        }*/
+        }
 
         Subject currentUser = ShiroKit.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password.toCharArray());
@@ -122,6 +143,9 @@ public class LoginController extends BaseController {
         currentUser.login(token);
 
         ShiroUser shiroUser = ShiroKit.getUser();
+
+
+
         super.getSession().setAttribute("shiroUser", shiroUser);
         super.getSession().setAttribute("username", shiroUser.getAccount());
 

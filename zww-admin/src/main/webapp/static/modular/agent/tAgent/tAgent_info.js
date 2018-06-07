@@ -65,8 +65,13 @@ TAgentInfoDlg.collectData = function() {
  * 提交添加
  */
 TAgentInfoDlg.addSubmit = function() {
-    if(this.get("hidfee") < this.get("fee") ||  this.get("fee") < 0){
-        Feng.error("添加失败!扣率必须在0-" + this.get("hidfee") + "之间");
+
+    if(!(/^1[34578]\d{9}$/.test(this.get("username")))){
+        Feng.error("登录名输入有误！");
+        return;
+    }
+    if(!(/^1[34578]\d{9}$/.test(this.get("phone")))){
+        Feng.error("手机号码输入有误");
         return;
     }
 
@@ -94,10 +99,6 @@ TAgentInfoDlg.addSubmit = function() {
  * 提交修改
  */
 TAgentInfoDlg.editSubmit = function() {
-    if(this.get("hidfee") < this.get("fee") ||  this.get("fee") < 0){
-        Feng.success("添加失败!扣率必须在0-" + this.get("hidfee") + "之间");
-        return;
-    }
 
     this.clearData();
     this.collectData();

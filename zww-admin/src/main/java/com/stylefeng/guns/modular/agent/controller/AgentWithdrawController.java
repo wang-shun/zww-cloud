@@ -205,8 +205,11 @@ public class AgentWithdrawController extends BaseController {
     public synchronized Object withdraw() {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
+        if(tAgent.getStatus() == 2) return new ErrorTip(500,"该账户已被冻结，请联系上级代理查询!");
+        if(tAgent.getStatus() == 3) return new ErrorTip(500,"该账户已失效!");
         BankInfo bankInfo = bankInfoService.getBankInfoByAgentId(tAgent.getId());
-        if(bankInfo == null || bankInfo.getCardNo() == null || bankInfo.getName() == null || bankInfo.getPhone() == null || bankInfo.getIdCardNo() == null) return new ErrorTip(500,"银行卡信息不全，请在手机端代理商管理上绑卡后再进行此操作!");
+        if(bankInfo == null || bankInfo.getCardNo() == null || bankInfo.getName() == null || bankInfo.getPhone() == null || bankInfo.getIdCardNo() == null)
+            return new ErrorTip(500,"银行卡信息不全，请在手机端代理商管理上绑卡后再进行此操作!");
         Long balance = tAgent.getBalance()-tAgent.getBalanceDisabled();//余额(单位：分)
         TSystemPref MIN_WITHDRAW = systemPrefService.selectByCode("MIN_WITHDRAW");
         TSystemPref SERVICE_CHARGE = systemPrefService.selectByCode("SERVICE_CHARGE");
