@@ -115,7 +115,7 @@ public class TAgentController extends BaseController {
             type=tAgent.getLevel();agentId=tAgent.getId();
         }else if("agent_three".equals(role.getTips())){
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
-        }else if("administrator".equals(role.getTips())){
+        }else{
             type = 10;
         }
         List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,phone,createTime,level,type,agentId);
@@ -130,16 +130,16 @@ public class TAgentController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         String code = "";
-        if("administrator".equals(role.getTips())){
-            code = "AGENT_SUPER_FEE";
-        }else if("agent_super".equals(role.getTips())){
+        if("agent_super".equals(role.getTips())){
             code = "AGENT_ONE_FEE";
         }else if("agent_one".equals(role.getTips())){
             code = "AGENT_TWO_FEE";
         }else if("agent_two".equals(role.getTips())){
             code = "AGENT_THREE_FEE";
-        }else{
+        }else if("agent_three".equals(role.getTips())){
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }else{
+            code = "AGENT_SUPER_FEE";
         }
         TSystemPref systemPref = systemPrefService.selectByCode(code);
         return Double.valueOf(systemPref.getValue());
@@ -162,12 +162,11 @@ public class TAgentController extends BaseController {
         UserDto user = new UserDto();
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         //cji管理员添加费率
-        if("administrator".equals(role.getTips())){
+        if(!"agent".equals(role.getTips().substring(0,5))){
             double defaultFee = getFee();
             if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
                 return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
             }
-
             tAgent.setLevel(0);
             user.setRoleid("2");
         }else{
@@ -287,9 +286,6 @@ public class TAgentController extends BaseController {
     }
 
 
-
-
-
     /**
      * 得到代理商等级
      */
@@ -300,7 +296,7 @@ public class TAgentController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         Integer type = null;
-        if("administrator".equals(role.getTips())){
+        if(!"agent".equals(role.getTips().substring(0,5))){
             type =0;
         }else{
             TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());

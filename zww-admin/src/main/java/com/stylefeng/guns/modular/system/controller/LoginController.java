@@ -81,7 +81,7 @@ public class LoginController extends BaseController {
 
         Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
         //cji管理员添加费率
-        if(!"administrator".equals(role.getTips())){
+        if("agent".equals(role.getTips().substring(0,5))){
             TAgent tAgent = agentMapper.selectTAgentByUId(user.getId());
             if (tAgent.getStatus() == 3) {
                 ShiroKit.getSubject().logout();
@@ -96,6 +96,7 @@ public class LoginController extends BaseController {
 
         return "/index.html";
     }
+
 
     /**
      * 跳转到登录页面
