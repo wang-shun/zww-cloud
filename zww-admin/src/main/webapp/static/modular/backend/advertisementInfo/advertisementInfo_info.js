@@ -60,17 +60,19 @@ AdvertisementInfoInfoDlg.collectData = function() {
  * 提交添加
  */
 AdvertisementInfoInfoDlg.addSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/advertisementInfo/add", function(data){
         Feng.success("添加成功!");
+        $("#ensure").removeAttr("disabled");
         window.parent.AdvertisementInfo.table.refresh();
         AdvertisementInfoInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.advertisementInfoInfoData);
     ajax.start();
@@ -80,17 +82,19 @@ AdvertisementInfoInfoDlg.addSubmit = function() {
  * 提交修改
  */
 AdvertisementInfoInfoDlg.editSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/advertisementInfo/update", function(data){
         Feng.success("修改成功!");
+        $("#ensure").removeAttr("disabled");
         window.parent.AdvertisementInfo.table.refresh();
         AdvertisementInfoInfoDlg.close();
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.advertisementInfoInfoData);
     ajax.start();

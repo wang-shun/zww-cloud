@@ -66,7 +66,7 @@ AgentWithdrawInfoDlg.collectData = function() {
  * 提交添加
  */
 AgentWithdrawInfoDlg.addSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
@@ -74,13 +74,16 @@ AgentWithdrawInfoDlg.addSubmit = function() {
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/add", function(data){
         if(data.code == 200 ){
             Feng.success("添加成功!");
+            $("#ensure").removeAttr("disabled");
             window.parent.AgentWithdraw.table.refresh();
             AgentWithdrawInfoDlg.close();
         }else{
             Feng.error(data.message);
+            $("#ensure").removeAttr("disabled");
         }
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();
@@ -90,7 +93,7 @@ AgentWithdrawInfoDlg.addSubmit = function() {
  * 提交修改
  */
 AgentWithdrawInfoDlg.editSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
@@ -98,13 +101,16 @@ AgentWithdrawInfoDlg.editSubmit = function() {
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/update", function(data){
         if(data.code == 200 ){
             Feng.success("修改成功!");
+            $("#ensure").removeAttr("disabled");
             window.parent.AgentWithdraw.table.refresh();
             AgentWithdrawInfoDlg.close();
         }else{
             Feng.error(data.message);
+            $("#ensure").removeAttr("disabled");
         }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();

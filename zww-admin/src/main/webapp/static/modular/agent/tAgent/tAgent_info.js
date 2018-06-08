@@ -65,13 +65,15 @@ TAgentInfoDlg.collectData = function() {
  * 提交添加
  */
 TAgentInfoDlg.addSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     if(!(/^1[34578]\d{9}$/.test(this.get("username")))){
         Feng.error("登录名输入有误！");
+        $("#ensure").removeAttr("disabled");
         return;
     }
     if(!(/^1[34578]\d{9}$/.test(this.get("phone")))){
         Feng.error("手机号码输入有误");
+        $("#ensure").removeAttr("disabled");
         return;
     }
 
@@ -82,14 +84,17 @@ TAgentInfoDlg.addSubmit = function() {
     var ajax = new $ax(Feng.ctxPath + "/tAgent/add", function(data){
         if(data.code == 200){
             Feng.success("添加成功!");
+            $("#ensure").removeAttr("disabled");
             window.parent.TAgent.table.refresh();
             TAgentInfoDlg.close();
         }else{
             Feng.error(data.message);
+            $("#ensure").removeAttr("disabled");
         }
 
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.tAgentInfoData);
     ajax.start();
@@ -99,17 +104,19 @@ TAgentInfoDlg.addSubmit = function() {
  * 提交修改
  */
 TAgentInfoDlg.editSubmit = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/tAgent/update", function(data){
         Feng.success("修改成功!");
+        $("#ensure").removeAttr("disabled");
         window.parent.TAgent.table.refresh();
         TAgentInfoDlg.close();
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.tAgentInfoData);
     ajax.start();

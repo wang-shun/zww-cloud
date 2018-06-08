@@ -66,7 +66,7 @@ AgentWithdrawInfoDlg.collectData = function() {
  * 提现
  */
 AgentWithdrawInfoDlg.Withdraw = function() {
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
 
@@ -74,14 +74,17 @@ AgentWithdrawInfoDlg.Withdraw = function() {
     var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/withdraw", function(data){
         if(data.code == 200 ){
             Feng.success("提现成功!请等待财务审批");
+            $("#ensure").removeAttr("disabled");
             window.location.reload();
            // window.parent.AgentWithdraw.table.refresh();
            // AgentWithdrawInfoDlg.close();
         }else{
             Feng.error(data.message);
+            $("#ensure").removeAttr("disabled");
         }
     },function(data){
         Feng.error("提现失败!" + data.responseJSON.message + "!");
+        $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.agentWithdrawInfoData);
     ajax.start();
