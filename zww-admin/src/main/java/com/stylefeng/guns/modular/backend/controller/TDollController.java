@@ -120,7 +120,7 @@ public class TDollController extends BaseController {
     	 + 1);
     	 // 修改后完整的文件名称
     	 String fileKey = StringUtils.getRandomUUID();
-    	 String NewFileKey = fileKey + "." + suffix;
+    	 String NewFileKey = "doll/" + fileKey + "." + suffix;
     	 byte[] bytes;
 		try {
 			bytes = picture.getBytes();
