@@ -245,21 +245,32 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TAgent tAgent) {
-
-        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
-        if("administrator".equals(role.getTips())){
+        TAgent agent = tAgentService.selectTAgentById(tAgent.getId());
+        if(agent.getLevel() == 0){//查询需要修改的代理等级
             double defaultFee = getFee();
             if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
                 return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
             }
-        }else {
-            TAgent map = tAgentService.selectTAgentByUId(userdto.getId());
-            double fee = map.getFee();
+        }else if(agent.getLevel() == 1){
+            TAgent superAgent = tAgentService.selectTAgentById(tAgent.getAgentId());
+            double fee = superAgent.getFee();
+            if (fee < tAgent.getFee() || tAgent.getFee() < 0) {
+                return new ErrorTip(500, "添加失败!扣率必须在0-" + fee + "之间");
+            }
+        }else if(agent.getLevel() == 2){
+            TAgent oneAgent = tAgentService.selectTAgentById(tAgent.getAgentOneId());
+            double fee = oneAgent.getFee();
+            if (fee < tAgent.getFee() || tAgent.getFee() < 0) {
+                return new ErrorTip(500, "添加失败!扣率必须在0-" + fee + "之间");
+            }
+        }else if(agent.getLevel() == 3){
+            TAgent twoAgent = tAgentService.selectTAgentById(tAgent.getAgentTwoId());
+            double fee = twoAgent.getFee();
             if (fee < tAgent.getFee() || tAgent.getFee() < 0) {
                 return new ErrorTip(500, "添加失败!扣率必须在0-" + fee + "之间");
             }
         }
+
         tAgent.setUpdateTime(new Date());
         tAgentService.updateById(tAgent);
         return super.SUCCESS_TIP;
