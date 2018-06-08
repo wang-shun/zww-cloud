@@ -15,10 +15,9 @@ TAgent.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
        // {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
-        //{title: '用户名', field: 'username', visible: false, align: 'center', valign: 'middle'},
        // {title: '密码', field: 'password', visible: false, align: 'center', valign: 'middle'},
-
         {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
+        {title: '登录名', field: 'username', visible: false, align: 'center', valign: 'middle'},
         {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
         {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
        /* {title: '状态', field: 'status', visible: true, align: 'center', valign: 'middle'},*/
