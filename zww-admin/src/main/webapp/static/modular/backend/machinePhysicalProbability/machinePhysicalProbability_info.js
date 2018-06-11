@@ -138,9 +138,14 @@ MachinePhysicalProbabilityInfoDlg.addSubmit = function() {
     }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/machinePhysicalProbability/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.MachinePhysicalProbability.table.refresh();
-        MachinePhysicalProbabilityInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("添加成功!");
+            window.parent.MachinePhysicalProbability.table.refresh();
+            MachinePhysicalProbabilityInfoDlg.close();
+        }else{
+            Feng.error("添加失败!" + data.message + "!");
+        }
+
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
@@ -160,9 +165,13 @@ MachinePhysicalProbabilityInfoDlg.editSubmit = function() {
     }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/machinePhysicalProbability/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.MachinePhysicalProbability.table.refresh();
-        MachinePhysicalProbabilityInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("修改成功!");
+            window.parent.MachinePhysicalProbability.table.refresh();
+            MachinePhysicalProbabilityInfoDlg.close();
+        }else{
+            Feng.error("修改失败!" + data.message + "!");
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });
@@ -202,11 +211,9 @@ $(function() {
 $(document).keyup(function(event){
     if(event.keyCode ==13){
         if($("#operation").val()=='add'){
-            // alert(1)
             MachinePhysicalProbabilityInfoDlg.addSubmit();
         }
         if($("#operation").val()=='update'){
-            // alert(2)
             MachinePhysicalProbabilityInfoDlg.editSubmit();
         }
     }

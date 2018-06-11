@@ -5,6 +5,7 @@ import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.model.DivinationTopic;
 import com.stylefeng.guns.common.persistence.model.TDoll;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.HttpClientUtil;
 
@@ -55,7 +56,7 @@ public class MachinePhysicalProbabilityController extends BaseController {
     //马甲网址
 //    private String linkUrl = "http://106.15.202.148:2346";
     //线上网址
-    private String linkUrl = "http://47.100.113.59:2346";
+    private String linkUrl = "http://47.106.149.59:2346";
 
     /**
      * 跳转到机器物理概率首页
@@ -116,7 +117,7 @@ public class MachinePhysicalProbabilityController extends BaseController {
                 if("ok".equals(result)){
                     machinePhysicalProbabilityService.insert(machinePhysicalProbability);
                 }else{
-                    return "链接机器失败";
+                    return new ErrorTip(500,"链接机器失败");
                 }
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
@@ -151,7 +152,7 @@ public class MachinePhysicalProbabilityController extends BaseController {
             if("ok".equals(result)){
                 machinePhysicalProbabilityService.updateById(machinePhysicalProbability);
             } else {
-                return "链接机器失败";
+                return new ErrorTip(500,"链接机器失败");
             }
         } catch (ClientProtocolException e) {
             e.printStackTrace();
@@ -175,8 +176,8 @@ public class MachinePhysicalProbabilityController extends BaseController {
                 ;
         if(doll != null) {
             machineUrl = doll.getMachineUrl();
-            //md5
-            String keyss = MD5Util.MD5Encode(machineUrl+"|setting|62kq9FlIRF58G8lF", "UTF-8");
+            //md5            62kq9FlIRF58G8lF
+            String keyss = MD5Util.MD5Encode(machineUrl+"|setting|2okq9dlIRc58G5lD", "UTF-8");
             littleKey = keyss.substring(0,10);
         }
         List<NameValuePair> params=new ArrayList<NameValuePair>();
