@@ -26,7 +26,7 @@
         id, order_number AS orderNumber, order_date AS orderDate, order_by AS orderBy, status, stock_valid_date AS stockValidDate, deliver_date AS deliverDate, deliver_method AS deliverMethod, deliver_number AS deliverNumber, deliver_amount AS deliverAmount, deliver_coins AS deliverCoins, address_id AS addressId, modified_date AS modifiedDate, modified_by AS modifiedBy, comment
     </sql>
 
-	<select id="selectByOrderNum" parameterType="TDollOrder"
+	<select id="selectByOrderNum" parameterType="com.stylefeng.guns.common.persistence.model.TDollOrder"
 			resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List"/>
@@ -103,4 +103,13 @@
 		</if>
 		order by a.modified_date DESC
 	</select>
+
+
+	<update id="updateTDollOrderById">
+            update t_doll_order set deliver_method=#{deliverMethod},deliver_number=#{deliverNumber},deliver_amount=#{deliverAmount},
+		      comment=#{comment},deliver_date=now(),modified_date=now(),status='已发货'  where id in
+		<foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</update>
 </mapper>

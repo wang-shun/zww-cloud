@@ -5,6 +5,7 @@ import com.stylefeng.guns.common.persistence.model.ShareInvite;
 import com.stylefeng.guns.common.persistence.model.TDollOrder;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -32,4 +33,6 @@ public interface ITDollOrderService extends IService<TDollOrder> {
 
     //反娃娃
     boolean backDoll(TDollOrder tDollOrder);
+
+    int updateTDollOrderById(List<Long> ids, String deliverMethod, String deliverNumber, BigDecimal deliverAmount, String comment);
 }

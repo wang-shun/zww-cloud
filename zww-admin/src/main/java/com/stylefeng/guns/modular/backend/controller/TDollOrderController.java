@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.common.persistence.model.TDollOrder;
 import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class TDollOrderController extends BaseController {
     private ITDollOrderService tDollOrderService;
 
     @Autowired
-    private TDollOrderItemMapper tDollOrderItemMapper;
+    private TDollOrderItemMapper dollOrderItemMapper;
 
     /**
      * 跳转到待发货列表首页
@@ -89,7 +90,7 @@ public class TDollOrderController extends BaseController {
             orderId = tDollOrder.getId();
         }
         Page<TDollOrderItem> page = new PageFactory<TDollOrderItem>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderItemMapper.selectLists(page, orderId);
+        List<Map<String, Object>> result = dollOrderItemMapper.selectLists(page, orderId);
         page.setRecords((List<TDollOrderItem>)new TDollOrderItemWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -106,11 +107,10 @@ public class TDollOrderController extends BaseController {
      * 跳转到修改待发货列表
      */
      
-    @RequestMapping("/tDollOrder_update/{tDollOrderId}")
-    public String tDollOrderUpdate(@PathVariable Integer tDollOrderId, Model model) {
-        TDollOrder tDollOrder = tDollOrderService.selectById(tDollOrderId);
-        model.addAttribute("item",tDollOrder);
-        LogObjectHolder.me().set(tDollOrder);
+    @RequestMapping(value = "/tDollOrder_update/{ids}")
+    public String tDollOrderUpdate(@PathVariable String ids, Model model) {
+        model.addAttribute("ids",ids);
+        LogObjectHolder.me().set(ids);
         return PREFIX + "tDollOrder_edit.html";
     }
 
@@ -219,10 +219,15 @@ public class TDollOrderController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TDollOrder tDollOrder) {
-        tDollOrder.setDeliverDate(new Date());
-        tDollOrder.setModifiedDate(new Date());
-        tDollOrder.setStatus("已发货");
-        tDollOrderService.updateById(tDollOrder);
+        String idStr = tDollOrder.getOrderNumber();
+        List<Long> ids = new ArrayList<Long>();
+        for (int i=0;i<idStr.split(",").length;i++){
+            ids.add(Long.valueOf(idStr.split(",")[i]));
+        }
+      //  tDollOrder.setDeliverDate(new Date());
+      //  tDollOrder.setModifiedDate(new Date());
+      //  tDollOrder.setStatus("已发货");
+        tDollOrderService.updateTDollOrderById(ids,tDollOrder.getDeliverMethod(),tDollOrder.getDeliverNumber(),tDollOrder.getDeliverAmount(),tDollOrder.getComment());
         return super.SUCCESS_TIP;
     }
 

@@ -10,7 +10,9 @@ import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,7 @@ import java.util.Map;
  * @since 2018-01-30
  */
 @Service
+@Transactional
 public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOrder> implements ITDollOrderService {
 
     @Autowired
@@ -103,6 +106,12 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         tDollOrder.setModifiedBy(ShiroKit.getUser().getId());
         return retBool(tDollOrderMapper.updateById(tDollOrder));
 
+    }
+
+
+    @Override
+    public int updateTDollOrderById(List<Long> ids, String deliverMethod, String deliverNumber, BigDecimal deliverAmount, String comment) {
+        return tDollOrderMapper.updateTDollOrderById(ids,deliverMethod,deliverNumber,deliverAmount,comment);
     }
 
 

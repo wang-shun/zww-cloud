@@ -19,11 +19,9 @@
     </sql>
 
 	<select id="selectLists" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select a.id id, a.doll_code dollCode, a.order_id orderId, a.quantity quantity,
-		b.dollName dollName,b.img_url dollImg
-		from t_doll_order_item a LEFT JOIN doll_info b on a.doll_code=b.dollCode
-		where 1=1
-		<if test="#{orderId != null and orderId != ''}">
+		select a.id id, a.doll_code dollCode, a.order_id orderId, a.quantity quantity,	b.dollName dollName,b.img_url dollImg
+		from t_doll_order_item a,doll_info b where a.doll_code=b.dollCode
+		<if test="orderId != null and orderId != 0">
 			and a.order_id=#{orderId,jdbcType=BIGINT}
 		</if>
 		ORDER by id

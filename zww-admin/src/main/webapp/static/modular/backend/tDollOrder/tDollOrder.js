@@ -13,7 +13,7 @@ var TDollOrder = {
  */
 TDollOrder.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkbox: true},
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
@@ -89,13 +89,21 @@ TDollOrder.openAddTDollOrder = function () {
  */
 TDollOrder.openTDollOrderDetail = function () {
     if (this.check()) {
+        var list = $('#' + this.id).bootstrapTable('getSelections'),ids="";
+        for (var i=0;i<list.length;i++){
+            ids += list[i].id;
+            if(i != list.length-1){
+                ids += ",";
+            }
+        }
         var index = layer.open({
             type: 2,
             title: '待发货列表详情',
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/tDollOrder/tDollOrder_update/' + TDollOrder.seItem.id
+           // content: Feng.ctxPath + '/tDollOrder/tDollOrder_update/' + TDollOrder.seItem.id
+            content: Feng.ctxPath + '/tDollOrder/tDollOrder_update/' + ids
         });
         this.layerIndex = index;
     }

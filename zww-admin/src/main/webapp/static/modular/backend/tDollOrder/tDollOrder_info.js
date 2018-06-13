@@ -96,9 +96,13 @@ TDollOrderInfoDlg.editSubmit = function() {
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/tDollOrder/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.TDollOrder.table.refresh();
-        TDollOrderInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("修改成功!");
+            window.parent.TDollOrder.table.refresh();
+            TDollOrderInfoDlg.close();
+        }else{
+            Feng.error("修改失败!" + data.message);
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });

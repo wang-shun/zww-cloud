@@ -5,6 +5,7 @@ import com.stylefeng.guns.common.persistence.model.TDollOrder;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -30,5 +31,6 @@ public interface TDollOrderMapper extends BaseMapper<TDollOrder> {
     //查询已发货订单
     List<Map<String, Object>> selectTDollOrderOut(@Param("page") Page<TDollOrder> page, @Param("memberId") String memberId, @Param("phone") String phone);
 
+    int updateTDollOrderById(@Param("ids") List<Long> ids, @Param("deliverMethod")String deliverMethod, @Param("deliverNumber")String deliverNumber, @Param("deliverAmount")BigDecimal deliverAmount, @Param("comment")String comment);
 
 }
