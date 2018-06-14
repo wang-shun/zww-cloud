@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="id" value="${item.id}" underline="true"/>
+                            <#input id="dollId" name="机器id" value="${item.dollId}" underline="true"/>
+                            <#input id="memberId" name="用户id" value="${item.memberId}" underline="true"/>
+                            <#input id="catchDate" name="抓取时间" value="${item.catchDate}" underline="true"/>
+                            <#input id="catchStatus" name="抓取状态" value="${item.catchStatus}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="videoUrl" name="视频url" value="${item.videoUrl}" underline="true"/>
+                            <#input id="gameNum" name="游戏编号" value="${item.gameNum}" underline="true"/>
+                            <#input id="machineType" name="房间业务类型0为普通房,1为练习房,2为钻石房,3为占卜房" value="${item.machineType}" underline="true"/>
+                            <#input id="dollCode" name="" value="${item.dollCode}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TDollCatchHistoryInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TDollCatchHistoryInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/backend/tDollCatchHistory/tDollCatchHistory_info.js"></script>
+@}

@@ -8,48 +8,64 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
-
+/**
+ * <p>
+ *
+ * </p>
+ *
+ * @author bruce
+ * @since 2018-06-14
+ */
 @TableName("t_doll_catch_history")
 public class TDollCatchHistory extends Model<TDollCatchHistory>{
-	  private static final long serialVersionUID = 1L;
-       /**
-	     * 唯一标识
-	     */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 唯一标识
+	 */
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
-	
-	 /**
-		 * 机器编号
-		 */
+
+	/**
+	 * 机器编号
+	 */
 	@TableField("doll_id")
 	private String dollId;
-	 /**
-		 * userId编号
-		 */
+	/**
+	 * userId编号
+	 */
 	@TableField("member_id")
-	private Integer userId;
-	
-	 /**
-     * 抓取时间
-     */
+	private Integer memberId;
+
+	/**
+	 * 抓取时间
+	 */
 	@TableField("catch_date")
 	private Date catchDate;
-	 /**
-     * 抓取状态
-     */
+	/**
+	 * 抓取状态
+	 */
 	@TableField("catch_status")
 	private String catchStatus;
-	 /**
-     * 视频url
-     */
+	/**
+	 * 视频url
+	 */
 	@TableField("video_url")
 	private String videoUrl;
-	 /**
-     * 游戏编号
-     */
+	/**
+	 * 游戏编号
+	 */
 	@TableField("game_num")
 	private String gameNum;
-		
+
+	/**
+	 * 房间业务类型0为普通房,1为练习房,2为钻石房,3为占卜房
+	 */
+	@TableField("machine_type")
+	private Integer machineType;
+
+	@TableField("doll_code")
+	private String dollCode;
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -71,12 +87,12 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 		this.dollId = dollId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getMemberId() {
+		return memberId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 
 	public Date getCatchDate() {
@@ -110,18 +126,36 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 	public void setGameNum(String gameNum) {
 		this.gameNum = gameNum;
 	}
-	
+
+	public Integer getMachineType() {
+		return machineType;
+	}
+
+	public void setMachineType(Integer machineType) {
+		this.machineType = machineType;
+	}
+
+	public String getDollCode() {
+		return dollCode;
+	}
+
+	public void setDollCode(String dollCode) {
+		this.dollCode = dollCode;
+	}
+
 	@Override
 	public String toString() {
 		return "TDollCatchHistory{" +
-			"id=" + id +
-			", doll_id=" + dollId +
-			", member_id=" + userId +
-			", catch_date=" + catchDate +
-			", catch_status=" + catchStatus +
-			", video_url=" + videoUrl +
-			", game_num=" + gameNum +
-			"}";
+				"id=" + id +
+				", doll_id=" + dollId +
+				", member_id=" + memberId +
+				", catch_date=" + catchDate +
+				", catch_status=" + catchStatus +
+				", video_url=" + videoUrl +
+				", game_num=" + gameNum +
+				", machineType=" + machineType +
+				", dollCode=" + dollCode +
+				"}";
 	}
 
 }

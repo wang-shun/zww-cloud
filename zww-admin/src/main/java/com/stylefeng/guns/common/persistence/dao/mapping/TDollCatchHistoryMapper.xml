@@ -6,25 +6,28 @@
 	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.TDollCatchHistory">
 		<id column="id" property="id" />
 		<result column="doll_id" property="dollId" />
-		<result column="member_id" property="userId" />
+		<result column="member_id" property="memberId" />
 		<result column="catch_date" property="catchDate" />
 		<result column="catch_status" property="catchStatus" />
 		<result column="video_url" property="videoUrl" />
 		<result column="game_num" property="gameNum" />
+		<result column="machine_type" property="machineType" />
+		<result column="doll_code" property="dollCode" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, doll_id AS dollId, member_id AS userId, catch_date AS catchDate, catch_status AS catchStatus, video_url AS videoUrl, game_num AS gameNum
+        id, doll_id AS dollId, member_id AS memberId, catch_date AS catchDate, catch_status AS catchStatus, video_url AS videoUrl, game_num AS gameNum, machine_type AS machineType, doll_code AS dollCode
     </sql>
+
 
 	<select id="selectDollCatchHistoryList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select
 		<include refid="Base_Column_List" />
 		from t_doll_catch_history
 		where 1=1
-		<if test="userId != null and userId != ''">
-			AND member_id = #{userId}
+		<if test="memberId != null and memberId != ''">
+			AND member_id = #{memberId}
 		</if>
 		<if test="dollId != null and dollId != 0">
 			AND doll_id = #{dollId}
@@ -38,13 +41,13 @@
 		<if test="endtime != null and endtime != ''">
 			AND  DATEDIFF(catch_date,#{endtime})&lt;0
 		</if>
-			order by catch_date desc
+		order by catch_date desc
 	</select>
 
 	<!--抓取总次数-->
 	<select id="selectCatchNum" resultType="java.lang.Integer" >
 		select
-		count(*)
+		count(1)
 		from t_doll_catch_history
 		where 1=1
 		<if test="memberId != null and memberId != 0">
@@ -63,7 +66,7 @@
 	<!--抓取成功次数-->
 	<select id="selectCatchSuccessNum" resultType="java.lang.Integer" >
 		select
-		count(*)
+		count(1)
 		from t_doll_catch_history
 		where 1=1 and catch_status = '抓取成功'
 		<if test="memberId != null and memberId != 0">
@@ -76,5 +79,33 @@
 			AND  DATEDIFF(catch_date,#{endtime})&lt;0
 		</if>
 		order by catch_date desc
+	</select>
+
+
+
+	<select id="selectDollCatchHistorys" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select	a.id,a.catch_date AS catchDate, a.catch_status AS catchStatus,a.machine_type AS machineType,
+		 a.doll_code AS dollCode,b.name dollName,b.machine_code machineCode,b.tbimg_real_path tbimgRealPath,c.name memberName
+		from t_doll_catch_history a,t_doll b ,t_member c
+		where a.doll_id=b.id and a.member_id=c.id
+		<if test="dollId != null and dollId != 0">
+			AND a.doll_id = #{dollId}
+		</if>
+		<if test="dollName != null and dollName != '' ">
+			and b.name like concat(concat("%",#{dollName,jdbcType=VARCHAR}),"%")
+		</if>
+		<if test="machineCode != null and machineCode != ''">
+			AND b.machine_code = #{machineCode,jdbcType=VARCHAR}
+		</if>
+		<if test="dollCatchStates != null and dollCatchStates != ''">
+			AND a.catch_status = #{dollCatchStates}
+		</if>
+		<if test="machineType != null and machineType != ''">
+			AND a.catch_status = #{machineType}
+		</if>
+		<if test="memberName != null and memberName != ''">
+			and c.name like concat(concat("%",#{memberName,jdbcType=VARCHAR}),"%")
+		</if>
+		order by a.catch_date desc
 	</select>
 </mapper>

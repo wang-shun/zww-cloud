@@ -1,0 +1,53 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>娃娃机抓取记录管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <#NameCon id="dollId" name="机器id" placeholder="输入机器id" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="dollName" name="名称" placeholder="输入娃娃名称" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#NameCon id="machineCode" name="机器号" placeholder="输入机器号" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="memberName" name="用户昵称" placeholder="输入用户昵称" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#SelectCon id="dollCatchStates" name="抓取状态" >
+                                <option value="" >全部</option>
+                                <option value="抓取失败" >抓取失败</option>
+                                <option value="抓取成功" >抓取成功</option>
+                                <option value="游戏异常,币已返回" >游戏异常,币已返回</option>
+                            </#SelectCon>
+                        </div>
+                        <div class="col-sm-3">
+                            <#SelectCon id="machineType" name="机器类型" >
+                            <option value="" >全部</option>
+                            <option value="0" >普通房</option>
+                            <option value="1" >练习房</option>
+                            <option value="2" >钻石房</option>
+                            <option value="3" >占卜房</option>
+                        </#SelectCon>
+                    </div>
+                <div class="col-sm-3">
+                    <#button name="搜索" icon="fa-search" clickFun="TDollCatchHistory.search()"/>
+                </div>
+            </div>
+                        <#table id="TDollCatchHistoryTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/backend/tDollCatchHistory/tDollCatchHistory.js"></script>
+@}
