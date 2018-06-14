@@ -45,6 +45,27 @@ public class MemberWarpper extends BaseControllerWarpper {
 		} else {
 			map.put("vipGroup",memberVip.getName());
 		}
+		Integer agentSuperId = (Integer) map.get("agentSuperId");
+		Integer agentOneId = (Integer) map.get("agentOneId");
+		Integer agentTwoId = (Integer) map.get("agentTwoId");
+		Integer agentThreeId = (Integer) map.get("agentThreeId");
+		if(agentThreeId != 0){
+			map.put("agentName", ZwwContentFactory.me().selectTAgentById(agentThreeId).getNickName());
+		}else{
+            if(agentTwoId != 0){
+				map.put("agentName", ZwwContentFactory.me().selectTAgentById(agentTwoId).getNickName());
+			}else{
+            	if(agentOneId != 0){
+					map.put("agentName", ZwwContentFactory.me().selectTAgentById(agentOneId).getNickName());
+				}else{
+            		if(agentSuperId != 0){
+						map.put("agentName", ZwwContentFactory.me().selectTAgentById(agentSuperId).getNickName());
+					}else{
+						map.put("agentName","无");
+					}
+				}
+			}
+		}
 	}
 
 }

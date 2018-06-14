@@ -15,7 +15,7 @@ Member.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
+            {title: '推荐人', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '手机', field: 'mobile', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'password', visible: true, align: 'center', valign: 'middle'},

@@ -127,6 +127,15 @@ public class Member extends Model<Member> implements Serializable {
 	@TableField(exist=false)
 	private String vipGroup; //vip等级显示
 
+	@TableField("agent_super_id")
+	private Integer agentSuperId;
+	@TableField("agent_one_id")
+	private Integer agentOneId;
+	@TableField("agent_two_id")
+	private Integer agentTwoId;
+	@TableField("agent_three_id")
+	private Integer agentThreeId;
+
 
 	public String getVipGroup() {
 		return vipGroup;
@@ -398,6 +407,38 @@ public class Member extends Model<Member> implements Serializable {
 
 	public void setPhoneModel(String phoneModel) {
 		this.phoneModel = phoneModel;
+	}
+
+	public Integer getAgentSuperId() {
+		return agentSuperId;
+	}
+
+	public void setAgentSuperId(Integer agentSuperId) {
+		this.agentSuperId = agentSuperId;
+	}
+
+	public Integer getAgentOneId() {
+		return agentOneId;
+	}
+
+	public void setAgentOneId(Integer agentOneId) {
+		this.agentOneId = agentOneId;
+	}
+
+	public Integer getAgentTwoId() {
+		return agentTwoId;
+	}
+
+	public void setAgentTwoId(Integer agentTwoId) {
+		this.agentTwoId = agentTwoId;
+	}
+
+	public Integer getAgentThreeId() {
+		return agentThreeId;
+	}
+
+	public void setAgentThreeId(Integer agentThreeId) {
+		this.agentThreeId = agentThreeId;
 	}
 
 	@Override

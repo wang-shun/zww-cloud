@@ -35,11 +35,18 @@
 		<result column="register_channel" property="registerChannel" />
 		<result column="login_channel" property="loginChannel" />
 		<result column="phone_model" property="phoneModel" />
+		<result column="agent_super_id" property="agentSuperId" />
+		<result column="agent_one_id" property="agentOneId" />
+		<result column="agent_two_id" property="agentTwoId" />
+		<result column="agent_three_id" property="agentThreeId" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, memberID, name, mobile, password, weixin_id AS weixinId, gender, birthday, coins, points, catch_number AS catchNumber, register_date AS registerDate, modified_date AS modifiedDate, modified_by AS modifiedBy, last_login_date AS lastLoginDate, last_logoff_date AS lastLogoffDate, online_flg AS onlineFlg, icon_context_path AS iconContextPath, icon_file_name AS iconFileName, icon_real_path AS iconRealPath, easemob_uuid AS easemobUuid, active_flg AS activeFlg, invite_flg AS inviteFlg, invite_flg_web AS inviteFlgWeb, register_from AS registerFrom, last_login_from AS lastLoginFrom, first_login AS firstLogin, first_charge AS firstCharge, register_channel AS registerChannel, login_channel AS loginChannel, phone_model AS phoneModel
+        id, memberID, name, mobile, password, weixin_id AS weixinId, gender, birthday, coins, points, catch_number AS catchNumber, register_date AS registerDate, modified_date AS modifiedDate,
+         modified_by AS modifiedBy, last_login_date AS lastLoginDate, last_logoff_date AS lastLogoffDate, online_flg AS onlineFlg, icon_context_path AS iconContextPath,  icon_file_name AS iconFileName,
+         icon_real_path AS iconRealPath, easemob_uuid AS easemobUuid, active_flg AS activeFlg, invite_flg AS inviteFlg, invite_flg_web AS inviteFlgWeb, register_from AS registerFrom,  last_login_from AS lastLoginFrom,first_login AS firstLogin,
+         first_charge AS firstCharge, register_channel AS registerChannel, login_channel AS loginChannel, phone_model AS phoneModel,agent_super_id AS agentSuperId,agent_one_id AS agentOneId,agent_two_id AS agentTwoId,agent_three_id AS agentThreeId
     </sql>
 
 	<sql id="Base_Column_Lists">
@@ -48,7 +55,7 @@
 		a.online_flg AS onlineFlg, a.icon_context_path AS iconContextPath, a.icon_file_name AS iconFileName, a.icon_real_path AS iconRealPath, a.easemob_uuid AS easemobUuid,
 		a.active_flg AS activeFlg, a.invite_flg AS inviteFlg, a.invite_flg_web AS inviteFlgWeb, a.register_from AS registerFrom, a.last_login_from AS lastLoginFrom, a.first_login AS firstLogin,
 		a.first_charge AS firstCharge, a.register_channel AS registerChannel, a.login_channel AS loginChannel, a.phone_model AS phoneModel,
-		b.jicun AS checkIn,
+		b.jicun AS checkIn,agent_super_id AS agentSuperId,agent_one_id AS agentOneId,agent_two_id AS agentTwoId,agent_three_id AS agentThreeId,
 		c.growth_value AS growthValue
 	</sql>
 
