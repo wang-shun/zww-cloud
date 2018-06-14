@@ -3,6 +3,8 @@ package com.stylefeng.guns.common.persistence.dao;
 import com.stylefeng.guns.common.persistence.model.BankInfo;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
   *  Mapper 接口
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-06-05
  */
 public interface BankInfoMapper extends BaseMapper<BankInfo> {
-    BankInfo getBankInfoByAgentId(Integer agentId);
+    List<BankInfo> getBankInfoByAgentId(Integer agentId);
 }

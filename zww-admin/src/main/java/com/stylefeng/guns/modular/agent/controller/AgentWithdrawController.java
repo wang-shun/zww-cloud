@@ -202,24 +202,50 @@ public class AgentWithdrawController extends BaseController {
 
     @RequestMapping(value = "/withdraw")
     @ResponseBody
-    public synchronized Object withdraw() {
+    public synchronized Object withdraw(AgentWithdraw agentWithdraw) {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
-        if(tAgent.getStatus() == 2) return new ErrorTip(500,"该账户已被冻结，请联系上级代理查询!");
+        if(tAgent.getStatus() == 2) return new ErrorTip(500,"该账户已被冻结，请联系上级代理查询！");
         if(tAgent.getStatus() == 3) return new ErrorTip(500,"该账户已失效!");
-        BankInfo bankInfo = bankInfoService.getBankInfoByAgentId(tAgent.getId());
-        if(bankInfo == null || bankInfo.getCardNo() == null || bankInfo.getName() == null || bankInfo.getPhone() == null || bankInfo.getIdCardNo() == null)
-            return new ErrorTip(500,"银行卡信息不全，请在手机端代理商管理上绑卡后再进行此操作!");
+        if(agentWithdraw.getId() == null || agentWithdraw.getId() == 0) return new ErrorTip(500,"请选择到账卡号！");
+        BankInfo bankInfo = bankInfoService.selectById(agentWithdraw.getId());
+        if(bankInfo == null) return new ErrorTip(500,"到账卡号选择错误，请重新选择！");
         Long balance = tAgent.getBalance()-tAgent.getBalanceDisabled();//余额(单位：分)
         TSystemPref MIN_WITHDRAW = systemPrefService.selectByCode("MIN_WITHDRAW");
         TSystemPref SERVICE_CHARGE = systemPrefService.selectByCode("SERVICE_CHARGE");
         long min = MIN_WITHDRAW == null ? 10000 : Long.valueOf(MIN_WITHDRAW.getValue());//最小提现金额(单位：分)
         long fee = SERVICE_CHARGE == null ? 200 : Long.valueOf(SERVICE_CHARGE.getValue());//手续费(单位：分)
-        if(balance < min) return new ErrorTip(500,"余额不足" + min*0.01 + "元,提现失败!");
+        if(balance < min) return new ErrorTip(500,"余额不足" + min*0.01 + "元,提现失败！");
         int i = agentWithdrawService.createAgentWithdraw(bankInfo,balance,fee);
-        if(i == 0) return new ErrorTip(500,"插入失败,提现失败!");
+        if(i == 0) return new ErrorTip(500,"插入失败,提现失败！");
         //减余额
         agentService.updateAmount(balance,0,tAgent.getId());
         return super.SUCCESS_TIP;
+    }
+
+    /**
+     * 审批成功
+     */
+    @PostMapping("/getWithdrawBankInfo")
+    @ResponseBody
+    public synchronized Map<String, Object> getWithdrawBankInfo() throws Exception{
+        Map<String, Object> resultMap = new HashedMap<String, Object>();
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
+        try {
+            List<BankInfo> list = bankInfoService.getBankInfoByAgentId(tAgent.getId());
+            if(list.size() == 0 ){
+                resultMap.put("code", 500);
+                resultMap.put("msg", "银行卡信息不全，请在手机端代理商管理上绑卡后再进行此操作!");
+                return resultMap;
+            }
+            resultMap.put("code", 200);
+            resultMap.put("list", list);
+            return resultMap;
+        }catch (Exception e){
+            resultMap.put("code", 500);
+            resultMap.put("msg", e.getMessage());
+            return resultMap;
+        }
     }
 }

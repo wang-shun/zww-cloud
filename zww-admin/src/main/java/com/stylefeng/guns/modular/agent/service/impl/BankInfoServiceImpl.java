@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -21,7 +23,7 @@ public class BankInfoServiceImpl extends ServiceImpl<BankInfoMapper, BankInfo> i
     private  BankInfoMapper bankInfoMapper;
 
     @Override
-    public BankInfo getBankInfoByAgentId(Integer agentId) {
+    public List<BankInfo> getBankInfoByAgentId(Integer agentId) {
         return bankInfoMapper.getBankInfoByAgentId(agentId);
     }
 }

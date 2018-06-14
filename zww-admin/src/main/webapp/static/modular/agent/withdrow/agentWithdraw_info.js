@@ -76,8 +76,8 @@ AgentWithdrawInfoDlg.Withdraw = function() {
             Feng.success("提现成功!请等待财务审批");
             $("#ensure").removeAttr("disabled");
             window.location.reload();
-           // window.parent.AgentWithdraw.table.refresh();
-           // AgentWithdrawInfoDlg.close();
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
         }else{
             Feng.error(data.message);
             $("#ensure").removeAttr("disabled");
@@ -115,5 +115,17 @@ AgentWithdrawInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    $.post(Feng.ctxPath + "/agentWithdraw/getWithdrawBankInfo",function(result){
+        if(result.code == 200){
+            var list = result.list;
+            for(var i=0;i<list.length;i++){
+                var pa = list[i];
+                $("#id").append("<option value='"+pa.id+"'>"+pa.cardBank + "(****" +pa.cardNo.substring(pa.cardNo.length-4,pa.cardNo)+")</option>");
+            }
+        }else{
+            Feng.error(result.msg);
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
+        }
+    });
 });
