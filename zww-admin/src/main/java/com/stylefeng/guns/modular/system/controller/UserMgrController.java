@@ -7,7 +7,10 @@ import com.stylefeng.guns.common.constant.dictmap.UserDict;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
+import com.stylefeng.guns.common.persistence.model.Role;
+import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.aliyun.AliyunService;
@@ -21,6 +24,7 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
@@ -66,6 +70,12 @@ public class UserMgrController extends BaseController {
     
     @Autowired
     AliyunService aliyunService;
+
+    @Resource
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private ITAgentService tAgentService;
 
     /**
      * 跳转到查看管理员列表的页面
@@ -132,6 +142,14 @@ public class UserMgrController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         User user = this.userMapper.selectById(userId);
+        Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
+        model.addAttribute("rate", "-");
+        if("agent".equals(role.getTips().substring(0,5))){
+            TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
+            if(tAgent !=null){
+                model.addAttribute("rate", tAgent.getFee());
+            }
+        }
         model.addAttribute(user);
         model.addAttribute("roleName", ConstantFactory.me().getRoleName(user.getRoleid()));
         model.addAttribute("deptName", ConstantFactory.me().getDeptName(user.getDeptid()));

@@ -75,7 +75,7 @@ AgentWithdrawInfoDlg.Withdraw = function() {
         if(data.code == 200 ){
             Feng.success("提现成功!请等待财务审批");
             $("#ensure").removeAttr("disabled");
-            window.location.reload();
+            window.parent.location.reload();
             window.parent.AgentWithdraw.table.refresh();
             AgentWithdrawInfoDlg.close();
         }else{
