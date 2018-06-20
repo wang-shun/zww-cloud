@@ -1,45 +1,124 @@
 @layout("/common/_container.html"){
+  <style>
+      .upload-btn,#btnDiv{
+          display: none;
+      }
+      .maxidCardPicturePos,.maxidCardPictureRev,.maxidCardPicture,.maxbankPicturePos{
+          width: 100%;
+          height: auto;
+      }
+      .minidCardPicturePos,.minidCardPictureRev,.minidCardPicture,.minbankPicturePos{
+          width: 236px;
+          height: 150px;
+      }
+      .runtest textarea {
+          display: block;
+          width: 300px;
+          height: 160px;
+          border: 10px solid #F8F8F8;
+          border-top-width: 0;
+          padding: 10px;
+          line-height: 20px;
+          overflow: auto;
+          background-color: #3F3F3F;
+          color: #eee;
+          font-size: 12px;
+          font-family: Courier New;
+      }
+      .runtest a {
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
+      }
+      .layui-btn-normal {
+          background-color: #1E9FFF;
+      }
+      .layui-btn {
+          display: inline-block;
+          height: 38px;
+          line-height: 38px;
+          padding: 0 18px;
+          background-color: #009688;
+          color: #fff;
+          white-space: nowrap;
+          text-align: center;
+          font-size: 14px;
+          border: none;
+          border-radius: 2px;
+          cursor: pointer;
+      }
+  </style>
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
 
             <input type="hidden" id="id" value="${item.id}">
-
+            <input type="hidden" id="status" value="${item.status}">
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="agentId" name="代理ID" value="${item.agentId}" underline="true"/>
+                           <!-- <#input id="id" name="" value="${item.id}" underline="true"/>-->
+                           <!-- <#input id="agentId" name="代理ID" value="${item.agentId}" underline="true"/>-->
+                            <#input id="name" name="真实姓名" value="${item.name}" underline="true"/>
+                            <#input id="phone" name="银行手机号" value="${item.phone}" underline="true"/>
+                           <#input id="idCardNo" name="身份证" value="${item.idCardNo}" underline="true"/>
                             <#input id="cardBank" name="银行名称" value="${item.cardBank}" underline="true"/>
-                            <#input id="cardSubBank" name="支行名称" value="${item.cardSubBank}" underline="true"/>
-                            <#input id="cardProvince" name="银行省份" value="${item.cardProvince}" underline="true"/>
-                            <#input id="cardCity" name="银行城市" value="${item.cardCity}" underline="true"/>
-                            <#input id="cardArea" name="银行区域" value="${item.cardArea}" underline="true"/>
+<!--
+                            <#input id="cardProvince" name="银行省份" value="" underline="true"/>
+                            <#input id="cardCity" name="银行城市" value="" underline="true"/>
+                            <#input id="cardArea" name="银行区域" value="" underline="true"/>-->
+                            <#input id="cardSubBank" name="银行地址" value="${item.cardProvince}${item.cardCity}${item.cardArea}${item.cardSubBank}" underline="true"/>
                             <#input id="cardBankNo" name="联行号" value="${item.cardBankNo}" underline="true"/>
-                            <#input id="cardNo" name="卡号" value="${item.cardNo}" />
+                            <#input id="cardNo" name="银行卡号" value="${item.cardNo}" underline="true"/>
+
+                            <#input id="createTime" name="创建日期" value="${item.createTime}" underline="true"/>
+                            <#input id="updateTime" name="修改日期" value="${item.updateTime}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="idCardNo" name="身份证" value="${item.idCardNo}" underline="true"/>
-                            <#input id="name" name="真实姓名" value="${item.name}" underline="true"/>
-                            <#input id="phone" name="银行手机号" value="${item.phone}" underline="true"/>
-                            <#input id="idCardPicturePos" name="身份证正面" value="${item.idCardPicturePos}" underline="true"/>
-                            <#input id="idCardPictureRev" name="身份证反面" value="${item.idCardPictureRev}" underline="true"/>
-                            <#input id="idCardPicture" name="手持身份证" value="${item.idCardPicture}" underline="true"/>
-                            <#input id="bankPicturePos" name="银行卡正面" value="${item.bankPicturePos}" underline="true"/>
-                            <#input id="createTime" name="银行添加时间" value="${item.createTime}" underline="true"/>
-                            <#input id="updateTime" name="修改时间" value="${item.updateTime}" />
+                    <div class="form-group">
+                          <label class="col-sm-3 control-label head-scu-label">身份证正面</label>
+                          <div><img src="${item.idCardPicturePos}" id="idCardPicturePos" class="minidCardPicturePos"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">身份证反面</label>
+                        <div><img src="${item.idCardPictureRev}" id="idCardPictureRev" class="minidCardPictureRev"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">手持身份证</label>
+                        <div><img src="${item.idCardPicture}" id="idCardPicture" class="minidCardPicture"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">银行卡正面</label>
+                        <div><img src="${item.bankPicturePos}" id="bankPicturePos" class="minbankPicturePos"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
                 </div>
             </div>
-
-            <div class="row btn-group-m-t">
+      <!--      <textarea name="word" id="word" cols="130" rows="3"placeholder="请输入审核失败理由"></textarea>-->
+            <div class="row btn-group-m-t"  id="btnDiv">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BankInfoInfoDlg.editSubmit()"/>
-                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BankInfoInfoDlg.close()"/>
+                    <#button btnCss="info" name="审核成功" id="ensure" icon="fa-check" clickFun="BankInfoInfoDlg.updStatus(1)"/>
+                    <#button btnCss="danger" name="审核失败" id="cancel" icon="fa-eraser" clickFun="BankInfoInfoDlg.showMessage(2)"/>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="object" style="z-index: 19891015; top: 589px; left: 353px; margin-left: 36px;display: none;">
+    <div class="layui-layer-title" style="cursor: move;">审核失败理由:</div>
+    <div id="Lay_layer_debug" class="layui-layer-content">
+        <div class="runtest layui-layer-wrap" style="display: block;">
+            <textarea class="site-demo-text" id="testmain"></textarea>
+            <a href="javascript:;" class="layui-btn layui-btn-normal" onclick="BankInfoInfoDlg.onclicks()">确认</a>
+        </div>
+    </div>
+    <span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" onclick="$('#layui-layer1').hide();"></a></span>
+</div>
+
 <script src="${ctxPath}/static/modular/agent/bankInfo/bankInfo_info.js"></script>
+<script src="${ctxPath}/static/modular/agent/bankInfo/jQueryRotate.2.2.js"></script>
 @}

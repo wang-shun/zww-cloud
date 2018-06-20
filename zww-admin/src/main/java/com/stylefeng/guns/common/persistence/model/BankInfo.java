@@ -75,6 +75,11 @@ public class BankInfo extends Model<BankInfo> {
      * 银行手机号
      */
 	private String phone;
+
+	/**
+	 * 银行手机号
+	 */
+	private String message;
     /**
      * 身份证正面
      */
@@ -105,6 +110,12 @@ public class BankInfo extends Model<BankInfo> {
      */
 	@TableField("update_time")
 	private Date updateTime;
+
+
+	/**
+	 * 银行手机号
+	 */
+	private Integer status;
 
 
 	public Integer getId() {
@@ -251,6 +262,22 @@ public class BankInfo extends Model<BankInfo> {
 		this.updateTime = updateTime;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -277,6 +304,8 @@ public class BankInfo extends Model<BankInfo> {
 			", bankPicturePos=" + bankPicturePos +
 			", createTime=" + createTime +
 			", updateTime=" + updateTime +
+			", status=" + status +
+			", message=" + message +
 			"}";
 	}
 }

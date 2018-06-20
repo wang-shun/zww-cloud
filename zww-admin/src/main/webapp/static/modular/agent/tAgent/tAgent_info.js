@@ -110,10 +110,15 @@ TAgentInfoDlg.editSubmit = function() {
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/tAgent/update", function(data){
-        Feng.success("修改成功!");
-        $("#ensure").removeAttr("disabled");
-        window.parent.TAgent.table.refresh();
-        TAgentInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("修改成功!");
+            $("#ensure").removeAttr("disabled");
+            window.parent.TAgent.table.refresh();
+            TAgentInfoDlg.close();
+        }else{
+            Feng.error(data.message);
+            $("#ensure").removeAttr("disabled");
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
         $("#ensure").removeAttr("disabled");

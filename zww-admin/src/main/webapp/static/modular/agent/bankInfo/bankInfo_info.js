@@ -84,27 +84,75 @@ BankInfoInfoDlg.addSubmit = function() {
     ajax.set(this.bankInfoInfoData);
     ajax.start();
 }
+BankInfoInfoDlg.onclicks = function () {
+    var word = $("#testmain").val();
+    if(word == ""){
+        alert("请输入审核失败理由");
+        return;
+    }
+    this.set("message",word);
+    BankInfoInfoDlg.updStatus(2);
+}
+BankInfoInfoDlg.showMessage = function () {
+    $("#layui-layer1").show();
+    return;
+}
 
 /**
- * 提交修改
+ * 提交审核
  */
-BankInfoInfoDlg.editSubmit = function() {
+BankInfoInfoDlg.updStatus = function(status) {
 
-    this.clearData();
-    this.collectData();
-
+    this.set('id');
+    this.set("status",status);
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/bankInfo/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.BankInfo.table.refresh();
+         Feng.success("成功!");
+         window.parent.BankInfo.table.refresh();
         BankInfoInfoDlg.close();
     },function(data){
-        Feng.error("修改失败!" + data.responseJSON.message + "!");
+        Feng.error("失败!" + data.responseJSON.message + "!");
     });
     ajax.set(this.bankInfoInfoData);
     ajax.start();
 }
 
 $(function() {
-
+    var status = BankInfoInfoDlg.get("status");
+    if(status != 1){
+         $("#btnDiv").show();
+    }
+    var num1 = 0,num2 = 0,num3 = 0,num4 = 0;
+    $("#idCardPicturePos").click(function () {
+        num1 ++;
+        $(this).rotate(90*num1);
+    });
+    $("#idCardPictureRev").click(function () {
+        num2 ++;
+        $(this).rotate(90*num2);
+    });
+    $("#idCardPicture").click(function () {
+        num3 ++;
+        $(this).rotate(90*num3);
+    });
+    $("#bankPicturePos").click(function () {
+        num4 ++;
+        $(this).rotate(90*num4);
+    });
+    $("#idCardPicturePos").dblclick(function () {
+        $(this).toggleClass("minidCardPicturePos");
+        $(this).toggleClass("maxidCardPicturePos");
+    });
+    $("#idCardPictureRev").dblclick(function () {
+        $(this).toggleClass("minidCardPictureRev");
+        $(this).toggleClass("maxidCardPictureRev");
+    });
+    $("#idCardPicture").dblclick(function () {
+        $(this).toggleClass("minidCardPicture");
+        $(this).toggleClass("maxidCardPicture");
+    });
+    $("#bankPicturePos").dblclick(function () {
+        $(this).toggleClass("minbankPicturePos");
+        $(this).toggleClass("maxbankPicturePos");
+    });
 });

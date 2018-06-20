@@ -48,8 +48,8 @@ TDoll.initColumn = function () {
             	formatter:function (value,row,index) {
             		if (value=="0")return '普通房';
                     if (value=="1")return '练习房';
-                    if (value=="2")return '钻石房';
-                    if (value=="3")return '占卜房';
+                    if (value=="2")return '化妆房';
+                    if (value=="3")return '数码房';
             	}
             },
             {title: '机器地址', field: 'adress', visible: true, align: 'center', valign: 'middle',

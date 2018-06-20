@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
+import com.stylefeng.guns.common.persistence.dao.ToemMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
-import com.stylefeng.guns.common.persistence.model.Role;
-import com.stylefeng.guns.common.persistence.model.TSystemPref;
+import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.exception.GunsException;
@@ -17,14 +17,14 @@ import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import org.apache.commons.collections4.map.HashedMap;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
-import com.stylefeng.guns.common.persistence.model.User;
+
 import java.math.BigDecimal;
 import javax.annotation.Resource;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
@@ -54,13 +54,14 @@ public class TAgentController extends BaseController {
     private ITSystemPrefService systemPrefService;
 
     @Resource
-    private UserMgrDao managerDao;
-
-    @Resource
     private UserMapper userMapper;
 
     @Resource
     private RoleMapper roleMapper;
+
+    @Resource
+    private ToemMapper toemMapper;
+
 
     /**
      * 跳转到代理商管理首页
@@ -91,6 +92,20 @@ public class TAgentController extends BaseController {
         LogObjectHolder.me().set(tAgent);
         return PREFIX + "tAgent_edit.html";
     }
+
+
+    /**
+     * 跳转到oem代理商管理
+     */
+
+    @RequestMapping("/oemPage/{tAgentId}")
+    public String oemPage(@PathVariable Integer tAgentId, Model model) {
+        TAgent tAgent = tAgentService.selectById(tAgentId);
+        model.addAttribute("item",tAgent);
+        LogObjectHolder.me().set(tAgent);
+        return PREFIX + "tAgent_oem.html";
+    }
+
 
     /**
      * 获取代理商管理列表
@@ -304,5 +319,23 @@ public class TAgentController extends BaseController {
         }
         resultMap.put("type", type);//未提现
         return resultMap;
+    }
+
+
+    /**
+     * oem进件
+     */
+
+    @RequestMapping(value = "/oemAdd")
+    @ResponseBody
+    public Object oemAdd(Oem oem) throws  Exception{
+        oem.setPartner("1503788561");
+        oem.setPartnerKey("PtR5S9g88z8LTUFZTsPMWdtqUgDJ4f8V");
+        oem.setNatappUrl("lanao.nat300.top");
+        oem.setStatus(1);
+        oem.setCreateTime(new Date());
+        oem.setUpdateTime(new Date());
+        toemMapper.insertSelective(oem);
+        return super.SUCCESS_TIP;
     }
 }

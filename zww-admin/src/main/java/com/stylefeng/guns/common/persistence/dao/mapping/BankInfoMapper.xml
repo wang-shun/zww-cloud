@@ -22,11 +22,12 @@
 		<result column="bank_picture_pos" property="bankPicturePos" />
 		<result column="create_time" property="createTime" />
 		<result column="update_time" property="updateTime" />
+		<result column="status" property="status" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, agent_id AS agentId, card_bank AS cardBank, card_sub_bank AS cardSubBank, card_province AS cardProvince, card_city AS cardCity, card_area AS cardArea, card_bank_no AS cardBankNo, card_no AS cardNo, id_card_no AS idCardNo, name, phone, id_card_picture_pos AS idCardPicturePos, id_card_picture_rev AS idCardPictureRev, id_card_picture AS idCardPicture, bank_picture_pos AS bankPicturePos, create_time AS createTime, update_time AS updateTime
+        id, agent_id AS agentId, card_bank AS cardBank, card_sub_bank AS cardSubBank, card_province AS cardProvince, card_city AS cardCity, card_area AS cardArea, card_bank_no AS cardBankNo, card_no AS cardNo, id_card_no AS idCardNo, name, phone, id_card_picture_pos AS idCardPicturePos, id_card_picture_rev AS idCardPictureRev, id_card_picture AS idCardPicture, bank_picture_pos AS bankPicturePos, create_time AS createTime, update_time AS updateTime,status
     </sql>
 
 	<select id="getBankInfoByAgentId" parameterType="java.lang.Integer" resultType="com.stylefeng.guns.common.persistence.model.BankInfo">
@@ -35,4 +36,26 @@
 		from bank_info where agent_id = #{agentId}
 	</select>
 
+
+	<select id="selectBankInfo" parameterType="com.baomidou.mybatisplus.plugins.Page" resultType="map">
+		select
+		<include refid="Base_Column_List"/>
+		from bank_info where 1=1
+		<if test="name != null and name != '' ">
+			and name = #{name}
+		</if>
+		<if test="phone != null and phone != '' ">
+			and phone = #{phone}
+		</if>
+		<if test="cardno != null and cardno != '' ">
+			and card_no = #{cardno}
+		</if>
+		<if test="idcard != null and idcard != '' ">
+			and id_card_no = #{idcard}
+		</if>
+		<if test="status != null">
+			and status = #{status}
+		</if>
+		order by create_time DESC
+	</select>
 </mapper>

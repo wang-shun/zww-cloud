@@ -34,10 +34,10 @@
                 </div>
                 <div class="hidden-xs" id="TAgentTableToolbar" role="group">
                     @if(shiro.hasPermission("/tAgent/add")){
-                    <#button name="添加" icon="fa-plus" clickFun="TAgent.openAddTAgent()"/>
+                         <#button name="添加" icon="fa-plus" clickFun="TAgent.openAddTAgent()"/>
                     @}
                     @if(shiro.hasPermission("/tAgent/update")){
-                    <#button name="修改" icon="fa-plus" clickFun="TAgent.openTAgentDetail()" space="true"/>
+                         <#button name="修改" icon="fa-plus" clickFun="TAgent.openTAgentDetail()" space="true"/>
                     @}
                 </div>
                 <#table id="TAgentTable"/>

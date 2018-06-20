@@ -1,6 +1,10 @@
 package com.stylefeng.guns.modular.agent.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
+import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.modular.agent.warpper.BankInfoWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +17,9 @@ import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.common.persistence.model.BankInfo;
 import com.stylefeng.guns.modular.agent.service.IBankInfoService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 银行卡管理控制器
@@ -63,8 +70,11 @@ public class BankInfoController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return bankInfoService.selectList(null);
+    public Object list(String name,String phone,String idcard,String cardno,Integer status) {
+        Page<BankInfo> page = new PageFactory<BankInfo>().defaultPage();
+        List<Map<String, Object>> result= bankInfoService.selectBankInfo(page,name,phone,idcard,cardno,status);
+        page.setRecords((List<BankInfo>)new BankInfoWarpper(result).warp());
+        return super.packForBT(page);
     }
 
     /**
