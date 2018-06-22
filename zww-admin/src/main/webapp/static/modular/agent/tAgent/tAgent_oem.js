@@ -107,10 +107,7 @@ TAgentInfoDlg.addoem = function() {
         }
     }
 });
-    //提交信息
-/*    $.post(Feng.ctxPath + "/tAgent/oemAdd",JSON.stringify( this.tAgentInfoData ),function(data){
 
-    });*/
 }
 
 TAgentInfoDlg.add = function(){
@@ -127,6 +124,7 @@ TAgentInfoDlg.del = function(num){
      $("#row"+num).hide();
      $("#oemtext" + num).val("");
      $("#banner"+num+"PreId img").attr("src","/static/img/default.png");
+    $("#banner" + num).val("");
     $("#addnum").val(num);
 }
 
