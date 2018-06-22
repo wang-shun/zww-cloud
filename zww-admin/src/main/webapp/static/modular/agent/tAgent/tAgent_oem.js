@@ -159,7 +159,7 @@ $(function() {
                 html += '<div class="row" id="row'+i+'" style="display: none;"><div class="col-sm-6">';
                 html += '<div class="form-group"><label class="col-sm-3 control-label head-scu-label">banner图片</label><div class="col-sm-4">';
                 html += '<div id="banner'+i+'PreId">';
-                html += ' <div><img width="100px" height="100px" src="/static/img/default.png"></div>';
+                html += ' <div><img width="100px" height="100px" src="/zwwAdmin/static/img/default.png"></div>';
                 html += '</div></div> <div class="col-sm-2">';
                 html += '<div class="head-scu-btn upload-btn webuploader-container" id="banner'+i+'BtnId"><div class="webuploader-pick">';
                 html += '<i class="fa fa-upload"></i>&nbsp;上传';
