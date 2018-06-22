@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.google.gson.JsonObject;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
@@ -20,6 +21,8 @@ import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +36,7 @@ import com.stylefeng.guns.common.constant.state.ManagerStatus;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -354,22 +358,28 @@ public class TAgentController extends BaseController {
      * oem进件
      */
 
-    @RequestMapping(value = "/oemAdd")
+    @PostMapping(value = "/oemAdd")
     @ResponseBody
-    public Object oemAdd(OemVo oemVo) throws  Exception{
-        TOem oem =oemVo.getOem();
-        oem.setPartner("1503788561");
-        oem.setPartnerKey("PtR5S9g88z8LTUFZTsPMWdtqUgDJ4f8V");
-        oem.setNatappUrl("lanao.nat300.top");
-        oem.setStatus(1);
-        oem.setCreateTime(new Date());
-        oem.setUpdateTime(new Date());
-        toemMapper.insert(oem);
+    public Object oemAdd(@RequestBody JSONObject jsonObject) throws  Exception{
+        TOem oem=(TOem)JSONObject.toBean(jsonObject.getJSONObject("oem"), TOem.class);
+        List<TOemBanner> oemBanner=(List<TOemBanner>) JSONArray.toList(JSONArray.fromObject(jsonObject.getJSONArray("oemBanner")), TOemBanner.class);
+        TOem tOem = toemMapper.selectById(oem.getId());
+        if(tOem == null){
+            oem.setPartner("1503788561");
+            oem.setPartnerKey("PtR5S9g88z8LTUFZTsPMWdtqUgDJ4f8V");
+            oem.setNatappUrl("lanao.nat300.top");
+            oem.setStatus(1);
+            oem.setCreateTime(new Date());
+            oem.setUpdateTime(new Date());
+            toemMapper.insert(oem);
+        }else{
+            oem.setUpdateTime(new Date());
+            toemMapper.updateById(oem);
+        }
         tOemBannerMapper.deleteByOemId(oem.getId());
-        tOemBannerMapper.insertBatch(oemVo.getOemBanner());
+        tOemBannerMapper.insertBatch(oemBanner);
         return super.SUCCESS_TIP;
     }
-
 
 
     /**

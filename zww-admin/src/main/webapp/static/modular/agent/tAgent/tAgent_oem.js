@@ -81,13 +81,21 @@ TAgentInfoDlg.addoem = function() {
         oems.status = 1;
         oemArr.push(oems);
     }
+
     console.log(oemArr)
     this.clearData();
     this.set("oem",oem);
     this.set("oemBanner",oemArr);
-    console.log(this.tAgentInfoData);
-    //提交信息
-    $.post(Feng.ctxPath + "/tAgent/oemAdd",this.tAgentInfoData,function(data){
+    console.log(this.tAgentInfoData)
+
+
+    $.ajax({
+            url:Feng.ctxPath + "/tAgent/oemAdd",
+            type:"post",
+            dataType:"json",
+            data:JSON.stringify( this.tAgentInfoData ),
+            contentType:"application/json",
+        success:function(data){
         if(data.code == 200){
             Feng.success("进件成功!");
             $("#ensure").removeAttr("disabled");
@@ -97,7 +105,12 @@ TAgentInfoDlg.addoem = function() {
             Feng.error(data.message);
             $("#ensure").removeAttr("disabled");
         }
-    });
+    }
+});
+    //提交信息
+/*    $.post(Feng.ctxPath + "/tAgent/oemAdd",JSON.stringify( this.tAgentInfoData ),function(data){
+
+    });*/
 }
 
 TAgentInfoDlg.add = function(){

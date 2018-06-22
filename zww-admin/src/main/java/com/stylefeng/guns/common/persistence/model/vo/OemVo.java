@@ -7,9 +7,9 @@ import java.util.List;
 
 public class OemVo{
 
-    private TOem oem;
+     TOem oem;
 
-    private List<TOemBanner> oemBanner;
+     List<TOemBanner> oemBanner;
 
     public List<TOemBanner> getOemBanner() {
         return oemBanner;
