@@ -77,7 +77,7 @@ TAgentInfoDlg.addoem = function() {
         oems.imgUrl = imgUrl;
         oems.url = url;
         oems.oemId = oem.id;
-        oems.sort = i;
+        oems.sort = i+1;
         oems.status = 1;
         oemArr.push(oems);
     }
