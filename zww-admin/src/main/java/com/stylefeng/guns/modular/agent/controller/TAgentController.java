@@ -4,20 +4,23 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
-import com.stylefeng.guns.common.persistence.dao.ToemMapper;
+import com.stylefeng.guns.common.persistence.dao.TOemBannerMapper;
+import com.stylefeng.guns.common.persistence.dao.TOemMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.common.persistence.model.vo.OemVo;
+import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.base.tips.TipType;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
-import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import org.apache.commons.collections4.map.HashedMap;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -25,14 +28,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 
-import java.math.BigDecimal;
 import javax.annotation.Resource;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.stylefeng.guns.modular.system.warpper.TagentWarpper;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -60,7 +65,13 @@ public class TAgentController extends BaseController {
     private RoleMapper roleMapper;
 
     @Resource
-    private ToemMapper toemMapper;
+    private TOemMapper toemMapper;
+
+    @Resource
+    private TOemBannerMapper tOemBannerMapper;
+
+    @Autowired
+    AliyunService aliyunService;
 
 
     /**
@@ -101,7 +112,7 @@ public class TAgentController extends BaseController {
     @RequestMapping("/oemPage/{tAgentId}")
     public String oemPage(@PathVariable Integer tAgentId, Model model) {
         TAgent tAgent = tAgentService.selectById(tAgentId);
-        model.addAttribute("item",tAgent);
+        model.addAttribute("tAgent",tAgent);
         LogObjectHolder.me().set(tAgent);
         return PREFIX + "tAgent_oem.html";
     }
@@ -113,7 +124,8 @@ public class TAgentController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String phone, @RequestParam(required = false) String createTime, @RequestParam(required = false) Integer level) {
+    public Object list(String name,String username,String phone, String createTime,
+                       Integer level) {
         Page<TAgent> page = new PageFactory<TAgent>().defaultPage();
         //设置查询的条件level,id
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
@@ -133,7 +145,7 @@ public class TAgentController extends BaseController {
         }else{
             type = 10;
         }
-        List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,phone,createTime,level,type,agentId);
+        List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,username,phone,createTime,level,type,agentId);
 
         page.setRecords((List<TAgent>)new TagentWarpper(result).warp());
         return super.packForBT(page);
@@ -306,7 +318,7 @@ public class TAgentController extends BaseController {
      */
     @PostMapping("/getlavel")
     @ResponseBody
-    public Map<String, Object> totle() throws Exception{
+    public Map<String, Object> getlavel() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
@@ -322,20 +334,69 @@ public class TAgentController extends BaseController {
     }
 
 
+
+    /**
+     * 得到代理商等级
+     */
+    @RequestMapping("/getBannerList")
+    @ResponseBody
+    public Map<String, Object> getBannerList(Integer  tAgentId) throws Exception{
+        Map<String, Object> resultMap = new HashedMap<String, Object>();
+        List<TOemBanner>  oemBannerList =  tOemBannerMapper.selectByOemId(tAgentId);
+        resultMap.put("oemBannerList", oemBannerList);
+        TOem oem = toemMapper.selectById(tAgentId);
+        resultMap.put("oem",oem);
+        return resultMap;
+    }
+
+
     /**
      * oem进件
      */
 
     @RequestMapping(value = "/oemAdd")
     @ResponseBody
-    public Object oemAdd(Oem oem) throws  Exception{
+    public Object oemAdd(OemVo oemVo) throws  Exception{
+        TOem oem =oemVo.getOem();
         oem.setPartner("1503788561");
         oem.setPartnerKey("PtR5S9g88z8LTUFZTsPMWdtqUgDJ4f8V");
         oem.setNatappUrl("lanao.nat300.top");
         oem.setStatus(1);
         oem.setCreateTime(new Date());
         oem.setUpdateTime(new Date());
-        toemMapper.insertSelective(oem);
+        toemMapper.insert(oem);
+        tOemBannerMapper.deleteByOemId(oem.getId());
+        tOemBannerMapper.insertBatch(oemVo.getOemBanner());
         return super.SUCCESS_TIP;
+    }
+
+
+
+    /**
+     * 上传图片(上传到项目的webapp/static/img)
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/upload/{tAgentId}")
+    @ResponseBody
+    public String upload(@RequestPart("file") MultipartFile picture, @PathVariable Integer tAgentId) {
+        String originalFileName = picture.getOriginalFilename();
+        // 获取后缀
+        String suffix = originalFileName.substring(originalFileName.lastIndexOf(".")
+                + 1);
+        // 修改后完整的文件名称
+        String fileKey = StringUtils.getRandomUUID();
+        String NewFileKey = "oem/" + tAgentId + "/" + fileKey + "." + suffix;
+        byte[] bytes;
+        try {
+            bytes = picture.getBytes();
+            InputStream fileInputStream = new ByteArrayInputStream(bytes);
+            if(!aliyunService.putFileStreamToOSS(NewFileKey, fileInputStream)) {
+                return "0";
+            }
+            String newFileUrl = aliyunService.generatePresignedUrl(NewFileKey,1000000).toString();
+            return newFileUrl;
+        } catch (Exception e) {
+            return "0";
+        }
+
     }
 }

@@ -1,195 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.stylefeng.guns.common.persistence.dao.ToemMapper">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.TOemMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.Oem">
-		<id column="id" property="id"/>
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.TOem">
+		<id column="id" property="id" />
 		<result column="name" property="name" />
 		<result column="code" property="code" />
-		<result column="appid" property="appid"/>
-		<result column="appsecret" property="appsecret"/>
+		<result column="appid" property="appid" />
+		<result column="appsecret" property="appsecret" />
 		<result column="partner" property="partner" />
-		<result column="partner_key" property="partnerKey"/>
+		<result column="partner_key" property="partnerKey" />
 		<result column="company" property="company" />
 		<result column="natapp_url" property="natappUrl" />
-		<result column="url" property="url" jdbcType="VARCHAR" />
-		<result column="SMS_code" property="smsCode"  />
+		<result column="url" property="url" />
+		<result column="SMS_code" property="smsCode" />
 		<result column="SMS_name" property="smsName" />
 		<result column="status" property="status" />
 		<result column="create_time" property="createTime" />
-		<result column="update_time" property="updateTime"/>
+		<result column="update_time" property="updateTime" />
+		<result column="is_doll_merge" property="isDollMerge" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, code, appid, appsecret, partner, partner_key partnerKey, company, natapp_url natappUrl, url,
-         SMS_code smsCode, SMS_name smsName, status, create_time createTime, update_time updateTime
-     </sql>
+        id, name, code, appid, appsecret, partner, partner_key AS partnerKey, company, natapp_url AS natappUrl, url, SMS_code AS smsCode, SMS_name AS smsName, status, create_time AS createTime, update_time AS updateTime, is_doll_merge AS isDollMerge
+    </sql>
 
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-		select
-		<include refid="Base_Column_List" />
-		from t_oem
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-
-	<insert id="insertSelective" parameterType="com.stylefeng.guns.common.persistence.model.Oem" >
-		insert into t_oem
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="id != null" >
-				id,
-			</if>
-			<if test="name != null" >
-				name,
-			</if>
-			<if test="code != null" >
-				code,
-			</if>
-			<if test="appid != null" >
-				appid,
-			</if>
-			<if test="appsecret != null" >
-				appsecret,
-			</if>
-			<if test="partner != null" >
-				partner,
-			</if>
-			<if test="partnerKey != null" >
-				partner_key,
-			</if>
-			<if test="company != null" >
-				company,
-			</if>
-			<if test="natappUrl != null" >
-				natapp_url,
-			</if>
-			<if test="url != null" >
-				url,
-			</if>
-			<if test="smsCode != null" >
-				SMS_code,
-			</if>
-			<if test="smsName != null" >
-				SMS_name,
-			</if>
-			<if test="status != null" >
-				status,
-			</if>
-			<if test="createTime != null" >
-				create_time,
-			</if>
-			<if test="updateTime != null" >
-				update_time,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides="," >
-			<if test="id != null" >
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="name != null" >
-				#{name,jdbcType=VARCHAR},
-			</if>
-			<if test="code != null" >
-				#{code,jdbcType=VARCHAR},
-			</if>
-			<if test="appid != null" >
-				#{appid,jdbcType=VARCHAR},
-			</if>
-			<if test="appsecret != null" >
-				#{appsecret,jdbcType=VARCHAR},
-			</if>
-			<if test="partner != null" >
-				#{partner,jdbcType=VARCHAR},
-			</if>
-			<if test="partnerKey != null" >
-				#{partnerKey,jdbcType=VARCHAR},
-			</if>
-			<if test="company != null" >
-				#{company,jdbcType=VARCHAR},
-			</if>
-			<if test="natappUrl != null" >
-				#{natappUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="url != null" >
-				#{url,jdbcType=VARCHAR},
-			</if>
-			<if test="smsCode != null" >
-				#{smsCode,jdbcType=VARCHAR},
-			</if>
-			<if test="smsName != null" >
-				#{smsName,jdbcType=VARCHAR},
-			</if>
-			<if test="status != null" >
-				#{status,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null" >
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null" >
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.stylefeng.guns.common.persistence.model.Oem" >
-		update t_oem
-		<set >
-			<if test="name != null" >
-				name = #{name,jdbcType=VARCHAR},
-			</if>
-			<if test="code != null" >
-				code = #{code,jdbcType=VARCHAR},
-			</if>
-			<if test="appid != null" >
-				appid = #{appid,jdbcType=VARCHAR},
-			</if>
-			<if test="appsecret != null" >
-				appsecret = #{appsecret,jdbcType=VARCHAR},
-			</if>
-			<if test="partner != null" >
-				partner = #{partner,jdbcType=VARCHAR},
-			</if>
-			<if test="partnerKey != null" >
-				partner_key = #{partnerKey,jdbcType=VARCHAR},
-			</if>
-			<if test="company != null" >
-				company = #{company,jdbcType=VARCHAR},
-			</if>
-			<if test="natappUrl != null" >
-				natapp_url = #{natappUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="url != null" >
-				url = #{url,jdbcType=VARCHAR},
-			</if>
-			<if test="smsCode != null" >
-				SMS_code = #{smsCode,jdbcType=VARCHAR},
-			</if>
-			<if test="smsName != null" >
-				SMS_name = #{smsName,jdbcType=VARCHAR},
-			</if>
-			<if test="status != null" >
-				status = #{status,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null" >
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null" >
-				update_time = #{updateTime,jdbcType=TIMESTAMP},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-
-	<select id="selectByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
-		select
-		<include refid="Base_Column_List" />
-		from t_oem
-		where  code = #{code,jdbcType=VARCHAR}
-	</select>
-
-	<select id="selectAllOem" resultMap="BaseResultMap" >
-		select
-		<include refid="Base_Column_List" />
-		from t_oem
-	</select>
 </mapper>

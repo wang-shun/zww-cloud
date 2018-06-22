@@ -58,7 +58,7 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 	private String gameNum;
 
 	/**
-	 * 房间业务类型0为普通房,1为练习房,2为钻石房,3为占卜房
+	 * 房间业务类型0为普通房1为练习房2化妆 3 数码
 	 */
 	@TableField("machine_type")
 	private Integer machineType;

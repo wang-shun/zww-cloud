@@ -95,13 +95,13 @@
 			and b.name like concat(concat("%",#{dollName,jdbcType=VARCHAR}),"%")
 		</if>
 		<if test="machineCode != null and machineCode != ''">
-			AND b.machine_code = #{machineCode,jdbcType=VARCHAR}
+			AND a.doll_code = #{machineCode,jdbcType=VARCHAR}
 		</if>
 		<if test="dollCatchStates != null and dollCatchStates != ''">
 			AND a.catch_status = #{dollCatchStates}
 		</if>
 		<if test="machineType != null and machineType != ''">
-			AND a.catch_status = #{machineType}
+			AND a.machine_type = #{machineType}
 		</if>
 		<if test="memberName != null and memberName != ''">
 			and c.name like concat(concat("%",#{memberName,jdbcType=VARCHAR}),"%")

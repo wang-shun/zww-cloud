@@ -62,8 +62,8 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
     }
 
     @Override
-    public List<Map<String, Object>> selectByLevel(Page<TAgent> page, String condition, String phone, String createTime, Integer level, Integer type ,Integer agentId) {
-        return tAgentMapper.selectByLevel(page,condition, phone, createTime, level, type,agentId);
+    public List<Map<String, Object>> selectByLevel(Page<TAgent> page, String nickName,String username,String phone, String createTime, Integer level, Integer type ,Integer agentId) {
+        return tAgentMapper.selectByLevel(page,nickName,username, phone, createTime, level, type,agentId);
     }
 
     @Override

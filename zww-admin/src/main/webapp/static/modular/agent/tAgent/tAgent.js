@@ -114,6 +114,7 @@ TAgent.openTAgentDetail = function () {
 
 TAgent.resetSearch = function () {
     $("#name").val("");
+    $("#username").val("");
     $("#phone").val("");
     $("#createTime").val("");
     $("#condition").val("");
@@ -126,6 +127,7 @@ TAgent.resetSearch = function () {
 TAgent.search = function () {
     var queryData = {};
     queryData['name'] = $("#name").val();
+    queryData['username'] = $("#username").val();
     queryData['phone'] = $("#phone").val();
     queryData['createTime'] = $("#createTime").val();
     queryData['level'] = $("#level").val();
