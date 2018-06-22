@@ -62,8 +62,7 @@ TAgentInfoDlg.collectData = function() {
  * 提交进件
  */
 TAgentInfoDlg.addoem = function() {
-  //  $("#ensure").attr("disabled",true);
-
+    $("#ensure").attr("disabled",true);
     this.clearData();
     this.collectData();
     var oemArr = new Array(), oem = this.tAgentInfoData;
@@ -81,14 +80,11 @@ TAgentInfoDlg.addoem = function() {
         oems.status = 1;
         oemArr.push(oems);
     }
-
     console.log(oemArr)
     this.clearData();
     this.set("oem",oem);
     this.set("oemBanner",oemArr);
     console.log(this.tAgentInfoData)
-
-
     $.ajax({
             url:Feng.ctxPath + "/tAgent/oemAdd",
             type:"post",
@@ -123,7 +119,7 @@ TAgentInfoDlg.add = function(){
 TAgentInfoDlg.del = function(num){
      $("#row"+num).hide();
      $("#oemtext" + num).val("");
-     $("#banner"+num+"PreId img").attr("src","/static/img/default.png");
+     $("#banner"+num+"PreId img").attr("src","/zwwAdmin/static/img/default.png");
     $("#banner" + num).val("");
     $("#addnum").val(num);
 }
