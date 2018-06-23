@@ -67,6 +67,11 @@ public class TAgentServiceImpl extends ServiceImpl<TAgentMapper, TAgent> impleme
     }
 
     @Override
+    public List<TAgent> selectAndExecl(String nickName, String  username,  String phone, String createTime,Integer level,Integer type,Integer agentId){
+        return tAgentMapper.selectAndExecl(nickName,username,phone,createTime,level,type,agentId);
+    }
+
+    @Override
     public String selectByValue (String clod){
         return tAgentMapper.selectByValue(clod);
     }

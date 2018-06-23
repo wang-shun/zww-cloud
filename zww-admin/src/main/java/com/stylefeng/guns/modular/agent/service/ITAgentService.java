@@ -30,5 +30,7 @@ public interface ITAgentService extends IService<TAgent> {
 
    List<Map<String, Object>> selectByLevel(@Param("page") Page<TAgent> page, @Param("nickName") String nickName, @Param("username") String  username,@Param("phone") String phone, @Param("createTime") String createTime, @Param("level") Integer level, @Param("type")Integer type,@Param("agentId") Integer agentId);
 
+   List<TAgent> selectAndExecl(@Param("nickName") String nickName,@Param("username") String  username, @Param("phone") String phone, @Param("createTime") String createTime, @Param("level") Integer level, @Param("type")Integer type,@Param("agentId") Integer agentId);
+
    TAgent selectTAgentByUsername(@Param("username") String username);
 }

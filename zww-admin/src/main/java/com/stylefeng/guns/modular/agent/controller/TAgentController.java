@@ -1,7 +1,6 @@
 package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.google.gson.JsonObject;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
@@ -9,11 +8,10 @@ import com.stylefeng.guns.common.persistence.dao.TOemBannerMapper;
 import com.stylefeng.guns.common.persistence.dao.TOemMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.*;
-import com.stylefeng.guns.common.persistence.model.vo.OemVo;
+import com.stylefeng.guns.common.persistence.model.vo.AgentVo;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
-import com.stylefeng.guns.core.base.tips.TipType;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.StringUtils;
@@ -24,6 +22,9 @@ import com.stylefeng.guns.modular.system.transfer.UserDto;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.jeecgframework.poi.excel.ExcelExportUtil;
+import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -32,14 +33,15 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 
 import javax.annotation.Resource;
-import com.stylefeng.guns.common.constant.state.ManagerStatus;
+import javax.servlet.http.HttpServletResponse;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.net.URLEncoder;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import com.stylefeng.guns.modular.system.warpper.TagentWarpper;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -254,20 +256,6 @@ public class TAgentController extends BaseController {
         return super.SUCCESS_TIP;
     }
 
-   /**
-     * 修改代理商状态
-     */
-
-   /*  @RequestMapping(value = "/statusUpdate")
-    @ResponseBody
-    public Object delete(@RequestParam Integer tAgentId) {
-        TAgent tagent = new TAgent();
-        tagent.setId(tAgentId);
-        tagent.setStatus(0);
-        tAgentService.deleteById(tAgentId);
-        return SUCCESS_TIP;
-    }*/
-
     /**
      * 修改代理商管理
      */
@@ -340,7 +328,7 @@ public class TAgentController extends BaseController {
 
 
     /**
-     * 得到代理商等级
+     * 得到o单banner总数
      */
     @RequestMapping("/getBannerList")
     @ResponseBody
@@ -409,4 +397,50 @@ public class TAgentController extends BaseController {
         }
 
     }
+
+    /***
+     * 获取excel数据
+     * @return 返回文件名称及excel文件的URL
+     * @throws IOException
+     */
+    @RequestMapping(value = "/execl",method = RequestMethod.GET)
+    public void execl(HttpServletResponse response, String name, String username, String phone, String createTime,
+                        Integer level) throws IOException {
+        //设置查询的条件level,id
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        Integer type = null,agentId = null;
+        if("agent_super".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel(); agentId=tAgent.getId();
+        }else if("agent_one".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel();agentId=tAgent.getId();
+        }else if("agent_two".equals(role.getTips())){
+            TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());
+            type=tAgent.getLevel();agentId=tAgent.getId();
+        }else if("agent_three".equals(role.getTips())){
+            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        }else{
+            type = 10;
+        }
+        List<TAgent>  result = tAgentService.selectAndExecl(name,username,phone,createTime,level,type,agentId);
+         List<AgentVo> agentVoList = result.stream().map(tAgent -> {
+            TAgent agentSuper = tAgent.getAgentId() == 0 ? null : tAgentService.selectTAgentById(tAgent.getAgentId());
+            TAgent agentOne = tAgent.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(tAgent.getAgentOneId());
+            TAgent agentTwo = tAgent.getAgentTwoId() == 0 ? null : tAgentService.selectTAgentById(tAgent.getAgentTwoId());
+            return new AgentVo(tAgent,agentSuper,agentOne,agentTwo);
+        }).collect(Collectors.toList());
+
+        String fileName = "测试文件.xls";
+
+        // 告诉浏览器用什么软件可以打开此文件
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        // 下载文件的默认名称
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), AgentVo.class, agentVoList);
+        workbook.write(response.getOutputStream());
+    }
+
 }

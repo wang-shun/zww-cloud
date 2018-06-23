@@ -121,6 +121,24 @@ TAgent.resetSearch = function () {
     $("#level").val("");
     TAgent.search();
 }
+
+TAgent.execl = function () {
+    $("#names").val($("#name").val());
+    $("#usernames").val($("#username").val());
+    $("#phones").val($("#phone").val());
+    $("#createTimes").val($("#createTime").val());
+    $("#levels").val($("#level").val());
+    $("#test").submit();
+ /*   var queryData = {};
+    queryData['name'] = $("#name").val();
+    queryData['name'] = $("#username").val();
+    queryData['phone'] = $("#phone").val();
+    queryData['createTime'] = $("#createTime").val();
+    queryData['level'] = $("#level").val();
+
+    $.GET(Feng.ctxPath + "/tAgent/execl",queryData);*/
+}
+
 /**
  * 查询代理商管理列表
  */

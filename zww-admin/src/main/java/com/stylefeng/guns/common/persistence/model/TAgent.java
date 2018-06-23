@@ -1,15 +1,15 @@
 package com.stylefeng.guns.common.persistence.model;
 
 import java.io.Serializable;
-
 import com.baomidou.mybatisplus.enums.IdType;
-import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-import java.io.Serializable;
+import org.jeecgframework.poi.excel.annotation.Excel;
+import org.jeecgframework.poi.excel.annotation.ExcelTarget;
+
 
 /**
  * <p>
@@ -19,6 +19,7 @@ import java.io.Serializable;
  * @author bruce
  * @since 2018-05-31
  */
+
 @TableName("t_agent")
 public class TAgent extends Model<TAgent> {
 
@@ -34,23 +35,54 @@ public class TAgent extends Model<TAgent> {
      * 密码
      */
 	private String password;
+
+	/**
+	 * md5密码盐
+	 */
+	private String salt;
+
+	/**
+	 * 真实姓名
+	 */
+	@TableField("nick_name")
+	private String nickName;
+
     /**
      * 手机号
      */
 	private String phone;
-    /**
-     * 真实姓名
-     */
-	@TableField("nick_name")
-	private String nickName;
+
     /**
      * 代理等级（0特级 1 ， 2 ,  3）
      */
 	private Integer level;
     /**
-     * 状态 (0未开启，1正常 ，2失效)
+     * 状态 (1正常 ，2冻结，3失效)
      */
 	private Integer status;
+
+	/**
+	 * 费率
+	 */
+	private Double fee;
+	/**
+	 * 余额
+	 */
+	private Long balance;
+
+	/**
+	 * 冻结金额
+	 */
+	@TableField("balance_disabled")
+	private Long balanceDisabled;
+
+
+
+	/**
+	 * 是否是贴牌商（0不是   1是）
+	 */
+	@TableField("is_oem")
+	private Boolean isOem;
     /**
      * 特级代理id
      */
@@ -76,25 +108,7 @@ public class TAgent extends Model<TAgent> {
      */
 	@TableField("update_time")
 	private Date updateTime;
-    /**
-     * 费率
-     */
-	private Double fee;
-    /**
-     * 余额
-     */
-	private Long balance;
 
-	/**
-	 * 冻结金额
-	 */
-	@TableField("balance_disabled")
-	private Long balanceDisabled;
-
-	/**
-	 * md5密码盐
-	 */
-	private String salt;
 
 	public void setSalt(String salt) {
 		this.salt = salt;
@@ -225,7 +239,13 @@ public class TAgent extends Model<TAgent> {
 		this.balanceDisabled = balanceDisabled;
 	}
 
+	public Boolean getIsOem() {
+		return isOem;
+	}
 
+	public void setIsOem(Boolean isOem) {
+		this.isOem = isOem;
+	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -250,6 +270,8 @@ public class TAgent extends Model<TAgent> {
 			", fee=" + fee +
 			", balance=" + balance +
 			", balanceDisabled=" + balanceDisabled +
+			", salt=" + salt +
+			", isOem=" + isOem +
 			"}";
 	}
 }

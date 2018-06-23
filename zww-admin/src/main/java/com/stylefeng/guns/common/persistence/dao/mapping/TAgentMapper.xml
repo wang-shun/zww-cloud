@@ -19,17 +19,20 @@
 		<result column="fee" property="fee" />
 		<result column="balance" property="balance" />
 		<result column="balance_disabled" property="balanceDisabled" />
+		<result column="salt" property="salt" />
+		<result column="is_oem" property="isOem" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee, balance,balance_disabled AS balanceDisabled
+        id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
+         agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee, balance,balance_disabled AS balanceDisabled,is_oem AS isOem
     </sql>
 
 	<select id="selectTAgentByUId" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.Integer">
 		 select
 		 a.id, a.username, a.password, a.phone, a.nick_name AS nickName, a.level, a.status, a.agent_id AS agentId, a.agent_one_id AS agentOneId,
-		 a.agent_two_id AS agentTwoId, a.create_time AS createTime, a.update_time AS updateTime, a.fee, a.balance,a.balance_disabled AS balanceDisabled
+		 a.agent_two_id AS agentTwoId, a.create_time AS createTime, a.update_time AS updateTime, a.fee, a.balance,a.balance_disabled AS balanceDisabled,is_oem AS isOem
          from sys_user s
 		left join sys_role r on s.roleid = r.id
 		left join t_agent a on s.account = a.username
@@ -58,13 +61,6 @@
 
 
 
-	<select id="selectByIdS" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		id, username, password, phone, nick_name , level, status, agent_id , agent_one_id , agent_two_id , create_time , update_time , fee, balance
-		from  t_agent where
-		id = #{id}
-	</select>
-
 
 
 	<select id="selectByValue" resultType="String" parameterType="java.lang.String">
@@ -78,7 +74,8 @@
 	<!--根据条件查询-->
 	<select id="selectByLevel" resultType="map" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
 		select
-		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId, agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee
+		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
+		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS isOem
 		<if test="type == 10">
 			,(balance-balance_disabled)*0.01 AS balance
 		</if>
@@ -111,7 +108,43 @@
 			and DATEDIFF(create_time,#{createTime}) &gt;= 0
 		</if>
 	</select>
-
+	<!--根据条件查询-->
+	<select id="selectAndExecl" resultType="com.stylefeng.guns.common.persistence.model.TAgent" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
+		select
+		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
+		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS isOem
+		<if test="type == 10">
+			,(balance-balance_disabled)*0.01 AS balance
+		</if>
+		<if test="type != 10">
+			,"-" AS balance
+		</if>
+		from  t_agent where 1=1
+		<if test="agentId != null and type == 0">
+			and agent_id = #{agentId}
+		</if>
+		<if test="agentId != null and type == 1">
+			and agent_one_id = #{agentId}
+		</if>
+		<if test="agentId != null and type == 2">
+			and agent_two_id = #{agentId}
+		</if>
+		<if test="nickName != null and nickName != '' ">
+			and nick_name = #{nickName}
+		</if>
+		<if test="username != null and username != '' ">
+			and username = #{username}
+		</if>
+		<if test="phone != null and phone !=''">
+			and phone = #{phone}
+		</if>
+		<if test="level != null">
+			and level = #{level}
+		</if>
+		<if test="createTime != null and createTime !=''">
+			and DATEDIFF(create_time,#{createTime}) &gt;= 0
+		</if>
+	</select>
 
 
 </mapper>
