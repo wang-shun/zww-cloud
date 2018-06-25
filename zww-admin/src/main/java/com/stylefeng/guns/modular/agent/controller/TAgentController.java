@@ -360,6 +360,8 @@ public class TAgentController extends BaseController {
             oem.setCreateTime(new Date());
             oem.setUpdateTime(new Date());
             toemMapper.insert(oem);
+            TAgent t = new TAgent(oem.getId(),true,new Date());
+            tAgentService.updateById(t);
         }else{
             oem.setUpdateTime(new Date());
             toemMapper.updateById(oem);

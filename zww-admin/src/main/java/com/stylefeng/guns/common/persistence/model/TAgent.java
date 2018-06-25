@@ -109,6 +109,35 @@ public class TAgent extends Model<TAgent> {
 	@TableField("update_time")
 	private Date updateTime;
 
+	public TAgent() {
+	}
+
+	public TAgent(Integer id, Boolean isOem, Date updateTime) {
+		this.id = id;
+		this.isOem = isOem;
+		this.updateTime = updateTime;
+	}
+
+
+	public TAgent(Integer id, String username, String password, String salt, String nickName, String phone, Integer level, Integer status, Double fee, Long balance, Long balanceDisabled, Boolean isOem, Integer agentId, Integer agentOneId, Integer agentTwoId, Date createTime, Date updateTime) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.salt = salt;
+		this.nickName = nickName;
+		this.phone = phone;
+		this.level = level;
+		this.status = status;
+		this.fee = fee;
+		this.balance = balance;
+		this.balanceDisabled = balanceDisabled;
+		this.isOem = isOem;
+		this.agentId = agentId;
+		this.agentOneId = agentOneId;
+		this.agentTwoId = agentTwoId;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
 	public void setSalt(String salt) {
 		this.salt = salt;
