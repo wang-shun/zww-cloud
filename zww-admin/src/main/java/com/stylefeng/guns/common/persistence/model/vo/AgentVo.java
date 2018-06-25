@@ -34,31 +34,31 @@ public class AgentVo {
     /**
      * 代理等级（0特级 1 ， 2 ,  3）
      */
-    @Excel(name = "代理等级", orderNum = "5", mergeVertical = true, isImportField = "level",width = 15.0D)
-    private String level;
+    @Excel(name = "代理等级", orderNum = "5", mergeVertical = true, isImportField = "level",width = 13.0D,replace = {"特级_0","一级_1","二级_2","三级_3"})
+    private Integer level;
     /**
      * 状态 (1正常 ，2冻结，3失效)
      */
-    @Excel(name = "状态", orderNum = "6", mergeVertical = true, isImportField = "status",width = 15.0D)
-    private String status;
+    @Excel(name = "状态", orderNum = "6", mergeVertical = true, isImportField = "status",replace = {"正常_1","冻结_2","失效_3"})
+    private Integer status;
 
     /**
      * 费率
      */
-    @Excel(name = "费率", orderNum = "7", mergeVertical = true, isImportField = "fee",width = 15.0D)
+    @Excel(name = "费率", orderNum = "7", mergeVertical = true, isImportField = "fee")
     private Double fee;
     /**
      * 余额
      */
-    @Excel(name = "余额", orderNum = "8", mergeVertical = true, isImportField = "balance",width = 15.0D)
+    @Excel(name = "余额", orderNum = "8", mergeVertical = true, isImportField = "balance")
     private Double balance;
 
 
     /**
      * 是否是贴牌商（0不是   1是）
      */
-    @Excel(name = "是否为贴牌商", orderNum = "9", mergeVertical = true, isImportField = "isOem",width = 15.0D)
-    private String isOem;
+    @Excel(name = "是否为贴牌商", orderNum = "9", mergeVertical = true, isImportField = "isOem",width = 15.0D,replace = {"是_true","不是_false"})
+    private Boolean isOem;
     /**
      * 特级代理id
      */
@@ -77,7 +77,7 @@ public class AgentVo {
     /**
      * 创建时间
      */
-    @Excel(name = "注册时间", orderNum = "13", mergeVertical = true, isImportField = "createTime",exportFormat = "yyyy-MM-dd HH:mm:ss",width = 16.0D)
+    @Excel(name = "注册时间", orderNum = "13", mergeVertical = true, isImportField = "createTime",exportFormat = "yyyy-MM-dd HH:mm:ss",width = 25.0D)
     private Date createTime;
 
 
@@ -86,25 +86,11 @@ public class AgentVo {
         this.username = tAgent.getUsername();
         this.nickName = tAgent.getNickName();
         this.phone = tAgent.getPhone();
-        if(tAgent.getLevel() == 0){
-            this.level = "特级代理商";
-        }else if(tAgent.getLevel() == 1){
-            this.level = "一级代理商";
-        }else if(tAgent.getLevel() == 2){
-            this.level = "二级代理商";
-        }else{
-            this.level = "三级代理商";
-        }
-        if(tAgent.getStatus() == 1){
-            this.status = "正常";
-        }else if(tAgent.getLevel() == 2){
-            this.status = "冻结";
-        }else{
-            this.status = "失效";
-        }
+        this.level = tAgent.getLevel();
+        this.status = tAgent.getStatus();
         this.fee = tAgent.getFee();
         this.balance = tAgent.getBalance()*0.01;
-        this.isOem = tAgent.getIsOem() ? "是" : "不是";
+        this.isOem = tAgent.getIsOem();
         this.agentName = agentSuper == null ? "-" : agentSuper.getNickName();
         this.agentOneName = agentOne == null ? "-" : agentOne.getNickName();
         this.agentTwoName = agentTwo == null ? "-" : agentTwo.getNickName();
@@ -145,19 +131,19 @@ public class AgentVo {
         this.phone = phone;
     }
 
-    public String getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -177,11 +163,11 @@ public class AgentVo {
         this.balance = balance;
     }
 
-    public String getIsOem() {
+    public Boolean getIsOem() {
         return isOem;
     }
 
-    public void setIsOem(String isOem) {
+    public void setIsOem(Boolean isOem) {
         this.isOem = isOem;
     }
 
