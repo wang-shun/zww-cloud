@@ -84,13 +84,8 @@ public class TDollOrderController extends BaseController {
     @ResponseBody
     public Object goodsDetailList(String orderNum) {
 
-        TDollOrder tDollOrder = tDollOrderService.selectByorderNum(orderNum);
-        Long orderId = null;
-        if(tDollOrder != null){
-            orderId = tDollOrder.getId();
-        }
         Page<TDollOrderItem> page = new PageFactory<TDollOrderItem>().defaultPage();
-        List<Map<String, Object>> result = dollOrderItemMapper.selectLists(page, orderId);
+        List<Map<String, Object>> result = dollOrderItemMapper.selectLists(page, orderNum);
         page.setRecords((List<TDollOrderItem>)new TDollOrderItemWarpper(result).warp());
         return super.packForBT(page);
     }

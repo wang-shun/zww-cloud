@@ -25,13 +25,18 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Long id;
+
 	@TableField("order_id")
 	private Long orderId;
+
 	@TableField("doll_id")
 	private Integer dollId;
+
 	private Integer quantity;
+
 	@TableField("created_date")
 	private Date createdDate;
+
 	@TableField("modified_date")
 	private Date modifiedDate;
 
@@ -41,11 +46,11 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 	@TableField("doll_code")
 	private String dollCode;
 
-	@TableField(exist=false)
+	@TableField("doll_name")
 	private String dollName;//娃娃名称
 
-	@TableField(exist=false)
-	private String dollImg;//娃娃图片
+	@TableField("doll_url")
+	private String dollUrl;//娃娃图片
 
 
 
@@ -57,12 +62,12 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 		this.dollName = dollName;
 	}
 
-	public String getDollImg() {
-		return dollImg;
+	public String getDollUrl() {
+		return dollUrl;
 	}
 
-	public void setDollImg(String dollImg) {
-		this.dollImg = dollImg;
+	public void setDollUrl(String dollUrl) {
+		this.dollUrl = dollUrl;
 	}
 
 	public Long getId() {
@@ -137,7 +142,7 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 			", modifiedDate=" + modifiedDate +
 			", dollCode=" + dollCode +
 			", dollName=" + dollName +
-			", dollCode=" + dollImg +
+			", dollUrl=" + dollUrl +
 			"}";
 	}
 }

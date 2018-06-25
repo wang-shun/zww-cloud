@@ -17,8 +17,8 @@ TDollCatchHistory.initColumn = function () {
            // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名称', field: 'memberName', visible: true, align: 'center', valign: 'middle'},
             {title: '机器名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
-            {title: '封面', field: 'tbimgRealPath', visible: true, align: 'center', valign: 'middle',
+            {title: '机器号', field: 'machineCode', visible: true, align: 'center', valign: 'middle'},
+            {title: '封面', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
               formatter:function (value,row,index) {
                  return '<a class="maincolor" href="javascript:;"><img  src="'+value+'" width="80" class="img-rounded" /></a>';
               }

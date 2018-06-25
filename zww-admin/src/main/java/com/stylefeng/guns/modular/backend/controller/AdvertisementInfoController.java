@@ -158,6 +158,7 @@ public class AdvertisementInfoController extends BaseController {
         } catch (Exception e) {
             throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
         }
+        newFileUrl = newFileUrl.replace("lanao.oss-cn-shenzhen.aliyuncs.com","oss.lanao.fun");
         return newFileUrl;
     }
 }

@@ -13,11 +13,13 @@
 		<result column="game_num" property="gameNum" />
 		<result column="machine_type" property="machineType" />
 		<result column="doll_code" property="dollCode" />
+		<result column="doll_name" property="dollName" />
+		<result column="doll_url" property="dollUrl" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, doll_id AS dollId, member_id AS memberId, catch_date AS catchDate, catch_status AS catchStatus, video_url AS videoUrl, game_num AS gameNum, machine_type AS machineType, doll_code AS dollCode
+        id, doll_id AS dollId, member_id AS memberId, catch_date AS catchDate, catch_status AS catchStatus, video_url AS videoUrl, game_num AS gameNum, machine_type AS machineType, doll_code AS dollCode, doll_name AS dollName, doll_url AS dollUrl
     </sql>
 
 
@@ -85,17 +87,17 @@
 
 	<select id="selectDollCatchHistorys" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select	a.id,a.catch_date AS catchDate, a.catch_status AS catchStatus,a.machine_type AS machineType,
-		 a.doll_code AS dollCode,b.name dollName,b.machine_code machineCode,b.tbimg_real_path tbimgRealPath,c.name memberName
+		 a.doll_code AS dollCode,a.doll_name dollName,b.machine_code machineCode,a.doll_url dollUrl,c.name memberName
 		from t_doll_catch_history a,t_doll b ,t_member c
 		where a.doll_id=b.id and a.member_id=c.id
 		<if test="dollId != null and dollId != 0">
 			AND a.doll_id = #{dollId}
 		</if>
 		<if test="dollName != null and dollName != '' ">
-			and b.name like concat(concat("%",#{dollName,jdbcType=VARCHAR}),"%")
+			and a.doll_name like concat(concat("%",#{dollName,jdbcType=VARCHAR}),"%")
 		</if>
 		<if test="machineCode != null and machineCode != ''">
-			AND a.doll_code = #{machineCode,jdbcType=VARCHAR}
+			AND b.machine_code = #{machineCode,jdbcType=VARCHAR}
 		</if>
 		<if test="dollCatchStates != null and dollCatchStates != ''">
 			AND a.catch_status = #{dollCatchStates}

@@ -66,6 +66,12 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 	@TableField("doll_code")
 	private String dollCode;
 
+	@TableField("doll_name")
+	private String  dollName;
+
+	@TableField("doll_url")
+	private String  dollUrl;
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -143,6 +149,22 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 		this.dollCode = dollCode;
 	}
 
+	public String getDollName() {
+		return dollName;
+	}
+
+	public void setDollName(String dollName) {
+		this.dollName = dollName;
+	}
+
+	public String getDollUrl() {
+		return dollUrl;
+	}
+
+	public void setDollUrl(String dollUrl) {
+		this.dollUrl = dollUrl;
+	}
+
 	@Override
 	public String toString() {
 		return "TDollCatchHistory{" +
@@ -155,6 +177,8 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 				", game_num=" + gameNum +
 				", machineType=" + machineType +
 				", dollCode=" + dollCode +
+				", dollUrl=" + dollUrl +
+				", dollName=" + dollName +
 				"}";
 	}
 

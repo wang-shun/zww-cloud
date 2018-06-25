@@ -11,24 +11,26 @@
 		<result column="created_date" property="createdDate" />
 		<result column="modified_date" property="modifiedDate" />
 		<result column="doll_code" property="dollCode" />
+		<result column="doll_name" property="dollName" />
+		<result column="doll_url" property="dollUrl" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, order_id AS orderId, doll_id AS dollId, quantity, created_date AS createdDate, modified_date AS modifiedDate, doll_code AS dollCode
+        id, order_id AS orderId, doll_id AS dollId, quantity, created_date AS createdDate, modified_date AS modifiedDate, doll_code AS dollCode, doll_url AS dollUrl, doll_name AS dollName
     </sql>
 
 	<select id="selectLists" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select a.id id, a.doll_code dollCode, a.order_id orderId, a.quantity quantity,	b.dollName dollName,b.img_url dollImg
-		from t_doll_order_item a,doll_info b where a.doll_code=b.dollCode
-		<if test="orderId != null and orderId != 0">
-			and a.order_id=#{orderId,jdbcType=BIGINT}
+		select a.id id, a.doll_code dollCode, a.order_id orderId, a.quantity quantity,	a.doll_name dollName,a.doll_url dollUrl
+		from t_doll_order_item a,t_doll_order b where a.order_id=b.id
+		<if test="orderNum != null and orderNum != 0">
+			and b.order_number=#{orderNum,jdbcType=VARCHAR}
 		</if>
-		ORDER by id
 	</select>
 
 	<select id="selectByOrderId" resultType="map">
-		select  id, order_id AS orderId, doll_id AS dollId, quantity, created_date AS createdDate, modified_date AS modifiedDate, doll_code AS dollCode
+		select
+		<include refid="Base_Column_List"/>
 		from t_doll_order_item where order_id = #{orderId}
 	</select>
 </mapper>
