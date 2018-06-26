@@ -77,16 +77,9 @@ AgentWithdraw.updateFail = function (id) {
 /**
  * 检查是否选中
  */
-/*AgentWithdraw.check = function () {
-    var selected = $('#' + this.id).bootstrapTable('getSelections');
-    if(selected.length == 0){
-        Feng.info("请先选中表格中的某一记录！");
-        return false;
-    }else{
-        AgentWithdraw.seItem = selected[0];
-        return true;
-    }
-};*/
+AgentWithdraw.execl = function () {
+    $("#test").submit();
+};
 
 /**
  * 点击添加未审批

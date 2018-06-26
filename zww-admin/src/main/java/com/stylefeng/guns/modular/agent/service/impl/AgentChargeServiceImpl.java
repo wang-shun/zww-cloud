@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.common.persistence.dao.AgentChargeMapper;
 import com.stylefeng.guns.common.persistence.model.AgentCharge;
+import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
 import com.stylefeng.guns.modular.agent.service.IAgentChargeService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class AgentChargeServiceImpl extends ServiceImpl<AgentChargeMapper, Agent
     @Override
     public List<Map<String, Object>> selectAgentCharge(@Param("page") Page<AgentCharge> page, @Param("agentId") Integer agentId, @Param("level") Integer level){
         return agentChargeMapper.selectAgentCharge(page,agentId,level);
+    }
+
+    @Override
+    public List<AgentChargeVo>  getAgentChargeExecl(){
+        return agentChargeMapper.getAgentChargeExecl();
     }
 }

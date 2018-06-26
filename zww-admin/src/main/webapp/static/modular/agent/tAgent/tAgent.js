@@ -26,7 +26,7 @@ TAgent.initColumn = function (type) {
             {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
             {title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
-            {title: '是否为O单商', field: 'isOem', visible: true, align: 'center', valign: 'middle',
+            {title: '是否为O单商', field: 'oem', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                 if(value){
                     return "是";
@@ -136,14 +136,7 @@ TAgent.execl = function () {
     $("#createTimes").val($("#createTime").val());
     $("#levels").val($("#level").val());
     $("#test").submit();
- /*   var queryData = {};
-    queryData['name'] = $("#name").val();
-    queryData['name'] = $("#username").val();
-    queryData['phone'] = $("#phone").val();
-    queryData['createTime'] = $("#createTime").val();
-    queryData['level'] = $("#level").val();
 
-    $.GET(Feng.ctxPath + "/tAgent/execl",queryData);*/
 }
 
 /**

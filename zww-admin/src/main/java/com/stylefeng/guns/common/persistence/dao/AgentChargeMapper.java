@@ -3,6 +3,7 @@ package com.stylefeng.guns.common.persistence.dao;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.persistence.model.AgentCharge;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -24,5 +25,7 @@ public interface AgentChargeMapper extends BaseMapper<AgentCharge> {
 
     //代理商分润列表
     List<Map<String, Object>> selectAgentCharge(@Param("page") Page<AgentCharge> page, @Param("agentId") Integer agentId, @Param("level") Integer level);
+
+    List<AgentChargeVo>  getAgentChargeExecl();
 
 }

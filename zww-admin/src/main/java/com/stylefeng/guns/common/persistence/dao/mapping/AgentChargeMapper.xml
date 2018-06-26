@@ -94,18 +94,18 @@
 	<select id="selectAgentCharge" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select a.agent_super_id agentSuperId,a.agent_one_id agentOneId,a.agent_two_id agentTwoId,a.agent_three_id agentThreeId,
 		<if test="level != null and agentId != null and level == 0">
-			a.agent_super_income agentIncome
+			a.agent_super_income agentIncome,
 		</if>
 		<if test="level != null and agentId != null and level == 1">
-			a.agent_one_income agentIncome
+			a.agent_one_income agentIncome,
 		</if>
 		<if test="level != null and agentId != null and level == 2">
-			a.agent_two_income  agentIncome
+			a.agent_two_income  agentIncome,
 		</if>
 		<if test="level != null and agentId != null and level == 3">
-			a.agent_three_income agentIncome
+			a.agent_three_income agentIncome,
 		</if>
-		,a.create_time createTime,b.member_name memberName,a.status status,b.price amount
+		a.create_time createTime,b.member_name memberName,a.status status,b.price amount
 		from agent_charge a,charge_order b	where a.order_id = b.id
 		<if test="level != null and agentId != null and level == 0">
 			and a.agent_super_id = #{agentId}
@@ -120,6 +120,17 @@
 			and a.agent_three_id = #{agentId}
 		</if>
 		order by create_time DESC
+	</select>
+
+
+	<select id="getAgentChargeExecl" resultType="com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo">
+		select
+		b.charge_name chargeName,b.price price,b.member_name memberName,b.create_date createDate,
+		a.agent_super_id agentSuperId,a.agent_super_fee agentSuperFee,a.agent_super_income*0.01 agentSuperIncome,
+		a.agent_one_id agentOneId,a.agent_one_fee agentOneFee,a.agent_one_income*0.01 agentOneIncome,
+		a.agent_two_id agentTwoId,a.agent_two_fee agentTwoFee,a.agent_two_income*0.01 agentTwoIncome,
+		a.agent_three_id agentThreeId,a.agent_three_fee agentThreeFee,a.agent_three_income*0.01 agentThreeIncome
+		from agent_charge a,charge_order b	where a.order_id = b.id and b.charge_state=1
 	</select>
 
 </mapper>

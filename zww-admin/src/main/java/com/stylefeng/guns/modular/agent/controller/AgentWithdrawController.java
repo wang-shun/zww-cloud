@@ -2,9 +2,13 @@ package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
+import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
+import com.stylefeng.guns.common.persistence.model.vo.AgentVo;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.agent.service.IAgentWithdrawService;
@@ -14,13 +18,20 @@ import com.stylefeng.guns.modular.agent.warpper.withdrawWarpper;
 import com.stylefeng.guns.modular.agent.service.IAgentChargeService;
 import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.jeecgframework.poi.excel.ExcelExportUtil;
+import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 提现控制器
@@ -43,6 +54,8 @@ public class AgentWithdrawController extends BaseController {
     private IBankInfoService bankInfoService;
     @Autowired
     private ITSystemPrefService systemPrefService;
+    @Autowired
+    private ITAgentService tAgentService;
 
     /**
      * 跳转到提现管理首页
@@ -248,4 +261,33 @@ public class AgentWithdrawController extends BaseController {
             return resultMap;
         }
     }
+
+    /***
+     * 获取excel数据
+     * @return 返回文件名称及excel文件的URL
+     * @throws IOException
+     */
+    @RequestMapping(value = "/execl",method = RequestMethod.GET)
+    public void execl(HttpServletResponse response) throws IOException {
+
+        List<AgentChargeVo>  AgentChargeList = agentChargeService.getAgentChargeExecl();
+
+        AgentChargeList = AgentChargeList.stream().map(agentChargeVo -> {
+            TAgent agentSuper = agentChargeVo.getAgentSuperId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentSuperId());
+            TAgent agentOne = agentChargeVo.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentOneId());
+            TAgent agentTwo = agentChargeVo.getAgentTwoId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentTwoId());
+            TAgent agentThree = agentChargeVo.getAgentThreeId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentThreeId());
+            return  new AgentChargeVo(agentChargeVo,agentSuper,agentOne,agentTwo,agentThree);
+        }).collect(Collectors.toList());
+        String fileName = "代理商分润.xls";
+
+        // 告诉浏览器用什么软件可以打开此文件
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        // 下载文件的默认名称
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), AgentChargeVo.class, AgentChargeList);
+        workbook.write(response.getOutputStream());
+    }
+
 }

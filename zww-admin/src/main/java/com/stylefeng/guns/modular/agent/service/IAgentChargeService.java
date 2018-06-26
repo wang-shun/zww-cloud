@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.agent.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.common.persistence.model.AgentCharge;
+import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,5 +26,6 @@ public interface IAgentChargeService extends IService<AgentCharge> {
     //代理商分润列表
     List<Map<String, Object>> selectAgentCharge(@Param("page") Page<AgentCharge> page, @Param("agentId") Integer agentId,@Param("level") Integer level);
 
+    List<AgentChargeVo>  getAgentChargeExecl();
 
 }

@@ -39,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.naming.NoPermissionException;
+import javax.swing.text.TabableView;
 import javax.validation.Valid;
 
 import java.io.ByteArrayInputStream;
@@ -182,6 +183,17 @@ public class UserMgrController extends BaseController {
             String newMd5 = ShiroKit.md5(newPwd, user.getSalt());
             user.setPassword(newMd5);
             user.updateById();
+
+            Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
+            if("agent".equals(role.getTips().substring(0,5))){
+                TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
+                if(tAgent != null){
+                    tAgent.setUpdateTime(new Date());
+                    tAgent.setPassword(newMd5);
+                    tAgentService.updateById(tAgent);
+                }
+            }
+
             return SUCCESS_TIP;
         } else {
             throw new GunsException(BizExceptionEnum.OLD_PWD_NOT_RIGHT);
@@ -256,6 +268,18 @@ public class UserMgrController extends BaseController {
             ShiroUser shiroUser = ShiroKit.getUser();
             if (shiroUser.getId().equals(user.getId())) {
                 this.userMapper.updateById(UserFactory.createUser(user));
+
+                Role role = roleMapper.selectId(shiroUser.getRoleList().get(0));
+                if("agent".equals(role.getTips().substring(0,5))){
+                    TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
+                    if(tAgent != null){
+                        tAgent.setUpdateTime(new Date());
+                        tAgent.setNickName(user.getName());
+                        tAgent.setPhone(user.getPhone());
+                        tAgentService.updateById(tAgent);
+                    }
+                }
+
                 return SUCCESS_TIP;
             } else {
                 throw new GunsException(BizExceptionEnum.NO_PERMITION);

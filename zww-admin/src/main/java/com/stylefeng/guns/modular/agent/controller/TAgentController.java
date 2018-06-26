@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.common.annotion.Permission;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
@@ -237,12 +239,13 @@ public class TAgentController extends BaseController {
         //设置md5和盐
         tAgent.setSalt(ShiroKit.getRandomSalt(5));
         if(ToolUtil.isEmpty(tAgent.getPassword())){
-            tAgent.setPassword(ShiroKit.md5("123456",tAgent.getSalt()));
+            tAgent.setPassword(ShiroKit.md5(Const.DEFAULT_PWD,tAgent.getSalt()));
         }else {
             tAgent.setPassword(ShiroKit.md5(tAgent.getPassword(),tAgent.getSalt()));
         }
         tAgent.setCreateTime(new Date());
         tAgent.setUpdateTime(new Date());
+        tAgent.setOem(false);
 
         user.setAccount(tAgent.getUsername());
         user.setName(tAgent.getNickName());
@@ -347,6 +350,7 @@ public class TAgentController extends BaseController {
      */
 
     @PostMapping(value = "/oemAdd")
+    @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public Object oemAdd(@RequestBody JSONObject jsonObject) throws  Exception{
         TOem oem=(TOem)JSONObject.toBean(jsonObject.getJSONObject("oem"), TOem.class);
@@ -360,7 +364,10 @@ public class TAgentController extends BaseController {
             oem.setCreateTime(new Date());
             oem.setUpdateTime(new Date());
             toemMapper.insert(oem);
-            TAgent t = new TAgent(oem.getId(),true,new Date());
+            TAgent t = new TAgent();
+            t.setOem(true);
+            t.setId(oem.getId());
+            t.setUpdateTime(new Date());
             tAgentService.updateById(t);
         }else{
             oem.setUpdateTime(new Date());
@@ -434,7 +441,7 @@ public class TAgentController extends BaseController {
             return new AgentVo(tAgent,agentSuper,agentOne,agentTwo);
         }).collect(Collectors.toList());
 
-        String fileName = "测试文件.xls";
+        String fileName = "代理商管理.xls";
 
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");

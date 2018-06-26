@@ -57,8 +57,8 @@ public class AgentVo {
     /**
      * 是否是贴牌商（0不是   1是）
      */
-    @Excel(name = "是否为贴牌商", orderNum = "9", mergeVertical = true, isImportField = "isOem",width = 15.0D,replace = {"是_true","不是_false"})
-    private Boolean isOem;
+    @Excel(name = "是否为贴牌商", orderNum = "9", mergeVertical = true, isImportField = "oem",width = 15.0D,replace = {"是_true","不是_false"})
+    private Boolean oem;
     /**
      * 特级代理id
      */
@@ -90,7 +90,7 @@ public class AgentVo {
         this.status = tAgent.getStatus();
         this.fee = tAgent.getFee();
         this.balance = tAgent.getBalance()*0.01;
-        this.isOem = tAgent.getIsOem();
+        this.oem = tAgent.getOem();
         this.agentName = agentSuper == null ? "-" : agentSuper.getNickName();
         this.agentOneName = agentOne == null ? "-" : agentOne.getNickName();
         this.agentTwoName = agentTwo == null ? "-" : agentTwo.getNickName();
@@ -163,12 +163,12 @@ public class AgentVo {
         this.balance = balance;
     }
 
-    public Boolean getIsOem() {
-        return isOem;
+    public Boolean getOem() {
+        return oem;
     }
 
-    public void setIsOem(Boolean isOem) {
-        this.isOem = isOem;
+    public void setOem(Boolean oem) {
+        this.oem = oem;
     }
 
     public String getAgentName() {
