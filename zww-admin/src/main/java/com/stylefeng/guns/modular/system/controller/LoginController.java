@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.system.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.stylefeng.guns.common.exception.InvalidKaptchaException;
+import com.stylefeng.guns.common.exception.UserException;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.TAgentMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
@@ -10,6 +11,7 @@ import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogManager;
 import com.stylefeng.guns.core.log.factory.LogTaskFactory;
 import com.stylefeng.guns.core.mutidatasource.DSEnum;
@@ -20,16 +22,20 @@ import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.ApiMenuFilter;
 import com.stylefeng.guns.core.util.KaptchaUtil;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.backend.form.LoginForm;
 import com.stylefeng.guns.modular.system.dao.MenuDao;
+import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.stylefeng.guns.core.support.HttpKit.getIp;
@@ -116,16 +122,19 @@ public class LoginController extends BaseController {
      */
      
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginVali() {
+    public String loginVali(@Valid LoginForm loginForm,BindingResult bindingResult) {
 
-        String username = super.getPara("username").trim();
-        String password = super.getPara("password").trim();
-        String remember = super.getPara("remember");
+        if (bindingResult.hasErrors()) {
+            throw new UserException(HttpStatus.SC_BAD_REQUEST, bindingResult.getFieldError().getDefaultMessage());
+        }
+        String username = loginForm.getUsername().trim();
+        String password = loginForm.getPassword().trim();
+        String remember = loginForm.getRemember();
 
 
         //验证验证码是否正确
         if (KaptchaUtil.getKaptchaOnOff()) {
-            String kaptcha = super.getPara("kaptcha").trim();
+            String kaptcha = loginForm.getKaptcha().trim();
             String code = (String) super.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
             if (ToolUtil.isEmpty(kaptcha) || !kaptcha.equalsIgnoreCase(code)) {
                 throw new InvalidKaptchaException();

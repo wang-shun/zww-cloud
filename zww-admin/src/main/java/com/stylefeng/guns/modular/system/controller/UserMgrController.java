@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.dictmap.UserDict;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.exception.UserException;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.Role;
@@ -25,11 +26,14 @@ import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
+import com.stylefeng.guns.modular.backend.form.ChangePwdForm;
+import com.stylefeng.guns.modular.backend.form.LoginForm;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
 
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -172,15 +176,20 @@ public class UserMgrController extends BaseController {
      
     @RequestMapping("/changePwd")
     @ResponseBody
-    public Object changePwd(@RequestParam String oldPwd, @RequestParam String newPwd, @RequestParam String rePwd) {
-        if (!newPwd.equals(rePwd)) {
+    public Object changePwd(@Valid ChangePwdForm changePwdForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new GunsException(HttpStatus.SC_BAD_REQUEST, bindingResult.getFieldError().getDefaultMessage());
+        }
+
+        if (!changePwdForm.getNewPwd().equals(changePwdForm.getRePwd())) {
             throw new GunsException(BizExceptionEnum.TWO_PWD_NOT_MATCH);
         }
         Integer userId = ShiroKit.getUser().getId();
         User user = userMapper.selectById(userId);
-        String oldMd5 = ShiroKit.md5(oldPwd, user.getSalt());
+        String oldMd5 = ShiroKit.md5(changePwdForm.getOldPwd(), user.getSalt());
         if (user.getPassword().equals(oldMd5)) {
-            String newMd5 = ShiroKit.md5(newPwd, user.getSalt());
+            String newMd5 = ShiroKit.md5(changePwdForm.getNewPwd(), user.getSalt());
             user.setPassword(newMd5);
             user.updateById();
 

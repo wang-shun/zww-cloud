@@ -2,6 +2,7 @@ package com.stylefeng.guns.core.aop;
 
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.exception.InvalidKaptchaException;
+import com.stylefeng.guns.common.exception.UserException;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogManager;
@@ -107,6 +108,19 @@ public class GlobalExceptionHandler {
         model.addAttribute("tips", "验证码错误");
         return "/login.html";
     }
+
+    /**
+     * 用户参数错误
+     *
+     * @author fengshuonan
+     */
+    @ExceptionHandler(UserException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String credentials(UserException e, Model model) {
+        model.addAttribute("tips", e.getMessage());
+        return "/login.html";
+    }
+
 
     /**
      * 无权访问该资源
