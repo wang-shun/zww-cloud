@@ -433,7 +433,7 @@ public class TAgentController extends BaseController {
         }else{
             type = 10;
         }
-        List<TAgent>  result = tAgentService.selectAndExecl(name,username,phone,createTime,level,type,agentId);
+         List<TAgent>  result = tAgentService.selectAndExecl(name,username,phone,createTime,level,type,agentId);
          List<AgentVo> agentVoList = result.stream().map(tAgent -> {
             TAgent agentSuper = tAgent.getAgentId() == 0 ? null : tAgentService.selectTAgentById(tAgent.getAgentId());
             TAgent agentOne = tAgent.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(tAgent.getAgentOneId());

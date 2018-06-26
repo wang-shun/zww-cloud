@@ -24,7 +24,7 @@
                         </div>
                         <div class="hidden-xs" id="AgentWithdrawTableToolbar" role="group">
                             @if(shiro.hasPermission("/agentWithdraw/execl")){
-                            <#button name="execl" icon="fa-plus" clickFun="AgentWithdraw.execl()"/>
+                            <#button name="execl" icon="fa-plus" clickFun="AgentWithdraw.execl(this)"/>
                             @}
                         </div>
                         <#table id="AgentWithdrawTable"/>
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<form id="test" style="display: none;" action="/agentWithdraw/execl">
+<form id="test" style="display: none;" action="${ctxPath}/agentWithdraw/execl">
 
 </form>
 <script src="${ctxPath}/static/modular/agent/notApproval/agentWithdraw.js"></script>

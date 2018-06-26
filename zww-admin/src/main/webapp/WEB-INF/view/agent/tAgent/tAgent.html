@@ -42,14 +42,14 @@
                          <#button name="修改" icon="fa-plus" clickFun="TAgent.openTAgentDetail()" space="true"/>
                     @}
                     @if(shiro.hasPermission("/tAgent/execl")){
-                      <#button name="execl" icon="fa-plus" clickFun="TAgent.execl()" space="true"/>
+                      <#button name="execl" icon="fa-plus" clickFun="TAgent.execl(this)" space="true"/>
                     @}
                 </div>
                 <#table id="TAgentTable"/>
             </div>
         </div>
     </div>
-    <form id="test" style="display: none;" action="/tAgent/execl">
+    <form id="test" style="display: none;" action="${ctxPath}/tAgent/execl">
         <input name="name" id="names" type="hidden" >
         <input name="username" id="usernames" type="hidden" >
         <input name="phone" id="phones" type="hidden" >

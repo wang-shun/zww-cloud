@@ -77,7 +77,11 @@ AgentWithdraw.updateFail = function (id) {
 /**
  * 检查是否选中
  */
-AgentWithdraw.execl = function () {
+AgentWithdraw.execl = function (v_this) {
+    $(v_this).attr("disabled","true");
+    setTimeout(function(){
+        $(v_this).removeAttr("disabled");
+    },5000);
     $("#test").submit();
 };
 

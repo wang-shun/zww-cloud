@@ -21,49 +21,65 @@ public class AgentChargeVo {
     @Excel(name = "订单创建时间", orderNum = "4", mergeVertical = true, isImportField = "createDate",width = 25.0D,exportFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
+    @Excel(name = "特级代理id", orderNum = "5", mergeVertical = true, isImportField = "agentSuperId")
     private Integer agentSuperId;
 
-    @Excel(name = "特级代理", orderNum = "5", mergeVertical = true, isImportField = "agentSuperName",width = 15.0D)
-    private String agentSuperName;
+    @Excel(name = "特级代理昵称", orderNum = "6", mergeVertical = true, isImportField = "agentSuperName",width = 15.0D)
+    private String agentSuperName = "-";
 
-    @Excel(name = "特级费率", orderNum = "6", mergeVertical = true, isImportField = "agentSuperFee")
-    private Double agentSuperFee;
+    @Excel(name = "特级代理手机号", orderNum = "7", mergeVertical = true, isImportField = "agentSuperPhone",width = 15.0D)
+    private String agentSuperPhone = "-";
 
-    @Excel(name = "特级收入", orderNum = "7", mergeVertical = true, isImportField = "agentSuperIncome")
-    private Double agentSuperIncome;
+    @Excel(name = "特级费率", orderNum = "8", mergeVertical = true, isImportField = "agentSuperFee")
+    private String agentSuperFee;
 
+    @Excel(name = "特级收入", orderNum = "9", mergeVertical = true, isImportField = "agentSuperIncome")
+    private String agentSuperIncome;
+
+    @Excel(name = "一级代理id", orderNum = "10", mergeVertical = true, isImportField = "agentOneId")
     private Integer agentOneId;
 
-    @Excel(name = "一级代理", orderNum = "8", mergeVertical = true, isImportField = "agentOneName",width = 15.0D)
-    private String agentOneName;
+    @Excel(name = "一级代理昵称", orderNum = "11", mergeVertical = true, isImportField = "agentOneName",width = 15.0D)
+    private String agentOneName = "-";
 
-    @Excel(name = "一级费率", orderNum = "9", mergeVertical = true, isImportField = "agentOneFee")
-    private Double agentOneFee;
+    @Excel(name = "一级代理手机号", orderNum = "12", mergeVertical = true, isImportField = "agentOnePhone",width = 15.0D)
+    private String agentOnePhone = "-";
 
-    @Excel(name = "一级收入", orderNum = "10", mergeVertical = true, isImportField = "agentOneIncome")
-    private Double agentOneIncome;
+    @Excel(name = "一级费率", orderNum = "13", mergeVertical = true, isImportField = "agentOneFee")
+    private String agentOneFee;
 
+    @Excel(name = "一级收入", orderNum = "14", mergeVertical = true, isImportField = "agentOneIncome")
+    private String agentOneIncome;
+
+    @Excel(name = "二级代理id", orderNum = "15", mergeVertical = true, isImportField = "agentTwoId")
     private Integer agentTwoId;
 
-    @Excel(name = "二级代理", orderNum = "11", mergeVertical = true, isImportField = "agentTwoName",width = 15.0D)
-    private String agentTwoName;
+    @Excel(name = "二级代理昵称", orderNum = "16", mergeVertical = true, isImportField = "agentTwoName",width = 15.0D)
+    private String agentTwoName = "-";
 
-    @Excel(name = "二级费率", orderNum = "12", mergeVertical = true, isImportField = "agentTwoFee")
-    private Double agentTwoFee;
+    @Excel(name = "二级代理手机号", orderNum = "17", mergeVertical = true, isImportField = "agentTwoPhone",width = 15.0D)
+    private String agentTwoPhone = "-";
 
-    @Excel(name = "二级收入", orderNum = "13", mergeVertical = true, isImportField = "agentTwoIncome")
-    private Double agentTwoIncome;
+    @Excel(name = "二级费率", orderNum = "18", mergeVertical = true, isImportField = "agentTwoFee")
+    private String agentTwoFee;
 
+    @Excel(name = "二级收入", orderNum = "19", mergeVertical = true, isImportField = "agentTwoIncome")
+    private String agentTwoIncome;
+
+    @Excel(name = "三级代理id", orderNum = "20", mergeVertical = true, isImportField = "agentThreeId")
     private Integer agentThreeId;
 
-    @Excel(name = "三级代理", orderNum = "14", mergeVertical = true, isImportField = "agentThreeName",width = 15.0D)
-    private String agentThreeName;
+    @Excel(name = "三级代理昵称", orderNum = "21", mergeVertical = true, isImportField = "agentThreeName",width = 15.0D)
+    private String agentThreeName = "-";
 
-    @Excel(name = "三级费率", orderNum = "15", mergeVertical = true, isImportField = "agentThreeFee")
-    private Double agentThreeFee;
+    @Excel(name = "三级代理手机号", orderNum = "22", mergeVertical = true, isImportField = "agentThreePhone",width = 15.0D)
+    private String agentThreePhone = "-";
 
-    @Excel(name = "三级收入", orderNum = "16", mergeVertical = true, isImportField = "agentThreeIncome")
-    private Double agentThreeIncome;
+    @Excel(name = "三级费率", orderNum = "23", mergeVertical = true, isImportField = "agentThreeFee")
+    private String agentThreeFee;
+
+    @Excel(name = "三级收入", orderNum = "24", mergeVertical = true, isImportField = "agentThreeIncome")
+    private String agentThreeIncome;
 
     public AgentChargeVo() {
     }
@@ -73,16 +89,32 @@ public class AgentChargeVo {
         this.price = agentChargeVo.getPrice();
         this.memberName = agentChargeVo.getMemberName();
         this.createDate = agentChargeVo.getCreateDate();
-        this.agentSuperName = agentSuper == null ? "-" : agentSuper.getNickName();
+        this.agentSuperId = agentChargeVo.getAgentSuperId();
+        if(agentSuper != null){
+            this.agentSuperName = agentSuper.getNickName();
+            this.agentSuperPhone = agentSuper.getPhone();
+        }
         this.agentSuperFee = agentChargeVo.getAgentSuperFee();
         this.agentSuperIncome = agentChargeVo.getAgentSuperIncome();
-        this.agentOneName = agentOne == null ? "-" : agentOne.getNickName();
+        this.agentOneId = agentChargeVo.getAgentOneId();
+        if(agentOne != null){
+            this.agentOneName = agentOne.getNickName();
+            this.agentOnePhone = agentOne.getPhone();
+        }
         this.agentOneFee = agentChargeVo.getAgentOneFee();
         this.agentOneIncome = agentChargeVo.getAgentOneIncome();
-        this.agentTwoName = agentTwo == null ? "-" : agentTwo.getNickName();
+        this.agentTwoId = agentChargeVo.getAgentTwoId();
+        if(agentTwo != null){
+            this.agentTwoName = agentTwo.getNickName();
+            this.agentTwoPhone = agentTwo.getPhone();
+        }
         this.agentTwoFee = agentChargeVo.getAgentTwoFee();
         this.agentTwoIncome = agentChargeVo.getAgentTwoIncome();
-        this.agentThreeName = agentThree == null ? "-" : agentThree.getNickName();
+        this.agentThreeId = agentChargeVo.getAgentThreeId();
+        if(agentThree != null){
+            this.agentThreeName = agentThree.getNickName();
+            this.agentThreePhone = agentThree.getPhone();
+        }
         this.agentThreeFee = agentChargeVo.getAgentThreeFee();
         this.agentThreeIncome = agentChargeVo.getAgentThreeIncome();
     }
@@ -135,19 +167,19 @@ public class AgentChargeVo {
         this.agentSuperName = agentSuperName;
     }
 
-    public Double getAgentSuperFee() {
+    public String getAgentSuperFee() {
         return agentSuperFee;
     }
 
-    public void setAgentSuperFee(Double agentSuperFee) {
+    public void setAgentSuperFee(String agentSuperFee) {
         this.agentSuperFee = agentSuperFee;
     }
 
-    public Double getAgentSuperIncome() {
+    public String getAgentSuperIncome() {
         return agentSuperIncome;
     }
 
-    public void setAgentSuperIncome(Double agentSuperIncome) {
+    public void setAgentSuperIncome(String agentSuperIncome) {
         this.agentSuperIncome = agentSuperIncome;
     }
 
@@ -167,19 +199,19 @@ public class AgentChargeVo {
         this.agentOneName = agentOneName;
     }
 
-    public Double getAgentOneFee() {
+    public String getAgentOneFee() {
         return agentOneFee;
     }
 
-    public void setAgentOneFee(Double agentOneFee) {
+    public void setAgentOneFee(String agentOneFee) {
         this.agentOneFee = agentOneFee;
     }
 
-    public Double getAgentOneIncome() {
+    public String getAgentOneIncome() {
         return agentOneIncome;
     }
 
-    public void setAgentOneIncome(Double agentOneIncome) {
+    public void setAgentOneIncome(String agentOneIncome) {
         this.agentOneIncome = agentOneIncome;
     }
 
@@ -199,19 +231,19 @@ public class AgentChargeVo {
         this.agentTwoName = agentTwoName;
     }
 
-    public Double getAgentTwoFee() {
+    public String getAgentTwoFee() {
         return agentTwoFee;
     }
 
-    public void setAgentTwoFee(Double agentTwoFee) {
+    public void setAgentTwoFee(String agentTwoFee) {
         this.agentTwoFee = agentTwoFee;
     }
 
-    public Double getAgentTwoIncome() {
+    public String getAgentTwoIncome() {
         return agentTwoIncome;
     }
 
-    public void setAgentTwoIncome(Double agentTwoIncome) {
+    public void setAgentTwoIncome(String agentTwoIncome) {
         this.agentTwoIncome = agentTwoIncome;
     }
 
@@ -231,19 +263,51 @@ public class AgentChargeVo {
         this.agentThreeName = agentThreeName;
     }
 
-    public Double getAgentThreeFee() {
+    public String getAgentThreeFee() {
         return agentThreeFee;
     }
 
-    public void setAgentThreeFee(Double agentThreeFee) {
+    public void setAgentThreeFee(String agentThreeFee) {
         this.agentThreeFee = agentThreeFee;
     }
 
-    public Double getAgentThreeIncome() {
+    public String getAgentThreeIncome() {
         return agentThreeIncome;
     }
 
-    public void setAgentThreeIncome(Double agentThreeIncome) {
+    public void setAgentThreeIncome(String agentThreeIncome) {
         this.agentThreeIncome = agentThreeIncome;
+    }
+
+    public String getAgentSuperPhone() {
+        return agentSuperPhone;
+    }
+
+    public void setAgentSuperPhone(String agentSuperPhone) {
+        this.agentSuperPhone = agentSuperPhone;
+    }
+
+    public String getAgentOnePhone() {
+        return agentOnePhone;
+    }
+
+    public void setAgentOnePhone(String agentOnePhone) {
+        this.agentOnePhone = agentOnePhone;
+    }
+
+    public String getAgentTwoPhone() {
+        return agentTwoPhone;
+    }
+
+    public void setAgentTwoPhone(String agentTwoPhone) {
+        this.agentTwoPhone = agentTwoPhone;
+    }
+
+    public String getAgentThreePhone() {
+        return agentThreePhone;
+    }
+
+    public void setAgentThreePhone(String agentThreePhone) {
+        this.agentThreePhone = agentThreePhone;
     }
 }

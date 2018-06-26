@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.agent.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
+import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
 import com.stylefeng.guns.common.persistence.model.vo.AgentVo;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -56,6 +58,8 @@ public class AgentWithdrawController extends BaseController {
     private ITSystemPrefService systemPrefService;
     @Autowired
     private ITAgentService tAgentService;
+    @Resource
+    private RoleMapper roleMapper;
 
     /**
      * 跳转到提现管理首页
@@ -269,9 +273,17 @@ public class AgentWithdrawController extends BaseController {
      */
     @RequestMapping(value = "/execl",method = RequestMethod.GET)
     public void execl(HttpServletResponse response) throws IOException {
-
-        List<AgentChargeVo>  AgentChargeList = agentChargeService.getAgentChargeExecl();
-
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        Integer agentId = null,level = null;
+        if("agent".equals(role.getTips().substring(0,5))){
+            TAgent tAgent =tAgentService.selectTAgentByUId(userdto.getId());
+            if(tAgent != null){
+                agentId = tAgent.getId();
+                level = tAgent.getLevel();
+            }
+        }
+        List<AgentChargeVo>  AgentChargeList = agentChargeService.getAgentChargeExecl(agentId,level);
         AgentChargeList = AgentChargeList.stream().map(agentChargeVo -> {
             TAgent agentSuper = agentChargeVo.getAgentSuperId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentSuperId());
             TAgent agentOne = agentChargeVo.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentOneId());

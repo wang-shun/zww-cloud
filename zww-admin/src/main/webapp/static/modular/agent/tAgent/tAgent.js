@@ -15,7 +15,7 @@ TAgent.initColumn = function (type) {
     if(type == 0){
         return [
             {field: 'selectItem', radio: true},
-            {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
+            {title: '昵称', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
             {title: '登录名', field: 'username', visible: true, align: 'center', valign: 'middle'},
             {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
             {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
@@ -46,7 +46,7 @@ TAgent.initColumn = function (type) {
     }else{
         return [
             {field: 'selectItem', radio: true},
-            {title: '真实姓名', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
+            {title: '昵称', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
             {title: '登录名', field: 'username', visible: true, align: 'center', valign: 'middle'},
             {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
             {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
@@ -129,7 +129,11 @@ TAgent.resetSearch = function () {
     TAgent.search();
 }
 
-TAgent.execl = function () {
+TAgent.execl = function (v_this) {
+    $(v_this).attr("disabled","true");
+    setTimeout(function(){
+        $(v_this).removeAttr("disabled");
+    },5000);
     $("#names").val($("#name").val());
     $("#usernames").val($("#username").val());
     $("#phones").val($("#phone").val());

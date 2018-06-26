@@ -26,6 +26,6 @@ public interface IAgentChargeService extends IService<AgentCharge> {
     //代理商分润列表
     List<Map<String, Object>> selectAgentCharge(@Param("page") Page<AgentCharge> page, @Param("agentId") Integer agentId,@Param("level") Integer level);
 
-    List<AgentChargeVo>  getAgentChargeExecl();
+    List<AgentChargeVo>  getAgentChargeExecl(@Param("agentId") Integer agentId, @Param("level") Integer level);
 
 }

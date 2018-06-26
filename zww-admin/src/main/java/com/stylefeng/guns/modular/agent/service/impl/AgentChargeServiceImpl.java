@@ -43,7 +43,7 @@ public class AgentChargeServiceImpl extends ServiceImpl<AgentChargeMapper, Agent
     }
 
     @Override
-    public List<AgentChargeVo>  getAgentChargeExecl(){
-        return agentChargeMapper.getAgentChargeExecl();
+    public List<AgentChargeVo>  getAgentChargeExecl(Integer agentId,Integer level){
+        return agentChargeMapper.getAgentChargeExecl(agentId,level);
     }
 }

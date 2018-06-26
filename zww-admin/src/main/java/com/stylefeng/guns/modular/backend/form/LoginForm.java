@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 public class LoginForm {
 
     @NotEmpty(message = "用户名不能为空")
-    @Pattern(regexp = "^1[3456789]\\d{9}", message = "用户名格式不规范")
     private String username;
 
 
