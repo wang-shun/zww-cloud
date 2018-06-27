@@ -82,7 +82,7 @@ MenuInfoDlg.close = function () {
  * 收集数据
  */
 MenuInfoDlg.collectData = function () {
-    this.set('id').set('name').set('code').set('pcode').set('url').set('num').set('levels').set('icon').set("ismenu");
+    this.set('id').set('name').set('code').set('pcode').set('url').set('num').set('levels').set('icon').set("ismenu").set("status");
 }
 
 /**
@@ -171,5 +171,10 @@ $(function () {
         $("#ismenu").val(0);
     }else{
         $("#ismenu").val($("#ismenuValue").val());
+    }
+    if($("#statusValue").val() == undefined){
+        $("#status").val(0);
+    }else{
+        $("#status").val($("#statusValue").val());
     }
 });

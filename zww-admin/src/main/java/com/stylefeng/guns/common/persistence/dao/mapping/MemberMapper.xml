@@ -75,14 +75,8 @@
 		<if test="beginTime != null and beginTime != ''">
 			and DATEDIFF(register_date,#{beginTime}) &gt;= 0
 		</if>
-		<if test="lastLoginFrom != null and lastLoginFrom != '' ">
-			<if test="lastLoginFrom == 'android'">
-				AND last_login_from = #{lastLoginFrom}
-			</if>
-			<if test="lastLoginFrom == 'ios'">
-				AND (last_login_from is NULL
-				or last_login_from = 'iOS')
-			</if>
+		<if test="phoneModel != null and phoneModel != '' ">
+			AND phone_model = #{phoneModel}
 		</if>
 		order by register_date DESC
 	</select>
@@ -108,14 +102,8 @@
 		<if test="endTime != null and endTime != ''">
 			AND  DATEDIFF(register_date,#{endTime})&lt;0
 		</if>
-		<if test="lastLoginFrom != null and lastLoginFrom != '' ">
-			<if test="lastLoginFrom == 'android'">
-				AND last_login_from = #{lastLoginFrom}
-			</if>
-			<if test="lastLoginFrom == 'ios'">
-				AND (last_login_from is NULL
-				or last_login_from = 'iOS')
-			</if>
+		<if test="phoneModel != null and phoneModel != '' ">
+			AND phone_model = #{phoneModel}
 		</if>
 		order by register_date desc
 	</select>

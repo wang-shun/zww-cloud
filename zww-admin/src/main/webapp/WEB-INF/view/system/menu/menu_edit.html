@@ -5,6 +5,7 @@
 
             <input type="hidden" id="id" value="${menu.id}">
             <input type="hidden" id="ismenuValue" value="${menu.ismenu}">
+            <input type="hidden" id="statusValue" value="${menu.status}">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
@@ -25,6 +26,10 @@
                     <#input id="url" name="请求地址" value="${menu.url}" underline="true" />
                     <#input id="num" name="排序" value="${menu.num}" underline="true" />
                     <#input id="icon" name="图标" underline="false" value="${menu.icon}"/>
+                    <#select id="status" name="状态">
+                       <option value="1">启用</option>
+                       <option value="0">禁用</option>
+                    </#select>
                 </div>
             </div>
 

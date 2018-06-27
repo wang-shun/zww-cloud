@@ -140,9 +140,9 @@ public class MemberController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer id,String userName,String registerDate,String lastLoginFrom) {
+    public Object list(Integer id,String userName,String registerDate,String phoneModel) {
     	 Page<Member> page = new PageFactory<Member>().defaultPage();
-    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userName,registerDate,lastLoginFrom);
+    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userName,registerDate,phoneModel);
     	 page.setRecords((List<Member>)new MemberWarpper(result).warp());
     	 return super.packForBT(page);
     }
@@ -153,9 +153,9 @@ public class MemberController extends BaseController {
      */
     @RequestMapping(value = "/channel")
     @ResponseBody
-    public Object channelListList(String channelNum,String userId,String userName,String registerDate,String endDate, String lastLoginFrom) {
+    public Object channelListList(String channelNum,String userId,String userName,String registerDate,String endDate, String phoneModel) {
         Page<Member> page = new PageFactory<Member>().defaultPage();
-        List<Map<String, Object>> result = memberService.selectChannel(page,channelNum,userId,userName,registerDate, endDate, lastLoginFrom);
+        List<Map<String, Object>> result = memberService.selectChannel(page,channelNum,userId,userName,registerDate, endDate, phoneModel);
         page.setRecords((List<Member>)new MemberWarpper(result).warp());
         return super.packForBT(page);
     }

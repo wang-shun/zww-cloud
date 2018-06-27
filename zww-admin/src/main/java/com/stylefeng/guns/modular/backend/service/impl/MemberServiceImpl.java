@@ -52,13 +52,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 
     @Override
-    public List<Map<String, Object>> selectMember(Page<Member> page,Integer id, String userName, String beginTime, String lastLoginFrom) {
-        return memberMapper.selectMember(page,id,userName,beginTime,lastLoginFrom);
+    public List<Map<String, Object>> selectMember(Page<Member> page,Integer id, String userName, String beginTime, String phoneModel) {
+        return memberMapper.selectMember(page,id,userName,beginTime,phoneModel);
     }
 
     @Override
-    public List<Map<String, Object>> selectChannel(Page<Member> page, String channelNum,String userId, String userName, String beginTime,String endTime, String lastLoginFrom) {
-        return memberMapper.selectChannel(page,channelNum,userId,userName,beginTime,endTime,lastLoginFrom);
+    public List<Map<String, Object>> selectChannel(Page<Member> page, String channelNum,String userId, String userName, String beginTime,String endTime, String phoneModel) {
+        return memberMapper.selectChannel(page,channelNum,userId,userName,beginTime,endTime,phoneModel);
     }
 
     @Override
