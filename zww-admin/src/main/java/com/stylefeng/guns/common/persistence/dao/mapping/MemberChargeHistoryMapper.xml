@@ -27,7 +27,7 @@
 		charge_method AS chargeMethod, doll_id AS dollId, coins_before AS coinsBefore, coins_after AS coinsAfter 
 		from t_member_charge_history a 
 		where 1=1
-		<if test="condition != null and condition != ''">
+		<if test="condition != null">
 			and a.member_id = #{condition}
 		</if>
 		ORDER by id DESC

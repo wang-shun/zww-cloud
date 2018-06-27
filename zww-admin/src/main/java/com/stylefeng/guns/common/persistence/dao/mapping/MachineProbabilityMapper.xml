@@ -38,7 +38,7 @@
 		<if test="machainCode != null and machainCode != ''">
 			AND b.machine_code = #{machainCode}
 		</if>
-		<if test="dollId != null and dollId != ''">
+		<if test="dollId != null and dollId != 0">
 			AND a.doll_id = #{dollId}
 		</if>
 		ORDER by id DESC

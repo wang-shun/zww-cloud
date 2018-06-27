@@ -34,7 +34,7 @@
 		<if test="name!=null and name != ''">
 			and b.name like CONCAT('%',#{name},'%')
 		</if>
-		<if test="dollId!=null and dollId != ''">
+		<if test="dollId!=null and dollId != 0">
 			and a.doll_id =#{dollId}
 		</if>
 		<if test="machineCode!=null and machineCode != ''">
@@ -44,7 +44,7 @@
 	</select>
 
 
-	<select id="selectByDollId" resultType="MachinePhysicalProbability" >
+	<select id="selectByDollId" resultMap="BaseResultMap" >
 		select
 		*
 		from machine_physical_probability

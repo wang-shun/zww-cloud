@@ -35,7 +35,7 @@
 		<include refid="Base_Column_List" />
 		from divination_image
 		where 1=1
-		<if test="condition!=null and name != ''">
+		<if test="condition!=null">
 			and divination_topic_id = #{condition}
 		</if>
 	</select>

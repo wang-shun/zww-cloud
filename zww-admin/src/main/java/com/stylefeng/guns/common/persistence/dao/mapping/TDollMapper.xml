@@ -80,10 +80,10 @@
 				and machine_status = #{machineStatus}
 			</if>
         </if>
-		<if test="machineType!=null and machineType !=''">
+		<if test="machineType!=null">
 			and machine_type = #{machineType}
 		</if>
-		<if test="modifiedBy!=null and modifiedBy !=''">
+		<if test="modifiedBy!=null">
 			<if test="modifiedBy == -1 ">
 				and a.modified_by IS NULL
 			</if>

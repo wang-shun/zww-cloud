@@ -102,7 +102,7 @@
 		<if test="dollCatchStates != null and dollCatchStates != ''">
 			AND a.catch_status = #{dollCatchStates}
 		</if>
-		<if test="machineType != null and machineType != ''">
+		<if test="machineType != null">
 			AND a.machine_type = #{machineType}
 		</if>
 		<if test="memberName != null and memberName != ''">

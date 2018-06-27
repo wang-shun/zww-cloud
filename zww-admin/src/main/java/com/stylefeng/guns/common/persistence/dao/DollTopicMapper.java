@@ -22,7 +22,7 @@ public interface DollTopicMapper extends BaseMapper<DollTopic> {
 	/**
 	 * 分页查询机器类型列表
 	 */
-	List<Map<String, Object>> getDollTopicList(@Param("page") Page<DollTopic> page, @Param("machineCode")  Integer machineCode,@Param("topicName") String topicName);
+	List<Map<String, Object>> getDollTopicList(@Param("page") Page<DollTopic> page, @Param("machineCode")Integer machineCode,@Param("topicName") String topicName);
 
 	Integer selectByTopicName(@Param("topicName") String topicName);
 

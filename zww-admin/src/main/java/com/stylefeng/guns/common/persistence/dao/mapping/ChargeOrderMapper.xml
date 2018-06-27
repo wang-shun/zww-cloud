@@ -38,13 +38,13 @@
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
 		</if>
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
-		<if test="chargeruleid != null and chargeruleid != ''">
+		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
 		</if>
-		<if test="chargeState != null and chargeState != ''">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -66,13 +66,13 @@
 		b.memberID memberNum
 		from charge_order a LEFT JOIN t_member b on a.member_id = b.id
 		where 1=1
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
-		<if test="chargeruleid != null and chargeruleid != ''">
+		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -90,13 +90,13 @@
 		sum(price)
 		from charge_order a LEFT JOIN t_member b on a.member_id = b.id
 		where 1=1
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != ''">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -135,13 +135,13 @@
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
 		</if>
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
-		<if test="chargeruleid != null and chargeruleid != ''">
+		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -181,10 +181,10 @@
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
 		</if>
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
-		<if test="chargeruleid != null and chargeruleid != ''">
+		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
 		</if>
 		<if test="chargeState != null">
@@ -209,13 +209,13 @@
 			AND b.name like concat
 			('%',#{memberName},'%')
 		</if>
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != ''">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -236,13 +236,13 @@
 			AND b.name like concat
 			('%',#{memberName},'%')
 		</if>
-		<if test="memberId != null and memberId != ''">
+		<if test="memberId != null and memberId != 0">
 			AND a.member_id = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != ''">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -279,9 +279,9 @@
 			AND b.memberID = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -318,9 +318,9 @@
 			AND b.memberID = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -359,9 +359,9 @@
 			AND b.memberID = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
@@ -399,9 +399,9 @@
 			AND b.memberID = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
-			AND a.chargeruleid = #{chargeName}
+			AND a.charge_name = #{chargeName}
 		</if>
-		<if test="chargeState != null and chargeState != '' ">
+		<if test="chargeState != null">
 			AND a.charge_state = #{chargeState}
 		</if>
 		<if test="registeDate != null and registeDate != ''">
