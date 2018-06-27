@@ -69,9 +69,6 @@
 		<if test="id != null and id != ''">
 			and a.id = #{id}
 		</if>
-		<if test="userId != null and userId != ''">
-			and memberID = #{userId}
-		</if>
 		<if test="userName != null and userName != ''">
 			and name like CONCAT('%',#{userName},'%')
 		</if>

@@ -140,9 +140,9 @@ public class MemberController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer id, String userId,String userName,String registerDate,String lastLoginFrom) {
+    public Object list(Integer id,String userName,String registerDate,String lastLoginFrom) {
     	 Page<Member> page = new PageFactory<Member>().defaultPage();
-    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userId,userName,registerDate,lastLoginFrom);
+    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userName,registerDate,lastLoginFrom);
     	 page.setRecords((List<Member>)new MemberWarpper(result).warp());
     	 return super.packForBT(page);
     }

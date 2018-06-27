@@ -214,7 +214,6 @@ Member.openMember = function () {
 Member.search = function () {
     var queryData = {};
     queryData['id'] = $("#id").val();
-    queryData['userId'] = $("#userId").val();
     queryData['userName'] = $("#userName").val();
     queryData['registerDate'] = $("#registerDate").val();
     queryData['lastLoginFrom'] = $("#lastLoginFrom").val();
