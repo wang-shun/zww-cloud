@@ -65,4 +65,8 @@ public class AgentWithdrawServiceImpl extends ServiceImpl<AgentWithdrawMapper, A
         return agentWithdrawMapper.insert(agentWithdraw);
     }
 
+    @Override
+    public Date getDateByAgentIdAndStatus(Integer agentId){
+        return agentWithdrawMapper.getDateByAgentIdAndStatus(agentId);
+    }
 }

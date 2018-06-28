@@ -40,13 +40,23 @@ AgentWithdraw.initColumn = function () {
           //  {title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'},
         {
             title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
-                return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="AgentWithdraw.updateSuccess(' + row.id + ')">审批成功</button>' +
+                return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="AgentWithdraw.profitHistory(this,' + row.agentId + ',\'' + row.createDate + '\')">分润记录execl</button>' +
+                    '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="AgentWithdraw.updateSuccess(' + row.id + ')">审批成功</button>' +
                     '<button type="button" class="btn btn-danger button-margin" style="margin-left: 9px !important" onclick="AgentWithdraw.updateFail(' + row.id + ')">审批失败</button>';
             }
         }
     ];
 };
-
+AgentWithdraw.profitHistory = function (v_this,agentId,date) {
+    $(v_this).attr("disabled","true");
+    console.log(date)
+    setTimeout(function(){
+        $(v_this).removeAttr("disabled");
+    },10000);
+    $("#agentIdForm").val(agentId);
+    $("#dateForm").val(date);
+    $("#test1").submit();
+};
 
 /**
  * 审批
@@ -81,7 +91,7 @@ AgentWithdraw.execl = function (v_this) {
     $(v_this).attr("disabled","true");
     setTimeout(function(){
         $(v_this).removeAttr("disabled");
-    },5000);
+    },10000);
     $("#test").submit();
 };
 

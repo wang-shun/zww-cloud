@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,5 +46,10 @@ public class AgentChargeServiceImpl extends ServiceImpl<AgentChargeMapper, Agent
     @Override
     public List<AgentChargeVo>  getAgentChargeExecl(Integer agentId,Integer level){
         return agentChargeMapper.getAgentChargeExecl(agentId,level);
+    }
+
+    @Override
+    public  List<AgentChargeVo>   execlAgentChargeHistoryByAgentId(Integer agentId, Integer level, Date beginTime, Date endTime){
+        return agentChargeMapper.execlAgentChargeHistoryByAgentId(agentId,level,beginTime,endTime);
     }
 }

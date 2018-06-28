@@ -12,6 +12,7 @@ import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.agent.service.IAgentWithdrawService;
 import com.stylefeng.guns.modular.agent.service.IBankInfoService;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
@@ -31,6 +32,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -302,4 +304,39 @@ public class AgentWithdrawController extends BaseController {
         workbook.write(response.getOutputStream());
     }
 
+
+
+    /***
+     * 获取excel数据
+     * @return 返回文件名称及excel文件的URL
+     * @throws IOException
+     */
+    @RequestMapping(value = "/profitHistory",method = RequestMethod.GET)
+    public void profitHistory(HttpServletResponse response,Integer agentId,String createDate) throws IOException {
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
+        TAgent tAgent =tAgentService.selectTAgentById(agentId);
+        if("agent".equals(role.getTips().substring(0,5))){
+            return;
+        }
+        Date date = agentWithdrawService.getDateByAgentIdAndStatus(agentId);
+        Date date1 = DateUtil.parseTime(createDate);
+        List<AgentChargeVo>  AgentChargeList = agentChargeService.execlAgentChargeHistoryByAgentId(agentId,tAgent.getLevel(),date,date1);
+        AgentChargeList = AgentChargeList.stream().map(agentChargeVo -> {
+            TAgent agentSuper = agentChargeVo.getAgentSuperId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentSuperId());
+            TAgent agentOne = agentChargeVo.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentOneId());
+            TAgent agentTwo = agentChargeVo.getAgentTwoId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentTwoId());
+            TAgent agentThree = agentChargeVo.getAgentThreeId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentThreeId());
+            return  new AgentChargeVo(agentChargeVo,agentSuper,agentOne,agentTwo,agentThree);
+        }).collect(Collectors.toList());
+        String fileName = tAgent.getNickName() + "的分润记录统计.xls";
+
+        // 告诉浏览器用什么软件可以打开此文件
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        // 下载文件的默认名称
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), AgentChargeVo.class, AgentChargeList);
+        workbook.write(response.getOutputStream());
+    }
 }

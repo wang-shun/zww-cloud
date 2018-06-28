@@ -6,6 +6,7 @@ import com.stylefeng.guns.common.persistence.model.AgentWithdraw;
 import com.stylefeng.guns.common.persistence.model.BankInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,4 +30,6 @@ public interface IAgentWithdrawService extends IService<AgentWithdraw> {
     AgentWithdraw getAgentWithdrawById(Integer id);
 
     int createAgentWithdraw(BankInfo bankInfo, Long amount, Long fee);
+
+    Date getDateByAgentIdAndStatus(Integer agentId);
 }

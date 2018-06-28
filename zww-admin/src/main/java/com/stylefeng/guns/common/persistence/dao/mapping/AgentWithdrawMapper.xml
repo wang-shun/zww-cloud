@@ -69,5 +69,7 @@
 		<include refid="Base_Column_List" />
 		 from agent_withdraw	where id = #{id}
 	</select>
-
+	<select id="getDateByAgentIdAndStatus" resultType="java.util.Date" parameterType="java.lang.Integer">
+		select create_date from agent_withdraw	where agentId = #{agentId} and status != 2 order by create_date desc limit 1
+	</select>
 </mapper>

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.stylefeng.guns.common.persistence.model.Member;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,9 +28,11 @@ public interface AgentWithdrawMapper extends BaseMapper<AgentWithdraw> {
      */
     List<Map<String, Object>> selectAgentWithdrow(@Param("page") Page<AgentWithdraw> page,@Param("agentId") Integer agentId,@Param("type") Integer type, @Param("status") Integer status, @Param("name") String name, @Param("phone") String phone, @Param("createDate") String createDate);
 
-   int updateStatusById(AgentWithdraw agentWithdraw);
+    int updateStatusById(AgentWithdraw agentWithdraw);
 
     AgentWithdraw getSumAmountByAgentId(Integer agentId);
 
     AgentWithdraw getAgentWithdrawById(Integer id);
+
+    Date getDateByAgentIdAndStatus(Integer agentId);
 }
