@@ -120,4 +120,6 @@ public interface IConstantFactory {
 
    String getAgentById(Integer agentId);
 
+    String getOemNameById(Integer id);
+
 }

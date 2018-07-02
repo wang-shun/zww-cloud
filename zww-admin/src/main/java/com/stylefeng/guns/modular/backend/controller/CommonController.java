@@ -39,6 +39,12 @@ public class CommonController extends BaseController{
 	@Autowired
 	MemberVipMapper memberVipMapper;
 
+	@Autowired
+	MachineProbabilityMapper machineProbabilityMapper;
+
+	@Autowired
+	MachinePhysicalProbabilityMapper machinePhysicalProbabilityMapper;
+
 	/**
 	 * 获取充值 规则	
 	 * @return
@@ -97,6 +103,29 @@ public class CommonController extends BaseController{
 	@RequestMapping(value = "getDollListProbability",method = RequestMethod.POST)
 	public Object getDollListProbability(){
 		List<TDoll> result = tDollMapper.getDollListProbability();
+		return result;
+	}
+
+
+	/**
+	 * 获取娃娃机概率列表
+	 * @return
+	 */
+	@RequestMapping(value = "getDollListByPhysical",method = RequestMethod.POST)
+	public Object getDollListByPhysical(){
+		List<MachinePhysicalProbability> list = machinePhysicalProbabilityMapper.selectList(null);
+		List<TDoll> result = tDollMapper.getDollListByPhysical(list);
+		return result;
+	}
+
+	/**
+	 * 获取娃娃机概率列表
+	 * @return
+	 */
+	@RequestMapping(value = "getDollListByProbability",method = RequestMethod.POST)
+	public Object getDollListByProbability(){
+		List<MachineProbability> list = machineProbabilityMapper.selectList(null);
+		List<TDoll> result = tDollMapper.getDollListByProbability(list);
 		return result;
 	}
 

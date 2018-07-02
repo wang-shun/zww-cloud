@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+            <input type="hidden" id="statusValue" value="${item.status}">
+            <div class="row">
+                <div class="col-sm-6">
+                    <#input id="name" name="OEM名称" value="${item.name}" underline="true"/>
+                    <#input id="code" name="简称" value="${item.code}" underline="true"/>
+                    <#input id="appid" name="appid" value="${item.appid}" underline="true"/>
+                    <#input id="appsecret" name="appsecret" value="${item.appsecret}" underline="true"/>
+                </div>
+                <div class="col-sm-6">
+                    <#input id="company" name="主体" value="${item.company}" underline="true"/>
+                    <#input id="url" name="域名" value="${item.url}" underline="true"/>
+                    <#input id="smsCode" name="短信模板id" value="${item.smsCode}" underline="true"/>
+                    <#input id="smsName" name="短信签名" value="${item.smsName}" underline="true"/>
+                    <#SelectCon id="status" name="状态" >
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                   </#SelectCon>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="margin-left: 35%;">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="OEMInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="OEMInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agent/oem/oem_info.js"></script>
+@}

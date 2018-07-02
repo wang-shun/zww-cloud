@@ -1,5 +1,7 @@
 package com.stylefeng.guns.common.persistence.dao;
 
+import com.stylefeng.guns.common.persistence.model.MachinePhysicalProbability;
+import com.stylefeng.guns.common.persistence.model.MachineProbability;
 import com.stylefeng.guns.common.persistence.model.TDoll;
 
 import java.util.List;
@@ -28,6 +30,12 @@ public interface TDollMapper extends BaseMapper<TDoll> {
 	List<TDoll> getDollListProbability();
 	//占卜机器
 	List<TDoll> getDollListDivination();
+
+	//概率机器
+	List<TDoll> getDollListByPhysical(@Param("list") List<MachinePhysicalProbability> list);
+
+	//概率机器
+	List<TDoll> getDollListByProbability(@Param("list") List<MachineProbability> list);
 
 
 }

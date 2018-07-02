@@ -80,11 +80,9 @@ TAgentInfoDlg.addoem = function() {
         oems.status = 1;
         oemArr.push(oems);
     }
-    console.log(oemArr)
     this.clearData();
     this.set("oem",oem);
     this.set("oemBanner",oemArr);
-    console.log(this.tAgentInfoData)
     $.ajax({
             url:Feng.ctxPath + "/tAgent/oemAdd",
             type:"post",
@@ -113,21 +111,21 @@ TAgentInfoDlg.add = function(){
           return;
       }
       $("#row"+addnum).show();
+      upd(addnum);
       $("#addnum").val(++addnum);
+
 }
 
 TAgentInfoDlg.del = function(num){
      $("#row"+num).hide();
      $("#oemtext" + num).val("");
-     $("#banner"+num+"PreId img").attr("src","/zwwAdmin/static/img/default.png");
+     $("#banner"+num+"PreId img").attr("src",Feng.ctxPath + "/static/img/default.png");
     $("#banner" + num).val("");
     $("#addnum").val(num);
 }
 
 $(function() {
     $.post(Feng.ctxPath + "/tAgent/getBannerList?tAgentId=" + TAgentInfoDlg.get("id"),function(data){
-        console.log(data)
-        console.log(data.oemBannerList)
         var list = data.oemBannerList,oem = data.oem;
         $("#addnum").val(list.length);
         $("#name").val(oem.name);
@@ -143,32 +141,15 @@ $(function() {
         for(var i=0;i<6;i++){
             var html = "";
             if(i < list.length){
-                html += '<div class="row"  id="row'+i+'" ><div class="col-sm-6">';
-                html += '<div class="form-group"><label class="col-sm-3 control-label head-scu-label">banner图片</label><div class="col-sm-4">';
-                html += '<div id="banner'+i+'PreId">';
-                html += ' <div><img width="100px" height="100px" src="'+ list[i].imgUrl +'"></div>';
-                html += '</div></div> <div class="col-sm-2">';
-                html += '<div class="head-scu-btn upload-btn webuploader-container" id="banner'+i+'BtnId"><div class="webuploader-pick">';
-                html += '<i class="fa fa-upload"></i>&nbsp;上传';
-                html += '</div><div  style="position: absolute; top: 0px; left: 0px; width: 69px; height: 32px; overflow: hidden; bottom: auto; right: auto;">';
-                html += '<input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png,application/vnd.android.package-archive">';
-                html += '<label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div>';
-                html += '<input type="hidden" id="banner'+i+'" value="'+ list[i].imgUrl +'">';
-                html += '</div><div class="hr-line-dashed"></div>';
+                $("#banner"+i+"PreId img").attr("src",list[i].imgUrl);
+                upd(i);
+                $("#banner"+i).val(list[i].imgUrl);
+                html += '<div class="row"  id="row'+i+'">';
             }else{
-                html += '<div class="row" id="row'+i+'" style="display: none;"><div class="col-sm-6">';
-                html += '<div class="form-group"><label class="col-sm-3 control-label head-scu-label">banner图片</label><div class="col-sm-4">';
-                html += '<div id="banner'+i+'PreId">';
-                html += ' <div><img width="100px" height="100px" src="/zwwAdmin/static/img/default.png"></div>';
-                html += '</div></div> <div class="col-sm-2">';
-                html += '<div class="head-scu-btn upload-btn webuploader-container" id="banner'+i+'BtnId"><div class="webuploader-pick">';
-                html += '<i class="fa fa-upload"></i>&nbsp;上传';
-                html += '</div><div  style="position: absolute; top: 0px; left: 0px; width: 69px; height: 32px; overflow: hidden; bottom: auto; right: auto;">';
-                html += '<input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png,application/vnd.android.package-archive">';
-                html += '<label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div></div>';
-                html += '<input type="hidden" id="banner'+i+'" value="">';
-                html += '</div><div class="hr-line-dashed"></div>';
+                html += '<div class="row" id="row'+i+'" style="display: none;">';
             }
+            html += '<div class="col-sm-6">';
+            html += $("#hiddenDiv"+i).html();
             html += '</div><div class="col-sm-6">';
             if(i < list.length){
                 html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址" value="' + list[i].url + '"/>';
@@ -181,9 +162,10 @@ $(function() {
                 html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
             }
             $("#bannelDiv").append(html);
+
         }
 
-        upd();
+
 
     });
 
@@ -191,12 +173,10 @@ $(function() {
 });
 
 
-    function upd(){
+    function upd(i){
         // 初始化头像上传
-        for(var i=0;i<6;i++){
             var avatarUp = new $WebUpload("banner"+i);
             avatarUp.setUploadBarId("progressBar");
             avatarUp.setUploadUrl(Feng.ctxPath + '/tAgent/upload/'+TAgentInfoDlg.get("id"));
             avatarUp.init();
-        }
     }

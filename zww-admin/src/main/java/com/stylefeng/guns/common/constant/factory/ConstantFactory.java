@@ -40,6 +40,7 @@ public class ConstantFactory implements IConstantFactory {
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private TAgentMapper tAgentMapper = SpringContextHolder.getBean(TAgentMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
+    private TOemMapper tOemMapper = SpringContextHolder.getBean(TOemMapper.class);
      
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -369,4 +370,15 @@ public class ConstantFactory implements IConstantFactory {
             return tAgent.getNickName();
         }
     }
+
+    @Override
+    public String getOemNameById(Integer id){
+        TOem oem = tOemMapper.selectById(id);
+        if (oem == null) {
+            return null;
+        } else {
+            return oem.getName();
+        }
+    }
+
 }

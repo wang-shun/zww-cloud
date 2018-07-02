@@ -52,7 +52,18 @@ public class TDollOrderItem extends Model<TDollOrderItem> {
 	@TableField("doll_url")
 	private String dollUrl;//娃娃图片
 
+	public TDollOrderItem() {
+	}
 
+	public TDollOrderItem(Long orderId, Integer dollId, Integer quantity, Date createdDate, String dollCode, String dollName, String dollUrl) {
+		this.orderId = orderId;
+		this.dollId = dollId;
+		this.quantity = quantity;
+		this.createdDate = createdDate;
+		this.dollCode = dollCode;
+		this.dollName = dollName;
+		this.dollUrl = dollUrl;
+	}
 
 	public String getDollName() {
 		return dollName;

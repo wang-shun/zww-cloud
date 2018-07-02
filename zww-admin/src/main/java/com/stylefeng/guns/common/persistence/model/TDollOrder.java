@@ -111,6 +111,19 @@ public class TDollOrder extends Model<TDollOrder> {
 	@TableField(exist=false)
 	private String imgUrl; //娃娃url
 
+	public TDollOrder() {
+	}
+
+	public TDollOrder(String orderNumber, Date orderDate, Integer orderBy, String status, Date stockValidDate,Integer deliverCoins, Integer modifiedBy,Integer dollRedeemCoins) {
+		this.orderNumber = orderNumber;
+		this.orderDate = orderDate;
+		this.orderBy = orderBy;
+		this.status = status;
+		this.stockValidDate = stockValidDate;
+		this.deliverCoins = deliverCoins;
+		this.modifiedBy = modifiedBy;
+		this.dollRedeemCoins = dollRedeemCoins;
+	}
 
 	public String getDollCodes() {
 		return dollCodes;

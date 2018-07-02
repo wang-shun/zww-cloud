@@ -2,8 +2,14 @@ package com.stylefeng.guns.modular.backend.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
+import com.stylefeng.guns.common.persistence.model.TMember;
+import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 import com.stylefeng.guns.modular.backend.warpper.TDollWarpper;
+import com.stylefeng.guns.modular.system.service.ITMemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +38,10 @@ public class TDollCatchHistoryController extends BaseController {
 
     @Autowired
     private ITDollCatchHistoryService tDollCatchHistoryService;
-
+    @Autowired
+    private ITMemberService memberService;
+    @Autowired
+    private ITDollOrderService  itDollOrderService;
     /**
      * 跳转到娃娃机抓取记录首页
      */
@@ -56,7 +65,9 @@ public class TDollCatchHistoryController extends BaseController {
     @RequestMapping("/tDollCatchHistory_update/{tDollCatchHistoryId}")
     public String tDollCatchHistoryUpdate(@PathVariable Integer tDollCatchHistoryId, Model model) {
         TDollCatchHistory tDollCatchHistory = tDollCatchHistoryService.selectById(tDollCatchHistoryId);
+        TMember member = memberService.selectById(tDollCatchHistory.getMemberId().intValue());
         model.addAttribute("item",tDollCatchHistory);
+        model.addAttribute("name",member.getName());
         LogObjectHolder.me().set(tDollCatchHistory);
         return PREFIX + "tDollCatchHistory_edit.html";
     }
@@ -102,9 +113,19 @@ public class TDollCatchHistoryController extends BaseController {
      
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(TDollCatchHistory tDollCatchHistory) {
+    public Object update(TDollCatchHistory tDollCatchHistory) throws  Exception{
         tDollCatchHistoryService.updateById(tDollCatchHistory);
-        return super.SUCCESS_TIP;
+        if(!"抓取成功".equals(tDollCatchHistory.getCatchStatus())){
+            return super.SUCCESS_TIP;
+        }
+        tDollCatchHistory = tDollCatchHistoryService.selectById(tDollCatchHistory.getId());
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        Boolean flag = itDollOrderService.insertTDollOrder(tDollCatchHistory,userdto.getId());
+        if(flag){
+            return super.SUCCESS_TIP;
+        }else{
+            return  new ErrorTip(500,"修改失败！");
+        }
     }
 
     /**

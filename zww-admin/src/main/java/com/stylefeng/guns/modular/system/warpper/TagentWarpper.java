@@ -1,6 +1,7 @@
 package com.stylefeng.guns.modular.system.warpper;
 
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
+import com.stylefeng.guns.common.persistence.model.TOem;
 import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
 import io.swagger.models.auth.In;
 
@@ -14,10 +15,7 @@ import java.util.Map;
  * @date 2017年2月13日 下午10:47:03
  */
 public class TagentWarpper extends BaseControllerWarpper {
-
     public TagentWarpper(List<Map<String, Object>> list) {
-
-
         super(list);
     }
 
@@ -27,7 +25,18 @@ public class TagentWarpper extends BaseControllerWarpper {
         map.put("levelName", ConstantFactory.me().getleveName((Integer) map.get("level")));
 
        Integer agentId= (Integer) map.get("agentId");
-       String agentName = "-",agentOneName = "-",agentTwoName = "-";
+       Integer id= (Integer) map.get("id");
+       Boolean isOem= (Boolean) map.get("oem");
+
+       String agentName = "-",agentOneName = "-",agentTwoName = "-",oemName = "-";
+        if(isOem){
+            if(agentId != 0){
+                 oemName = ConstantFactory.me().getOemNameById(agentId);
+            }else{
+                oemName = ConstantFactory.me().getOemNameById(id);
+            }
+        }
+        map.put("oemName", oemName);
        if(agentId != 0){
            agentName = ConstantFactory.me().getAgentById(agentId);
        }

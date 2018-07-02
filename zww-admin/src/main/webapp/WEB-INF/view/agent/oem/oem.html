@@ -1,0 +1,24 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>OEM列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="hidden-xs" id="TOEMTableToolbar" role="group">
+                            @if(shiro.hasPermission("/oem/update")){
+                                 <#button name="修改" icon="fa-plus" clickFun="OEM.update()"/>
+                            @}
+                        </div>
+                        <#table id="OemTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agent/oem/oem.js"></script>
+@}

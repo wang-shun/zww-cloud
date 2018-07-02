@@ -23,18 +23,18 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 	 * 唯一标识
 	 */
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
 
 	/**
 	 * 机器编号
 	 */
 	@TableField("doll_id")
-	private String dollId;
+	private Integer dollId;
 	/**
 	 * userId编号
 	 */
 	@TableField("member_id")
-	private Integer memberId;
+	private Long memberId;
 
 	/**
 	 * 抓取时间
@@ -77,27 +77,27 @@ public class TDollCatchHistory extends Model<TDollCatchHistory>{
 		return this.id;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getDollId() {
+	public Integer getDollId() {
 		return dollId;
 	}
 
-	public void setDollId(String dollId) {
+	public void setDollId(Integer dollId) {
 		this.dollId = dollId;
 	}
 
-	public Integer getMemberId() {
+	public Long getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Integer memberId) {
+	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 

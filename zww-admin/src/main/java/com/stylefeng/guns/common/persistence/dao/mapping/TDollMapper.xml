@@ -116,5 +116,27 @@
 		where machine_type = 3 and delete_status = 1
 	</select>
 
+	<select id="getDollListByPhysical" resultType="TDoll" parameterType="list">
+		select
+		id, name, machine_code AS machineCode
+		from t_doll
+		where machine_url like CONCAT('devicea%') and delete_status = 1  and id not in
+		<foreach collection="list" index="index" item="item"
+				 separator="," open="(" close=")">
+			#{item.dollId}
+		</foreach>
+	</select>
+
+	<select id="getDollListByProbability" resultType="TDoll" parameterType="list">
+		select
+		id, name, machine_code AS machineCode
+		from t_doll
+		where machine_url like CONCAT('devicea%') and delete_status = 1  and id not in
+		<foreach collection="list" index="index" item="item"
+				 separator="," open="(" close=")">
+			#{item.dollId}
+		</foreach>
+	</select>
+
 
 </mapper>

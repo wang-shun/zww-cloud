@@ -46,19 +46,14 @@ TDollCatchHistoryInfoDlg.close = function() {
 TDollCatchHistoryInfoDlg.collectData = function() {
     this
     .set('id')
-    .set('dollId')
-    .set('memberId')
-    .set('catchDate')
     .set('catchStatus')
-    .set('videoUrl')
-    .set('gameNum')
-    .set('machineType')
     ;
 }
 
 /**
  * 提交添加
  */
+/*
 TDollCatchHistoryInfoDlg.addSubmit = function() {
 
     this.clearData();
@@ -75,6 +70,7 @@ TDollCatchHistoryInfoDlg.addSubmit = function() {
     ajax.set(this.tDollCatchHistoryInfoData);
     ajax.start();
 }
+*/
 
 /**
  * 提交修改
@@ -86,9 +82,13 @@ TDollCatchHistoryInfoDlg.editSubmit = function() {
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/tDollCatchHistory/update", function(data){
-        Feng.success("修改成功!");
-        window.parent.TDollCatchHistory.table.refresh();
-        TDollCatchHistoryInfoDlg.close();
+        if(data.code == 200){
+            Feng.success("修改成功!");
+            window.parent.TDollCatchHistory.table.refresh();
+            TDollCatchHistoryInfoDlg.close();
+        }else{
+            Feng.error(data.message);
+        }
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });
@@ -97,5 +97,10 @@ TDollCatchHistoryInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    var catchStatusValue = $("#catchStatusValue").val();
+    if(catchStatusValue == null || catchStatusValue == "null" || catchStatusValue == undefined){
+        $("#catchStatus").val("");
+    }else{
+        $("#catchStatus").val(catchStatusValue);
+    }
 });

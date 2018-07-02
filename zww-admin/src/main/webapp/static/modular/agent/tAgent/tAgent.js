@@ -26,14 +26,16 @@ TAgent.initColumn = function (type) {
             {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
             {title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
-            {title: '是否为O单商', field: 'oem', visible: true, align: 'center', valign: 'middle',
+            {title: '是否为OEM', field: 'oem', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                 if(value){
                     return "是";
                 }else{
                     return "不是";
                 }
-                }}, {
+             }},
+            {title: 'OEM名称', field: 'oemName', visible: true, align: 'center', valign: 'middle'},
+            {
                 title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
                     if(row.level == 0){
                         return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.OEM(' + row.id + ')">O单</button>';

@@ -2,24 +2,19 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
-
             <input type="hidden" id="id" value="${item.id}">
-
+            <input type="hidden" id="catchStatusValue" value="${item.catchStatus}">
             <div class="row">
-                <div class="col-sm-6 b-r">
-                            <#input id="id" name="id" value="${item.id}" underline="true"/>
-                            <#input id="dollId" name="机器id" value="${item.dollId}" underline="true"/>
-                            <#input id="memberId" name="用户id" value="${item.memberId}" underline="true"/>
-                            <#input id="catchDate" name="抓取时间" value="${item.catchDate}" underline="true"/>
-                            <#input id="catchStatus" name="抓取状态" value="${item.catchStatus}" />
-                </div>
-
-                <div class="col-sm-6">
-                            <#input id="videoUrl" name="视频url" value="${item.videoUrl}" underline="true"/>
-                            <#input id="gameNum" name="游戏编号" value="${item.gameNum}" underline="true"/>
-                            <#input id="machineType" name="房间业务类型0为普通房,1为练习房,2为化妆,3为数码" value="${item.machineType}" underline="true"/>
-                            <#input id="dollCode" name="" value="${item.dollCode}" />
-                </div>
+                <div class="col-sm-12">
+                       <#input id="dollName" name="机器名称" value="${item.dollName}" underline="true" disabled="disabled"/>
+                        <#input id="memberName" name="用户名称" value="${name}" underline="true" disabled="disabled"/>
+                        <#SelectCon id="catchStatus" name="抓取状态" >
+                           <option value="">全部状态</option>
+                           <option value="抓取失败">抓取失败</option>
+                           <option value="抓取成功">抓取成功</option>
+                           <option value="游戏异常,币已返回">游戏异常,币已返回</option>
+                        </#SelectCon>
+                 </div>
             </div>
 
             <div class="row btn-group-m-t">

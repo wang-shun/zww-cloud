@@ -54,24 +54,9 @@ TDollCatchHistory.check = function () {
 };
 
 /**
- * 点击添加娃娃机抓取记录
- */
-TDollCatchHistory.openAddTDollCatchHistory = function () {
-    var index = layer.open({
-        type: 2,
-        title: '添加娃娃机抓取记录',
-        area: ['800px', '420px'], //宽高
-        fix: false, //不固定
-        maxmin: true,
-        content: Feng.ctxPath + '/tDollCatchHistory/tDollCatchHistory_add'
-    });
-    this.layerIndex = index;
-};
-
-/**
  * 打开查看娃娃机抓取记录详情
  */
-TDollCatchHistory.openTDollCatchHistoryDetail = function () {
+TDollCatchHistory.update = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
@@ -85,21 +70,6 @@ TDollCatchHistory.openTDollCatchHistoryDetail = function () {
     }
 };
 
-/**
- * 删除娃娃机抓取记录
- */
-TDollCatchHistory.delete = function () {
-    if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/tDollCatchHistory/delete", function (data) {
-            Feng.success("删除成功!");
-            TDollCatchHistory.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set("tDollCatchHistoryId",this.seItem.id);
-        ajax.start();
-    }
-};
 
 /**
  * 查询娃娃机抓取记录列表
