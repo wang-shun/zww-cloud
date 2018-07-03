@@ -28,6 +28,8 @@ public class TSystemPref extends Model<TSystemPref> {
 	private Date modifiedDate;
 	@TableField("modified_by")
 	private Integer modifiedBy;
+	@TableField("type")
+	private Integer type;
 
 
 	public String getCode() {
@@ -70,6 +72,14 @@ public class TSystemPref extends Model<TSystemPref> {
 		this.modifiedBy = modifiedBy;
 	}
 
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.code;
@@ -83,6 +93,7 @@ public class TSystemPref extends Model<TSystemPref> {
 			", value=" + value +
 			", modifiedDate=" + modifiedDate +
 			", modifiedBy=" + modifiedBy +
+			", type=" + type +
 			"}";
 	}
 }

@@ -18,6 +18,15 @@ TSystemPref.initColumn = function () {
             {title: '名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '参数值', field: 'value', visible: true, align: 'center', valign: 'middle'},
             {title: '修改时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
+            {title: '状态', field: 'type', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    if(value == 1){
+                        return '<span class="label label-success radius">上架</span>';
+                    }else{
+                        return '<span class="label label-danger radius">下架</span>';
+                    }
+                }
+            },
             // {title: '', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'}
     ];
 };
@@ -90,6 +99,7 @@ TSystemPref.delete = function () {
 TSystemPref.search = function () {
     var queryData = {};
     queryData['condition'] = $("#condition").val();
+    queryData['code'] = $("#code").val();
     TSystemPref.table.refresh({query: queryData});
 };
 

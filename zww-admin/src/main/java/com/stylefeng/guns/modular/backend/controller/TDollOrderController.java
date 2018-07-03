@@ -115,9 +115,9 @@ public class TDollOrderController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String memberId,String phone) {
+    public Object list(String addrName,String phone) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,memberId,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,addrName,phone);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -129,9 +129,9 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/outList")
     @ResponseBody
-    public Object outList(String memberId,String phone) {
+    public Object outList(String addrName,String phone) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,memberId,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,addrName,phone);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }

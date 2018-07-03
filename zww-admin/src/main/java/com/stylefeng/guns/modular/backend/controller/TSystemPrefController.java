@@ -1,7 +1,10 @@
 package com.stylefeng.guns.modular.backend.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,9 +69,17 @@ public class TSystemPrefController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        return tSystemPrefService.selectList(null);
+    public Object list(String condition,String code) {
+        if(ToolUtil.isEmpty(condition)){
+            return tSystemPrefService.selectList(null);
+        }else{
+            EntityWrapper<TSystemPref> entityWrapper = new EntityWrapper<>();
+            Wrapper<TSystemPref> wrapper =  entityWrapper.like("name",condition).like("code",code);
+            return tSystemPrefService.selectList(wrapper);
+        }
     }
+
+
 
     /**
      * 新增设置参数列表
@@ -79,6 +90,7 @@ public class TSystemPrefController extends BaseController {
     public Object add(TSystemPref tSystemPref) {
         tSystemPref.setModifiedDate(new Date());
         tSystemPref.setModifiedBy(ShiroKit.getUser().getId());
+        tSystemPref.setType(1);
         tSystemPrefService.insert(tSystemPref);
         return super.SUCCESS_TIP;
     }

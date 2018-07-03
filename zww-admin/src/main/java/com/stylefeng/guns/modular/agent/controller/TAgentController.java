@@ -373,8 +373,10 @@ public class TAgentController extends BaseController {
             oem.setUpdateTime(new Date());
             toemMapper.updateById(oem);
         }
-        tOemBannerMapper.deleteByOemId(oem.getId());
-        tOemBannerMapper.insertBatch(oemBanner);
+        if(oemBanner.size() > 0){
+            tOemBannerMapper.deleteByOemId(oem.getId());
+            tOemBannerMapper.insertBatch(oemBanner);
+        }
         return super.SUCCESS_TIP;
     }
 

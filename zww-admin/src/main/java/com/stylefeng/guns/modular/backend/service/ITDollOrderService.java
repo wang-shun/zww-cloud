@@ -22,10 +22,10 @@ import java.util.Map;
 public interface ITDollOrderService extends IService<TDollOrder> {
 
     //待发货
-    List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String memberId, String phone);
+    List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String addrName, String phone);
 
     //已发货
-    List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, String memberId, String phone);
+    List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, String addrName, String phone);
 
     //按订单编号查询
     TDollOrder selectByorderNum(String orderNum);

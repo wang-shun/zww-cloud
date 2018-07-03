@@ -52,8 +52,8 @@ TAgentInfoDlg.collectData = function() {
     .set('appsecret')
     .set('company')
     .set('url')
-    .set('SMSCode')
-    .set('SMSName')
+    .set('smsCode')
+    .set('smsName')
     .set('isDollMerge')
     ;
 }
@@ -127,49 +127,47 @@ TAgentInfoDlg.del = function(num){
 $(function() {
     $.post(Feng.ctxPath + "/tAgent/getBannerList?tAgentId=" + TAgentInfoDlg.get("id"),function(data){
         var list = data.oemBannerList,oem = data.oem;
-        $("#addnum").val(list.length);
         $("#name").val(oem.name);
         $("#code").val(oem.code);
         $("#appid").val(oem.appid);
         $("#appsecret").val(oem.appsecret);
         $("#company").val(oem.company);
         $("#url").val(oem.url);
-        $("#SMSCode").val(oem.smsCode);
-        $("#SMSName").val(oem.smsName);
+        $("#smsCode").val(oem.smsCode);
+        $("#smsName").val(oem.smsName);
         $("#isDollMerge").val(oem.isDollMerge);
 
-        for(var i=0;i<6;i++){
+            $("#addnum").val(list.length);
+          for(var i=0;i<6;i++){
             var html = "";
-            if(i < list.length){
-                $("#banner"+i+"PreId img").attr("src",list[i].imgUrl);
-                upd(i);
-                $("#banner"+i).val(list[i].imgUrl);
-                html += '<div class="row"  id="row'+i+'">';
-            }else{
-                html += '<div class="row" id="row'+i+'" style="display: none;">';
-            }
-            html += '<div class="col-sm-6">';
-            html += $("#hiddenDiv"+i).html();
-            html += '</div><div class="col-sm-6">';
-            if(i < list.length){
-                html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址" value="' + list[i].url + '"/>';
-            }else{
-                html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址"/>';
-            }
-            if(i==0){
-                html += '<button class="info" onclick="TAgentInfoDlg.add()">+</button></div></div>';
-            }else{
-                html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
-            }
-            $("#bannelDiv").append(html);
+                  if (list.length > 0 && i < list.length) {
+                      $("#banner" + i + "PreId img").attr("src", list[i].imgUrl);
+                      upd(i);
+                      $("#banner" + i).val(list[i].imgUrl);
+                      html += '<div class="row"  id="row' + i + '">';
+                  } else  if(list.length == 0 && i == 0){
+                      html += '<div class="row"  id="row' + i + '">';
+                      upd(i);
+                  }else{
+                      html += '<div class="row" id="row' + i + '" style="display: none;">';
+                  }
+                html += '<div class="col-sm-6">';
+                html += $("#hiddenDiv"+i).html();
+                html += '</div><div class="col-sm-6">';
+                if(i < list.length){
+                    html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址" value="' + list[i].url + '"/>';
+                }else{
+                    html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址"/>';
+                }
+                if(i==0){
+                    html += '<button class="info" onclick="TAgentInfoDlg.add()">+</button></div></div>';
+                }else{
+                    html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
+                }
+                $("#bannelDiv").append(html);
 
-        }
-
-
-
+           }
     });
-
-
 });
 
 

@@ -48,6 +48,7 @@ TSystemPrefInfoDlg.collectData = function() {
     .set('code')
     .set('name')
     .set('value')
+    .set('type')
     ;
 }
 
@@ -108,5 +109,10 @@ $(document).keyup(function(event){
 
 
 $(function() {
-
+      var typeValue = $("#typeValue").val();
+      if(typeValue == null || typeValue == undefined){
+           $("#type").val(0);
+      }else{
+          $("#type").val(typeValue);
+      }
 });

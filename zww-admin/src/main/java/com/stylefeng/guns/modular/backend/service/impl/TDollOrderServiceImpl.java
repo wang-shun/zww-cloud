@@ -59,14 +59,14 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
 
     //待发货订单
     @Override
-    public List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String memberId, String phone) {
-        return tDollOrderMapper.selectTDollOrder(page,memberId,phone);
+    public List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String addrName, String phone) {
+        return tDollOrderMapper.selectTDollOrder(page,addrName,phone);
     }
 
     //已发货订单
     @Override
-    public List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, String memberId, String phone) {
-        return tDollOrderMapper.selectTDollOrderOut(page,memberId,phone);
+    public List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, String addrName, String phone) {
+        return tDollOrderMapper.selectTDollOrderOut(page,addrName,phone);
     }
 
     //按订单编号查询
