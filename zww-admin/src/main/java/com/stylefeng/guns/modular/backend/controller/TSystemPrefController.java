@@ -70,7 +70,7 @@ public class TSystemPrefController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition,String code) {
-        if(ToolUtil.isEmpty(condition)){
+        if(ToolUtil.isEmpty(condition) && ToolUtil.isEmpty(condition)){
             return tSystemPrefService.selectList(null);
         }else{
             EntityWrapper<TSystemPref> entityWrapper = new EntityWrapper<>();
