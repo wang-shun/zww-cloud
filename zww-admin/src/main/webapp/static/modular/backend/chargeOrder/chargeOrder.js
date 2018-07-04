@@ -15,7 +15,7 @@ ChargeOrder.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单编号', field: 'orderNo', visible: true, align: 'center', valign: 'middle'},
+         //   {title: '订单编号', field: 'orderNo', visible: true, align: 'center', valign: 'middle'},
             // {title: '充值规则id', field: 'chargeruleid', visible: true, align: 'center', valign: 'middle'},
             {title: '充值规则名称', field: 'chargeName', visible: true, align: 'center', valign: 'middle'},
             {title: '充值金额', field: 'price', visible: true, align: 'center', valign: 'middle'},
@@ -107,7 +107,7 @@ ChargeOrder.loadMoney = function(){
         Feng.error("失败!" + data.responseJSON.message + "!");
     });
     ajax.set("memberName",$("#memberName").val());
-    ajax.set("memberId",$("#memberId").val());
+    //ajax.set("memberId",$("#memberId").val());
     ajax.set("comboNames",$("#comboNames").val());
     ajax.set("chargeState",$("#chargeState").val());
     ajax.set("registeDate",$("#registeDate").val());

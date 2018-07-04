@@ -88,16 +88,9 @@ public class ChargeOrderController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String memberName,String memberId,Integer chargeruleid,Integer chargeState,String registeDate,String endtime) {
-        Integer userId = null;
-        if(memberId != null && !"".equals(memberId)){
-            Member member = iMemberService.selectIdByMemberId(memberId);
-            if(member != null){
-                userId = member.getId();
-            }
-        }
+    public Object list(String memberName,Integer chargeruleid,Integer chargeState,String registeDate,String endtime) {
         Page<ChargeOrder> page = new PageFactory<ChargeOrder>().defaultPage();
-        List<Map<String, Object>> result = chargeOrderService.selectList(page,memberName,userId,chargeruleid,chargeState,registeDate,endtime);
+        List<Map<String, Object>> result = chargeOrderService.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime);
         page.setRecords((List<ChargeOrder>)new ChargeOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -107,16 +100,9 @@ public class ChargeOrderController extends BaseController {
      */
     @RequestMapping(value = "/channelList")
     @ResponseBody
-    public Object channelList(String channelNum, String lastLoginFrom,String memberName,String memberId,Integer chargeruleid,Integer chargeState,String registeDate,String endtime) {
-        Integer userId = null;
-        if(memberId != null && !"".equals(memberId)){
-            Member member = iMemberService.selectIdByMemberId(memberId);
-            if(member != null){
-                userId = member.getId();
-            }
-        }
+    public Object channelList(String channelNum, String lastLoginFrom,String memberName,Integer chargeruleid,Integer chargeState,String registeDate,String endtime) {
         Page<ChargeOrder> page = new PageFactory<ChargeOrder>().defaultPage();
-        List<Map<String, Object>> result = chargeOrderService.selectListChannel(page,channelNum,lastLoginFrom,memberName,userId,chargeruleid,chargeState,registeDate,endtime);
+        List<Map<String, Object>> result = chargeOrderService.selectListChannel(page,channelNum,lastLoginFrom,memberName,chargeruleid,chargeState,registeDate,endtime);
         page.setRecords((List<ChargeOrder>)new ChargeOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -171,8 +157,8 @@ public class ChargeOrderController extends BaseController {
      */
     @RequestMapping(value = "/allMoneyChannel")
     @ResponseBody
-    public Object allMoneyChannel(String channelNum, String lastLoginFrom, String memberName,String memberId,String comboNames,String chargeState,String registeDate,String endtime) {
-        Double allMoney = chargeOrderService.selectAllMoneyChannel(channelNum,lastLoginFrom,memberName,memberId,comboNames,chargeState,registeDate,endtime);
+    public Object allMoneyChannel(String channelNum, String lastLoginFrom, String memberName,String comboNames,String chargeState,String registeDate,String endtime) {
+        Double allMoney = chargeOrderService.selectAllMoneyChannel(channelNum,lastLoginFrom,memberName,comboNames,chargeState,registeDate,endtime);
         if(allMoney == null){
             allMoney = 0.0;
         }

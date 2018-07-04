@@ -28,7 +28,7 @@
 
 	<select id="selectList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select
-		a.id id, a.order_no orderNo, a.chargeruleid chargeruleid,a.charge_name chargeName,
+		a.id id, a.chargeruleid chargeruleid,a.charge_name chargeName,
 		a.price price, a.member_id memberId, a.member_name memberName, a.charge_type chargeType,
 		a.charge_state chargeState, a.coins_before coinsBefore, a.coins_after coinsAfter,
 		a.coins_charge coinsCharge, a.coins_offer coinsOffer,a.create_date createDate, a.update_date updateDate,
@@ -37,9 +37,6 @@
 		where 1=1
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
-		</if>
-		<if test="memberId != null and memberId != 0">
-			AND a.member_id = #{memberId}
 		</if>
 		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
@@ -134,9 +131,6 @@
 		</if>
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
-		</if>
-		<if test="memberId != null and memberId != 0">
-			AND a.member_id = #{memberId}
 		</if>
 		<if test="chargeruleid != null and chargeruleid != 0">
 			AND a.chargeruleid = #{chargeruleid}
@@ -274,9 +268,6 @@
 		</if>
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
-		</if>
-		<if test="memberId != null and memberId != ''">
-			AND b.memberID = #{memberId}
 		</if>
 		<if test="chargeName != null and chargeName != ''">
 			AND a.charge_name = #{chargeName}

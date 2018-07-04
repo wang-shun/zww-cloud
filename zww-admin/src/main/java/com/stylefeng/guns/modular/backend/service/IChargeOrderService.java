@@ -17,10 +17,10 @@ import com.stylefeng.guns.common.persistence.model.ChargeOrder;
  */
 public interface IChargeOrderService extends IService<ChargeOrder> {
 
-    List<Map<String, Object>> selectList(Page<ChargeOrder> page, String memberName, Integer memberId, Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
+    List<Map<String, Object>> selectList(Page<ChargeOrder> page, String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
 
     //渠道
-    List<Map<String, Object>> selectListChannel(Page<ChargeOrder> page,String channelNum, String lastLoginFrom,String memberName, Integer memberId, Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
+    List<Map<String, Object>> selectListChannel(Page<ChargeOrder> page,String channelNum, String lastLoginFrom,String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
 
     //小妖精渠道
     List<Map<String, Object>> xiaoyaojingSelectListChannel(Page<ChargeOrder> page,String channelNum, String lastLoginFrom,String memberName, Integer memberId, Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
@@ -33,7 +33,7 @@ public interface IChargeOrderService extends IService<ChargeOrder> {
 
 
     //渠道总金额
-    Double selectAllMoneyChannel(String channelNum,String lastLoginFrom,String memberName, String memberId, String chargeName, String chargeState, String registeDate, String endtime);
+    Double selectAllMoneyChannel(String channelNum,String lastLoginFrom,String memberName, String chargeName, String chargeState, String registeDate, String endtime);
     //渠道总人数
     Integer selectAllPersonChannel(String channelNum,String lastLoginFrom,String memberName, String memberId, String chargeName, String chargeState, String registeDate, String endtime);
 

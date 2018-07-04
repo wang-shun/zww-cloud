@@ -26,15 +26,15 @@ public class ChargeOrderServiceImpl extends ServiceImpl<ChargeOrderMapper, Charg
     private ChargeOrderMapper chargeOrderMapper;
 
     @Override
-    public List<Map<String, Object>> selectList(Page<ChargeOrder> page,String memberName, Integer memberId, Integer chargeruleid, Integer chargeState, String registeDate, String endtime)
+    public List<Map<String, Object>> selectList(Page<ChargeOrder> page,String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime)
     {
-        return chargeOrderMapper.selectList(page,memberName,memberId,chargeruleid,chargeState,registeDate,endtime);
+        return chargeOrderMapper.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime);
     }
 
     @Override
-    public List<Map<String, Object>> selectListChannel(Page<ChargeOrder> page,String channelNum,String lastLoginFrom, String memberName, Integer memberId, Integer chargeruleid, Integer chargeState, String registeDate, String endtime)
+    public List<Map<String, Object>> selectListChannel(Page<ChargeOrder> page,String channelNum,String lastLoginFrom, String memberName, Integer chargeruleid, Integer chargeState, String registeDate, String endtime)
     {
-        return chargeOrderMapper.selectListChannel(page,channelNum,lastLoginFrom,memberName,memberId,chargeruleid,chargeState,registeDate,endtime);
+        return chargeOrderMapper.selectListChannel(page,channelNum,lastLoginFrom,memberName,chargeruleid,chargeState,registeDate,endtime);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class ChargeOrderServiceImpl extends ServiceImpl<ChargeOrderMapper, Charg
 
 
     @Override
-    public Double selectAllMoneyChannel(String channelNum, String lastLoginFrom, String memberName, String memberId, String chargeName, String chargeState, String registeDate, String endtime) {
-        return chargeOrderMapper.selectAllMoneyChannel(channelNum,lastLoginFrom,memberName,memberId,chargeName,chargeState,registeDate,endtime);
+    public Double selectAllMoneyChannel(String channelNum, String lastLoginFrom, String memberName,String chargeName, String chargeState, String registeDate, String endtime) {
+        return chargeOrderMapper.selectAllMoneyChannel(channelNum,lastLoginFrom,memberName,chargeName,chargeState,registeDate,endtime);
     }
 
     @Override

@@ -128,5 +128,10 @@ TAgentInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+            var statusValue = $("#statusValue").val();
+            if(statusValue == null || statusValue == undefined){
+                    $("#status").val(1);
+            }else{
+                $("#status").val(statusValue);
+            }
 });

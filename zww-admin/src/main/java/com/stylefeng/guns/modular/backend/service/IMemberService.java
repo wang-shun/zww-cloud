@@ -24,7 +24,7 @@ public interface IMemberService extends IService<Member> {
     //用户列表
     List<Map<String, Object>> selectMember(@Param("page") Page<Member> page,@Param("id") Integer id,@Param("userName") String userName, @Param("beginTime") String beginTime, @Param("phoneModel") String phoneModel);
     //渠道列表
-    List<Map<String, Object>> selectChannel(@Param("page") Page<Member> page,String channelNum, @Param("userId") String userId, @Param("userName") String userName, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("phoneModel") String phoneModel);
+    List<Map<String, Object>> selectChannel(@Param("page") Page<Member> page,String channelNum, @Param("userName") String userName, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("phoneModel") String phoneModel);
     //小妖精渠道
     List<Map<String, Object>> xiaoyaojingSelectChannel(@Param("page") Page<Member> page,String channelNum, @Param("userId") String userId, @Param("userName") String userName, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("lastLoginFrom") String lastLoginFrom);
 

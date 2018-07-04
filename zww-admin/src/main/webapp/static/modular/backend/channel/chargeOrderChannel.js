@@ -135,7 +135,6 @@ ChargeOrder.loadPerson = function(){
     ajax.set("channelNum",$("#channelNum").val());
     ajax.set("lastLoginFrom",$("#lastLoginFrom").val());
     ajax.set("memberName",$("#memberName").val());
-    ajax.set("memberId",$("#memberId").val());
     ajax.set("comboNames",$("#comboNames").val());
     ajax.set("chargeState",$("#chargeState").val());
     ajax.set("registeDate",$("#registeDate").val());
@@ -150,7 +149,6 @@ ChargeOrder.search = function () {
     queryData['channelNum'] = $("#channelNum").val();
     queryData['lastLoginFrom'] = $("#lastLoginFrom").val();
     queryData['memberName'] = $("#memberName").val();
-    queryData['memberId'] = $("#memberId").val();
     queryData['chargeruleid'] = $("#comboNames").val();
     queryData['chargeState'] = $("#chargeState").val();
     queryData['registeDate'] = $("#registeDate").val();

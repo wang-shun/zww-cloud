@@ -1,7 +1,7 @@
 @layout("/common/_container.html"){
   <style>
       .oemtext{
-          width: 500px;
+          width: 430px;
           margin-top: 9%;
           height: 37px;
           padding-left: 8px;
@@ -9,7 +9,7 @@
       .info{
           width: 69px;
           height: 38px;
-          margin-left: 12%;
+          margin-left: 5%;
           background: #18ab8d;
           color: white;
           border: 0 solid;
@@ -26,40 +26,41 @@
             <input type="hidden" id="id" value="${tAgent.id}" >
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="nickName" name="真实姓名" value="${tAgent.nickName}" underline="true" disabled="disabled"/>
+                    <#input id="nickName" name="代理商名" value="${tAgent.nickName}" underline="true" disabled="disabled"/>
                     <#input id="name" name="贴牌名"  underline="true" placeholder="例如:蓝澳"/>
                     <#input id="code" name="商户简称"  underline="true" placeholder="例如:lanaokj"/>
                     <#input id="appid" name="微信公众号appid"  underline="true"/>
                     <#input id="appsecret" name="微信公众号appsecret"  underline="true" />
+                    <#input id="company" name="公众号主体"  underline="true"/>
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="company" name="公众号主体"  underline="true"/>
                     <#input id="url" name="域名"  underline="true" />
                     <#input id="smsCode" name="短信模板"  underline="true"/>
                     <#input id="smsName" name="短信签名名字"  underline="true" placeholder="例如:蓝澳科技"/>
                     <input type="hidden" id="addnum" value="1">
-                    <#SelectCon id="isDollMerge" name="房间合并状态">
+                    <#SelectCon id="isDollMerge" name="房间合并状态" >
                         <option value='0'>单独</option>
                         <option value='1'>混合</option>
-                </#SelectCon>
+                    </#SelectCon>
+                    <#image id="icon" name="图标" underline="true"/>
                 </div>
             </div>
             <div id="bannelDiv">
 
             </div>
 
-            <div class="row btn-group-m-t">
-                <div class="col-sm-10" style="text-align: center;">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TAgentInfoDlg.addoem()"/>
-                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TAgentInfoDlg.close()"/>
-                </div>
+         <div class="row btn-group-m-t">
+            <div class="col-sm-10" style="text-align: center;">
+                <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TAgentInfoDlg.addoem()"/>
+                <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TAgentInfoDlg.close()"/>
             </div>
+         </div>
 
-            <div class="progress progress-striped" id="progressTipArea">
-                <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-info">
-                </div>
+        <div class="progress progress-striped" id="progressTipArea">
+            <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-info">
             </div>
+        </div>
 
         <div class="col-sm-6" style="display: none;" id="hiddenDiv0">
             <#image id="banner0" name="banner图片" underline="true"/>

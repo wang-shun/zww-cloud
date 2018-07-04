@@ -55,6 +55,7 @@ TAgentInfoDlg.collectData = function() {
     .set('smsCode')
     .set('smsName')
     .set('isDollMerge')
+    .set('icon')
     ;
 }
 
@@ -111,7 +112,7 @@ TAgentInfoDlg.add = function(){
           return;
       }
       $("#row"+addnum).show();
-      upd(addnum);
+      upd("banner"+addnum);
       $("#addnum").val(++addnum);
 
 }
@@ -136,18 +137,20 @@ $(function() {
         $("#smsCode").val(oem.smsCode);
         $("#smsName").val(oem.smsName);
         $("#isDollMerge").val(oem.isDollMerge);
-
-            $("#addnum").val(list.length);
+        $("#icon").val(oem.icon);
+        $("#iconPreId img").attr("src", oem.icon);
+        upd("icon");
+        $("#addnum").val(list.length);
           for(var i=0;i<6;i++){
             var html = "";
                   if (list.length > 0 && i < list.length) {
                       $("#banner" + i + "PreId img").attr("src", list[i].imgUrl);
-                      upd(i);
+                      upd("banner"+i);
                       $("#banner" + i).val(list[i].imgUrl);
                       html += '<div class="row"  id="row' + i + '">';
                   } else  if(list.length == 0 && i == 0){
                       html += '<div class="row"  id="row' + i + '">';
-                      upd(i);
+                      upd("banner"+i);
                   }else{
                       html += '<div class="row" id="row' + i + '" style="display: none;">';
                   }
@@ -165,15 +168,14 @@ $(function() {
                     html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
                 }
                 $("#bannelDiv").append(html);
-
            }
     });
 });
 
 
-    function upd(i){
+    function upd(name){
         // 初始化头像上传
-            var avatarUp = new $WebUpload("banner"+i);
+            var avatarUp = new $WebUpload(name);
             avatarUp.setUploadBarId("progressBar");
             avatarUp.setUploadUrl(Feng.ctxPath + '/tAgent/upload/'+TAgentInfoDlg.get("id"));
             avatarUp.init();

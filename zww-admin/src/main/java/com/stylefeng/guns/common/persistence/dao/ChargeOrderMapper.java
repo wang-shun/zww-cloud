@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public interface ChargeOrderMapper extends BaseMapper<ChargeOrder> {
 
-    List<Map<String, Object>> selectList(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
+    List<Map<String, Object>> selectList(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
 
     //某个用户充值
     List<Map<String, Object>> selectListOneMember(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
@@ -29,7 +29,7 @@ public interface ChargeOrderMapper extends BaseMapper<ChargeOrder> {
 
 
     //渠道
-    List<Map<String, Object>> selectListChannel(@Param("page") Page<ChargeOrder> page,@Param("channelNum")String channelNum,@Param("lastLoginFrom") String lastLoginFrom, @Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
+    List<Map<String, Object>> selectListChannel(@Param("page") Page<ChargeOrder> page,@Param("channelNum")String channelNum,@Param("lastLoginFrom") String lastLoginFrom, @Param("memberName")String memberName, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
 
     //小妖精渠道
     List<Map<String, Object>> xiaoyaojingSelectListChannel(@Param("page") Page<ChargeOrder> page,@Param("channelNum")String channelNum,@Param("lastLoginFrom") String lastLoginFrom, @Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
@@ -42,7 +42,7 @@ public interface ChargeOrderMapper extends BaseMapper<ChargeOrder> {
     Integer selectAllPerson(@Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeName")String chargeName, @Param("chargeState")String chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
 
     //渠道总金额
-    Double selectAllMoneyChannel(@Param("channelNum")String channelNum,@Param("lastLoginFrom")String lastLoginFrom,@Param("memberName")String memberName, @Param("memberId")String memberId, @Param("chargeName")String chargeName, @Param("chargeState")String chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
+    Double selectAllMoneyChannel(@Param("channelNum")String channelNum,@Param("lastLoginFrom")String lastLoginFrom,@Param("memberName")String memberName,@Param("chargeName")String chargeName, @Param("chargeState")String chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
     //渠道总人数
     Integer selectAllPersonChannel(@Param("channelNum")String channelNum,@Param("lastLoginFrom")String lastLoginFrom,@Param("memberName")String memberName, @Param("memberId")String memberId, @Param("chargeName")String chargeName, @Param("chargeState")String chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
 

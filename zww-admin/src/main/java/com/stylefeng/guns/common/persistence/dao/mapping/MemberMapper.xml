@@ -90,9 +90,6 @@
 		<if test="channelNum != null and channelNum != ''">
 			and register_channel = #{channelNum}
 		</if>
-		<if test="userId != null and userId != ''">
-			and memberID = #{userId}
-		</if>
 		<if test="userName != null and userName != ''">
 			and name like CONCAT('%',#{userName},'%')
 		</if>

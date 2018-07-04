@@ -96,6 +96,11 @@ public class TOem extends Model<TOem> {
 	@TableField("is_doll_merge")
 	private Integer isDollMerge;
 
+	/**
+	 * 图标
+	 */
+	private String icon;
+
 
 	public Integer getId() {
 		return id;
@@ -225,6 +230,14 @@ public class TOem extends Model<TOem> {
 		this.isDollMerge = isDollMerge;
 	}
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -249,6 +262,7 @@ public class TOem extends Model<TOem> {
 			", createTime=" + createTime +
 			", updateTime=" + updateTime +
 			", isDollMerge=" + isDollMerge +
+			", icon=" + icon +
 			"}";
 	}
 }

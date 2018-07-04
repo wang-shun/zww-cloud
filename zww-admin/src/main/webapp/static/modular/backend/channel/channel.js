@@ -200,7 +200,6 @@ Member.openMemberCatchDetail = function () {
 Member.search = function () {
     var queryData = {};
     queryData['channelNum'] = $("#channelNum").val();
-    queryData['userId'] = $("#userId").val();
     queryData['userName'] = $("#userName").val();
     queryData['registerDate'] = $("#registerDate").val();
     queryData['endDate'] = $("#endDate").val();

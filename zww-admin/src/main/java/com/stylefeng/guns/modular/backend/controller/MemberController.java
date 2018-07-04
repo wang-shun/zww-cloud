@@ -153,9 +153,9 @@ public class MemberController extends BaseController {
      */
     @RequestMapping(value = "/channel")
     @ResponseBody
-    public Object channelListList(String channelNum,String userId,String userName,String registerDate,String endDate, String phoneModel) {
+    public Object channelListList(String channelNum,String userName,String registerDate,String endDate, String phoneModel) {
         Page<Member> page = new PageFactory<Member>().defaultPage();
-        List<Map<String, Object>> result = memberService.selectChannel(page,channelNum,userId,userName,registerDate, endDate, phoneModel);
+        List<Map<String, Object>> result = memberService.selectChannel(page,channelNum,userName,registerDate, endDate, phoneModel);
         page.setRecords((List<Member>)new MemberWarpper(result).warp());
         return super.packForBT(page);
     }
