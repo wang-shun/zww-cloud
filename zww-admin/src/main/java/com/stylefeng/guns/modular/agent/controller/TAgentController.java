@@ -180,7 +180,12 @@ public class TAgentController extends BaseController {
         return Double.valueOf(systemPref.getValue());
     }
 
-
+    public static void main(String[] args) {
+        String reg = "";
+        if(StringUtils.isEmpty(reg) || !"^[^\\s]*$".matches(reg)){
+            System.out.println("11111111111");
+        }
+    }
     /**
      * 新增代理商管理
      */
@@ -188,6 +193,9 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(TAgent tAgent) throws  Exception{
+        if(StringUtils.isEmpty(tAgent.getNickName()) || !"^[^\\s]*$".matches(tAgent.getNickName())){
+            return  new ErrorTip(500,"真实姓名格式不正确，请输入正确的真实姓名");
+        }
         TAgent agent = tAgentService.selectTAgentByUsername(tAgent.getUsername());
         if(agent != null ){
             return  new ErrorTip(500,"添加失败!用户名已存在");
