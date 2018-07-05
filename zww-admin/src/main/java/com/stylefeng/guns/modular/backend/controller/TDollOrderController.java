@@ -11,19 +11,22 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.backend.warpper.TDollOrderItemWarpper;
 import com.stylefeng.guns.modular.backend.warpper.TDollOrderWarpper;
 import com.stylefeng.guns.modular.backend.warpper.TDollWarpper;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.jeecgframework.poi.excel.ExcelExportUtil;
+import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.mutidatasource.DSEnum;
 import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.common.persistence.model.TDollOrder;
 import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -234,5 +237,26 @@ public class TDollOrderController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("tDollOrderId") Integer tDollOrderId) {
         return tDollOrderService.selectById(tDollOrderId);
+    }
+
+
+    /***
+     * 获取excel数据
+     * @return 返回文件名称及excel文件的URL
+     * @throws IOException
+     */
+    @RequestMapping(value = "/tDollOrderExecl",method = RequestMethod.GET)
+    public void profitHistory(HttpServletResponse response, String addrName,String phone) throws IOException {
+        List<TDollOrder> result = tDollOrderService.selectTDollOrderExecl(addrName,phone);
+
+        String fileName = "未发货数据统计.xls";
+
+        // 告诉浏览器用什么软件可以打开此文件
+        response.setHeader("content-Type", "application/vnd.ms-excel");
+        // 下载文件的默认名称
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(fileName, "utf-8"));
+
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), TDollOrder.class, result);
+        workbook.write(response.getOutputStream());
     }
 }

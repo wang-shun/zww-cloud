@@ -24,7 +24,15 @@ MgrUser.initColumn = function () {
         {title: '邮箱', field: 'email', align: 'center', valign: 'middle', sortable: true},
         {title: '电话', field: 'phone', align: 'center', valign: 'middle', sortable: true},
         {title: '创建时间', field: 'createtime', align: 'center', valign: 'middle', sortable: true},
-        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true}];
+        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true,
+            formatter:function (value,row,index) {
+                if(value == "启用"){
+                    return '<span class="label label-success radius">'+value+'</span>';
+                }else {
+                    return '<span class="label label-danger radius">'+value+'</span>';
+                }
+            }
+        }];
     return columns;
 };
 

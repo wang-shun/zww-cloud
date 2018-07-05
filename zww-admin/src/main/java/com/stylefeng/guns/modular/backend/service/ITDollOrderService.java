@@ -5,6 +5,7 @@ import com.stylefeng.guns.common.persistence.model.ShareInvite;
 import com.stylefeng.guns.common.persistence.model.TDollCatchHistory;
 import com.stylefeng.guns.common.persistence.model.TDollOrder;
 import com.baomidou.mybatisplus.service.IService;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -40,4 +41,6 @@ public interface ITDollOrderService extends IService<TDollOrder> {
 
 
     boolean insertTDollOrder(TDollCatchHistory history,Integer modifiedBy);
+
+    List<TDollOrder> selectTDollOrderExecl(@Param("addrName") String addrName, @Param("phone") String phone);
 }

@@ -18,5 +18,25 @@
 		<result column="status" property="status" />
 		<result column="isopen" property="isopen" />
 	</resultMap>
+	<sql id="Base_sql">
+		id,code,pcode,pcodes,name,icon,url,num,levels,ismenu,tips,status,isopen
+	</sql>
+
+	<select id="selectMenuByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+         <include refid="Base_sql"/>
+		 from sys_menu where code = #{code}
+	</select>
+
+	<select id="selectMenuByPcode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_sql"/>
+		from sys_menu where pcode = #{pcode}
+	</select>
+
+	<update id="updMenuByPcode" parameterType="com.stylefeng.guns.common.persistence.model.Menu">
+		update sys_menu set status = #{status}
+		 where pcode = #{pcode}
+	</update>
 
 </mapper>

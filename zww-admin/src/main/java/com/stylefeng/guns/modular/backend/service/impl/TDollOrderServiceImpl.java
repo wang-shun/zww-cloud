@@ -173,4 +173,9 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
                history.getDollCode(),history.getDollName(),history.getDollUrl());
        return retBool(tDollOrderItemMapper.insert(item));
     }
+
+    @Override
+    public   List<TDollOrder> selectTDollOrderExecl(String addrName,String phone){
+        return tDollOrderMapper.selectTDollOrderExecl(addrName,phone);
+    }
 }

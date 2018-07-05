@@ -33,4 +33,6 @@ public interface TDollOrderMapper extends BaseMapper<TDollOrder> {
 
     int updateTDollOrderById(@Param("ids") List<Long> ids, @Param("deliverMethod")String deliverMethod, @Param("deliverNumber")String deliverNumber, @Param("deliverAmount")BigDecimal deliverAmount, @Param("comment")String comment);
 
+
+   List<TDollOrder> selectTDollOrderExecl(@Param("addrName") String addrName, @Param("phone") String phone);
 }

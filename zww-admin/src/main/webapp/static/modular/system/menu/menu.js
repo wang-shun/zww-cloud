@@ -22,7 +22,16 @@ Menu.initColumn = function () {
         {title: '排序', field: 'num', align: 'center', valign: 'middle', sortable: true},
         {title: '层级', field: 'levels', align: 'center', valign: 'middle', sortable: true},
         {title: '是否是菜单', field: 'isMenuName', align: 'center', valign: 'middle', sortable: true},
-        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true}]
+        {title: '状态', field: 'statusName', align: 'center', valign: 'middle', sortable: true,
+            formatter:function (value,row,index) {
+                console.log(row.statusName);
+                if(row.statusName == "启用"){
+                    return '<span class="label label-success radius">启用</span>';
+                }else {
+                    return '<span class="label label-danger radius">禁用</span>';
+                }
+            }
+        }]
     return columns;
 };
 

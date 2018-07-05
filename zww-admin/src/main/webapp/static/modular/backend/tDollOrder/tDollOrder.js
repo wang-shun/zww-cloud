@@ -63,7 +63,15 @@ TDollOrder.goodsDetail = function (title,url,orderUrl,w,h) {
     layer_show(title,url,800,400);
 
 }
-
+TDollOrder.execl = function (v_this) {
+    $("#phoneForm").val($("#phone").val());
+    $("#addrNameForm").val($("#addrName").val());
+    $(v_this).attr("disabled","true");
+    setTimeout(function(){
+        $(v_this).removeAttr("disabled");
+    },10000);
+    $("#test").submit();
+};
 
 /**
  * 点击添加待发货列表

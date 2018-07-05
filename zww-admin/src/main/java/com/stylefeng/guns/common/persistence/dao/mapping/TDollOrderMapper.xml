@@ -109,4 +109,21 @@
 			#{item}
 		</foreach>
 	</update>
+
+	<select id="selectTDollOrderExecl" resultType="com.stylefeng.guns.common.persistence.model.TDollOrder">
+		select b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
+		b.county county, b.street street,d.doll_name dollName
+		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
+		LEFT JOIN t_member_addr b ON  a.address_id=b.id
+		where a.status='申请发货'
+		<if test="phone!=null and phone != '' ">
+			and b.receiver_phone like concat
+			('%',#{phone},'%')
+		</if>
+		<if test="addrName != null and addrName != '' ">
+			and b.receiver_name like concat
+			('%',#{addrName},'%')
+		</if>
+		order by a.modified_date DESC
+	</select>
 </mapper>

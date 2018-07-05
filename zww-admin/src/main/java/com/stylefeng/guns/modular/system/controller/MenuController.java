@@ -121,6 +121,17 @@ public class MenuController extends BaseController {
         menuSetPcode(menu);
 
         this.menuMapper.updateById(menu);
+
+       if(menu.getLevels() != 3){
+           menuMapper.updMenuByPcode(menu.getCode(),menu.getStatus());
+
+           if(menu.getLevels() == 1){
+               List<Menu> list = menuMapper.selectMenuByPcode(menu.getCode());
+               for (Menu menu1 : list){
+                   menuMapper.updMenuByPcode(menu1.getCode(),menu.getStatus());
+               }
+           }
+       }
         return SUCCESS_TIP;
     }
 

@@ -12,7 +12,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sys_menu
-		where status = 1
+		where 1=1
 		<if test="condition != null and condition != ''">
 			and (name like CONCAT('%',#{condition},'%') or code like CONCAT('%',#{condition},'%'))
 		</if>
@@ -102,7 +102,7 @@
 		</foreach>
 		)
 		) m3 ON m1.id = m3.id
-		where m1.ismenu = 1
+		where m1.ismenu = 1 and m1.status=1
 		order by levels,num asc
 	</select>
 
