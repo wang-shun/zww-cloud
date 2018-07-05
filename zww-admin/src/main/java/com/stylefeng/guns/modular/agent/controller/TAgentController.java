@@ -393,7 +393,6 @@ public class TAgentController extends BaseController {
         return super.SUCCESS_TIP;
     }
 
-
     /**
      * 上传图片(上传到项目的webapp/static/img)
      */
