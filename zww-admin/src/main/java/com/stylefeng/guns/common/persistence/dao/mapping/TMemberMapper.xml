@@ -42,4 +42,10 @@
         id, memberID, name, mobile, password, weixin_id AS weixinId, gender, birthday, coins, points, catch_number AS catchNumber, register_date AS registerDate, modified_date AS modifiedDate, modified_by AS modifiedBy, last_login_date AS lastLoginDate, last_logoff_date AS lastLogoffDate, online_flg AS onlineFlg, icon_context_path AS iconContextPath, icon_file_name AS iconFileName, icon_real_path AS iconRealPath, easemob_uuid AS easemobUuid, active_flg AS activeFlg, invite_flg AS inviteFlg, invite_flg_web AS inviteFlgWeb, register_from AS registerFrom, last_login_from AS lastLoginFrom, first_login AS firstLogin, first_charge AS firstCharge, register_channel AS registerChannel, login_channel AS loginChannel, phone_model AS phoneModel
     </sql>
 
+
+	<select id="selectByMobile" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		   <include refid="Base_Column_List"/>
+		from t_member where mobile = #{mobile}
+	</select>
 </mapper>

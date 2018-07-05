@@ -5,10 +5,7 @@ import com.stylefeng.guns.common.annotion.Permission;
 import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.persistence.dao.RoleMapper;
-import com.stylefeng.guns.common.persistence.dao.TOemBannerMapper;
-import com.stylefeng.guns.common.persistence.dao.TOemMapper;
-import com.stylefeng.guns.common.persistence.dao.UserMapper;
+import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.common.persistence.model.vo.AgentVo;
 import com.stylefeng.guns.core.aliyun.AliyunService;
@@ -68,6 +65,9 @@ public class TAgentController extends BaseController {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private TMemberMapper tMemberMapper;
 
     @Resource
     private RoleMapper roleMapper;
@@ -356,26 +356,39 @@ public class TAgentController extends BaseController {
         TOem oem=(TOem)JSONObject.toBean(jsonObject.getJSONObject("oem"), TOem.class);
         List<TOemBanner> oemBanner=(List<TOemBanner>) JSONArray.toList(JSONArray.fromObject(jsonObject.getJSONArray("oemBanner")), TOemBanner.class);
         TOem tOem = toemMapper.selectById(oem.getId());
+        if(oemBanner.size() > 0){
+            tOemBannerMapper.deleteByOemId(oem.getId());
+            tOemBannerMapper.insertBatch(oemBanner);
+        }
+        Date now = new Date();
         if(tOem == null){
             oem.setPartner("1503788561");
             oem.setPartnerKey("PtR5S9g88z8LTUFZTsPMWdtqUgDJ4f8V");
             oem.setNatappUrl("lanao.nat300.top");
             oem.setStatus(1);
-            oem.setCreateTime(new Date());
-            oem.setUpdateTime(new Date());
+            oem.setCreateTime(now);
+            oem.setUpdateTime(now);
             toemMapper.insert(oem);
             TAgent t = new TAgent();
             t.setOem(true);
             t.setId(oem.getId());
-            t.setUpdateTime(new Date());
+            t.setUpdateTime(now);
             tAgentService.updateById(t);
+            //把自己商户身份化为自己的oem代理名下
+            t=tAgentService.selectTAgentById(oem.getId());
+            if(t == null){
+                return super.SUCCESS_TIP;
+            }
+            TMember tMember =tMemberMapper.selectByMobile(t.getPhone());
+            if(tMember == null){
+                return super.SUCCESS_TIP;
+            }
+            tMember.setRegisterChannel(oem.getCode());
+            tMember.setModifiedDate(now);
+            tMemberMapper.updateById(tMember);
         }else{
-            oem.setUpdateTime(new Date());
+            oem.setUpdateTime(now);
             toemMapper.updateById(oem);
-        }
-        if(oemBanner.size() > 0){
-            tOemBannerMapper.deleteByOemId(oem.getId());
-            tOemBannerMapper.insertBatch(oemBanner);
         }
         return super.SUCCESS_TIP;
     }

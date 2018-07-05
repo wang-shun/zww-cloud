@@ -69,7 +69,7 @@ TAgentInfoDlg.addoem = function() {
     var oemArr = new Array(), oem = this.tAgentInfoData;
     for(var i=0;i<6;i++){
         var oems={};
-        var imgUrl = $("#banner"+i).val();
+        var imgUrl = $("#showdiv"+i+" #image"+i).val();
         var url = $("#oemtext"+i).val();
         if(imgUrl == "" && url == ""){
             continue;
@@ -111,8 +111,9 @@ TAgentInfoDlg.add = function(){
           Feng.error("只能最多添加6个banner");
           return;
       }
+      $("#showdiv" + addnum).html($("#hiddenDiv"+addnum).html());
       $("#row"+addnum).show();
-      upd("banner"+addnum);
+      upd("image"+addnum);
       $("#addnum").val(++addnum);
 
 }
@@ -120,8 +121,9 @@ TAgentInfoDlg.add = function(){
 TAgentInfoDlg.del = function(num){
      $("#row"+num).hide();
      $("#oemtext" + num).val("");
-     $("#banner"+num+"PreId img").attr("src",Feng.ctxPath + "/static/img/default.png");
-    $("#banner" + num).val("");
+     $("#showdiv" + num).html("");
+    $("#hiddenDiv"+num + " #image" + num + "PreId img").attr("src", Feng.ctxPath + "/static/img/default.png");
+    $("#hiddenDiv"+num + " #image" + num).val("");
     $("#addnum").val(num);
 }
 
@@ -139,36 +141,51 @@ $(function() {
         $("#isDollMerge").val(oem.isDollMerge);
         $("#icon").val(oem.icon);
         $("#iconPreId img").attr("src", oem.icon);
-        upd("icon");
+
         $("#addnum").val(list.length);
           for(var i=0;i<6;i++){
-            var html = "";
-                  if (list.length > 0 && i < list.length) {
-                      $("#banner" + i + "PreId img").attr("src", list[i].imgUrl);
-                      upd("banner"+i);
-                      $("#banner" + i).val(list[i].imgUrl);
+              var html = "";
+              if(list.length > 0){
+                  if (i < list.length) {
+                      $("#image" + i + "PreId img").attr("src", list[i].imgUrl);
+                      $("#image" + i).val(list[i].imgUrl);
                       html += '<div class="row"  id="row' + i + '">';
-                  } else  if(list.length == 0 && i == 0){
-                      html += '<div class="row"  id="row' + i + '">';
-                      upd("banner"+i);
                   }else{
                       html += '<div class="row" id="row' + i + '" style="display: none;">';
                   }
-                html += '<div class="col-sm-6">';
-                html += $("#hiddenDiv"+i).html();
-                html += '</div><div class="col-sm-6">';
-                if(i < list.length){
-                    html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址" value="' + list[i].url + '"/>';
-                }else{
-                    html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址"/>';
-                }
-                if(i==0){
-                    html += '<button class="info" onclick="TAgentInfoDlg.add()">+</button></div></div>';
-                }else{
-                    html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
-                }
-                $("#bannelDiv").append(html);
+              }else{
+                 if(i == 0){
+                      html += '<div class="row"  id="row0">';
+                  }else{
+                      html += '<div class="row" id="row' + i + '" style="display: none;">';
+                  }
+              }
+            html += '<div class="col-sm-6" id="showdiv' + i + '">';
+            html += $("#hiddenDiv"+i).html();
+            html += '</div><div class="col-sm-6">';
+            if (list.length > 0 && i < list.length) {
+                  html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址" value="' + list[i].url + '"/>';
+            }else{
+                 html += '<input type="text" class="oemtext" id="oemtext'+i+'" placeholder="请求地址"/>';
+            }
+            if(i==0){
+                html += '<button class="info" onclick="TAgentInfoDlg.add()">+</button></div></div>';
+            }else{
+                html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentInfoDlg.del(' + i + ')">-</button></div></div>';
+            }
+            $("#bannelDiv").append(html);
+
+              if(list.length > 0){
+                  if (i < list.length) {
+                      upd("image"+i);
+                  }
+              }else{
+                  if(i == 0){
+                      upd("image"+i);
+                  }
+              }
            }
+        upd("icon");
     });
 });
 

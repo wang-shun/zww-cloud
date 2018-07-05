@@ -2,6 +2,7 @@ package com.stylefeng.guns.common.persistence.dao;
 
 import com.stylefeng.guns.common.persistence.model.TMember;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-01-02
  */
 public interface TMemberMapper extends BaseMapper<TMember> {
+
+   TMember selectByMobile(@Param("mobile") String mobile);
 
 }

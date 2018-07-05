@@ -20,11 +20,12 @@
 		<result column="create_time" property="createTime" />
 		<result column="update_time" property="updateTime" />
 		<result column="is_doll_merge" property="isDollMerge" />
+		<result column="icon" property="icon" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, code, appid, appsecret, partner, partner_key AS partnerKey, company, natapp_url AS natappUrl, url, SMS_code AS smsCode, SMS_name AS smsName, status, create_time AS createTime, update_time AS updateTime, is_doll_merge AS isDollMerge
+        id, name, code, appid, appsecret, partner, partner_key AS partnerKey, company, natapp_url AS natappUrl, url, SMS_code AS smsCode, SMS_name AS smsName, status, create_time AS createTime, update_time AS updateTime, is_doll_merge AS isDollMerge,icon
     </sql>
 
 </mapper>
