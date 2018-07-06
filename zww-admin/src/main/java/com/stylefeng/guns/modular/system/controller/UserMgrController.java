@@ -7,7 +7,6 @@ import com.stylefeng.guns.common.constant.dictmap.UserDict;
 import com.stylefeng.guns.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.exception.UserException;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.dao.UserMapper;
 import com.stylefeng.guns.common.persistence.model.Role;
@@ -27,12 +26,10 @@ import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.stylefeng.guns.modular.backend.form.ChangePwdForm;
-import com.stylefeng.guns.modular.backend.form.LoginForm;
 import com.stylefeng.guns.modular.system.dao.UserMgrDao;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
-
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,9 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.naming.NoPermissionException;
-import javax.swing.text.TabableView;
 import javax.validation.Valid;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Date;

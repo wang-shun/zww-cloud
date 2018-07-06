@@ -3,7 +3,6 @@ package com.stylefeng.guns.modular.agent.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.model.AgentCharge;
-import com.stylefeng.guns.common.persistence.model.AgentWithdraw;
 import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.base.controller.BaseController;

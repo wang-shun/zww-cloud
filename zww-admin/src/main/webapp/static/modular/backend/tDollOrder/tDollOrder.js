@@ -14,7 +14,7 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', checkbox: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+          //  {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
        /*     {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return '<a href="javascript:;" onclick="TDollOrder.goodsDetail(\'订单详情\',\'tDollOrder\/goodsDetail\',\''+value+'\',\'300\',\'450\')">'+value+'</a>';

@@ -1,18 +1,15 @@
 package com.stylefeng.guns.modular.backend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.core.base.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.modular.backend.service.ITChargeRulesService;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/common")

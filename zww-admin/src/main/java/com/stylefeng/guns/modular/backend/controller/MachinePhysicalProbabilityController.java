@@ -2,38 +2,32 @@ package com.stylefeng.guns.modular.backend.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
-import com.stylefeng.guns.common.persistence.model.DivinationTopic;
+import com.stylefeng.guns.common.persistence.model.MachinePhysicalProbability;
 import com.stylefeng.guns.common.persistence.model.TDoll;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
+import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.HttpClientUtil;
-
 import com.stylefeng.guns.core.util.MD5Util;
-import com.stylefeng.guns.core.util.StringUtils;
+import com.stylefeng.guns.modular.backend.service.IMachinePhysicalProbabilityService;
 import com.stylefeng.guns.modular.backend.service.ITDollService;
+import com.stylefeng.guns.modular.backend.warpper.MachinePhysicalProbilityWarpper;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.message.BasicNameValuePair;
-
-import com.stylefeng.guns.modular.backend.warpper.ChargeOrderWarpper;
-import com.stylefeng.guns.modular.backend.warpper.MachinePhysicalProbilityWarpper;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.message.BasicNameValuePair;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.stylefeng.guns.common.persistence.model.MachinePhysicalProbability;
-import com.stylefeng.guns.modular.backend.service.IMachinePhysicalProbabilityService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 机器物理概率控制器

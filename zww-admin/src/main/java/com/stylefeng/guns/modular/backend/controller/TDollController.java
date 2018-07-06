@@ -1,32 +1,9 @@
 package com.stylefeng.guns.modular.backend.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import com.stylefeng.guns.common.persistence.model.DollTopic;
-import com.stylefeng.guns.modular.backend.service.IDollTopicService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.persistence.model.TBanner;
+import com.stylefeng.guns.common.persistence.model.DollTopic;
 import com.stylefeng.guns.common.persistence.model.TDoll;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
@@ -38,8 +15,23 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.RedisKeyGenerator;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.game.MachineStatus;
+import com.stylefeng.guns.modular.backend.service.IDollTopicService;
 import com.stylefeng.guns.modular.backend.service.ITDollService;
 import com.stylefeng.guns.modular.backend.warpper.TDollWarpper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 娃娃机列表控制器

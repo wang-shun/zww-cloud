@@ -76,7 +76,6 @@ TDollCatchHistory.update = function () {
  */
 TDollCatchHistory.search = function () {
     var queryData = {};
-    queryData['dollId'] = $("#dollId").val();
     queryData['dollName'] = $("#dollName").val();
     queryData['machineCode'] = $("#machineCode").val();
     queryData['dollCatchStates'] = $("#dollCatchStates").val();

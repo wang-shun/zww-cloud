@@ -52,11 +52,11 @@ TDoll.initColumn = function () {
                     if (value=="3")return '数码房';
             	}
             },
-            {title: '机器地址', field: 'adress', visible: true, align: 'center', valign: 'middle',
+         /*   {title: '机器地址', field: 'adress', visible: true, align: 'center', valign: 'middle',
             	formatter:function (value,row,index) {
             		return row.province+row.city+row.county+row.street;
             	}
-            },
+            },*/
             {title: '操作人', field: 'person', visible: true, align: 'center', valign: 'middle'},
             //{title: '', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'description', visible: true, align: 'center', valign: 'middle'},

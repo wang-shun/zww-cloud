@@ -1,29 +1,8 @@
 package com.stylefeng.guns.modular.backend.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import com.stylefeng.guns.core.aliyun.impl.AliyunServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.persistence.model.TBanner;
-import com.stylefeng.guns.common.persistence.model.TDoll;
 import com.stylefeng.guns.common.persistence.model.TDollImage;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
@@ -35,7 +14,18 @@ import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.modular.backend.service.ITDollImageService;
 import com.stylefeng.guns.modular.backend.warpper.TDollImageWarpper;
-import com.stylefeng.guns.modular.backend.warpper.TDollWarpper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 娃娃机背景图片列表控制器

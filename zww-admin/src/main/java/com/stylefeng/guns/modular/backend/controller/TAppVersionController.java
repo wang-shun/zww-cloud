@@ -1,28 +1,23 @@
 package com.stylefeng.guns.modular.backend.controller;
 
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.persistence.model.TDollImage;
+import com.stylefeng.guns.common.persistence.model.TAppVersion;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.base.tips.TipType;
 import com.stylefeng.guns.core.exception.GunsException;
-import com.stylefeng.guns.core.shiro.ShiroKit;
-import com.stylefeng.guns.core.util.StringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
-import com.stylefeng.guns.common.persistence.model.TAppVersion;
+import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.modular.backend.service.ITAppVersionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Date;
 
 /**
  * 版本管理控制器

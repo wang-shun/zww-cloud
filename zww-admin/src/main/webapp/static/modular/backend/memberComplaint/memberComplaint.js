@@ -15,10 +15,7 @@ MemberComplaint.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            // {title: '游戏编号', field: 'gameNum', visible: true, align: 'center', valign: 'middle'},
-            // {title: '用户id', field: 'memberId', visible: true, align: 'center', valign: 'middle'},
-            // {title: '渠道', field: 'complaintChannel', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户编号', field: 'memberNum', visible: true, align: 'center', valign: 'middle'},
+          //  {title: '用户编号', field: 'memberNum', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'memberName', visible: true, align: 'center', valign: 'middle'},
             {title: '用户手机', field: 'memberPhone', visible: true, align: 'center', valign: 'middle'},
             // {title: '娃娃机id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
@@ -137,7 +134,6 @@ MemberComplaint.openMemberComplaintDetail = function () {
  */
 MemberComplaint.search = function () {
     var queryData = {};
-    queryData['memberID'] = $("#memberID").val();
     queryData['channelNum'] = $("#channelNum").val();
     queryData['catchStates'] = $("#catchStates").val();
     queryData['vipGroups'] = $("#vipGroups").val();

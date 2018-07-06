@@ -33,8 +33,8 @@ MemberChannelDeduct.initColumn = function () {
                 }
             },
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户编号', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
+          //  {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
+           // {title: '用户编号', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '手机号', field: 'mobile', visible: true, align: 'center', valign: 'middle'},
             // {title: '微信id', field: 'weixinId', visible: true, align: 'center', valign: 'middle'},
@@ -95,7 +95,6 @@ MemberChannelDeduct.delete = function () {
  */
 MemberChannelDeduct.search = function () {
     var queryData = {};
-    queryData['userId'] = $("#userId").val();
     queryData['name'] = $("#name").val();
     queryData['registeDate'] = $("#registeDate").val();
     queryData['endTime'] = $("#endTime").val();

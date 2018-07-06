@@ -1,24 +1,21 @@
 package com.stylefeng.guns.modular.backend.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
+import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.base.tips.TipType;
-import com.stylefeng.guns.core.util.RedisKeyGenerator;
+import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.backend.service.IMemberChargeHistoryService;
-import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
-import com.stylefeng.guns.modular.backend.service.impl.ChargeOrderServiceImpl;
+import com.stylefeng.guns.modular.backend.service.IMemberService;
 import com.stylefeng.guns.modular.backend.warpper.ChargeOrderWarpper;
+import com.stylefeng.guns.modular.backend.warpper.DollCatchHistoryWarpper;
+import com.stylefeng.guns.modular.backend.warpper.MemberWarpper;
 import com.stylefeng.guns.modular.backend.warpper.TDollOrderWarpper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,16 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.stylefeng.guns.common.constant.factory.PageFactory;
-import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.util.DateUtil;
-import com.stylefeng.guns.modular.backend.service.IMemberService;
-import com.stylefeng.guns.modular.backend.warpper.DollCatchHistoryWarpper;
-import com.stylefeng.guns.modular.backend.warpper.MemberWarpper;
-
-import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * member控制器

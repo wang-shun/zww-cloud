@@ -1,24 +1,21 @@
 package com.stylefeng.guns.modular.backend.controller;
 
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
-import com.stylefeng.guns.common.persistence.model.TBanner;
+import com.stylefeng.guns.common.persistence.model.AlertInfo;
 import com.stylefeng.guns.config.properties.GunsProperties;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.base.tips.TipType;
 import com.stylefeng.guns.core.exception.GunsException;
+import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.StringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
-import com.stylefeng.guns.common.persistence.model.AlertInfo;
 import com.stylefeng.guns.modular.backend.service.IAlertInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;

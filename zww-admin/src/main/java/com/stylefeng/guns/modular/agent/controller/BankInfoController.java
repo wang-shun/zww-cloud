@@ -2,21 +2,18 @@ package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
-import com.stylefeng.guns.common.persistence.model.TAgent;
+import com.stylefeng.guns.common.persistence.model.BankInfo;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.modular.agent.service.IBankInfoService;
 import com.stylefeng.guns.modular.agent.warpper.BankInfoWarpper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.stylefeng.guns.core.log.LogObjectHolder;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.stylefeng.guns.common.persistence.model.BankInfo;
-import com.stylefeng.guns.modular.agent.service.IBankInfoService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;

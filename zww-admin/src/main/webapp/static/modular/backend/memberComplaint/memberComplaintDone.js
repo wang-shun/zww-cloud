@@ -18,7 +18,7 @@ MemberComplaint.initColumn = function () {
             // {title: '游戏编号', field: 'gameNum', visible: true, align: 'center', valign: 'middle'},
             // {title: '用户id', field: 'memberId', visible: true, align: 'center', valign: 'middle'},
             {title: '渠道', field: 'complaintChannel', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户编号', field: 'memberNum', visible: true, align: 'center', valign: 'middle'},
+          //  {title: '用户编号', field: 'memberNum', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'memberName', visible: true, align: 'center', valign: 'middle'},
             {title: '用户手机', field: 'memberPhone', visible: true, align: 'center', valign: 'middle'},
             // {title: '娃娃机id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
@@ -93,7 +93,7 @@ MemberComplaint.video = function (title,url,videoUrl,w,h) {
  */
 MemberComplaint.search = function () {
     var queryData = {};
-    queryData['memberID'] = $("#memberID").val();
+    //queryData['memberID'] = $("#memberID").val();
     queryData['channelNum'] = $("#channelNum").val();
     queryData['catchStates'] = $("#catchStates").val();
     queryData['checkState'] = $("#checkState").val();

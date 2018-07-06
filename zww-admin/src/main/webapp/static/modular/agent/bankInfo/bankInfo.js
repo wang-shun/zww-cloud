@@ -14,7 +14,7 @@ var BankInfo = {
 BankInfo.initColumn = function () {
     return [
             {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+            //{title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
           //  {title: '代理ID', field: 'agentId', visible: true, align: 'center', valign: 'middle'},
             {title: '姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '身份证', field: 'idCardNo', visible: true, align: 'center', valign: 'middle'},

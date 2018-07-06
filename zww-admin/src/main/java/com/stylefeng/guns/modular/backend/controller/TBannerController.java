@@ -1,24 +1,5 @@
 package com.stylefeng.guns.modular.backend.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.model.TBanner;
 import com.stylefeng.guns.config.properties.GunsProperties;
@@ -31,8 +12,18 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.modular.backend.service.ITBannerService;
-import com.stylefeng.guns.modular.backend.warpper.MemberWarpper;
 import com.stylefeng.guns.modular.backend.warpper.TBannerWarpper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
 
 /**
  * banner控制器

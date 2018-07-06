@@ -14,11 +14,11 @@ var DollRepairs = {
 DollRepairs.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+           // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             // {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
+        //    {title: '用户id', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'name', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
+           // {title: '机器id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
             {title: '机器名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '机器图片', field: 'tbimgRealPath', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
@@ -27,11 +27,11 @@ DollRepairs.initColumn = function () {
             },
             {title: '机器号', field: 'machineCode', visible: true, align: 'center', valign: 'middle'},
             {title: '机器状态', field: 'machineStatus', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器地址', field: 'dollAddress', visible: true, align: 'center', valign: 'middle',
+         /*   {title: '机器地址', field: 'dollAddress', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return row.province+row.city+row.county+row.street;
                 }
-            },
+            },*/
             {title: '报修原因', field: 'repairsReason', visible: true, align: 'center', valign: 'middle'},
             {title: '报修时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
             // {title: '修改时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'}

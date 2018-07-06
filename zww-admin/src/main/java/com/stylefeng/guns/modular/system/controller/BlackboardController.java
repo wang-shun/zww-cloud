@@ -1,8 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
 import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
 import com.stylefeng.guns.modular.system.dao.NoticeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

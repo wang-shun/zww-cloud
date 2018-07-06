@@ -117,13 +117,11 @@
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='申请发货'
 		<if test="phone!=null and phone != '' ">
-			and b.receiver_phone like concat
-			('%',#{phone},'%')
+			and b.receiver_phone like concat('%',#{phone},'%')
 		</if>
 		<if test="addrName != null and addrName != '' ">
-			and b.receiver_name like concat
-			('%',#{addrName},'%')
+			and b.receiver_name like concat('%',#{addrName},'%')
 		</if>
-		order by a.modified_date DESC
+		order by b.receiver_name DESC,b.county DESC
 	</select>
 </mapper>

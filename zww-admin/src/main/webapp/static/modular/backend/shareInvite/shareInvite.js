@@ -14,8 +14,8 @@ var ShareInvite = {
 ShareInvite.initColumn = function () {
     return [
             {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户ID', field: 'inviteCode', visible: true, align: 'center', valign: 'middle'},
+           // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+           // {title: '用户ID', field: 'inviteCode', visible: true, align: 'center', valign: 'middle'},
             {title: '昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '电话', field: 'mobile', visible: true, align: 'center', valign: 'middle'},
             {title: '性别', field: 'genderName', visible: true, align: 'center', valign: 'middle'},
@@ -73,7 +73,7 @@ ShareInvite.openMemberChargeDetail = function () {
  */
 ShareInvite.search = function () {
     var queryData = {};
-    queryData['memberid'] = $("#memberid").val();
+   // queryData['memberid'] = $("#memberid").val();
     queryData['name'] = $("#name").val();
     queryData['startDate'] = $("#startDate").val();
     queryData['endDate'] = $("#endDate").val();

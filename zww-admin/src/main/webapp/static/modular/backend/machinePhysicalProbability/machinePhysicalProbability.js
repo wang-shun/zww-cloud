@@ -24,7 +24,7 @@ MachinePhysicalProbability.initColumn = function () {
             {title: '强力时间', field: 'strongTime', visible: true, align: 'center', valign: 'middle'},
             {title: '弱一时间', field: 'weakTime', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createdDate', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建人', field: 'createdBy', visible: true, align: 'center', valign: 'middle'},
+           // {title: '创建人', field: 'createdBy', visible: true, align: 'center', valign: 'middle'},
             {title: '修改时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
             {title: '操作人', field: 'person', visible: true, align: 'center', valign: 'middle'}
             // {title: '修改人', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'}

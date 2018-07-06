@@ -10,12 +10,8 @@ import com.stylefeng.guns.common.persistence.model.Role;
 import com.stylefeng.guns.common.persistence.model.TAgent;
 import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.core.base.controller.BaseController;
-import com.stylefeng.guns.core.base.tips.ErrorTip;
-import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogManager;
 import com.stylefeng.guns.core.log.factory.LogTaskFactory;
-import com.stylefeng.guns.core.mutidatasource.DSEnum;
-import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
 import com.stylefeng.guns.core.node.MenuNode;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
@@ -34,7 +30,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
