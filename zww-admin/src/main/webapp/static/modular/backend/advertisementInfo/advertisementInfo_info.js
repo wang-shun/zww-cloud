@@ -103,6 +103,7 @@ AdvertisementInfoInfoDlg.editSubmit = function() {
 $(function() {
     // 初始化头像上传
     var avatarUp = new $WebUpload("imgUrl");
+    avatarUp.setUploadUrl(Feng.ctxPath + '/advertisementInfo/upload');
     avatarUp.setUploadBarId("progressBar");
     avatarUp.init();
 });
