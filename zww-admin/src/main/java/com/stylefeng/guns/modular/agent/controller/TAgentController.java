@@ -261,7 +261,6 @@ public class TAgentController extends BaseController {
         return super.SUCCESS_TIP;
     }
 
-
     /**
      * 修改代理商管理
      */
