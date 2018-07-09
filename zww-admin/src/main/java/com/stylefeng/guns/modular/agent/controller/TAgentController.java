@@ -193,7 +193,7 @@ public class TAgentController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(TAgent tAgent) throws  Exception{
-        if(StringUtils.isEmpty(tAgent.getNickName()) || !"^[^\\s]*$".matches(tAgent.getNickName())){
+        if(StringUtils.isEmpty(tAgent.getNickName())){
             return  new ErrorTip(500,"真实姓名格式不正确，请输入正确的真实姓名");
         }
         TAgent agent = tAgentService.selectTAgentByUsername(tAgent.getUsername());
