@@ -8,6 +8,7 @@ import com.stylefeng.guns.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.common.persistence.dao.*;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.common.persistence.model.vo.AgentVo;
+import com.stylefeng.guns.common.weixin.WXUtil;
 import com.stylefeng.guns.core.aliyun.AliyunService;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
@@ -371,6 +372,8 @@ public class TAgentController extends BaseController {
             oem.setCreateTime(now);
             oem.setUpdateTime(now);
             toemMapper.insert(oem);
+            //创建菜单
+            WXUtil.doPost("", "http://lanao.nat300.top/icrane/api/createMenu?code=" + oem.getCode(),"GET");
             TAgent t = new TAgent();
             t.setOem(true);
             t.setId(oem.getId());
@@ -388,6 +391,7 @@ public class TAgentController extends BaseController {
             tMember.setRegisterChannel(oem.getCode());
             tMember.setModifiedDate(now);
             tMemberMapper.updateById(tMember);
+
         }else{
             oem.setUpdateTime(now);
             toemMapper.updateById(oem);
