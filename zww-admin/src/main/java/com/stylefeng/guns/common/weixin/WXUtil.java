@@ -1,16 +1,9 @@
 package com.stylefeng.guns.common.weixin;
 
-import com.stylefeng.guns.common.persistence.model.TOem;
-import com.stylefeng.guns.core.util.StringUtils;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.*;
-import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by SUN on 2017/12/27.
