@@ -22,11 +22,11 @@ TAgent.initColumn = function (type) {
     if(type == 0){
         column.push({title: '余额(元)', field: 'balance', visible: true, align: 'center', valign: 'middle'});
         column.push({title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'});
+        column.push({title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'});
     }else if(type == 1){
         column.push({title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'});
-    }else if(type == 2){
-        column.push({title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'});
     }
+    column.push({title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'});
     column.push({title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'});
     column.push({title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'});
     if(type == 0){
