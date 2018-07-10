@@ -12,55 +12,39 @@ var TAgent = {
  * 初始化表格的列
  */
 TAgent.initColumn = function (type) {
+    var column = new Array();
+    column.push({field: 'selectItem', radio: true});
+    column.push({title: '昵称', field: 'nickName', visible: true, align: 'center', valign: 'middle'});
+    column.push({title: '登录名', field: 'username', visible: true, align: 'center', valign: 'middle'});
+    column.push({title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'});
+    column.push({title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'});
+    column.push({title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'});
     if(type == 0){
-        return [
-            {field: 'selectItem', radio: true},
-            {title: '昵称', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
-            {title: '登录名', field: 'username', visible: true, align: 'center', valign: 'middle'},
-            {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
-            {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
-            {title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'},
-            {title: '余额(元)', field: 'balance', visible: true, align: 'center', valign: 'middle'},
-            {title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
-            {title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'},
-            {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
-            {title: '是否为OEM', field: 'oem', visible: true, align: 'center', valign: 'middle',
-                formatter:function (value,row,index) {
-                if(value){
-                    return "是";
+        column.push({title: '余额(元)', field: 'balance', visible: true, align: 'center', valign: 'middle'});
+        column.push({title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'});
+    }else if(type == 1){
+        column.push({title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'});
+    }else if(type == 2){
+        column.push({title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'});
+    }
+    column.push({title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'});
+    column.push({title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'});
+    if(type == 0){
+        column.push({title: '是否为OEM', field: 'oem', visible: true, align: 'center', valign: 'middle',
+            formatter:function (value,row,index) {
+                if(value){ return "是"; }else{ return "不是"; }
+            }});
+        column.push({
+            title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
+                if(row.level == 0){
+                    return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.OEM(' + row.id + ')">O单</button>';
                 }else{
-                    return "不是";
-                }
-             }},
-            {title: 'OEM名称', field: 'oemName', visible: true, align: 'center', valign: 'middle'},
-            {
-                title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
-                    if(row.level == 0){
-                        return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.OEM(' + row.id + ')">O单</button>';
-                    }else{
-                        return '-';
-                    }
+                    return '-';
                 }
             }
-        ];
-    }else{
-        return [
-            {field: 'selectItem', radio: true},
-            {title: '昵称', field: 'nickName', visible: true, align: 'center', valign: 'middle'},
-            {title: '登录名', field: 'username', visible: true, align: 'center', valign: 'middle'},
-            {title: '手机号', field: 'phone', visible: true, align: 'center', valign: 'middle'},
-            {title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'},
-            {title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'},
-            {title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
-            {title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'},
-            {title: '二级代理', field: 'agentTwoName', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'}
-        ];
+        });
     }
-
+    return column;
 };
 
 TAgent.OEM = function (id) {
