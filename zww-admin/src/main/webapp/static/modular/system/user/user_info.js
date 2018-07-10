@@ -256,9 +256,11 @@ $(function () {
     //初始化性别选项
     $("#sex").val($("#sexValue").val());
     //日期回显示
-    if($("#birthdayValue").val() == undefined){
-    		}else{
-        $("#birthday").val(formatDate($("#birthdayValue").val(),'yyyy-MM-dd'));
+    var  birthdayValue = $("#birthdayValue").val();
+    if(birthdayValue == undefined || birthdayValue == null || birthdayValue =="" ){
+        $("#birthday").val(formatDate(new Date(),'yyyy-MM-dd'));
+    }else{
+        $("#birthday").val(formatDate(birthdayValue,'yyyy-MM-dd'));
     }
 
     // 初始化头像上传
