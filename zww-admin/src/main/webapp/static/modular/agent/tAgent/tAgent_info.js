@@ -66,12 +66,12 @@ TAgentInfoDlg.collectData = function() {
  */
 TAgentInfoDlg.addSubmit = function() {
     $("#ensure").attr("disabled",true);
-    if(!(/^1[34578]\d{9}$/.test(this.get("username")))){
+    if(!(/^1[3456789]\d{9}$/.test(this.get("username")))){
         Feng.error("登录名输入有误！");
         $("#ensure").removeAttr("disabled");
         return;
     }
-    if(!(/^1[34578]\d{9}$/.test(this.get("phone")))){
+    if(!(/^1[3456789]\d{9}$/.test(this.get("phone")))){
         Feng.error("手机号码输入有误");
         $("#ensure").removeAttr("disabled");
         return;
