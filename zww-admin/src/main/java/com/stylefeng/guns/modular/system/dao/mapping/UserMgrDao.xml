@@ -20,7 +20,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from sys_user
-		where status != 3
+		where status != 3 and deptid != 52
 		<if test="name != null and name != ''">
 			and (phone like CONCAT('%',#{name},'%')
 			or account like CONCAT('%',#{name},'%')

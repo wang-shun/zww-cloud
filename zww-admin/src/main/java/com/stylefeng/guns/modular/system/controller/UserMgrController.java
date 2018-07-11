@@ -212,14 +212,12 @@ public class UserMgrController extends BaseController {
     @Permission
     @ResponseBody
     public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer deptid) {
-        if (ShiroKit.isAdmin()) {
-            List<Map<String, Object>> users = managerDao.selectUsers(null, name, beginTime, endTime, deptid);
-            return new UserWarpper(users).warp();
-        } else {
-            DataScope dataScope = new DataScope(ShiroKit.getDeptDataScope());
-            List<Map<String, Object>> users = managerDao.selectUsers(dataScope, name, beginTime, endTime, deptid);
-            return new UserWarpper(users).warp();
+        DataScope dataScope =null;
+        if (!ShiroKit.isAdmin()) {
+            dataScope = new DataScope(ShiroKit.getDeptDataScope());
         }
+        List<Map<String, Object>> users = managerDao.selectUsers(dataScope, name, beginTime, endTime, deptid);
+        return new UserWarpper(users).warp();
     }
 
     /**
