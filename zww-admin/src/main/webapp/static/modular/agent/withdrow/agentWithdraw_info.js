@@ -120,7 +120,9 @@ $(function() {
             var list = result.list;
             for(var i=0;i<list.length;i++){
                 var pa = list[i];
-                $("#id").append("<option value='"+pa.id+"'>"+pa.cardBank + "(****" +pa.cardNo.substring(pa.cardNo.length-4,pa.cardNo)+")</option>");
+                if(pa.status ==1){
+                    $("#id").append("<option value='"+pa.id+"'>"+pa.cardBank + "(****" +pa.cardNo.substring(pa.cardNo.length-4,pa.cardNo)+")</option>");
+                }
             }
         }else{
             Feng.error(result.msg);

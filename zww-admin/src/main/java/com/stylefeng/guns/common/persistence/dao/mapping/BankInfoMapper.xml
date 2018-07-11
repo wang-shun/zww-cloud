@@ -33,7 +33,7 @@
 	<select id="getBankInfoByAgentId" parameterType="java.lang.Integer" resultType="com.stylefeng.guns.common.persistence.model.BankInfo">
 		select
 		<include refid="Base_Column_List"/>
-		from bank_info where agent_id = #{agentId}
+		from bank_info where agent_id = #{agentId} and status =1
 	</select>
 
 

@@ -52,7 +52,7 @@ BankInfoInfoDlg.collectData = function() {
     .set('cardProvince')
     .set('cardCity')
     .set('cardArea')
-    .set('cardBankNo')
+  /*  .set('cardBankNo')*/
     .set('cardNo')
     .set('idCardNo')
     .set('name')

@@ -239,7 +239,7 @@ public class AgentWithdrawController extends BaseController {
     }
 
     /**
-     * 审批成功
+     * 获取银行卡信息
      */
     @PostMapping("/getWithdrawBankInfo")
     @ResponseBody
