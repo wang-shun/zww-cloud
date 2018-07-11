@@ -33,4 +33,15 @@ public interface Const {
      */
     String API_MENU_NAME = "接口文档";
 
+    /**
+     * 代理商角色的名字
+     */
+    String AGENT_SUPER = "agent_super";
+
+    String AGENT_ONE = "agent_one";
+
+    String AGENT_TWO = "agent_two";
+
+    String AGENT_three = "agent_three";
+
 }

@@ -97,11 +97,15 @@ AgentCharge.initColumn = function () {
     AgentCharge.table.refresh({query: queryData});
 };*/
 AgentCharge.total = function () {
-    $.post(Feng.ctxPath + "/agentCharge/totle",function(result){
+
+    var ajax = new $ax(Feng.ctxPath + "/agentCharge/totle", function(result){
         $("#yesterdayProfit").html(result.yesterdayProfit/100);//昨日分润
         $("#NotProfit").html(result.NotProfit/100);//未结算分润
         $("#profit").html(result.profit/100);//已结算分润
+    },function(result){
+        Feng.error("权限不足：" + result.responseJSON.message + "!");
     });
+    ajax.start();
 };
 $(function () {
     AgentCharge.total();

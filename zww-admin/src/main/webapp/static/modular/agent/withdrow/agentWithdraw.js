@@ -53,11 +53,15 @@ AgentWithdraw.check = function () {
     }
 };
 AgentWithdraw.total = function () {
-    $.post(Feng.ctxPath + "/agentWithdraw/totle",function(result){
-           $("#undischarged").html(result.undischarged/100);//未清算
-           $("#notPutForward").html(result.notPutForward/100);//未提现
-           $("#alreadyPresented").html(result.alreadyPresented/100);//已提现
+
+    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/totle", function(result){
+            $("#undischarged").html(result.undischarged/100);//未清算
+            $("#notPutForward").html(result.notPutForward/100);//未提现
+            $("#alreadyPresented").html(result.alreadyPresented/100);//已提现
+    },function(result){
+        Feng.error("权限不足：" + result.responseJSON.message + "!");
     });
+    ajax.start();
 };
 /**
  * 点击提现

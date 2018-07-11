@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.common.annotion.Permission;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.model.AgentCharge;
 import com.stylefeng.guns.common.persistence.model.TAgent;
@@ -56,7 +58,6 @@ public class AgentChargeController extends BaseController {
     /**
      * 跳转到修改代理商分润
      */
-     
     @RequestMapping("/agentCharge_update/{agentChargeId}")
     public String agentChargeUpdate(@PathVariable Long agentChargeId, Model model) {
         AgentCharge agentCharge = agentChargeService.selectById(agentChargeId);
@@ -127,6 +128,7 @@ public class AgentChargeController extends BaseController {
      * 总数据
      */
     @PostMapping("/totle")
+    @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
     @ResponseBody
     public Map<String, Object> totle() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();

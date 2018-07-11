@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.agent.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.stylefeng.guns.common.annotion.Permission;
+import com.stylefeng.guns.common.constant.Const;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.model.*;
@@ -151,6 +153,7 @@ public class AgentWithdrawController extends BaseController {
      * 总数据
      */
     @PostMapping("/totle")
+    @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
     @ResponseBody
     public Map<String, Object> totle() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();
@@ -216,6 +219,7 @@ public class AgentWithdrawController extends BaseController {
      */
 
     @RequestMapping(value = "/withdraw")
+    @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
     @ResponseBody
     public synchronized Object withdraw(AgentWithdraw agentWithdraw) {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
