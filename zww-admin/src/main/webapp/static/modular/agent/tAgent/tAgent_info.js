@@ -15,7 +15,7 @@ TAgentInfoDlg.clearData = function() {
 /**
  * 设置对话框中的数据
  *
- * @param key 数据的名称
+ * @param key 数据的名称b
  * @param val 数据的具体值
  */
 TAgentInfoDlg.set = function(key, val) {
