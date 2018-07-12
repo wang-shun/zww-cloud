@@ -105,6 +105,27 @@ TAgent.openTAgentDetail = function () {
     }
 };
 
+/**
+ * 重置密码
+ */
+TAgent.resetPass = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/tAgent/resetPass/" + TAgent.seItem.id, function(data){
+            if(data.code == 200){
+                Feng.success("重置成功!");
+                window.parent.TAgent.table.refresh();
+                TAgentInfoDlg.close();
+            }else{
+                Feng.error(data.message);
+            }
+
+        },function(data){
+            Feng.error("重置失败!" + data.responseJSON.message + "!");
+        });
+        ajax.start();
+    }
+};
+
 TAgent.resetSearch = function () {
     $("#name").val("");
     $("#username").val("");

@@ -332,6 +332,20 @@ public class TAgentController extends BaseController {
     }
 
 
+    /**
+     * 重置密码
+     */
+    @PostMapping("/resetPass/{tAgentId}")
+    @ResponseBody
+    public Object resetPass(@PathVariable("tAgentId") Integer tAgentId) throws Exception{
+        TAgent tAgent = tAgentService.selectTAgentById(tAgentId);
+        tAgent.setPassword(ShiroKit.md5(Const.DEFAULT_PWD,tAgent.getSalt()));
+        tAgentService.updateById(tAgent);
+        User user = userMapper.selectByUsername(tAgent.getUsername());
+        user.setPassword(tAgent.getPassword());
+        userMapper.updateById(user);
+        return super.SUCCESS_TIP;
+    }
 
     /**
      * 得到o单banner总数

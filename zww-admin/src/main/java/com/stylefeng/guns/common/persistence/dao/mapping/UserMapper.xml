@@ -20,5 +20,14 @@
 		<result column="createtime" property="createtime" />
 		<result column="version" property="version" />
 	</resultMap>
+	<sql id="Base_sql">
+		id,avatar,account,password,salt,name,birthday,sex,email,phone,roleid,deptid,status,createtime,version
+	</sql>
+
+	<select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+		  select
+            <include refid="Base_sql"/>
+		  from sys_user where account = #{account}
+	</select>
 
 </mapper>

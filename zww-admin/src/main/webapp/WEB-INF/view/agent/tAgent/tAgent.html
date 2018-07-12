@@ -29,7 +29,6 @@
                             <#button name="搜索" icon="fa-search" clickFun="TAgent.search()"/>
                         </div>
                         <div class="col-sm-1">
-
                             <#button name="重置" icon="fa-trash" clickFun="TAgent.resetSearch()" space="true"/>
                         </div>
                     </div>
@@ -43,6 +42,9 @@
                     @}
                     @if(shiro.hasPermission("/tAgent/execl")){
                       <#button name="execl" icon="fa-plus" clickFun="TAgent.execl(this)" space="true"/>
+                    @}
+                    @if(shiro.hasPermission("/tAgent/update")){
+                    <#button name="重置密码" icon="fa-plus" clickFun="TAgent.resetPass()" space="true"/>
                     @}
                 </div>
                 <#table id="TAgentTable"/>
