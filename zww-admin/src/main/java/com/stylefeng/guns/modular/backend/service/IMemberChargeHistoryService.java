@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.common.persistence.model.Account;
 import com.stylefeng.guns.common.persistence.model.MemberChargeHistory;
+import com.stylefeng.guns.common.persistence.model.User;
 
 /**
  * <p>
@@ -20,5 +21,5 @@ public interface IMemberChargeHistoryService extends IService<MemberChargeHistor
     List<Map<String, Object>> selectList(Page<MemberChargeHistory> page,Integer condition);
 
     //生成消费记录
-    Integer insertChargeHistory(Account account);
+    Integer insertChargeHistory(Account account,User userdto);
 }

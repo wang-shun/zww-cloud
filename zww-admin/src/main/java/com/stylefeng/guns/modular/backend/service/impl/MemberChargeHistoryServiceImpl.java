@@ -5,6 +5,7 @@ import com.stylefeng.guns.common.persistence.dao.ChargeOrderMapper;
 import com.stylefeng.guns.common.persistence.model.Account;
 import com.stylefeng.guns.common.persistence.model.MemberChargeHistory;
 import com.stylefeng.guns.common.persistence.dao.MemberChargeHistoryMapper;
+import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.modular.backend.service.IMemberChargeHistoryService;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -40,11 +41,11 @@ public class MemberChargeHistoryServiceImpl extends ServiceImpl<MemberChargeHist
     }
 
     @Override
-    public Integer insertChargeHistory(Account account) {
+    public Integer insertChargeHistory(Account account,User userdto) {
         MemberChargeHistory chargeRecord = new MemberChargeHistory();
         Account acc = accountMapper.selectById(account.getId());
         chargeRecord.setChargeDate(new Date());
-        chargeRecord.setChargeMethod("客服改币："+account.getAddReason());
+        chargeRecord.setChargeMethod(userdto.getName() + "改币："+account.getAddReason());
         chargeRecord.setCoins(acc.getCoins());
         chargeRecord.setCoinsSum(account.getCoins()-acc.getCoins());
         chargeRecord.setSuperTicket(acc.getSuperTicket());

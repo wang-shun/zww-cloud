@@ -8,6 +8,7 @@ import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.base.tips.TipType;
 import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.DateUtil;
 import com.stylefeng.guns.modular.backend.service.IMemberChargeHistoryService;
 import com.stylefeng.guns.modular.backend.service.IMemberService;
@@ -252,7 +253,8 @@ public class MemberController extends BaseController {
     @ResponseBody
     public Object update(Account account) {
         //加币记录
-        memberChargeHistoryService.insertChargeHistory(account);
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        memberChargeHistoryService.insertChargeHistory(account,userdto);
         accountMapper.updateById(account);
         return super.SUCCESS_TIP;
     }
