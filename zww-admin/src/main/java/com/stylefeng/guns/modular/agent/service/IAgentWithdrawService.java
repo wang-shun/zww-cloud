@@ -29,7 +29,7 @@ public interface IAgentWithdrawService extends IService<AgentWithdraw> {
 
     AgentWithdraw getAgentWithdrawById(Integer id);
 
-    int createAgentWithdraw(BankInfo bankInfo, Long amount, Long fee);
+    int createAgentWithdraw(BankInfo bankInfo, Long amount, Long fee,Date date);
 
     Date getDateByAgentIdAndStatus(Integer agentId);
 }

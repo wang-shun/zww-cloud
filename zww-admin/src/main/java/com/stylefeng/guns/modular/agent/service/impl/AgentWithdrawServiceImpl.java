@@ -49,7 +49,7 @@ public class AgentWithdrawServiceImpl extends ServiceImpl<AgentWithdrawMapper, A
     }
 
     @Override
-    public int createAgentWithdraw(BankInfo bankInfo, Long amount, Long fee) {
+    public int createAgentWithdraw(BankInfo bankInfo, Long amount, Long fee,Date date) {
         AgentWithdraw agentWithdraw = new AgentWithdraw();
         agentWithdraw.setAgentId(bankInfo.getAgentId());
         agentWithdraw.setStatus(0);
@@ -61,7 +61,7 @@ public class AgentWithdrawServiceImpl extends ServiceImpl<AgentWithdrawMapper, A
         agentWithdraw.setPhone(bankInfo.getPhone());
         agentWithdraw.setIdCardNo(bankInfo.getIdCardNo());
         agentWithdraw.setCardNo(bankInfo.getCardNo());
-        agentWithdraw.setCreateDate(new Date());
+        agentWithdraw.setCreateDate(date);
         return agentWithdrawMapper.insert(agentWithdraw);
     }
 

@@ -7,6 +7,7 @@ import com.stylefeng.guns.common.constant.factory.PageFactory;
 import com.stylefeng.guns.common.persistence.dao.RoleMapper;
 import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo;
+import com.stylefeng.guns.common.weixin.WXUtil;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.shiro.ShiroKit;
@@ -30,6 +31,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -222,21 +224,52 @@ public class AgentWithdrawController extends BaseController {
     @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
     @ResponseBody
     public synchronized Object withdraw(AgentWithdraw agentWithdraw) {
+        Date now = new Date();
+        TSystemPref START_DATE = systemPrefService.selectByCode("START_DATE");//提现开始时间
+        TSystemPref END_DATE = systemPrefService.selectByCode("END_DATE");//提现结束时间
+        if(START_DATE != null && END_DATE != null){
+            SimpleDateFormat sim = new SimpleDateFormat("HHmmss");
+            long start = Long.valueOf(START_DATE.getValue());
+            long end = Long.valueOf(END_DATE.getValue());
+            long nowTime = Long.valueOf(sim.format(now));
+            if(nowTime < start || nowTime > end){
+                return new ErrorTip(500,"提现时间：早8:30到晚17:30，其他时间段关闭提现！");
+            }
+        }
+        Integer isHostory = WXUtil.isHostory(now);
+        if(isHostory != null && isHostory != 0){
+            return new ErrorTip(500,"暂不支持节假日提现！");
+        }
+        if(isHostory == null && WXUtil.isWeekend(now)){
+            return new ErrorTip(500,"暂不支持周末提现！");
+        }
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
-        if(tAgent.getStatus() == 2) return new ErrorTip(500,"该账户已被冻结，请联系上级代理查询！");
-        if(tAgent.getStatus() == 3) return new ErrorTip(500,"该账户已失效!");
-        if(agentWithdraw.getId() == null || agentWithdraw.getId() == 0) return new ErrorTip(500,"请选择到账卡号！");
+        if(tAgent.getStatus() == 2){
+            return new ErrorTip(500,"该账户已被冻结，请联系上级代理查询！");
+        }
+        if(tAgent.getStatus() == 3) {
+            return new ErrorTip(500,"该账户已失效!");
+        }
+        if(agentWithdraw.getId() == null || agentWithdraw.getId() == 0){
+            return new ErrorTip(500,"请选择到账卡号！");
+        }
         BankInfo bankInfo = bankInfoService.selectById(agentWithdraw.getId());
-        if(bankInfo == null) return new ErrorTip(500,"到账卡号选择错误，请重新选择！");
+        if(bankInfo == null){
+            return new ErrorTip(500,"到账卡号选择错误，请重新选择！");
+        }
         Long balance = tAgent.getBalance()-tAgent.getBalanceDisabled();//余额(单位：分)
         TSystemPref MIN_WITHDRAW = systemPrefService.selectByCode("MIN_WITHDRAW");
         TSystemPref SERVICE_CHARGE = systemPrefService.selectByCode("SERVICE_CHARGE");
         long min = MIN_WITHDRAW == null ? 10000 : Long.valueOf(MIN_WITHDRAW.getValue());//最小提现金额(单位：分)
         long fee = SERVICE_CHARGE == null ? 200 : Long.valueOf(SERVICE_CHARGE.getValue());//手续费(单位：分)
-        if(balance < min) return new ErrorTip(500,"余额不足" + min*0.01 + "元,提现失败！");
-        int i = agentWithdrawService.createAgentWithdraw(bankInfo,balance,fee);
-        if(i == 0) return new ErrorTip(500,"插入失败,提现失败！");
+        if(balance < min){
+            return new ErrorTip(500,"余额不足" + min*0.01 + "元,提现失败！");
+        }
+        int i = agentWithdrawService.createAgentWithdraw(bankInfo,balance,fee,now);
+        if(i == 0){
+            return new ErrorTip(500,"插入失败,提现失败！");
+        }
         //减余额
         agentService.updateAmount(balance,0,tAgent.getId());
         return super.SUCCESS_TIP;
