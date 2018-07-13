@@ -25,6 +25,7 @@ AdvertisementInfo.initColumn = function () {
             {title: '下载次数', field: 'downCount', visible: true, align: 'center', valign: 'middle'},
             {title: 'x轴', field: 'xAxis', visible: true, align: 'center', valign: 'middle'},
             {title: 'y轴', field: 'yAxis', visible: true, align: 'center', valign: 'middle'},
+            {title: '文字颜色', field: 'wordColor', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
             {title: '修改时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'}
     ];
@@ -51,7 +52,7 @@ AdvertisementInfo.openAddAdvertisementInfo = function () {
     var index = layer.open({
         type: 2,
         title: '添加文案管理',
-        area: ['800px', '420px'], //宽高
+        area: ['832px', '477px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/advertisementInfo/advertisementInfo_add'
@@ -67,7 +68,7 @@ AdvertisementInfo.openAdvertisementInfoDetail = function () {
         var index = layer.open({
             type: 2,
             title: '文案管理详情',
-            area: ['800px', '420px'], //宽高
+            area: ['832px', '477px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/advertisementInfo/advertisementInfo_update/' + AdvertisementInfo.seItem.id

@@ -44,6 +44,8 @@ public class AdvertisementInfo extends Model<AdvertisementInfo> {
 	private Double xAxis;
 	@TableField("y_axis")
 	private Double yAxis;
+	@TableField("word_color")
+	private String wordColor;
 	@TableField("create_date")
 	private Date createDate;
 	@TableField("update_date")
@@ -122,6 +124,14 @@ public class AdvertisementInfo extends Model<AdvertisementInfo> {
 		this.updateDate = updateDate;
 	}
 
+	public String getWordColor() {
+		return wordColor;
+	}
+
+	public void setWordColor(String wordColor) {
+		this.wordColor = wordColor;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -137,6 +147,7 @@ public class AdvertisementInfo extends Model<AdvertisementInfo> {
 			", downCount=" + downCount +
 			", xAxis=" + xAxis +
 			", yAxis=" + yAxis +
+			", wordColor=" + wordColor +
 			", createDate=" + createDate +
 			", updateDate=" + updateDate +
 			"}";

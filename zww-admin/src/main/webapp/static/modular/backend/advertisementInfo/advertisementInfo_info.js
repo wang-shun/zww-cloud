@@ -52,6 +52,7 @@ AdvertisementInfoInfoDlg.collectData = function() {
     .set('downCount')
     .set('xAxis')
     .set('yAxis')
+    .set('wordColor')
     .set('createDate')
     ;
 }
