@@ -75,7 +75,7 @@
 		<if test="addrName != null and addrName != '' ">
 			and b.receiver_name like concat('%',#{addrName},'%')
 		</if>
-		order by a.order_by,a.modified_date DESC
+		order by a.modified_date DESC,a.order_by DESC
 	</select>
 
 	<!-- 查询已发货发货的订单 -->
@@ -96,7 +96,7 @@
 			and b.receiver_name like concat
 			('%',#{addrName},'%')
 		</if>
-		GROUP BY a.deliver_number,d.doll_id ORDER BY a.order_by,a.modified_date DESC
+		GROUP BY a.deliver_number,d.doll_id ORDER BY a.modified_date DESC,a.order_by DESC
 	</select>
 
 
@@ -120,6 +120,6 @@
 		<if test="addrName != null and addrName != '' ">
 			and b.receiver_name like concat('%',#{addrName},'%')
 		</if>
-		GROUP BY b.receiver_phone,d.doll_id ORDER BY a.order_by,a.modified_date DESC
+		GROUP BY b.receiver_phone,d.doll_id ORDER BY a.modified_date DESC,a.order_by DESC
 	</select>
 </mapper>

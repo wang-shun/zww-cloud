@@ -14,16 +14,7 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', checkbox: true},
-          //  {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-       /*     {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle',
-                formatter:function (value,row,index) {
-                    return '<a href="javascript:;" onclick="TDollOrder.goodsDetail(\'订单详情\',\'tDollOrder\/goodsDetail\',\''+value+'\',\'300\',\'450\')">'+value+'</a>';
-                }
-            },*/
-         //   {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
-          //  {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
-           // {title: '娃娃编号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃头像', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return '<img src="'+value+'" width="80" class="img-rounded" />';
