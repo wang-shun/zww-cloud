@@ -70,14 +70,12 @@
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='申请发货'
 		<if test="phone!=null and phone != '' ">
-			and b.receiver_phone like concat
-			('%',#{phone},'%')
+			and b.receiver_phone like concat('%',#{phone},'%')
 		</if>
 		<if test="addrName != null and addrName != '' ">
-			and b.receiver_name like concat
-			('%',#{addrName},'%')
+			and b.receiver_name like concat('%',#{addrName},'%')
 		</if>
-		order by a.modified_date DESC
+		order by a.order_by,a.modified_date DESC
 	</select>
 
 	<!-- 查询已发货发货的订单 -->
@@ -86,7 +84,7 @@
 		a.order_by orderBy,a.status status,a.deliver_date deliverDate,a.deliver_amount deliverAmount,
 		a.deliver_method deliverMethod, a.deliver_number deliverNumber,a.modified_date modifiedDate,
 		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
-		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,d.quantity quantity
+		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,COUNT(a.id) quantity
 		from t_doll_order a LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		where a.status='已发货'
@@ -98,7 +96,7 @@
 			and b.receiver_name like concat
 			('%',#{addrName},'%')
 		</if>
-		order by a.modified_date DESC
+		GROUP BY a.deliver_number,d.doll_id ORDER BY a.order_by,a.modified_date DESC
 	</select>
 
 
@@ -112,7 +110,7 @@
 
 	<select id="selectTDollOrderExecl" resultType="com.stylefeng.guns.common.persistence.model.TDollOrder">
 		select b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
-		b.county county, b.street street,d.doll_name dollName
+		b.county county, b.street street,d.doll_name dollName,COUNT(a.id) quantity
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='申请发货'
@@ -122,6 +120,6 @@
 		<if test="addrName != null and addrName != '' ">
 			and b.receiver_name like concat('%',#{addrName},'%')
 		</if>
-		order by b.receiver_name DESC,b.county DESC
+		GROUP BY b.receiver_phone,d.doll_id ORDER BY a.order_by,a.modified_date DESC
 	</select>
 </mapper>

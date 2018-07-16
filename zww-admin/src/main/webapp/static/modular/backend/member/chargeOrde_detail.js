@@ -16,13 +16,13 @@ var ChargeOrder = {
 ChargeOrder.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单编号', field: 'orderNo', visible: true, align: 'center', valign: 'middle'},
+          //  {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+          //  {title: '订单编号', field: 'orderNo', visible: true, align: 'center', valign: 'middle'},
             // {title: '充值规则id', field: 'chargeruleid', visible: true, align: 'center', valign: 'middle'},
             {title: '充值规则名称', field: 'chargeName', visible: true, align: 'center', valign: 'middle'},
             {title: '充值金额', field: 'price', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberId', visible: false, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
+           // {title: '用户id', field: 'memberId', visible: false, align: 'center', valign: 'middle'},
+           // {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名称', field: 'memberName', visible: true, align: 'center', valign: 'middle'},
             // {title: '充值类型', field: 'chargeType', visible: true, align: 'center', valign: 'middle'},
             {title: '订单状态', field: 'chargeState', visible: false, align: 'center', valign: 'middle'},

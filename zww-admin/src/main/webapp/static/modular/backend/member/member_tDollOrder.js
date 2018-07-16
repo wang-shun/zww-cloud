@@ -14,11 +14,11 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'orderDate', visible: true, align: 'center', valign: 'middle'},
+          //  {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+           // {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle'},
+
             // {title: '用户序号', field: 'orderBy', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
+            //{title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃编号', field: 'dollCodes', visible: true, align: 'center', valign: 'middle'},
             {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
@@ -31,6 +31,7 @@ TDollOrder.initColumn = function () {
                     }
                 }
             },
+            {title: '创建时间', field: 'orderDate', visible: true, align: 'center', valign: 'middle'},
             {title: '订单状态', field: 'status', visible: true, align: 'center', valign: 'middle'},
             // {title: '寄存有效期', field: 'stockValidDate', visible: true, align: 'center', valign: 'middle'},
             // {title: '发货时间', field: 'deliverDate', visible: true, align: 'center', valign: 'middle'},

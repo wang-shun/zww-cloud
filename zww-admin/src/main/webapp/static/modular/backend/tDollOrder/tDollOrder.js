@@ -22,7 +22,7 @@ TDollOrder.initColumn = function () {
             },*/
          //   {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
-            {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
+          //  {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
            // {title: '娃娃编号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃头像', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {

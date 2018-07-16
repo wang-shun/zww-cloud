@@ -88,22 +88,22 @@ public class TDollOrder extends Model<TDollOrder> {
 	private String comment;
 
 	@TableField(exist=false)
-	@Excel(name = "收货人", orderNum = "2", isImportField = "addrName",width = 20.0D)
+	@Excel(name = "收货人", orderNum = "3", isImportField = "addrName",width = 20.0D)
 	private String addrName;//收货人
 	@TableField(exist=false)
-	@Excel(name = "收货手机", orderNum = "3", isImportField = "addrPhone",width = 20.0D)
+	@Excel(name = "收货手机", orderNum = "4", isImportField = "addrPhone",width = 15.0D)
 	private String addrPhone;//收货手机
 	@TableField(exist=false)
-	@Excel(name = "省", orderNum = "4", isImportField = "province",width = 15.0D)
+	@Excel(name = "省", orderNum = "5", isImportField = "province",width = 15.0D)
 	private String province;//省
 	@TableField(exist=false)
-	@Excel(name = "市", orderNum = "5",  isImportField = "city",width = 15.0D)
+	@Excel(name = "市", orderNum = "6",  isImportField = "city",width = 15.0D)
 	private String city;//市
 	@TableField(exist=false)
-	@Excel(name = "区", orderNum = "6", isImportField = "county",width = 15.0D)
+	@Excel(name = "区", orderNum = "7", isImportField = "county",width = 15.0D)
 	private String county;//区
 	@TableField(exist=false)
-	@Excel(name = "街道", orderNum = "7", isImportField = "street",width = 50.0D)
+	@Excel(name = "街道", orderNum = "8", isImportField = "street",width = 70.0D)
 	private String street;//街道
 
 	@TableField(exist=false)
@@ -113,10 +113,11 @@ public class TDollOrder extends Model<TDollOrder> {
 	private String dollCodes; //娃娃编号
 
 	@TableField(exist=false)
+	@Excel(name = "数量", orderNum = "2", isImportField = "quantity")
 	private Integer quantity; //娃娃数量
 
 	@TableField(exist=false)
-	@Excel(name = "娃娃名称", orderNum = "1",isImportField = "dollName",width = 30.0D)
+	@Excel(name = "娃娃名称", orderNum = "1",isImportField = "dollName",width = 20.0D)
 	private String dollName; //娃娃名称
 
 	@TableField(exist=false)

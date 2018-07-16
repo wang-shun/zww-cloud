@@ -14,9 +14,20 @@ var MemberCatchDetail = {
 MemberCatchDetail.initColumn = function () {
     return [
     		{field: 'selectItem', radio: true, visible: false},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
+           // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             // {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
+            //{title: '机器id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
+             {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
+             {title: '娃娃编号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
+             {title: '娃娃图片', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    if(value == null){
+                        return '<img  src="1" width="80" class="img-rounded" />'
+                    }else {
+                        return '<img  src="'+value+'" width="80" class="img-rounded" />';
+                    }
+                }
+            },
             {title: '抓取时间', field: 'catchDate', visible: true, align: 'center', valign: 'middle'},
             {title: '抓取状态', field: 'catchStatus', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
@@ -26,9 +37,9 @@ MemberCatchDetail.initColumn = function () {
                         return '<span class="label label-success radius">'+value+'</span>';
                     }
                 }
-            },
-            {title: '视频地址', field: 'videoUrl', visible: true, align: 'center', valign: 'middle'},
-            {title: '游戏编号', field: 'gameNum', visible: true, align: 'center', valign: 'middle'}
+            }
+           // {title: '视频地址', field: 'videoUrl', visible: true, align: 'center', valign: 'middle'},
+           // {title: '游戏编号', field: 'gameNum', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
