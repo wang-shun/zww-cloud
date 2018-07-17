@@ -140,7 +140,7 @@ public class MemberComplaintServiceImpl extends ServiceImpl<MemberComplaintMappe
                 dollOrder.setModifiedDate(new Date());
                 dollOrder.setModifiedBy(memberComplaintAll.getMemberId());
                 dollOrder.setStatus("寄存中");
-                dollOrder.setDollRedeemCoins(doll.getRedeemCoins());
+                dollOrder.setDollRedeemCoins(doll.getPrice());
                 if ("1".equals(String.valueOf(doll.getMachineType()))) {//练习房 直接兑换
                     dollOrder.setStatus("已兑换");
                     dollOrder.setDeliverCoins(doll.getRedeemCoins());

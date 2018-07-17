@@ -14,11 +14,6 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-          //  {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-           // {title: '订单号', field: 'orderNumber', visible: true, align: 'center', valign: 'middle'},
-
-            // {title: '用户序号', field: 'orderBy', visible: true, align: 'center', valign: 'middle'},
-            //{title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃编号', field: 'dollCodes', visible: true, align: 'center', valign: 'middle'},
             {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
@@ -32,24 +27,7 @@ TDollOrder.initColumn = function () {
                 }
             },
             {title: '创建时间', field: 'orderDate', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单状态', field: 'status', visible: true, align: 'center', valign: 'middle'},
-            // {title: '寄存有效期', field: 'stockValidDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '发货时间', field: 'deliverDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle'},
-            // {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
-            // {title: '收货地址', field: 'address', visible: true, align: 'center', valign: 'middle',
-            //     formatter:function (value,row,index) {
-            //         return row.province+row.city+row.county+row.street;
-            //     }
-            // },
-            // {title: '发货方式（快递公司名称）', field: 'deliverMethod', visible: true, align: 'center', valign: 'middle'},
-            // {title: '快递单号', field: 'deliverNumber', visible: true, align: 'center', valign: 'middle'},
-            // {title: '邮费金额，暂不用，预留字段', field: 'deliverAmount', visible: true, align: 'center', valign: 'middle'},
-            // {title: '邮费等值的游戏币', field: 'deliverCoins', visible: true, align: 'center', valign: 'middle'},
-            // {title: '发货地址id', field: 'addressId', visible: true, align: 'center', valign: 'middle'},
-            // {title: '申请发货时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'comment', visible: true, align: 'center', valign: 'middle'}
+            {title: '订单状态', field: 'status', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 

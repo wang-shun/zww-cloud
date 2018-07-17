@@ -37,5 +37,5 @@ public interface TDollMapper extends BaseMapper<TDoll> {
 	//概率机器
 	List<TDoll> getDollListByProbability(@Param("list") List<MachineProbability> list);
 
-
+	TDoll getDollByMachineCode(@Param("machineCode") String machineCode);
 }

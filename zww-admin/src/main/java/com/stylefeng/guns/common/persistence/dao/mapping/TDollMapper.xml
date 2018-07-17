@@ -138,5 +138,10 @@
 		</foreach>
 	</select>
 
-
+	<select id="getDollByMachineCode" resultType="TDoll" parameterType="java.lang.String">
+		select
+		id, name, a.tbimg_real_path tbimgRealPath
+		from t_doll
+		where machine_code = #{machineCode}
+	</select>
 </mapper>

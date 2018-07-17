@@ -54,7 +54,7 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
     private TSystemPrefMapper tSystemPrefMapper;
 
     @Autowired
-    private DollInfoMapper dollInfoMapper;
+    private TDollMapper dollMapper;
 
 
     //待发货订单
@@ -125,7 +125,7 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         Integer deliverCoin = Integer.valueOf(deliverCoins.getValue());
         Integer validDate = Integer.valueOf(systemPref.getValue());
         //通过娃娃编号查询tdoll
-        DollInfo dollInfo = dollInfoMapper.selectByDollCode(tDollOrder.getDollCodes());
+        TDoll doll = dollMapper.getDollByMachineCode(tDollOrder.getDollCodes());
         TDollOrderItem dollOrderItem = new TDollOrderItem();
         String orderNum = StringUtils.getOrderNumber();
         while (tDollOrderMapper.selectByOrderNum(orderNum) != null) {
@@ -143,19 +143,21 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         tDollOrder.setModifiedDate(new Date());
         tDollOrder.setModifiedBy(ShiroKit.getUser().getId());
         tDollOrder.setStatus("寄存中");
-        if(dollInfo != null){
-            tDollOrder.setDollRedeemCoins(dollInfo.getRedeemCoins()==null?0:dollInfo.getRedeemCoins());
+        if(doll != null){
+            tDollOrder.setDollRedeemCoins(doll.getPrice());
         }else {
-            tDollOrder.setDollRedeemCoins(0);
+            tDollOrder.setDollRedeemCoins(19);
         }
         tDollOrder.setStockValidDate(TimeUtil.plusDay(validDate));
         tDollOrderMapper.insert(tDollOrder);
 
         dollOrderItem.setOrderId(tDollOrder.getId());
-        dollOrderItem.setDollId(1);
-        dollOrderItem.setQuantity(tDollOrder.getQuantity());
+        dollOrderItem.setDollId(doll.getId());
+        dollOrderItem.setQuantity(1);
         dollOrderItem.setCreatedDate(new Date());
         dollOrderItem.setDollCode(tDollOrder.getDollCodes());
+        dollOrderItem.setDollName(doll.getName());
+        dollOrderItem.setDollUrl(doll.getTbimgRealPath());
         return retBool(tDollOrderItemMapper.insert(dollOrderItem));
     }
    @Override
@@ -163,7 +165,7 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         Date orderDate = history.getCatchDate();
         String orderNumber = StringUtils.getOrderNumber();
         TDollOrder order = new TDollOrder(orderNumber,orderDate,history.getMemberId().intValue(),"寄存中",
-                DateUtils.addDays(orderDate,15), 50,  modifiedBy, 95);
+                DateUtils.addDays(orderDate,15), 50,  modifiedBy, 19);
        int i = tDollOrderMapper.insert(order);
        if(i < 0){
            return false;
