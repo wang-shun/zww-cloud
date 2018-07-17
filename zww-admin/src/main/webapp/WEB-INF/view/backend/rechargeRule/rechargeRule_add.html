@@ -1,0 +1,33 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="price" name="充值金额(元)或者抓取次数" underline="true"/>
+                            <#input id="coin" name="赠送金币" underline="true"/>
+                            <#input id="sort" name="充值规则排序"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="createDate" name="创建时间" underline="true"/>
+                            <#input id="updateDate" name="更新时间" underline="true"/>
+                            <#SelectCon id="type" name="参数规则" >
+                                 <option value="1" >充值</option>
+                                 <option value="2" >抓取</option>
+                            </#SelectCon>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="RechargeRuleInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="RechargeRuleInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/backend/rechargeRule/rechargeRule_info.js"></script>
+@}

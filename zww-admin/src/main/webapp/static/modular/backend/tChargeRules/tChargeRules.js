@@ -16,7 +16,7 @@ TChargeRules.initColumn = function () {
         {field: 'selectItem', radio: true},
             // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'orderby', visible: true, align: 'center', valign: 'middle'},
-            {title: '规则名称', field: 'chargeName', visible: true, align: 'center', valign: 'middle'},
+            {title: '礼包名称', field: 'chargeName', visible: true, align: 'center', valign: 'middle'},
             {title: '价格', field: 'chargePrice', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃币', field: 'coinsCharge', visible: true, align: 'center', valign: 'middle'},
             {title: '赠送娃娃币', field: 'coinsOffer', visible: true, align: 'center', valign: 'middle'},
@@ -32,7 +32,7 @@ TChargeRules.initColumn = function () {
             // {title: '修改人id', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
             // {title: '充值类型', field: 'chargeType', visible: true, align: 'center', valign: 'middle'},
             // {title: '限购次数,-1为无限次', field: 'chargeTimesLimit', visible: true, align: 'center', valign: 'middle'},
-            {title: '规则状态', field: 'rulesStatus', visible: true, align: 'center', valign: 'middle',
+            {title: '礼包状态', field: 'rulesStatus', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     if(value == 1){
                         return '<span class="label label-success radius">上架</span>';
@@ -65,7 +65,7 @@ TChargeRules.check = function () {
 TChargeRules.openAddTChargeRules = function () {
     var index = layer.open({
         type: 2,
-        title: '添加充值规则列表',
+        title: '添加充值礼包列表',
         area: ['900px', '520px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -81,7 +81,7 @@ TChargeRules.openTChargeRulesDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '充值规则列表详情',
+            title: '充值礼包列表详情',
             area: ['900px', '520px'], //宽高
             fix: false, //不固定
             maxmin: true,
