@@ -14,14 +14,10 @@ var MemberChargeHistory = {
 MemberChargeHistory.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户序号', field: 'memberId', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'memberIDs', visible: true, align: 'center', valign: 'middle'},
-            {title: '充值金额', field: 'prepaidAmt', visible: true, align: 'center', valign: 'middle'},
+            {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
+            {title: '机器名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
+            {title: '方式', field: 'chargeMethod', visible: true, align: 'center', valign: 'middle'},
             {title: '金币数', field: 'coins', visible: true, align: 'center', valign: 'middle'},
-            {title: '充值类型', field: 'type', visible: true, align: 'center', valign: 'middle'},
-            {title: '获取方式', field: 'chargeMethod', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器id', field: 'dollId', visible: true, align: 'center', valign: 'middle'},
             {title: '加币前', field: 'coinsBefore', visible: true, align: 'center', valign: 'middle'},
             {title: '加币后', field: 'coinsAfter', visible: true, align: 'center', valign: 'middle'},
             {title: '充值时间', field: 'chargeDate', visible: true, align: 'center', valign: 'middle'}
@@ -95,7 +91,10 @@ MemberChargeHistory.delete = function () {
  */
 MemberChargeHistory.search = function () {
     var queryData = {};
-    queryData['memberId'] = $("#memberId").val();
+    queryData['name'] = $("#name").val();
+    queryData['machineCode'] = $("#machineCode").val();
+    queryData['type'] = $("#type").val();
+    queryData['chargeDate'] = $("#chargeDate").val();
     MemberChargeHistory.table.refresh({query: queryData});
 };
 

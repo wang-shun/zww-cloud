@@ -12,7 +12,7 @@ public class MemberChargeHistoryWarpper extends BaseControllerWarpper{
 
 	@Override
 	protected void warpTheMap(Map<String, Object> map) {
-		Integer userId = (Integer) map.get("memberId");
-		 map.put("memberIDs", ZwwContentFactory.me().getMemberId(userId));
+		//Integer userId = (Integer) map.get("memberId");
+		// map.put("memberIDs", ZwwContentFactory.me().getMemberId(userId));
 	}
 }

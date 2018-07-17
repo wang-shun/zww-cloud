@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.common.persistence.model.Account;
 import com.stylefeng.guns.common.persistence.model.MemberChargeHistory;
 import com.stylefeng.guns.common.persistence.model.User;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import com.stylefeng.guns.common.persistence.model.User;
  * @since 2018-01-03
  */
 public interface IMemberChargeHistoryService extends IService<MemberChargeHistory> {
-    List<Map<String, Object>> selectList(Page<MemberChargeHistory> page,Integer condition);
+    List<Map<String, Object>> selectList(Page<MemberChargeHistory> page, @Param("name")String name,@Param("machineCode")String machineCode, @Param("type")String type, @Param("chargeDate")String chargeDate);
 
     //生成消费记录
     Integer insertChargeHistory(Account account,User userdto);

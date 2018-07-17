@@ -22,15 +22,30 @@
     </sql>
 
 	<select id="selectList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select
-		a.id, member_id AS memberId, prepaid_amt AS prepaidAmt, a.coins coins, charge_date AS chargeDate, type,
-		charge_method AS chargeMethod, doll_id AS dollId, coins_before AS coinsBefore, coins_after AS coinsAfter 
-		from t_member_charge_history a 
-		where 1=1
-		<if test="condition != null">
-			and a.member_id = #{condition}
+		select b.name name, prepaid_amt AS prepaidAmt, a.coins coins, charge_date AS chargeDate, type ,charge_method AS chargeMethod, coins_before AS coinsBefore, coins_after AS coinsAfter
+		<if test="type != null and type != '' and type == 'income'">
+			,"-" dollName
+			from t_member_charge_history a,t_member b where a.member_id=b.id
 		</if>
-		ORDER by id DESC
+		<if test="type != null and type != '' and type == 'expense'">
+			,c.`name` dollName
+			from t_member_charge_history a,t_member b,t_doll c where a.member_id=b.id and a.doll_id =c.id
+			and a.type = #{type}
+		</if>
+		<if test="type == null or type == ''">
+			,c.`name` dollName
+			from t_member_charge_history a,t_member b,t_doll c where a.member_id=b.id and a.doll_id =c.id
+		</if>
+		<if test="name != null and name != ''">
+			and b.name like CONCAT('%',#{name},'%')
+		</if>
+		<if test="machineCode != null and machineCode != '' and type != 'income'">
+			and c.machine_code = #{machineCode}
+		</if>
+		<if test="chargeDate != null and chargeDate != ''">
+			and DATEDIFF(a.charge_date,#{chargeDate}) &gt;= 0
+		</if>
+		ORDER BY a.charge_date desc
 	</select>
 
 	<!-- 更新总币数 -->

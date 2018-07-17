@@ -20,7 +20,7 @@ import com.stylefeng.guns.common.persistence.model.MemberChargeHistory;
 public interface MemberChargeHistoryMapper extends BaseMapper<MemberChargeHistory> {
 
     //分页
-    List<Map<String, Object>> selectList(@Param("page") Page<MemberChargeHistory> page,@Param("condition") Integer condition);
+    List<Map<String, Object>> selectList(@Param("page") Page<MemberChargeHistory> page,@Param("name")String name,@Param("machineCode")String machineCode,@Param("type")String type,@Param("chargeDate")String chargeDate);
 
     //更新用户金币
     Integer updateMemberCount(MemberChargeHistory chargeRecord);

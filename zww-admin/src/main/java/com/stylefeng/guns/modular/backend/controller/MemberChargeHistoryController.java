@@ -71,16 +71,9 @@ public class MemberChargeHistoryController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String memberId) {
-        Integer userId = 0;
-        if(memberId != null && !("".equals(memberId))){
-            Member member = iMemberService.selectIdByMemberId(memberId);
-            if(member != null){
-                userId = member.getId();
-            }
-        }
+    public Object list(String name,String machineCode,String type,String chargeDate) {
     	Page<MemberChargeHistory> page = new PageFactory<MemberChargeHistory>().defaultPage();
-    	List<Map<String, Object>> result = memberChargeHistoryService.selectList(page,userId);
+    	List<Map<String, Object>> result = memberChargeHistoryService.selectList(page,name,machineCode,type,chargeDate);
     	page.setRecords((List<MemberChargeHistory>)new MemberChargeHistoryWarpper(result).warp());
    	 	return super.packForBT(page);
     }

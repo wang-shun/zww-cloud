@@ -36,8 +36,8 @@ public class MemberChargeHistoryServiceImpl extends ServiceImpl<MemberChargeHist
     private AccountMapper accountMapper;
 
     @Override
-    public List<Map<String, Object>> selectList(Page<MemberChargeHistory> page,Integer condition) {
-        return memberChargeHistoryMapper.selectList(page,condition);
+    public List<Map<String, Object>> selectList(Page<MemberChargeHistory> page,String name,String machineCode,String type,String chargeDate) {
+        return memberChargeHistoryMapper.selectList(page,name,machineCode,type,chargeDate);
     }
 
     @Override
