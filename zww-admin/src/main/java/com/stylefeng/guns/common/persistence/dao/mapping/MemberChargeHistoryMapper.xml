@@ -22,24 +22,16 @@
     </sql>
 
 	<select id="selectList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select b.name name, prepaid_amt AS prepaidAmt, a.coins coins, charge_date AS chargeDate, type ,charge_method AS chargeMethod, coins_before AS coinsBefore, coins_after AS coinsAfter
-		<if test="type != null and type != '' and type == 'income'">
-			,"-" dollName
-			from t_member_charge_history a,t_member b where a.member_id=b.id
-		</if>
-		<if test="type != null and type != '' and type == 'expense'">
-			,c.`name` dollName
-			from t_member_charge_history a,t_member b,t_doll c where a.member_id=b.id and a.doll_id =c.id
-			and a.type = #{type}
-		</if>
-		<if test="type == null or type == ''">
-			,c.`name` dollName
-			from t_member_charge_history a,t_member b,t_doll c where a.member_id=b.id and a.doll_id =c.id
+		select a.member_id memberId,b.name name, prepaid_amt AS prepaidAmt, a.coins coins, charge_date AS chargeDate, type ,charge_method AS chargeMethod,
+		coins_before AS coinsBefore, coins_after AS coinsAfter,c.`name` dollName,c.machine_code machineCode
+		from t_member_charge_history a,t_member b,t_doll c where a.member_id=b.id and a.doll_id =c.id
+		<if test="memberId != null and memberId != 0">
+			and a.member_id  = #{memberId}
 		</if>
 		<if test="name != null and name != ''">
 			and b.name like CONCAT('%',#{name},'%')
 		</if>
-		<if test="machineCode != null and machineCode != '' and type != 'income'">
+		<if test="machineCode != null and machineCode != ''">
 			and c.machine_code = #{machineCode}
 		</if>
 		<if test="chargeDate != null and chargeDate != ''">

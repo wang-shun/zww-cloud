@@ -19,7 +19,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2018-01-03
  */
 public interface IMemberChargeHistoryService extends IService<MemberChargeHistory> {
-    List<Map<String, Object>> selectList(Page<MemberChargeHistory> page, @Param("name")String name,@Param("machineCode")String machineCode, @Param("type")String type, @Param("chargeDate")String chargeDate);
+    List<Map<String, Object>> selectList(Page<MemberChargeHistory> page, @Param("memberId")Integer memberId, @Param("name")String name,@Param("machineCode")String machineCode, @Param("chargeDate")String chargeDate);
 
     //生成消费记录
     Integer insertChargeHistory(Account account,User userdto);

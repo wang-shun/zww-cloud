@@ -65,6 +65,8 @@ public class MemberController extends BaseController {
     private TDollOrderMapper tDollOrderMapper;
 
 
+
+
     /**
      * 跳转到member首页
      */
@@ -255,6 +257,8 @@ public class MemberController extends BaseController {
         //加币记录
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         memberChargeHistoryService.insertChargeHistory(account,userdto);
+
+
         accountMapper.updateById(account);
         return super.SUCCESS_TIP;
     }

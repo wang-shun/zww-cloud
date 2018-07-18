@@ -14,8 +14,14 @@ var MemberChargeHistory = {
 MemberChargeHistory.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
+            {title: '用户id', field: 'memberId', visible: true, align: 'center', valign: 'middle'},
             {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
-            {title: '机器名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
+            {title: '房间名', field: 'dollName', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                   return value.substring(0,value.indexOf("-"));
+                }
+            },
+            {title: '机器号', field: 'machineCode', visible: true, align: 'center', valign: 'middle'},
             {title: '方式', field: 'chargeMethod', visible: true, align: 'center', valign: 'middle'},
             {title: '金币数', field: 'coins', visible: true, align: 'center', valign: 'middle'},
             {title: '加币前', field: 'coinsBefore', visible: true, align: 'center', valign: 'middle'},
@@ -93,7 +99,7 @@ MemberChargeHistory.search = function () {
     var queryData = {};
     queryData['name'] = $("#name").val();
     queryData['machineCode'] = $("#machineCode").val();
-    queryData['type'] = $("#type").val();
+    queryData['memberId'] = $("#memberId").val();
     queryData['chargeDate'] = $("#chargeDate").val();
     MemberChargeHistory.table.refresh({query: queryData});
 };

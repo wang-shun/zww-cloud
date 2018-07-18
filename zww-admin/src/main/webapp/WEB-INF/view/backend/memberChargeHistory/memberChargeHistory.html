@@ -9,20 +9,17 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
+                            <div class="col-sm-2">
+                                <#NameCon id="memberId" name="用户id" />
+                            </div>
                             <div class="col-sm-3">
                                 <#NameCon id="name" name="用户昵称" />
                             </div>
                             <div class="col-sm-2">
                                 <#NameCon id="machineCode" name="机器号" />
                             </div>
-                            <div class="col-sm-2">
-                                <#SelectCon id="type" name="类型" >
-                                    <option value="income">奖励</option>
-                                    <option value="expense">消费</option>
-                                </#SelectCon>
-                            </div>d
                             <div class="col-sm-3">
-                                <#TimeCon id="chargeDate" name="注册时间" isTime="false" pattern="YYYY-MM-DD"/>
+                                <#TimeCon id="chargeDate" name="充值时间" isTime="false" pattern="YYYY-MM-DD"/>
                             </div>
                             <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="MemberChargeHistory.search()"/>
