@@ -46,6 +46,14 @@ public class TDollOrderController extends BaseController {
     private TDollOrderItemMapper dollOrderItemMapper;
 
     /**
+     * 跳转到申请发货列表首页
+     */
+    @RequestMapping("/apply")
+    public String applyPage() {
+        return PREFIX + "tDollOrder_apply.html";
+    }
+
+    /**
      * 跳转到待发货列表首页
      */
     @RequestMapping("")
@@ -105,6 +113,19 @@ public class TDollOrderController extends BaseController {
         model.addAttribute("ids",ids);
         LogObjectHolder.me().set(ids);
         return PREFIX + "tDollOrder_edit.html";
+    }
+
+    /**
+     * 获取申请发货列表列表
+     */
+
+    @RequestMapping(value = "/applylist")
+    @ResponseBody
+    public Object applylist(String addrName,String phone) {
+        Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderApply(page,addrName,phone);
+        page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
+        return super.packForBT(page);
     }
 
     /**
@@ -221,6 +242,21 @@ public class TDollOrderController extends BaseController {
       //  tDollOrder.setModifiedDate(new Date());
       //  tDollOrder.setStatus("已发货");
         tDollOrderService.updateTDollOrderById(ids,tDollOrder.getDeliverMethod(),tDollOrder.getDeliverNumber(),tDollOrder.getDeliverAmount(),tDollOrder.getComment());
+        return super.SUCCESS_TIP;
+    }
+
+    /**
+     * 揽件
+     */
+
+    @RequestMapping(value = "/order_apply")
+    @ResponseBody
+    public Object order_apply(String tDollOrderIds) {
+        List<Long> ids = new ArrayList<Long>();
+        for (int i=0;i<tDollOrderIds.split(",").length;i++){
+            ids.add(Long.valueOf(tDollOrderIds.split(",")[i]));
+        }
+        tDollOrderService.updateTDollOrderApplyById(ids);
         return super.SUCCESS_TIP;
     }
 

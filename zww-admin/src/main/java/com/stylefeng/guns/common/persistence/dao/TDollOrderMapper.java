@@ -25,11 +25,16 @@ public interface TDollOrderMapper extends BaseMapper<TDollOrder> {
     //查询寄存中订单
     List<Map<String, Object>> selectTDollOrderMember(@Param("page") Page<TDollOrder> page, @Param("memberId") String memberId, @Param("phone") String phone);
 
+    //查询申请发货订单
+    List<Map<String, Object>> selectTDollOrderApply(@Param("page") Page<TDollOrder> page, @Param("addrName") String addrName, @Param("phone") String phone);
+
     //查询待发货订单
     List<Map<String, Object>> selectTDollOrder(@Param("page") Page<TDollOrder> page, @Param("addrName") String addrName, @Param("phone") String phone);
 
     //查询已发货订单
     List<Map<String, Object>> selectTDollOrderOut(@Param("page") Page<TDollOrder> page, @Param("addrName") String addrName, @Param("phone") String phone);
+
+    int updateTDollOrderApplyById(@Param("ids") List<Long> ids);
 
     int updateTDollOrderById(@Param("ids") List<Long> ids, @Param("deliverMethod")String deliverMethod, @Param("deliverNumber")String deliverNumber, @Param("deliverAmount")BigDecimal deliverAmount, @Param("comment")String comment);
 

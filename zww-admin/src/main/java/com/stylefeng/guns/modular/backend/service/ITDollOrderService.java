@@ -22,6 +22,9 @@ import java.util.Map;
  */
 public interface ITDollOrderService extends IService<TDollOrder> {
 
+    //查询申请发货订单
+    List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,String addrName,String phone);
+
     //待发货
     List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String addrName, String phone);
 
@@ -37,8 +40,11 @@ public interface ITDollOrderService extends IService<TDollOrder> {
     //反娃娃
     boolean backDoll(TDollOrder tDollOrder);
 
-    int updateTDollOrderById(List<Long> ids, String deliverMethod, String deliverNumber, BigDecimal deliverAmount, String comment);
+    //揽件
+    int updateTDollOrderApplyById(@Param("ids") List<Long> ids);
 
+    //发货
+    int updateTDollOrderById(List<Long> ids, String deliverMethod, String deliverNumber, BigDecimal deliverAmount, String comment);
 
     boolean insertTDollOrder(TDollCatchHistory history,Integer modifiedBy);
 

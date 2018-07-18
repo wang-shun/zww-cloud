@@ -59,9 +59,8 @@
 		order by a.modified_date DESC
 	</select>
 
-
 	<!-- 查询申请发货的订单 -->
-	<select id="selectTDollOrder" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+	<select id="selectTDollOrderApply" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select a.id id,a.order_date orderDate,
 		a.order_by orderBy,a.status status,a.modified_date modifiedDate,
 		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
@@ -78,7 +77,26 @@
 		order by a.modified_date DESC,a.order_by DESC
 	</select>
 
-	<!-- 查询已发货发货的订单 -->
+
+	<!-- 查询待发货的订单 -->
+	<select id="selectTDollOrder" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select a.id id,a.order_date orderDate,
+		a.order_by orderBy,a.status status,a.modified_date modifiedDate,
+		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
+		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,d.quantity quantity
+		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
+		LEFT JOIN t_member_addr b ON  a.address_id=b.id
+		where a.status='待发货'
+		<if test="phone!=null and phone != '' ">
+			and b.receiver_phone like concat('%',#{phone},'%')
+		</if>
+		<if test="addrName != null and addrName != '' ">
+			and b.receiver_name like concat('%',#{addrName},'%')
+		</if>
+		order by a.modified_date DESC,a.order_by DESC
+	</select>
+
+	<!-- 查询已发货的订单 -->
 	<select id="selectTDollOrderOut" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select a.id id,a.order_date orderDate,
 		a.order_by orderBy,a.status status,a.deliver_date deliverDate,a.deliver_amount deliverAmount,
@@ -98,8 +116,15 @@
 		</if>
 		GROUP BY a.deliver_number,d.doll_id ORDER BY a.modified_date DESC,a.order_by DESC
 	</select>
+	<!-- 揽件 -->
+	<update id="updateTDollOrderApplyById">
+		update t_doll_order set modified_date=now(),status='待发货'  where id in
+		<foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</update>
 
-
+	<!-- 发货 -->
 	<update id="updateTDollOrderById">
             update t_doll_order set deliver_method=#{deliverMethod},deliver_number=#{deliverNumber},deliver_amount=#{deliverAmount},
 		      comment=#{comment},deliver_date=now(),modified_date=now(),status='已发货'  where id in
@@ -113,7 +138,7 @@
 		b.county county, b.street street,d.doll_name dollName,COUNT(a.id) quantity
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
-		where a.status='申请发货'
+		where a.status='待发货'
 		<if test="phone!=null and phone != '' ">
 			and b.receiver_phone like concat('%',#{phone},'%')
 		</if>

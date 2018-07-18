@@ -10,6 +10,7 @@ import com.stylefeng.guns.core.util.TimeUtil;
 import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,10 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
     @Autowired
     private TDollMapper dollMapper;
 
-
+    @Override
+    public List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,String addrName,String phone){
+        return tDollOrderMapper.selectTDollOrderApply(page,addrName,phone);
+    }
     //待发货订单
     @Override
     public List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, String addrName, String phone) {
@@ -104,9 +108,12 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         tDollOrder.setModifiedDate(new Date());
         tDollOrder.setModifiedBy(ShiroKit.getUser().getId());
         return retBool(tDollOrderMapper.updateById(tDollOrder));
-
     }
 
+    @Override
+    public int updateTDollOrderApplyById(@Param("ids") List<Long> ids){
+        return tDollOrderMapper.updateTDollOrderApplyById(ids);
+    }
 
     @Override
     public int updateTDollOrderById(List<Long> ids, String deliverMethod, String deliverNumber, BigDecimal deliverAmount, String comment) {
