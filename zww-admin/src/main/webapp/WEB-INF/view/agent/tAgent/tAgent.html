@@ -43,6 +43,9 @@
                     @if(shiro.hasPermission("/tAgent/execl")){
                       <#button name="execl" icon="fa-plus" clickFun="TAgent.execl(this)" space="true"/>
                     @}
+                    @if(shiro.hasPermission("/tAgent/detail")){
+                    <#button name="二维码链接" icon="fa-plus" clickFun="TAgent.qrcode()" space="true"/>
+                    @}
                     @if(shiro.hasPermission("/tAgent/update")){
                     <#button name="重置密码" icon="fa-plus" clickFun="TAgent.resetPass()" space="true"/>
                     @}

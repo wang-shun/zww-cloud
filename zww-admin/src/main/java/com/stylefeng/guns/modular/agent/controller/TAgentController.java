@@ -347,6 +347,25 @@ public class TAgentController extends BaseController {
         return super.SUCCESS_TIP;
     }
 
+
+    /**
+     * 生成二维码以及链接
+     */
+    @GetMapping("/qrcode/{tAgentId}")
+    public String qrcode(@PathVariable("tAgentId") Integer tAgentId, Model model) throws Exception{
+        TAgent tAgent = tAgentService.selectTAgentById(tAgentId);
+        String jsonStr = WXUtil.doPost("agentId="+tAgent.getId()+"&token=1&version=1","http://lanao.nat300.top/icrane/api/share/AgentImgUrl","POST");
+       // {"success":true,"statusCode":"200","message":"right token","token":"","resultData":{"shareImgUrl":"http://lanao.oss-cn-shenzhen.aliyuncs.com/agent/share/1/f2d8afa2-5e65-4f4b-9252-fd2a193c34fc.jpg?Expires=1845252970&OSSAccessKeyId=LTAIibVdoyx3NRxN&Signature=bt%2BHdd6X%2BROQ2PONA3DjC9NP4UA%3D","shareUrl":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcb4254f4b131fc12&redirect_uri=http%3A%2F%2Flanao.nat300.top/icrane/api/h5login&response_type=code&scope=snsapi_userinfo&state=agent1-lanaokj_null#wechat_redirect"}}
+       JSONObject json = JSONObject.fromObject(jsonStr);
+       JSONObject resultData = json.getJSONObject("resultData");
+       String shareImgUrl = resultData.getString("shareImgUrl");
+       String shareUrl = resultData.getString("shareUrl");
+       model.addAttribute("shareImgUrl",shareImgUrl);
+       model.addAttribute("shareUrl",shareUrl);
+        model.addAttribute("name",tAgent.getNickName());
+        return  PREFIX + "tAgent_qrcode.html";
+    }
+
     /**
      * 得到o单banner总数
      */

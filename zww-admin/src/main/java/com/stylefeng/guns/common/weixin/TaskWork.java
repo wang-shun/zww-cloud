@@ -44,7 +44,6 @@ public class TaskWork {
                 if(!StringUtils.isEmpty(accessToken)){
                     List<TMember> members = memberMapper.selectByRegisterChannel(code);
                     for (TMember member: members) {
-                        if(member.getId() == 1){
                             JSONObject userInfoJson = WXUtil.getUserInfo(member.getWeixinId(),accessToken);
                             if (!StringUtils.isEmpty(userInfoJson) && userInfoJson.containsKey("unionid")) {
                                 String nikeName = userInfoJson.getString("nickname");
@@ -55,7 +54,6 @@ public class TaskWork {
                             } else {
                                 logger.error("获取用户微信信息出错={}", userInfoJson);
                             }
-                        }
                     }
                 }
             }

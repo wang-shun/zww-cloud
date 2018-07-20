@@ -127,11 +127,25 @@ TAgentInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+
+
+/**
+ * 提交修改
+ */
+TAgentInfoDlg.fuzhi = function() {
+    var Url2=document.getElementById("shareUrl");
+    Url2.select(); // 选择对象
+    document.execCommand("Copy"); // 执行浏览器复制命令
+    layer.alert("复制成功！",{
+        title:'提示',
+    });
+}
+
 $(function() {
-            var statusValue = $("#statusValue").val();
-            if(statusValue == null || statusValue == undefined){
-                    $("#status").val(1);
-            }else{
-                $("#status").val(statusValue);
-            }
+     var statusValue = $("#statusValue").val();
+     if(statusValue == null || statusValue == undefined){
+            $("#status").val(1);
+     }else{
+            $("#status").val(statusValue);
+     }
 });

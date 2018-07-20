@@ -1,0 +1,24 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center;">
+                    <img src="${shareImgUrl}" width="200" class="img-rounded" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input id="shareUrl" type="text"  value="${shareUrl}" style="width: 607px;"> <#button btnCss="info" name="复制" id="ensure" icon="fa-check" clickFun="TAgentInfoDlg.fuzhi()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="${ctxPath}/static/modular/agent/tAgent/tAgent_info.js"></script>
+<script src="${ctxPath}/static/js/ZeroClipboard.js"></script>
+@}

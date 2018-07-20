@@ -136,6 +136,7 @@ TAgent.resetSearch = function () {
     TAgent.search();
 }
 
+
 TAgent.execl = function (v_this) {
     $(v_this).attr("disabled","true");
     setTimeout(function(){
@@ -148,6 +149,22 @@ TAgent.execl = function (v_this) {
     $("#levels").val($("#level").val());
     $("#test").submit();
 
+}
+
+
+
+TAgent.qrcode = function () {
+    if (this.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '代理商链接详情',
+            area: ['800px', '400px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/tAgent/qrcode/' + TAgent.seItem.id
+        });
+        this.layerIndex = index;
+    }
 }
 
 /**
