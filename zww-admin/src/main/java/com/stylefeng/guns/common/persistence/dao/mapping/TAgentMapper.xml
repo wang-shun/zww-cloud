@@ -80,7 +80,7 @@
 			,(balance-balance_disabled)*0.01 AS balance
 		</if>
 		<if test="type != 10">
-			,"-" AS balance
+			,0 AS balance
 		</if>
 		from  t_agent where 1=1
 		<if test="agentId != null and type == 0">
@@ -114,10 +114,10 @@
 		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
 		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS oem
 		<if test="type == 10">
-			,(balance-balance_disabled)*0.01 AS balance
+			,(balance-balance_disabled) AS balance
 		</if>
 		<if test="type != 10">
-			,"-" AS balance
+			,0 AS balance
 		</if>
 		from  t_agent where 1=1
 		<if test="agentId != null and type == 0">

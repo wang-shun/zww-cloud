@@ -140,7 +140,7 @@ TAgent.execl = function (v_this) {
     $(v_this).attr("disabled","true");
     setTimeout(function(){
         $(v_this).removeAttr("disabled");
-    },5000);
+    },10000);
     $("#names").val($("#name").val());
     $("#usernames").val($("#username").val());
     $("#phones").val($("#phone").val());

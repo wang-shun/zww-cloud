@@ -1,5 +1,10 @@
 package com.stylefeng.guns.common.weixin;
 
+import com.stylefeng.guns.core.util.StringUtils;
+import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,6 +17,33 @@ import java.util.Date;
  * Created by SUN on 2017/12/27.
  */
 public class WXUtil {
+    private static final Logger logger = LoggerFactory.getLogger(WXUtil.class);
+
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    public static JSONObject getUserInfo(String openid,String accessToken ) {
+        String info = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
+        try {
+            if (StringUtils.isEmpty(accessToken)) {
+                return null;
+            }
+            info = info.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openid);
+            String msg = doPost("", info, "GET");
+            JSONObject resp4 = JSONObject.fromObject(msg);
+            if (!resp4.containsKey("errcode")) {
+                resp4.put("access_token", accessToken);
+                return resp4;
+            } else {
+                logger.info("获取获取用户信息异常:" + resp4.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * 判断是否为节假日

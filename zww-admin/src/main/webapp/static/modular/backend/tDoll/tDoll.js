@@ -19,6 +19,7 @@ TDoll.initColumn = function () {
             {title: '名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '价格', field: 'price', visible: true, align: 'center', valign: 'middle'},
             {title: '兑换币数', field: 'redeemCoins', visible: true, align: 'center', valign: 'middle'},
+            {title: '库存数', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
             {title: '状态', field: 'machineStatus', visible: true, align: 'center', valign: 'middle',
           	  formatter:function (value,row,index) {  
           		if(value == '空闲中'){
@@ -52,32 +53,9 @@ TDoll.initColumn = function () {
                     if (value=="3")return '数码房';
             	}
             },
-         /*   {title: '机器地址', field: 'adress', visible: true, align: 'center', valign: 'middle',
-            	formatter:function (value,row,index) {
-            		return row.province+row.city+row.county+row.street;
-            	}
-            },*/
             {title: '操作人', field: 'person', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'description', visible: true, align: 'center', valign: 'middle'},
-            //{title: '机器序列号', field: 'machineSerialNum', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'machineIp', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'machineUrl', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'tbimgContextPath', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'tbimgFileName', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'createdDate', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'createdBy', visible: true, align: 'center', valign: 'middle'},
-            //{title: '后台修改时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'rtmpUrl1', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'rtmpUrl2', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'rtmpUrl3', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'rtmpPushUrl', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'mnsTopicName', visible: true, align: 'center', valign: 'middle'},
-            //{title: '七牛连麦房间名称', field: 'piliRoomName', visible: true, align: 'center', valign: 'middle'},
-            //{title: '娃娃机地址id', field: 'dollAddressId', visible: true, align: 'center', valign: 'middle'},
-            //{title: '', field: 'bgm', visible: true, align: 'center', valign: 'middle'},
-            //{title: '删除状态（1未删除 0已删除）', field: 'deleteStatus', visible: true, align: 'center', valign: 'middle'}
+            {title: '后台修改时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 

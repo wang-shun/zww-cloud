@@ -48,4 +48,10 @@
 		   <include refid="Base_Column_List"/>
 		from t_member where mobile = #{mobile}
 	</select>
+
+	<select id="selectByRegisterChannel" resultType="com.stylefeng.guns.common.persistence.model.TMember" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from t_member where register_channel = #{registerChannel}
+	</select>
 </mapper>

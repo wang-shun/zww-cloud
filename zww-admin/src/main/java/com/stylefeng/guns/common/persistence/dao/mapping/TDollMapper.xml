@@ -49,22 +49,13 @@
     </sql>
     
     <select id="selectDolls" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select
-        a.id id, a.name name, a.description description, a.machine_type machineType, quantity, price, a.machine_status
-        machineStatus,
-        a.machine_serial_num machineSerialNum, a.machine_ip machineIp,
-        a.machine_url machineUrl, a.tbimg_context_path tbimgContextPath, a.tbimg_file_name tbimgFileName,
-        a.tbimg_real_path tbimgRealPath, a.created_date createdDate,
-        a.created_by createdBy, a.modified_date modifiedDate,
-        a.modified_by modifiedBy, a.rtmp_url_1 rtmpUrl1, a.rtmp_url_2 rtmpUrl2, a.rtmp_url_3 rtmpUrl3,
-        a.rtmp_push_url rtmpPushUrl, a.watching_number watchingNumber, a.mns_topic_name mnsTopicName, a.redeem_coins
-        redeemCoins, timeout, a.machine_code machineCode,
-        a.doll_ID dollID, a.doll_address_id dollAddressId,
-        b.province, b.city, b.county, b.street
-        from t_doll a LEFT JOIN doll_address b on a.doll_address_id = b.id
-        where machine_status!="" AND machine_status!="已下架" and delete_status = 1
+		select id,name,description,machine_type machineType, quantity, price, machine_status machineStatus,
+		tbimg_real_path tbimgRealPath,modified_date modifiedDate,
+		modified_by modifiedBy,watching_number watchingNumber,redeem_coins
+		redeemCoins, timeout, machine_code machineCode,doll_ID dollID from t_doll
+		where machine_status!="" AND machine_status!="已下架" and delete_status = 1
         <if test="dollId!=null and dollId != ''">
-            and a.id = #{dollId}
+            and id = #{dollId}
         </if>
 		<if test="name!=null and name != ''">
 			and name like CONCAT('%',#{name},'%')
@@ -85,10 +76,10 @@
 		</if>
 		<if test="modifiedBy!=null">
 			<if test="modifiedBy == -1 ">
-				and a.modified_by IS NULL
+				and modified_by IS NULL
 			</if>
 		</if>
-        order by a.modified_date desc
+        order by modified_date desc
 	</select>
 
 	<!--机器列表排序-->
@@ -140,7 +131,7 @@
 
 	<select id="getDollByMachineCode" resultType="TDoll" parameterType="java.lang.String">
 		select
-		id, name, a.tbimg_real_path tbimgRealPath
+		id, name, tbimg_real_path tbimgRealPath
 		from t_doll
 		where machine_code = #{machineCode}
 	</select>

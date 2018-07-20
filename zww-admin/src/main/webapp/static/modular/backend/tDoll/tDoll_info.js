@@ -36,6 +36,13 @@ var TDollInfoDlg = {
                 }
             }
         },
+        quantity: {
+            validators: {
+                notEmpty: {
+                    message: '库存数不能为空'
+                }
+            }
+        },
         timeout: {
             validators: {
                 notEmpty: {
