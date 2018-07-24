@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.common.persistence.dao.TDollInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.stylefeng.guns.common.persistence.model.TDollInfo">
+		<id column="id" property="id" />
+		<result column="dollName" property="dollName" />
+		<result column="dollTotal" property="dollTotal" />
+		<result column="img_url" property="imgUrl" />
+		<result column="dollCode" property="dollCode" />
+		<result column="agency" property="agency" />
+		<result column="size" property="size" />
+		<result column="type" property="type" />
+		<result column="note" property="note" />
+		<result column="redeemCoins" property="redeemCoins" />
+		<result column="dollCoins" property="dollCoins" />
+		<result column="deliverCoins" property="deliverCoins" />
+		<result column="addTime" property="addTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dollName, dollTotal, img_url AS imgUrl, dollCode, agency, size, type, note, redeemCoins, dollCoins, deliverCoins, addTime
+    </sql>
+
+	<select id="selectDollInfos" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select
+		 <include refid="Base_Column_List"/>
+		from t_doll_info where 1=1
+		<if test="dollCode != null  and dollCode != '' ">
+			and dollCode =#{dollCode}
+		</if>
+		<if test="dollName != null  and dollName != '' ">
+			and dollName like CONCAT('%',#{dollName},'%')
+		</if>
+	</select>
+
+	<select id="selectDollInfoByDollCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"/>
+		from t_doll_info where  dollCode = #{dollCode}
+	</select>
+
+
+</mapper>

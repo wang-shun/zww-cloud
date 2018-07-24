@@ -97,6 +97,24 @@ TDoll.openAddTDoll = function () {
 };
 
 
+
+/**
+ * 点击添加样品属性图
+ */
+TDoll.dollInfoImg = function () {
+    if (this.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '添加样品属性图',
+            area: ['800px', '370px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/tDoll/dollInfoImg/'+ TDoll.seItem.id
+        });
+        this.layerIndex = index;
+    }
+};
+
 /**
  * 点击添加主题
  */

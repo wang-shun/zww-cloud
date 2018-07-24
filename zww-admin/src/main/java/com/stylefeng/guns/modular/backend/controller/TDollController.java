@@ -50,15 +50,15 @@ public class TDollController extends BaseController {
 
     @Autowired
     private IDollTopicService dollTopicService;
-    
+
     @Autowired
     AliyunService aliyunService;
-    
-     @Autowired
-     StringRedisTemplate stringRedisTemplate;
 
-     @Resource(name = "stringRedisTemplate")
-     ValueOperations<String, String> valOpsStr;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
+    @Resource(name = "stringRedisTemplate")
+    ValueOperations<String, String> valOpsStr;
 
     /**
      * 跳转到娃娃机列表首页
@@ -82,83 +82,143 @@ public class TDollController extends BaseController {
     @RequestMapping("/dollTopic_add/{tDollId}")
     public String dollTopicAdd(@PathVariable Integer tDollId, Model model) {
         TDoll tDoll = tDollService.selectById(tDollId);
-        model.addAttribute("item",tDoll);
+        model.addAttribute("item", tDoll);
         LogObjectHolder.me().set(tDoll);
         return PREFIX + "tDollTopic_add.html";
     }
 
     /**
      * 娃娃封面图片上传
+     *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("/toUpload")
     public String toUpload(Integer id, Model model) {
-    	TDoll doll = tDollService.selectById(id);
-    	 model.addAttribute("item",doll);
+        TDoll doll = tDollService.selectById(id);
+        model.addAttribute("item", doll);
         return PREFIX + "tDoll_upload.html";
     }
-    
+
     /**
      * 上传图片(上传到项目的webapp/static/img)
      */
     @RequestMapping(method = RequestMethod.POST, path = "/upload/{tBannerId}")
     @ResponseBody
-    public Object upload(@RequestPart("file") MultipartFile picture,@PathVariable Integer tBannerId) {
-    	 String originalFileName = picture.getOriginalFilename();
-    	 // 获取后缀
-    	 String suffix = originalFileName.substring(originalFileName.lastIndexOf(".")
-    	 + 1);
-    	 // 修改后完整的文件名称
-    	 String fileKey = StringUtils.getRandomUUID();
-    	 String NewFileKey = "doll/" + fileKey + "." + suffix;
-    	 byte[] bytes;
-		try {
-			bytes = picture.getBytes();
-			InputStream fileInputStream = new ByteArrayInputStream(bytes);
-			 if(!aliyunService.putFileStreamToOSS(NewFileKey, fileInputStream)) {
-					 return "0";
-			}
-			 TDoll dollmachine = tDollService.selectById(tBannerId);
-			 //logger.info("广告参数:{}",d.toString());
-			 if(dollmachine.getTbimgRealPath()!=null&&dollmachine.getTbimgRealPath().equals("")==false&&dollmachine.getTbimgRealPath().length()>10)
-			 {
-			 String oldFileKey=dollmachine.getTbimgRealPath().substring(dollmachine.getTbimgRealPath().lastIndexOf("/")+1, dollmachine.getTbimgRealPath().lastIndexOf("."));
-			 //如果有则删除原来的头像
-			 if(!"".equals(oldFileKey) && oldFileKey!=null) {
-			// logger.info("删除广告: "+d.getId()+"原来的头像从阿里云OSS:"+ bukectName+"文件名:"+oldFileKey);
-				 aliyunService.deleteFileFromOSS(oldFileKey);
-			 }
-			 }
-			 String newFileUrl = aliyunService.generatePresignedUrl(NewFileKey,1000000).toString();
-			 dollmachine.setTbimgRealPath(newFileUrl);
-			 dollmachine.setModifiedBy(ShiroKit.getUser().getId());
-			 dollmachine.setModifiedDate(new Date());
-			 //logger.info("更新广告头像结果:{}",newFileUrl);
-			 boolean result = tDollService.insertOrUpdate(dollmachine);
-			// logger.info("更新广告头像结果:{}",result>0?"success":"fail");
-			 if(result) {
-				 return SUCCESS_TIP;
-			 }else {
-				 return new ErrorTip(TipType.UPLOAD_ERROR.getCode(),TipType.UPLOAD_ERROR.getMessage());
-			 }
-		} catch (Exception e) {
-			throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
-		}
-    	 
+    public Object upload(@RequestPart("file") MultipartFile picture, @PathVariable Integer tBannerId) {
+        String originalFileName = picture.getOriginalFilename();
+        // 获取后缀
+        String suffix = originalFileName.substring(originalFileName.lastIndexOf(".")
+                + 1);
+        // 修改后完整的文件名称
+        String fileKey = StringUtils.getRandomUUID();
+        String NewFileKey = "doll/" + fileKey + "." + suffix;
+        byte[] bytes;
+        try {
+            bytes = picture.getBytes();
+            InputStream fileInputStream = new ByteArrayInputStream(bytes);
+            if (!aliyunService.putFileStreamToOSS(NewFileKey, fileInputStream)) {
+                return "0";
+            }
+            TDoll dollmachine = tDollService.selectById(tBannerId);
+            //logger.info("广告参数:{}",d.toString());
+            if (dollmachine.getTbimgRealPath() != null && dollmachine.getTbimgRealPath().equals("") == false && dollmachine.getTbimgRealPath().length() > 10) {
+                String oldFileKey = dollmachine.getTbimgRealPath().substring(dollmachine.getTbimgRealPath().lastIndexOf("/") + 1, dollmachine.getTbimgRealPath().lastIndexOf("."));
+                //如果有则删除原来的头像
+                if (!"".equals(oldFileKey) && oldFileKey != null) {
+                    // logger.info("删除广告: "+d.getId()+"原来的头像从阿里云OSS:"+ bukectName+"文件名:"+oldFileKey);
+                    aliyunService.deleteFileFromOSS(oldFileKey);
+                }
+            }
+            String newFileUrl = aliyunService.generatePresignedUrl(NewFileKey, 1000000).toString();
+            dollmachine.setTbimgRealPath(newFileUrl);
+            dollmachine.setModifiedBy(ShiroKit.getUser().getId());
+            dollmachine.setModifiedDate(new Date());
+            //logger.info("更新广告头像结果:{}",newFileUrl);
+            boolean result = tDollService.insertOrUpdate(dollmachine);
+            // logger.info("更新广告头像结果:{}",result>0?"success":"fail");
+            if (result) {
+                return SUCCESS_TIP;
+            } else {
+                return new ErrorTip(TipType.UPLOAD_ERROR.getCode(), TipType.UPLOAD_ERROR.getMessage());
+            }
+        } catch (Exception e) {
+            throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
+        }
+    }
+
+
+    /**
+     * 上传图片(上传到项目的webapp/static/img)
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/imginfo/{tBannerId}")
+    @ResponseBody
+    public Object imginfo(@RequestPart("file") MultipartFile picture, @PathVariable Integer tBannerId) {
+        String originalFileName = picture.getOriginalFilename();
+        // 获取后缀
+        String suffix = originalFileName.substring(originalFileName.lastIndexOf(".")
+                + 1);
+        // 修改后完整的文件名称
+        String fileKey = StringUtils.getRandomUUID();
+        String NewFileKey = "doll/imginfo/" + fileKey + "." + suffix;
+        byte[] bytes;
+        try {
+            bytes = picture.getBytes();
+            InputStream fileInputStream = new ByteArrayInputStream(bytes);
+            if (!aliyunService.putFileStreamToOSS(NewFileKey, fileInputStream)) {
+                return "0";
+            }
+            TDoll dollmachine = tDollService.selectById(tBannerId);
+            //logger.info("广告参数:{}",d.toString());
+            if (dollmachine.getRtmpPushUrl() != null && dollmachine.getRtmpPushUrl().equals("") == false && dollmachine.getRtmpPushUrl().length() > 10) {
+                String oldFileKey = dollmachine.getRtmpPushUrl().substring(dollmachine.getRtmpPushUrl().lastIndexOf("/") + 1, dollmachine.getRtmpPushUrl().lastIndexOf("."));
+                //如果有则删除原来的头像
+                if (!"".equals(oldFileKey) && oldFileKey != null) {
+                    // logger.info("删除广告: "+d.getId()+"原来的头像从阿里云OSS:"+ bukectName+"文件名:"+oldFileKey);
+                    aliyunService.deleteFileFromOSS(oldFileKey);
+                }
+            }
+            String newFileUrl = aliyunService.generatePresignedUrl(NewFileKey, 1000000).toString();
+            dollmachine.setRtmpPushUrl(newFileUrl);
+            dollmachine.setModifiedBy(ShiroKit.getUser().getId());
+            dollmachine.setModifiedDate(new Date());
+            //logger.info("更新广告头像结果:{}",newFileUrl);
+            boolean result = tDollService.insertOrUpdate(dollmachine);
+            // logger.info("更新广告头像结果:{}",result>0?"success":"fail");
+            if (result) {
+                return SUCCESS_TIP;
+            } else {
+                return new ErrorTip(TipType.UPLOAD_ERROR.getCode(), TipType.UPLOAD_ERROR.getMessage());
+            }
+        } catch (Exception e) {
+            throw new GunsException(BizExceptionEnum.UPLOAD_ERROR);
+        }
     }
 
     /**
      * 跳转到修改娃娃机列表
      */
-     
+
     @RequestMapping("/tDoll_update/{tDollId}")
     public String tDollUpdate(@PathVariable Integer tDollId, Model model) {
         TDoll tDoll = tDollService.selectById(tDollId);
-        model.addAttribute("item",tDoll);
+        model.addAttribute("item", tDoll);
         LogObjectHolder.me().set(tDoll);
         return PREFIX + "tDoll_edit.html";
+    }
+
+
+    /**
+     * 跳转到修改娃娃机列表
+     */
+
+    @RequestMapping("/dollInfoImg/{tDollId}")
+    public String dollInfoImg(@PathVariable Integer tDollId, Model model) {
+        TDoll tDoll = tDollService.selectById(tDollId);
+        model.addAttribute("item", tDoll);
+        LogObjectHolder.me().set(tDoll);
+        return PREFIX + "tDoll_imginfo.html";
     }
 
 
@@ -169,7 +229,7 @@ public class TDollController extends BaseController {
     @RequestMapping("/addBackgroung/{tDollId}")
     public String addBackgroung(@PathVariable Integer tDollId, Model model) {
         TDoll tDoll = tDollService.selectById(tDollId);
-        model.addAttribute("item",tDoll);
+        model.addAttribute("item", tDoll);
         LogObjectHolder.me().set(tDoll);
         return PREFIX + "tDollImage_t.html";
     }
@@ -177,14 +237,14 @@ public class TDollController extends BaseController {
     /**
      * 获取娃娃机列表列表
      */
-     
+
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer dollId, String name, String machineCode, String machineStates,Integer machineType,Integer modifiedBy) {
-         Page<TDoll> page = new PageFactory<TDoll>().defaultPage();
-         List<Map<String, Object>> result = tDollService.selectDolls(page,dollId,name,machineCode,machineStates,machineType,modifiedBy);
-         page.setRecords((List<TDoll>)new TDollWarpper(result).warp());
-         return super.packForBT(page);
+    public Object list(Integer dollId, String name, String machineCode, String machineStates, Integer machineType, Integer modifiedBy) {
+        Page<TDoll> page = new PageFactory<TDoll>().defaultPage();
+        List<Map<String, Object>> result = tDollService.selectDolls(page, dollId, name, machineCode, machineStates, machineType, modifiedBy);
+        page.setRecords((List<TDoll>) new TDollWarpper(result).warp());
+        return super.packForBT(page);
     }
 
     /**
@@ -193,14 +253,17 @@ public class TDollController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(TDoll tDoll) {
-    	tDoll.setMachineStatus(MachineStatus.MACHINE_NOT_ONLINE.getMessage());
-    	tDoll.setQuantity(99);
-    	tDoll.setTbimgRealPath("#");
-    	tDoll.setDeleteStatus(1);
-    	tDoll.setCreatedDate(new Date());
-    	tDoll.setCreatedBy(ShiroKit.getUser().getId());
-    	tDoll.setModifiedDate(new Date());
-    	tDoll.setModifiedBy(ShiroKit.getUser().getId());
+       // tDoll.setMachineStatus(MachineStatus.MACHINE_NOT_ONLINE.getMessage());
+        tDoll.setQuantity(99);
+        tDoll.setTbimgRealPath("#");
+        tDoll.setDeleteStatus(1);
+        tDoll.setCreatedDate(new Date());
+        tDoll.setCreatedBy(ShiroKit.getUser().getId());
+        tDoll.setModifiedDate(new Date());
+        tDoll.setModifiedBy(ShiroKit.getUser().getId());
+        tDoll.setMachineIp("devicea_" + tDoll.getMachineCode());
+        tDoll.setMachineUrl("devicea_" + tDoll.getMachineCode());
+        tDoll.setMachineSerialNum("devicea_" + tDoll.getMachineCode());
         tDollService.insert(tDoll);
         return SUCCESS_TIP;
     }
@@ -208,43 +271,43 @@ public class TDollController extends BaseController {
     /**
      * 删除娃娃机列表
      */
-     
+
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer tDollId) {
-       // tDollService.deleteById(tDollId);
-    	 TDoll tDoll = tDollService.selectById(tDollId);
-    	 tDoll.setDeleteStatus(0);
-    	 tDoll.setModifiedDate(new Date());
-    	 tDoll.setModifiedBy(ShiroKit.getUser().getId());
-    	 tDollService.insertOrUpdate(tDoll);
+        // tDollService.deleteById(tDollId);
+        TDoll tDoll = tDollService.selectById(tDollId);
+        tDoll.setDeleteStatus(0);
+        tDoll.setModifiedDate(new Date());
+        tDoll.setModifiedBy(ShiroKit.getUser().getId());
+        tDollService.insertOrUpdate(tDoll);
         return SUCCESS_TIP;
     }
 
     /**
      * 修改娃娃机列表
      */
-     
+
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TDoll tDoll) {
-    	TDoll oldtDoll = tDollService.selectById(tDoll.getId());
-    	tDoll.setCreatedBy(oldtDoll.getCreatedBy());
-    	tDoll.setCreatedDate(oldtDoll.getCreatedDate());
-    	tDoll.setModifiedBy(ShiroKit.getUser().getId());
-    	tDoll.setModifiedDate(new Date());
-    	tDoll.setQuantity(99);
-    	tDoll.setDeleteStatus(1);
-    	tDoll.setTbimgRealPath(oldtDoll.getTbimgRealPath());
-    	boolean result = tDollService.updateById(tDoll);
+        TDoll oldtDoll = tDollService.selectById(tDoll.getId());
+        tDoll.setCreatedBy(oldtDoll.getCreatedBy());
+        tDoll.setCreatedDate(oldtDoll.getCreatedDate());
+        tDoll.setModifiedBy(ShiroKit.getUser().getId());
+        tDoll.setModifiedDate(new Date());
+        tDoll.setQuantity(99);
+        tDoll.setDeleteStatus(1);
+        tDoll.setTbimgRealPath(oldtDoll.getTbimgRealPath());
+        boolean result = tDollService.updateById(tDoll);
         DollTopic dollTopic = new DollTopic();
         dollTopic.setDollId(tDoll.getId());
         dollTopic.setDollName(tDoll.getName());
-        if(result) {
+        if (result) {
             //修改主题机器名称
             dollTopicService.updateByDollId(dollTopic);
             //修改redis状态
-			valOpsStr.set(RedisKeyGenerator.getRoomStatusKey(tDoll.getId()), tDoll.getMachineStatus());
+            valOpsStr.set(RedisKeyGenerator.getRoomStatusKey(tDoll.getId()), tDoll.getMachineStatus());
 
         }
         return SUCCESS_TIP;
@@ -254,7 +317,7 @@ public class TDollController extends BaseController {
     /**
      * 娃娃机列表详情
      */
-     
+
     @RequestMapping(value = "/detail/{tDollId}")
     @ResponseBody
     public Object detail(@PathVariable("tDollId") Integer tDollId) {

@@ -70,7 +70,7 @@ public class TaskWork {
         String localip=ia.getHostAddress();
         logger.warn("本机名称是："+ localname);
         logger.warn("本机的ip是 ："+localip);
-        if (!"172.18.48.84".equals(localip)) {
+        if (!"47.106.39.237".equals(localip)) {
             return false;
         }
         return  true;

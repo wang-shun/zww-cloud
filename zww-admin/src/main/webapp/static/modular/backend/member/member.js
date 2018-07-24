@@ -17,27 +17,19 @@ Member.initColumn = function () {
             {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '推荐人', field: 'agentName', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'name', visible: true, align: 'center', valign: 'middle'},
+            {title: '头像', field: 'iconRealPath', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    return '<img  src="'+value+'" width="80" class="img-rounded" />';
+                }
+            },
             {title: '手机', field: 'mobile', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'password', visible: true, align: 'center', valign: 'middle'},
-            // {title: '微信id', field: 'weixinId', visible: true, align: 'center', valign: 'middle'},
-            // {title: '性别', field: 'gender', visible: false, align: 'center', valign: 'middle'},
             {title: '性别', field: 'genderName', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'birthday', visible: true, align: 'center', valign: 'middle'},
             {title: '原金币', field: 'coins', visible: false, align: 'center', valign: 'middle'},
             {title: '金币', field: 'Acoins', visible: true, align: 'center', valign: 'middle'},
             {title: '钻石', field: 'superTicket', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'points', visible: true, align: 'center', valign: 'middle'},
             {title: '抓取次数', field: 'catchNumber', visible: true, align: 'center', valign: 'middle'},
             {title: '注册时间', field: 'registerDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
             {title: '最近登录时间', field: 'lastLoginDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'lastLogoffDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '是否在线 ', field: 'onlineFlg', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconContextPath', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconFileName', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconRealPath', visible: true, align: 'center', valign: 'middle'},
-            // {title: '环信uuid', field: 'easemobUuid', visible: true, align: 'center', valign: 'middle'},
             {title: '是否有效', field: 'activeFlg', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     if(value){
@@ -47,16 +39,8 @@ Member.initColumn = function () {
                     }
                 }
             },
-            // {title: '是否已输入邀请码', field: 'inviteFlg', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'inviteFlgWeb', visible: true, align: 'center', valign: 'middle'},
-            // {title: '注册设备', field: 'registerFrom', visible: true, align: 'center', valign: 'middle'},
             {title: '手机型号', field: 'phoneModel', visible: true, align: 'center', valign: 'middle'},
             {title: '寄存个数', field: 'checkIn', visible: true, align: 'center', valign: 'middle'},
-            // {title: '0尚未充值，1已充值', field: 'firstLogin', visible: true, align: 'center', valign: 'middle'},
-            // {title: '0尚未充值过，1已完成过充值', field: 'firstCharge', visible: true, align: 'center', valign: 'middle'},
-            // {title: '注册渠道号', field: 'registerChannel', visible: true, align: 'center', valign: 'middle'},
-            // {title: '登陆渠道号', field: 'loginChannel', visible: true, align: 'center', valign: 'middle'},
-            // {title: '手机机型', field: 'phoneModel', visible: true, align: 'center', valign: 'middle'}
             {title: 'vip等级', field: 'vipGroup', visible: true, align: 'center', valign: 'middle'},
     ];
 };

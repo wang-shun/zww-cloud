@@ -4,18 +4,19 @@
         <div class="form-horizontal">
 
             <input type="hidden" id="id" value="${item.id}">
-            <input type="hidden" id="statusValue" value="${item.status}">
+            <input type="hidden" id="statusValue" value="${item.status}" >
             <div class="row">
                 <div class="col-sm-6">
                     <#input id="name" name="OEM名称" value="${item.name}" underline="true"/>
                     <#input id="code" name="简称" value="${item.code}" underline="true"/>
                     <#input id="appid" name="appid" value="${item.appid}" underline="true"/>
                     <#input id="appsecret" name="appsecret" value="${item.appsecret}" underline="true"/>
+                    <#input id="natappUrl" name="隧道地址" value="${item.natappUrl}" readonly="readonly"/>
                 </div>
                 <div class="col-sm-6">
                     <#input id="company" name="主体" value="${item.company}" underline="true"/>
                     <#input id="url" name="域名" value="${item.url}" underline="true"/>
-                    <#input id="smsCode" name="短信模板id" value="${item.smsCode}" underline="true"/>
+                    <#input id="smsCode" name="短信模板" value="${item.smsCode}" underline="true"/>
                     <#input id="smsName" name="短信签名" value="${item.smsName}" underline="true"/>
                     <#SelectCon id="status" name="状态" >
                         <option value="1">启用</option>

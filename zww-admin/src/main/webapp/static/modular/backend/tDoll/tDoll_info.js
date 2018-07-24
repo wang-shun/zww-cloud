@@ -36,59 +36,10 @@ var TDollInfoDlg = {
                 }
             }
         },
-        quantity: {
-            validators: {
-                notEmpty: {
-                    message: '库存数不能为空'
-                }
-            }
-        },
         timeout: {
             validators: {
                 notEmpty: {
                     message: '游戏时间不能为空'
-                }
-            }
-        },
-        machineSerialNum: {
-            validators: {
-                notEmpty: {
-                    message: '设备码不能为空'
-                }
-            }
-        },
-        machineUrl: {
-            validators: {
-                notEmpty: {
-                    message: '设备名称不能为空'
-                }
-            }
-        },
-        machineIp: {
-            validators: {
-                notEmpty: {
-                    message: '队列名称不能为空'
-                }
-            }
-        },
-        mnsTopicName: {
-            validators: {
-                notEmpty: {
-                    message: 'Topic名称不能为空'
-                }
-            }
-        },
-        rtmpPushUrl: {
-            validators: {
-                notEmpty: {
-                    message: '推牛地址不能为空'
-                }
-            }
-        },
-        rtmpUrl1: {
-            validators: {
-                notEmpty: {
-                    message: '拉牛地址1不能为空'
                 }
             }
         },
@@ -229,28 +180,23 @@ TDollInfoDlg.editSubmit = function() {
  * 加载默认值
  */
 TDollInfoDlg.init = function(column,value){
-	if($("#"+column+"Value").val() == undefined){
-	       $("#"+column).val(0);
-	   }else{
-	       $("#"+column).val($("#"+column+"Value").val());
-	}
+    if($("#"+column+"Value").val() == undefined){
+        $("#"+column).val(value);
+    }else{
+        $("#"+column).val($("#"+column+"Value").val());
+    }
 }
 /**
  * 修改初始化表单
  */
 TDollInfoDlg.editInit = function() {
-	TDollInfoDlg.init("machineType");
-	//TDollInfoDlg.init("dollAddressId");
+	TDollInfoDlg.init("machineType",0);
 	 if($("#dollAddressIdValue").val() == undefined){
 		   $("#dollAddressId").attr("value","1");
 	   }else{
-		   //alert($("#payIndexValue").val());
-		   //alert($("#payIndex").parent().html());
-		   //$("#payIndex").attr("ckvalue",$("#payIndexValue").val());
 	       $("#dollAddressId").attr("value",$("#dollAddressIdValue").val());
-	      // alert($("#payIndex").val());
 	   }
-	TDollInfoDlg.init("machineStatus");
+	TDollInfoDlg.init("machineStatus","空闲中");
 }
 
 $(function() {

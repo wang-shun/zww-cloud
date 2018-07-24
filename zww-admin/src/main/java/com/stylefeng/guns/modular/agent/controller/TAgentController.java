@@ -362,8 +362,8 @@ public class TAgentController extends BaseController {
        String shareUrl = resultData.getString("shareUrl");
        model.addAttribute("shareImgUrl",shareImgUrl);
        model.addAttribute("shareUrl",shareUrl);
-        model.addAttribute("name",tAgent.getNickName());
-        return  PREFIX + "tAgent_qrcode.html";
+       model.addAttribute("name",tAgent.getNickName());
+       return  PREFIX + "tAgent_qrcode.html";
     }
 
     /**

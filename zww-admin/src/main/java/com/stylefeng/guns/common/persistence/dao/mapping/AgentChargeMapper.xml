@@ -32,19 +32,19 @@
 		select
 		<if test="agentSuperId != null and agentSuperId != 0">
 			IFNULL(sum(a.agent_super_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_super_income),0.00)
-			from agent_charge b where b.status =1 and a.agent_super_id=b.agent_super_id)agentOneIncome
+			from agent_charge b where b.status =1 and b.agent_super_id = #{agentSuperId})agentOneIncome
 		</if>
 		<if test="agentOneId != null and agentOneId != 0">
 			IFNULL(sum(a.agent_one_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_one_income),0.00)
-			from agent_charge b where b.status =1 and a.agent_one_id=b.agent_one_id)agentOneIncome
+			from agent_charge b where b.status =1 and b.agent_one_id = #{agentOneId})agentOneIncome
 		</if>
 		<if test="agentTwoId != null and agentTwoId != 0">
 			IFNULL(sum(a.agent_two_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_two_income),0.00)
-			from agent_charge b where b.status =1 and a.agent_two_id=b.agent_two_id)agentOneIncome
+			from agent_charge b where b.status =1 and b.agent_two_id = #{agentTwoId})agentOneIncome
 		</if>
 		<if test="agentThreeId != null and agentThreeId != 0">
 			IFNULL(sum(a.agent_three_income),0.00)agentSuperIncome,(select IFNULL(sum(b.agent_three_income),0.00)
-			from agent_charge b where b.status =1 and a.agent_three_id=b.agent_three_id)agentOneIncome
+			from agent_charge b where b.status =1 and b.agent_three_id = #{agentThreeId})agentOneIncome
 		</if>
 		from agent_charge a	where a.status = 0
 		<if test="agentSuperId != null and agentSuperId != 0">
