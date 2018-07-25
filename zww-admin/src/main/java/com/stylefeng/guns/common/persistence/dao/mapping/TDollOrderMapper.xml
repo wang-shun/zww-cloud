@@ -43,11 +43,10 @@
 		b.county county, b.street street,
 		c.memberID memberIDs,
 		d.doll_code dollCodes, d.quantity quantity,
-		e.dollName dollName, e.img_url imgUrl
+		d.doll_name dollName, d.doll_url imgUrl
 		from t_doll_order a LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		LEFT JOIN t_member c on a.order_by = c.id
 		LEFT JOIN t_doll_order_item d on d.order_id = a.id
-		LEFT JOIN doll_info e on d.doll_code = e.dollCode
 		where a.status='寄存中'
 		<if test="phone!=null and phone != '' ">
 			and b.receiver_phone like concat

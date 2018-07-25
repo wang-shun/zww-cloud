@@ -19,12 +19,4 @@
     <sql id="Base_Column_List">
         id, dollName, dollTotal, img_url AS imgUrl, addTime, dollCode, size, type, note
     </sql>
-
-
-	<select id="selectByDollCode" resultMap="BaseResultMap">
-		SELECT *
-		FROM doll_info
-		WHERE dollCode = #{dollCode}
-	</select>
-
 </mapper>

@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2018-04-02
  */
 public interface DollInfoMapper extends BaseMapper<DollInfo> {
-    DollInfo selectByDollCode(@Param("dollCode") String dollCode);
+
 }
