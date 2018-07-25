@@ -78,9 +78,9 @@ public class TDollCatchHistoryController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer dollId, String dollName, String machineCode, String dollCatchStates,Integer machineType,String memberName) {
+    public Object list(Integer dollId, String dollName, String machineCode, String dollCatchStates,Integer machineType,String memberName,String beginDate,String endtime) {
         Page<TDollCatchHistory> page = new PageFactory<TDollCatchHistory>().defaultPage();
-        List<Map<String, Object>> result = tDollCatchHistoryService.selectDollCatchHistorys(page,dollId,dollName,machineCode,dollCatchStates,machineType,memberName);
+        List<Map<String, Object>> result = tDollCatchHistoryService.selectDollCatchHistorys(page,dollId,dollName,machineCode,dollCatchStates,machineType,memberName,beginDate,endtime);
         page.setRecords((List<TDollCatchHistory>)new TDollWarpper(result).warp());
         return super.packForBT(page);
     }

@@ -26,6 +26,6 @@ public interface TDollCatchHistoryMapper extends BaseMapper<TDollCatchHistory> {
     //抓取成功次数
     Integer selectCatchSuccessNum(@Param("memberId") Integer memberId, @Param("beginDate")String beginDate, @Param("endtime") String endtime);
 
-    List<Map<String, Object>> selectDollCatchHistorys(@Param("page") Page<TDollCatchHistory> page,@Param("dollId") Integer dollId, @Param("dollName") String dollName, @Param("machineCode") String machineCode, @Param("dollCatchStates") String dollCatchStates,@Param("machineType") Integer machineType,@Param("memberName") String memberName);
+    List<Map<String, Object>> selectDollCatchHistorys(@Param("page") Page<TDollCatchHistory> page,@Param("dollId") Integer dollId, @Param("dollName") String dollName, @Param("machineCode") String machineCode, @Param("dollCatchStates") String dollCatchStates,@Param("machineType") Integer machineType,@Param("memberName") String memberName, @Param("beginDate")String beginDate, @Param("endtime")String endtime);
 
 }

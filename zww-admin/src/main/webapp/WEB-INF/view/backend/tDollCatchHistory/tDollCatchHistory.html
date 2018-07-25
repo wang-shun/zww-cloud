@@ -9,13 +9,13 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <#NameCon id="dollName" name="名称" placeholder="输入娃娃名称" />
                             </div>
                             <div class="col-sm-2">
                                 <#NameCon id="machineCode" name="机器号" placeholder="输入机器号" />
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <#NameCon id="memberName" name="用户昵称" placeholder="输入用户昵称" />
                             </div>
                             <div class="col-sm-2">
@@ -35,6 +35,12 @@
                               <option value="3" >数码</option>
                             </#SelectCon>
                          </div>
+                    <div class="col-sm-2">
+                        <#TimeCon id="beginDate" name="开始时间" isTime="true" pattern="YYYY-MM-DD hh:mm:ss"/>
+                    </div>
+                    <div class="col-sm-2">
+                        <#TimeCon id="endtime" name="结束时间" isTime="true" pattern="YYYY-MM-DD hh:mm:ss"/>
+                    </div>
                 <div class="col-sm-2">
                     <#button name="搜索" icon="fa-search" clickFun="TDollCatchHistory.search()"/>
                 </div>

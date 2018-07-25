@@ -18,5 +18,5 @@ import java.util.Map;
  */
 public interface ITDollCatchHistoryService extends IService<TDollCatchHistory> {
 
-    List<Map<String, Object>> selectDollCatchHistorys(Page<TDollCatchHistory> page, Integer dollId, String dollName, String machineCode, String dollCatchStates, Integer machineType, String memberName);
+    List<Map<String, Object>> selectDollCatchHistorys(Page<TDollCatchHistory> page, Integer dollId, String dollName, String machineCode, String dollCatchStates, Integer machineType, String memberName,String beginDate,String endtime);
 }

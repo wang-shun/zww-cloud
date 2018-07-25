@@ -34,5 +34,6 @@
 		<if test="dollName != null  and dollName != '' ">
 			and dollName like CONCAT('%',#{dollName},'%')
 		</if>
+		order by createTime desc
 	</select>
 </mapper>

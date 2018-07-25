@@ -26,8 +26,8 @@ public class TDollCatchHistoryServiceImpl extends ServiceImpl<TDollCatchHistoryM
     TDollCatchHistoryMapper tDollCatchHistoryMapper;
 
     @Override
-    public List<Map<String, Object>> selectDollCatchHistorys(Page<TDollCatchHistory> page, Integer orderId, String dollName, String machineCode, String dollCatchStates, Integer machineType, String memberName) {
+    public List<Map<String, Object>> selectDollCatchHistorys(Page<TDollCatchHistory> page, Integer orderId, String dollName, String machineCode, String dollCatchStates, Integer machineType, String memberName,String beginDate,String endtime) {
         // TODO Auto-generated method stub
-        return tDollCatchHistoryMapper.selectDollCatchHistorys(page,orderId,dollName, machineCode, dollCatchStates,machineType,memberName);
+        return tDollCatchHistoryMapper.selectDollCatchHistorys(page,orderId,dollName, machineCode, dollCatchStates,machineType,memberName,beginDate,endtime);
     }
 }

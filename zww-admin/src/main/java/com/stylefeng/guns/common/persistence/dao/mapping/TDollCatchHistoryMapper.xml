@@ -108,6 +108,12 @@
 		<if test="memberName != null and memberName != ''">
 			and c.name like concat(concat("%",#{memberName,jdbcType=VARCHAR}),"%")
 		</if>
+		<if test="beginDate != null and beginDate != ''">
+			AND   a.catch_date >= #{beginDate}
+		</if>
+		<if test="endtime != null and endtime != ''">
+			AND  a.catch_date &lt;= #{endtime}
+		</if>
 		order by a.catch_date desc
 	</select>
 </mapper>

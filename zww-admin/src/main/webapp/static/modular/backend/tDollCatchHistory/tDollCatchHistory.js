@@ -81,6 +81,8 @@ TDollCatchHistory.search = function () {
     queryData['dollCatchStates'] = $("#dollCatchStates").val();
     queryData['machineType'] = $("#machineType").val();
     queryData['memberName'] = $("#memberName").val();
+    queryData['beginDate'] = $("#beginDate").val();
+    queryData['endtime'] = $("#endtime").val();
     TDollCatchHistory.table.refresh({query: queryData});
 };
 
