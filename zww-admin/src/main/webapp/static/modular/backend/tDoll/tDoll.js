@@ -19,7 +19,7 @@ TDoll.initColumn = function () {
             {title: '名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '价格', field: 'price', visible: true, align: 'center', valign: 'middle'},
             {title: '兑换币数', field: 'redeemCoins', visible: true, align: 'center', valign: 'middle'},
-            {title: '库存数', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
+            {title: '库存数', field: 'stock', visible: true, align: 'center', valign: 'middle'},
             {title: '状态', field: 'machineStatus', visible: true, align: 'center', valign: 'middle',
           	  formatter:function (value,row,index) {  
           		if(value == '空闲中'){

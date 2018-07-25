@@ -19,6 +19,9 @@ public class TDollWarpper extends BaseControllerWarpper {
 			Integer modifiedBy = (Integer)map.get("modifiedBy");
 			map.put("person",ConstantFactory.me().getUserNameById(modifiedBy));
 		}
+		String dollID = (String) map.get("dollID");
+		map.put("stock",ConstantFactory.me().getStockByDollID(dollID));
+
 	}
 
 	

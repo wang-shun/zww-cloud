@@ -122,4 +122,6 @@ public interface IConstantFactory {
 
     String getOemNameById(Integer id);
 
+    Integer getStockByDollID(String dollID);
+
 }

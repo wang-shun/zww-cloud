@@ -15,6 +15,7 @@ import com.stylefeng.guns.core.mutidatasource.annotion.DataSource;
 import com.stylefeng.guns.core.support.StrKit;
 import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.SpringContextHolder;
+import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.DependsOn;
@@ -41,6 +42,7 @@ public class ConstantFactory implements IConstantFactory {
     private TAgentMapper tAgentMapper = SpringContextHolder.getBean(TAgentMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
     private TOemMapper tOemMapper = SpringContextHolder.getBean(TOemMapper.class);
+    private TDollInfoMapper tDollInfoMapper = SpringContextHolder.getBean(TDollInfoMapper.class);
      
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -379,6 +381,21 @@ public class ConstantFactory implements IConstantFactory {
         } else {
             return oem.getName();
         }
+    }
+
+
+
+    /**
+     * 获取菜单名称
+     */
+
+    @Override
+    public Integer getStockByDollID(String dollID) {
+      TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(dollID);
+      if(tDollInfo == null){
+          return  0;
+      }
+      return tDollInfo.getDollTotal();
     }
 
 }
