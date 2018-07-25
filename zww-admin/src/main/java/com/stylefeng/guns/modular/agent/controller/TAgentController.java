@@ -197,7 +197,7 @@ public class TAgentController extends BaseController {
         }
         User u = userMapper.selectByUsername(tAgent.getUsername());
         if(u != null){
-            return  new ErrorTip(500,"添加失败!用户名已是管理员");
+            return  new ErrorTip(500,"添加失败!用户名已存在，该用户已是管理员");
         }
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         //添加用户
