@@ -11,11 +11,12 @@
 		<result column="monthCardState" property="monthCardState" />
 		<result column="bitState" property="bitState" />
 		<result column="growth_value" property="growthValue" />
+		<result column="tester" property="tester" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id,coins,superTicket,weeksCardState,monthCardState,bitState,growth_value growthValue
+        id,coins,superTicket,weeksCardState,monthCardState,bitState,growth_value growthValue,tester
     </sql>
 
 	<select id="selectAccount" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
@@ -27,7 +28,7 @@
 
 	<select id="selectById" resultType="com.stylefeng.guns.common.persistence.model.Account">
 		select
-		*
+		<include refid="Base_Column_List" />
 		from account
 		where id = #{memberId}
 	</select>

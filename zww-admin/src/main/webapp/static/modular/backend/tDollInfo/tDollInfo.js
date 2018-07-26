@@ -15,7 +15,7 @@ TDollInfo.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
            // {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '房间名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
+            {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '库存数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
             {title: '图片', field: 'imgUrl', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
@@ -23,11 +23,11 @@ TDollInfo.initColumn = function () {
                 }
             },
             {title: '娃娃编号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
-            {title: '发货地', field: 'agency', visible: true, align: 'center', valign: 'middle'},
+           /* {title: '发货地', field: 'agency', visible: true, align: 'center', valign: 'middle'},
             {title: '尺寸', field: 'size', visible: true, align: 'center', valign: 'middle'},
-            {title: '材质', field: 'type', visible: true, align: 'center', valign: 'middle'},
+            {title: '材质', field: 'type', visible: true, align: 'center', valign: 'middle'},*/
             {title: '备注', field: 'note', visible: true, align: 'center', valign: 'middle'},
-            {title: '返币数', field: 'redeemCoins', visible: true, align: 'center', valign: 'middle'},
+           // {title: '返币数', field: 'redeemCoins', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃成本(元)', field: 'dollCoins', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return value*0.01;

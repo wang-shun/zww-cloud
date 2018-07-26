@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -42,6 +43,9 @@ public class Account extends Model<Account> implements Serializable {
 
 	@TableField(exist=false)
 	private String addReason;//加币原因
+
+	@TableField("tester")
+	private Integer tester;//测试人员标记（0普通用户1测试人员）
 
 
 	public double getGrowthValue() {
@@ -107,6 +111,14 @@ public class Account extends Model<Account> implements Serializable {
 		this.bitState = bitState;
 	}
 
+	public Integer getTester() {
+		return tester;
+	}
+
+	public void setTester(Integer tester) {
+		this.tester = tester;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -123,6 +135,7 @@ public class Account extends Model<Account> implements Serializable {
 			", bitState=" + bitState +
 			", addReason=" + addReason +
 			", growthValue=" + growthValue +
+			", tester=" + tester +
 			"}";
 	}
 }

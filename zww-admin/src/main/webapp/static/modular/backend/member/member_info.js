@@ -65,7 +65,7 @@ MemberInfoDlg.collectData = function() {
     this
     .set('id')
     .set('coins')
-    .set('superTicket')
+   /* .set('superTicket')*/
     .set('addReason')
     ;
 }
@@ -114,6 +114,28 @@ MemberInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+/**
+ * 提交修改
+ */
+MemberInfoDlg.updateTest = function() {
+
+    this.clearData();
+    this.set("id")
+    this.set('tester');
+
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/member/updateTest", function(data){
+        Feng.success("修改成功!");
+        window.parent.Member.table.refresh();
+        MemberInfoDlg.close();
+    },function(data){
+        Feng.error("修改失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set(this.memberInfoData);
+    ajax.start();
+}
+
+
 //jquery实现回车键触发事件
 $(document).keyup(function(event){
     if(event.keyCode ==13){
@@ -125,4 +147,11 @@ $(document).keyup(function(event){
 $(function() {
     //为空验证
     Feng.initValidator("memberInfoForm", MemberInfoDlg.validateFields);
+
+    var testerValue = $("#testerValue").val();
+     if(testerValue == undefined || testerValue == null){
+         $("#tester").val(0);
+     }else{
+         $("#tester").val(testerValue);
+     }
 });

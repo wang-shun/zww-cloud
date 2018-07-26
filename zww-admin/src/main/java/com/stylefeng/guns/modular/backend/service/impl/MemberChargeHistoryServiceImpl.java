@@ -54,8 +54,6 @@ public class MemberChargeHistoryServiceImpl extends ServiceImpl<MemberChargeHist
         chargeRecord.setChargeMethod(userdto.getName() + "改币："+account.getAddReason());
         chargeRecord.setCoins(acc.getCoins());
         chargeRecord.setCoinsSum(account.getCoins()-acc.getCoins());
-        chargeRecord.setSuperTicket(acc.getSuperTicket());
-        chargeRecord.setSuperTicketSum(account.getSuperTicket()-acc.getSuperTicket());
         chargeRecord.setMemberId(account.getId());
         chargeRecord.setType("income");
 

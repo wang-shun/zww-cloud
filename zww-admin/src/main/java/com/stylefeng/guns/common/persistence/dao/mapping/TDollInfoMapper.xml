@@ -34,6 +34,7 @@
 		<if test="dollName != null  and dollName != '' ">
 			and dollName like CONCAT('%',#{dollName},'%')
 		</if>
+		order by addTime desc
 	</select>
 
 	<select id="selectDollInfoByDollCode" resultMap="BaseResultMap" parameterType="java.lang.String">

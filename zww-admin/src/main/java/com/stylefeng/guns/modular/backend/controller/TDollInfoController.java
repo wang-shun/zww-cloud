@@ -123,6 +123,7 @@ public class TDollInfoController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TDollInfo tDollInfo) {
+        tDollInfo.setAddTime(new Date());
         tDollInfoService.updateById(tDollInfo);
         TDollInfo info = tDollInfoService.selectById(tDollInfo.getId());
         TDollInfoHistory history = new TDollInfoHistory(tDollInfo,info.getDollTotal(),tDollInfo.getDollTotal(), ShiroKit.getUser().getId());

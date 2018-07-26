@@ -100,6 +100,18 @@ public class MemberController extends BaseController {
         return PREFIX + "member_add.html";
     }
 
+
+    /**
+     * 跳转到添加member
+     */
+    @RequestMapping("/updateTestPage/{memberId}")
+    public String updateTestPage(@PathVariable Integer memberId, Model model) {
+        Account account = accountMapper.selectById(memberId);
+        model.addAttribute("item",account);
+        LogObjectHolder.me().set(account);
+        return PREFIX + "member_update_test.html";
+    }
+
     /**
      * 跳转到修改member
      */
@@ -258,7 +270,14 @@ public class MemberController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         memberChargeHistoryService.insertChargeHistory(account,userdto);
 
+        accountMapper.updateById(account);
+        return super.SUCCESS_TIP;
+    }
 
+
+    @RequestMapping(value = "/updateTest")
+    @ResponseBody
+    public Object updateTest(Account account) {
         accountMapper.updateById(account);
         return super.SUCCESS_TIP;
     }

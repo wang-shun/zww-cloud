@@ -26,7 +26,7 @@ Member.initColumn = function () {
             {title: '性别', field: 'genderName', visible: true, align: 'center', valign: 'middle'},
             {title: '原金币', field: 'coins', visible: false, align: 'center', valign: 'middle'},
             {title: '金币', field: 'Acoins', visible: true, align: 'center', valign: 'middle'},
-            {title: '钻石', field: 'superTicket', visible: true, align: 'center', valign: 'middle'},
+           // {title: '钻石', field: 'superTicket', visible: true, align: 'center', valign: 'middle'},
             {title: '抓取次数', field: 'catchNumber', visible: true, align: 'center', valign: 'middle'},
             {title: '注册时间', field: 'registerDate', visible: true, align: 'center', valign: 'middle'},
             {title: '最近登录时间', field: 'lastLoginDate', visible: true, align: 'center', valign: 'middle'},
@@ -42,6 +42,15 @@ Member.initColumn = function () {
             {title: '手机型号', field: 'phoneModel', visible: true, align: 'center', valign: 'middle'},
             {title: '寄存个数', field: 'checkIn', visible: true, align: 'center', valign: 'middle'},
             {title: 'vip等级', field: 'vipGroup', visible: true, align: 'center', valign: 'middle'},
+            {title: '用户身份', field: 'tester', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    if(value == 0){
+                        return '<span class="label label-success radius">普通</span>';
+                    }else {
+                        return '<span class="label label-danger radius">测试</span>';
+                    }
+                }
+            }
     ];
 };
 
@@ -147,7 +156,19 @@ Member.openMemberGoodsDetail = function () {
     }
 };
 
-
+Member.updateTest = function () {
+    if (this.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '修改身份',
+            area: ['600px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/member/updateTestPage/' + Member.seItem.id
+        });
+        this.layerIndex = index;
+    }
+};
 
 //用户封号
 Member.closeMember = function () {
@@ -162,6 +183,8 @@ Member.closeMember = function () {
         ajax.start();
     }
 };
+
+
 
 //解封
 Member.openMember = function () {
