@@ -157,7 +157,7 @@ Member.openMemberGoodsDetail = function () {
 };
 
 Member.updateTest = function () {
-    if (this.check()) {
+/*    if (this.check()) {
         var index = layer.open({
             type: 2,
             title: '修改身份',
@@ -167,7 +167,14 @@ Member.updateTest = function () {
             content: Feng.ctxPath + '/member/updateTestPage/' + Member.seItem.id
         });
         this.layerIndex = index;
-    }
+    }*/
+
+    var ajax = new $ax(Feng.ctxPath + "/Tests/Test", function(data){
+        Feng.success(data);
+    },function(data){
+        Feng.error("重置失败!" + data.responseJSON.message + "!");
+    });
+    ajax.start();
 };
 
 //用户封号

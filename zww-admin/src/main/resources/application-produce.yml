@@ -8,6 +8,9 @@
       url: jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
       username: bruce
       password: Xlq12345!
+     # url: jdbc:mysql://127.0.0.1:3306/zww?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    #  username: root
+    #  password: 199584
       db-name: zww
       filters: log4j,wall,mergeStat
       connectionInitSqls: "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;"
@@ -21,9 +24,13 @@
       password: Xlq12345!
   zww:
     datasource:
-      url: jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
-      username: bruce
-      password: Xlq12345!
+     url: jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+     username: bruce
+     password: Xlq12345!
+
+    #  url: jdbc:mysql://127.0.0.1:3306/zww?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+   #   username: root
+   #   password: 199584
   muti-datasource:
     default-dataSource-name: dataSourceGuns #默认的数据源名称
     url: rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww_flowable?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false

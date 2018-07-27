@@ -34,4 +34,6 @@ public interface TAgentMapper extends BaseMapper<TAgent> {
 
     TAgent selectTAgentByUsername(@Param("username") String username);
 
+   int  updateStatusByUsername(@Param("status") String status,@Param("username") String username,@Param("phone") String phone);
+
 }

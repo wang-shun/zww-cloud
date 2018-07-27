@@ -124,8 +124,8 @@ public class TDollInfoController extends BaseController {
     @ResponseBody
     public Object update(TDollInfo tDollInfo) {
         tDollInfo.setAddTime(new Date());
-        tDollInfoService.updateById(tDollInfo);
         TDollInfo info = tDollInfoService.selectById(tDollInfo.getId());
+        tDollInfoService.updateById(tDollInfo);
         TDollInfoHistory history = new TDollInfoHistory(tDollInfo,info.getDollTotal(),tDollInfo.getDollTotal(), ShiroKit.getUser().getId());
         tDollInfoHistoryService.insert(history);
         return super.SUCCESS_TIP;

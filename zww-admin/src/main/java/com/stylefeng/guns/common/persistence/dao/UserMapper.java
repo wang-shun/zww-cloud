@@ -14,4 +14,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserMapper extends BaseMapper<User> {
     User selectByUsername(@Param("account") String account);
+
+   int updateStatusByUsername(@Param("status") String status,@Param("account") String account);
 }

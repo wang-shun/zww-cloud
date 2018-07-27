@@ -146,5 +146,19 @@
 		</if>
 	</select>
 
+	<select id="selectTAgentByUsername" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.String">
+		select <include refid="Base_Column_List" /> from t_agent where username  = #{username}
+	</select>
+
+	<update id="updateStatusByUsername"  parameterType="java.lang.String">
+		update t_agent set
+		<if test="status =='失效'">
+	     	status = 3
+	    </if>
+		<if test="status =='冻结'">
+			status = 2
+		</if>
+		  where username  = #{username} and status =1 and phone = #{phone}
+	</update>
 
 </mapper>

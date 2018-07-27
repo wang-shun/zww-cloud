@@ -30,4 +30,8 @@
 		  from sys_user where account = #{account}
 	</select>
 
+	<update id="updateStatusByUsername"  parameterType="java.lang.String">
+			update sys_user set status = 3 where account = #{account}
+	</update>
+
 </mapper>
