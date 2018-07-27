@@ -19,6 +19,7 @@ public class ZwwContentFactory {
 	private MemberMapper memberMapper = SpringContextHolder.getBean(MemberMapper.class);
 	private TChargeRulesMapper tChargeRulesMapper = SpringContextHolder.getBean(TChargeRulesMapper.class);
 	private AccountMapper accountMapper = SpringContextHolder.getBean(AccountMapper.class);
+	private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
 	
 	private ShareInviteMapper shareInviteMapper = SpringContextHolder.getBean(ShareInviteMapper.class);;
 
@@ -32,11 +33,11 @@ public class ZwwContentFactory {
 	  
 	   /**
 	    * 用户id 获取 memberId
-	    * @param userId
+	    * @param memberId
 	    * @return
 	    */
-	 public String getMemberId(Integer userId) {
-		 Member member =  memberMapper.selectById(userId);
+	 public String getMemberId(Integer memberId) {
+		 Member member =  memberMapper.selectById(memberId);
 		 if (member != null) {
 	            return member.getMemberID();
 	        } else {
@@ -99,6 +100,11 @@ public class ZwwContentFactory {
 	public TAgent selectTAgentById(Integer agentId) {
 		return agentMapper.selectTAgentById(agentId);
 	}
+
+	public User selectUserById(Integer userId) {
+		return userMapper.selectById(userId);
+	}
+
 
 
 }

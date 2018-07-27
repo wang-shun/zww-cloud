@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -70,8 +71,18 @@ public class TDollInfoController extends BaseController {
     public String tDollInfoUpdate(@PathVariable Integer tDollInfoId, Model model) {
         TDollInfo tDollInfo = tDollInfoService.selectById(tDollInfoId);
         model.addAttribute("item",tDollInfo);
+        SimpleDateFormat sim =new SimpleDateFormat("yyyy-MM-dd");
+        model.addAttribute("time",sim.format(tDollInfo.getAddTime()));
         LogObjectHolder.me().set(tDollInfo);
         return PREFIX + "tDollInfo_edit.html";
+    }
+
+    @RequestMapping("/tDollInfo_detail/{dollCode}")
+    public String tDollInfoDetail(@PathVariable String dollCode, Model model) {
+        TDollInfo tDollInfo = tDollInfoService.selectDollInfoByDollCode(dollCode);
+        model.addAttribute("item",tDollInfo);
+        LogObjectHolder.me().set(tDollInfo);
+        return PREFIX + "tDollInfo_detail.html";
     }
 
     /**
@@ -99,6 +110,8 @@ public class TDollInfoController extends BaseController {
             return new ErrorTip(500,"娃娃编号已存在，请重新输入！");
         }
         tDollInfo.setAddTime(new Date());
+        tDollInfo.setRedeemCoins(tDollInfo.getDollTotal());
+        tDollInfo.setDeliverCoins(tDollInfo.getDollCoins() * tDollInfo.getDollTotal());
         tDollInfoService.insert(tDollInfo);
         TDollInfoHistory history = new TDollInfoHistory(tDollInfo,0,tDollInfo.getDollTotal(), ShiroKit.getUser().getId());
         tDollInfoHistoryService.insert(history);
@@ -125,8 +138,19 @@ public class TDollInfoController extends BaseController {
     public Object update(TDollInfo tDollInfo) {
         tDollInfo.setAddTime(new Date());
         TDollInfo info = tDollInfoService.selectById(tDollInfo.getId());
-        tDollInfoService.updateById(tDollInfo);
         TDollInfoHistory history = new TDollInfoHistory(tDollInfo,info.getDollTotal(),tDollInfo.getDollTotal(), ShiroKit.getUser().getId());
+        //进货数量
+        int num = tDollInfo.getDollTotal()-info.getDollTotal();
+        //娃娃总数量
+        int total = info.getRedeemCoins() + num;
+        //娃娃总金额
+        long sum = info.getDeliverCoins() + num * tDollInfo.getDollCoins();
+        //单价
+        long price = sum/total;
+        tDollInfo.setRedeemCoins(total);
+        tDollInfo.setDeliverCoins(sum);
+        tDollInfo.setDollCoins(price);
+        tDollInfoService.updateById(tDollInfo);
         tDollInfoHistoryService.insert(history);
         return super.SUCCESS_TIP;
     }

@@ -59,7 +59,7 @@ public class TDollInfo extends Model<TDollInfo> {
      */
 	private String note;
     /**
-     * 返币数
+     * 娃娃总数量
      */
 	private Integer redeemCoins;
     /**
@@ -67,13 +67,16 @@ public class TDollInfo extends Model<TDollInfo> {
      */
 	private Long dollCoins;
     /**
-     * 快递费
+     * 娃娃总金额（分）
      */
 	private Long deliverCoins;
     /**
-     * 进货时间
+     * 修改时间
      */
 	private Date addTime;
+
+	@TableField(exist=false)
+	private Date stockDate;//进货时间
 
 
 	public Integer getId() {
@@ -180,6 +183,15 @@ public class TDollInfo extends Model<TDollInfo> {
 		this.addTime = addTime;
 	}
 
+
+	public Date getStockDate() {
+		return stockDate;
+	}
+
+	public void setStockDate(Date stockDate) {
+		this.stockDate = stockDate;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -201,6 +213,7 @@ public class TDollInfo extends Model<TDollInfo> {
 			", dollCoins=" + dollCoins +
 			", deliverCoins=" + deliverCoins +
 			", addTime=" + addTime +
+			", stockDate=" + stockDate +
 			"}";
 	}
 }

@@ -69,9 +69,19 @@ public class TDollInfoHistory extends Model<TDollInfoHistory> {
      */
 	private Integer modifyer;
     /**
-     * 进货时间
+     * 修改时间
      */
 	private Date createTime;
+
+	/**
+	 * 进货时间
+	 */
+	private Date stockDate;
+
+	/**
+	 * 进货时间
+	 */
+	private Long price;
 
 	public TDollInfoHistory() {
 	}
@@ -81,11 +91,10 @@ public class TDollInfoHistory extends Model<TDollInfoHistory> {
 		this.dollTotal = numEnd-numStart;
 		this.numStart = numStart;
 		this.numEnd = numEnd;
+		this.price = tDollInfo.getDollCoins();
+		this.stockDate = tDollInfo.getStockDate();
 		this.dollName = tDollInfo.getDollName();
 		this.imgUrl = tDollInfo.getImgUrl();
-		this.agency = tDollInfo.getAgency();
-		this.size = tDollInfo.getSize();
-		this.type = tDollInfo.getType();
 		this.note = tDollInfo.getNote();
 		this.modifyer = userId;
 		this.createTime = new Date();
@@ -195,6 +204,22 @@ public class TDollInfoHistory extends Model<TDollInfoHistory> {
 		this.createTime = createTime;
 	}
 
+	public Date getStockDate() {
+		return stockDate;
+	}
+
+	public void setStockDate(Date stockDate) {
+		this.stockDate = stockDate;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -216,6 +241,8 @@ public class TDollInfoHistory extends Model<TDollInfoHistory> {
 			", note=" + note +
 			", modifyer=" + modifyer +
 			", createTime=" + createTime +
+			", stockDate=" + stockDate +
+			", price=" + price +
 			"}";
 	}
 }

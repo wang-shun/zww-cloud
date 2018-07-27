@@ -14,31 +14,20 @@ var TDollInfo = {
 TDollInfo.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-           // {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
-            {title: '库存数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
+            {title: '娃娃编码', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
             {title: '图片', field: 'imgUrl', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return '<img  src="'+value+'" width="80" class="img-rounded" />';
                 }
             },
-            {title: '娃娃编号', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
-           /* {title: '发货地', field: 'agency', visible: true, align: 'center', valign: 'middle'},
-            {title: '尺寸', field: 'size', visible: true, align: 'center', valign: 'middle'},
-            {title: '材质', field: 'type', visible: true, align: 'center', valign: 'middle'},*/
-            {title: '备注', field: 'note', visible: true, align: 'center', valign: 'middle'},
-           // {title: '返币数', field: 'redeemCoins', visible: true, align: 'center', valign: 'middle'},
-            {title: '娃娃成本(元)', field: 'dollCoins', visible: true, align: 'center', valign: 'middle',
+            {title: '库存数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
+            {title: '成本单价(元)', field: 'dollCoins', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     return value*0.01;
                 }
             },
-            {title: '快递费(元)', field: 'deliverCoins', visible: true, align: 'center', valign: 'middle',
-                formatter:function (value,row,index) {
-                    return value*0.01;
-                }
-            },
-            {title: '进货时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'}
+            {title: '修改时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -63,7 +52,7 @@ TDollInfo.openAddTDollInfo = function () {
     var index = layer.open({
         type: 2,
         title: '添加库存管理',
-        area: ['100%', '100%'], //宽高
+        area: ['1089px', '608px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/tDollInfo/tDollInfo_add'
@@ -79,7 +68,7 @@ TDollInfo.openTDollInfoDetail = function () {
         var index = layer.open({
             type: 2,
             title: '库存管理详情',
-            area: ['100%', '100%'], //宽高
+            area: ['1089px', '608px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/tDollInfo/tDollInfo_update/' + TDollInfo.seItem.id
@@ -89,18 +78,19 @@ TDollInfo.openTDollInfoDetail = function () {
 };
 
 /**
- * 删除库存管理
+ * 库存管理详情
  */
-TDollInfo.delete = function () {
+TDollInfo.detail = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/tDollInfo/delete", function (data) {
-            Feng.success("删除成功!");
-            TDollInfo.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
+        var index = layer.open({
+            type: 2,
+            title: '库存管理详情',
+            area: ['1089px', '608px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/tDollInfo/tDollInfo_detail/' + TDollInfo.seItem.dollCode
         });
-        ajax.set("tDollInfoId",this.seItem.id);
-        ajax.start();
+        this.layerIndex = index;
     }
 };
 

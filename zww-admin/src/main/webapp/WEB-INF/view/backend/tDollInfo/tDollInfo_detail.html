@@ -10,16 +10,16 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3">
-                                <#NameCon id="dollCode" name="娃娃编号" />
+                                <#NameCon id="dollCode" name="娃娃编号" value="${item.dollCode}" readonly="readonly"/>
                             </div>
+
                             <div class="col-sm-3">
-                                <#NameCon id="dollName" name="娃娃名" />
+                                <#NameCon id="dollName" name="房间名" value="${item.dollName}" readonly="readonly"/>
                             </div>
                             <div class="col-sm-3">
                                 <#button name="搜索" icon="fa-search" clickFun="TDollInfoHistory.search()"/>
                             </div>
                         </div>
-
                         <#table id="TDollInfoHistoryTable"/>
                     </div>
                 </div>

@@ -55,9 +55,10 @@ TDollInfoInfoDlg.collectData = function() {
     .set('type')
     .set('note')
     .set('redeemCoins')
+    .set('deliverCoins')
+    .set('stockDate')
     ;
     this.tDollInfoInfoData['dollCoins'] = parseInt($("#dollCoins").val() * 100);
-    this.tDollInfoInfoData['deliverCoins'] = parseInt($("#deliverCoins").val() * 100);
 }
 
 /**
@@ -119,4 +120,5 @@ $(function() {
         }
     });
     avatarUp.init();
+
 });
