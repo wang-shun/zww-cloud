@@ -26,10 +26,11 @@ public class TDollInfoWarpper extends BaseControllerWarpper {
 		  }else{
 			  map.put("modifyName",u.getName());
 		  }
-		Date date = (Date)map.get("stockDate");
-		String dataStr = DateUtil.formatDate(date,"yyyy-MM-dd");
-		map.put("stockDateStr",dataStr);
-
+		  Date date = (Date)map.get("stockDate");
+		  if(date != null){
+			  String dataStr = DateUtil.formatDate(date,"yyyy-MM-dd");
+			  map.put("stockDateStr",dataStr);
+		  }
 	}
 
 }

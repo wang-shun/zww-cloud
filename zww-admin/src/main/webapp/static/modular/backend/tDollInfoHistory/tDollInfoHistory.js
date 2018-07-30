@@ -26,7 +26,7 @@ TDollInfoHistory.initColumn = function () {
             },
             {title: '单价(元)', field: 'price', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
-                    return value*0.01;
+                    return (value*0.01).toFixed(2);
                 }
             },
             {title: '备注', field: 'note', visible: true, align: 'center', valign: 'middle'},

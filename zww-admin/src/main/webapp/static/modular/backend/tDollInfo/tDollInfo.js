@@ -24,7 +24,7 @@ TDollInfo.initColumn = function () {
             {title: '库存数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
             {title: '成本单价(元)', field: 'dollCoins', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
-                    return value*0.01;
+                    return (value*0.01).toFixed(2);
                 }
             },
             {title: '修改时间', field: 'addTime', visible: true, align: 'center', valign: 'middle'}
