@@ -2,6 +2,8 @@ package com.stylefeng.guns.modular.backend.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
+import com.stylefeng.guns.common.persistence.dao.TDollMapper;
+import com.stylefeng.guns.common.persistence.model.TDoll;
 import com.stylefeng.guns.common.persistence.model.TDollCatchHistory;
 import com.stylefeng.guns.common.persistence.model.TMember;
 import com.stylefeng.guns.common.persistence.model.User;
@@ -9,6 +11,7 @@ import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.base.tips.ErrorTip;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.modular.backend.service.IMemberChargeHistoryService;
 import com.stylefeng.guns.modular.backend.service.ITDollCatchHistoryService;
 import com.stylefeng.guns.modular.backend.service.ITDollOrderService;
 import com.stylefeng.guns.modular.backend.warpper.TDollWarpper;
@@ -42,6 +45,11 @@ public class TDollCatchHistoryController extends BaseController {
     private ITMemberService memberService;
     @Autowired
     private ITDollOrderService  itDollOrderService;
+    @Autowired
+    private IMemberChargeHistoryService memberChargeHistoryService;
+    @Autowired
+    private TDollMapper dollMapper;
+
     /**
      * 跳转到娃娃机抓取记录首页
      */
@@ -115,17 +123,19 @@ public class TDollCatchHistoryController extends BaseController {
     @ResponseBody
     public Object update(TDollCatchHistory tDollCatchHistory) throws  Exception{
         tDollCatchHistoryService.updateById(tDollCatchHistory);
-        if(!"抓取成功".equals(tDollCatchHistory.getCatchStatus())){
-            return super.SUCCESS_TIP;
+        if("游戏异常,币已返回".equals(tDollCatchHistory.getCatchStatus())){
+            tDollCatchHistory = tDollCatchHistoryService.selectById(tDollCatchHistory.getId());
+            TDoll doll = dollMapper.selectById(tDollCatchHistory.getDollId());
+            memberChargeHistoryService.insertChargeHistory(tDollCatchHistory.getMemberId().intValue(),doll.getRedeemCoins());
         }
-        tDollCatchHistory = tDollCatchHistoryService.selectById(tDollCatchHistory.getId());
-        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        Boolean flag = itDollOrderService.insertTDollOrder(tDollCatchHistory,userdto.getId());
-        if(flag){
-            return super.SUCCESS_TIP;
-        }else{
-            return  new ErrorTip(500,"修改失败！");
+        if("抓取成功".equals(tDollCatchHistory.getCatchStatus())){
+            tDollCatchHistory = tDollCatchHistoryService.selectById(tDollCatchHistory.getId());
+            Boolean flag = itDollOrderService.insertTDollOrder(tDollCatchHistory,ShiroKit.getUser().getId());
+            if(!flag){
+                return  new ErrorTip(500,"修改失败！");
+            }
         }
+        return super.SUCCESS_TIP;
     }
 
     /**

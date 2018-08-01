@@ -23,4 +23,6 @@ public interface IMemberChargeHistoryService extends IService<MemberChargeHistor
 
     //生成消费记录
     Integer insertChargeHistory(Account account,User userdto);
+    //生成消费记录
+    Integer insertChargeHistory(Integer memberId,Integer redeemCoins);
 }

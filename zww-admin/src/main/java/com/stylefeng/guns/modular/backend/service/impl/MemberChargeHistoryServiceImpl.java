@@ -3,11 +3,8 @@ package com.stylefeng.guns.modular.backend.service.impl;
 import com.stylefeng.guns.common.persistence.dao.AccountMapper;
 import com.stylefeng.guns.common.persistence.dao.ChargeOrderMapper;
 import com.stylefeng.guns.common.persistence.dao.TSystemCoinMapper;
-import com.stylefeng.guns.common.persistence.model.Account;
-import com.stylefeng.guns.common.persistence.model.MemberChargeHistory;
+import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.common.persistence.dao.MemberChargeHistoryMapper;
-import com.stylefeng.guns.common.persistence.model.TSystemCoin;
-import com.stylefeng.guns.common.persistence.model.User;
 import com.stylefeng.guns.modular.backend.service.IMemberChargeHistoryService;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -65,6 +62,20 @@ public class MemberChargeHistoryServiceImpl extends ServiceImpl<MemberChargeHist
         tSystemCoin.setRemark(account.getAddReason());
         tSystemCoinMapper.insert(tSystemCoin);
 
+        return memberChargeHistoryMapper.insertChargeHistory(chargeRecord);
+    }
+
+
+    @Override
+    public Integer insertChargeHistory(Integer memberId,Integer redeemCoins) {
+        MemberChargeHistory chargeRecord = new MemberChargeHistory();
+        Account acc = accountMapper.selectById(memberId);
+        chargeRecord.setChargeDate(new Date());
+        chargeRecord.setChargeMethod("异常币已返回");
+        chargeRecord.setCoins(acc.getCoins());
+        chargeRecord.setCoinsSum(redeemCoins);
+        chargeRecord.setMemberId(memberId);
+        chargeRecord.setType("expense");
         return memberChargeHistoryMapper.insertChargeHistory(chargeRecord);
     }
 }
