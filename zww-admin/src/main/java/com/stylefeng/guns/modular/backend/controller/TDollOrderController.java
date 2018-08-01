@@ -121,9 +121,9 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/applylist")
     @ResponseBody
-    public Object applylist(String addrName,String phone) {
+    public Object applylist(Integer id,String addrName,String phone) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderApply(page,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderApply(page,id,addrName,phone);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -134,9 +134,9 @@ public class TDollOrderController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String addrName,String phone) {
+    public Object list(Integer id,String addrName,String phone) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,id,addrName,phone);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -148,9 +148,9 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/outList")
     @ResponseBody
-    public Object outList(String addrName,String phone) {
+    public Object outList(Integer id,String addrName,String phone) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,id,addrName,phone);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }

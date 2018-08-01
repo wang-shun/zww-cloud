@@ -73,6 +73,7 @@ TDollOrder.order_apply = function () {
  */
 TDollOrder.search = function () {
     var queryData = {};
+    queryData['id'] = $("#id").val();
     queryData['phone'] = $("#phone").val();
     queryData['addrName'] = $("#addrName").val();
     TDollOrder.table.refresh({query: queryData});

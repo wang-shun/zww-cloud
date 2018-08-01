@@ -67,6 +67,9 @@
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='申请发货'
+		<if test="id != null">
+			and a.order_by = #{id}
+		</if>
 		<if test="phone!=null and phone != '' ">
 			and b.receiver_phone like concat('%',#{phone},'%')
 		</if>
@@ -86,6 +89,9 @@
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='待发货'
+		<if test="id != null">
+			and a.order_by = #{id}
+		</if>
 		<if test="phone!=null and phone != '' ">
 			and b.receiver_phone like concat('%',#{phone},'%')
 		</if>
@@ -105,6 +111,9 @@
 		from t_doll_order a LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		where a.status='已发货'
+		<if test="id != null">
+			and a.order_by = #{id}
+		</if>
 		<if test="phone!=null and phone != '' ">
 			and b.receiver_phone like concat
 			('%',#{phone},'%')
