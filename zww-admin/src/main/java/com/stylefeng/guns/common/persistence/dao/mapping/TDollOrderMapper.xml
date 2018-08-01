@@ -135,7 +135,7 @@
 	<!-- 发货 -->
 	<update id="updateTDollOrderById">
             update t_doll_order set deliver_method=#{deliverMethod},deliver_number=#{deliverNumber},deliver_amount=#{deliverAmount},
-		      comment=#{comment},deliver_date=now(),modified_date=now(),status='已发货'  where id in
+		      comment=#{comment},deliver_date=now(),status='已发货'  where id in
 		<foreach collection="ids" index="index" item="item" separator="," open="(" close=")">
 			#{item}
 		</foreach>
