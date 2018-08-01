@@ -76,6 +76,10 @@ public class MemberChargeHistoryServiceImpl extends ServiceImpl<MemberChargeHist
         chargeRecord.setCoinsSum(redeemCoins);
         chargeRecord.setMemberId(memberId);
         chargeRecord.setType("expense");
+
+        acc.setCoins(acc.getCoins() + redeemCoins);
+        accountMapper.updateById(acc);
+
         return memberChargeHistoryMapper.insertChargeHistory(chargeRecord);
     }
 }
