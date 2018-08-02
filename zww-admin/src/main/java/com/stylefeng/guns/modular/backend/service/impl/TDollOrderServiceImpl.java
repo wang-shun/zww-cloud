@@ -58,19 +58,19 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
     private TDollMapper dollMapper;
 
     @Override
-    public List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,Integer id,String addrName,String phone){
-        return tDollOrderMapper.selectTDollOrderApply(page,id,addrName,phone);
+    public List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,Integer id,String addrName,String phone,String dollName){
+        return tDollOrderMapper.selectTDollOrderApply(page,id,addrName,phone,dollName);
     }
     //待发货订单
     @Override
-    public List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, Integer id,String addrName, String phone) {
-        return tDollOrderMapper.selectTDollOrder(page,id,addrName,phone);
+    public List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page, Integer id,String addrName, String phone,String dollName) {
+        return tDollOrderMapper.selectTDollOrder(page,id,addrName,phone,dollName);
     }
 
     //已发货订单
     @Override
-    public List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, Integer id,String addrName, String phone) {
-        return tDollOrderMapper.selectTDollOrderOut(page,id,addrName,phone);
+    public List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page, Integer id,String addrName, String phone,String dollName) {
+        return tDollOrderMapper.selectTDollOrderOut(page,id,addrName,phone,dollName);
     }
 
     //按订单编号查询
@@ -184,7 +184,7 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
     }
 
     @Override
-    public   List<TDollOrder> selectTDollOrderExecl(String addrName,String phone){
-        return tDollOrderMapper.selectTDollOrderExecl(addrName,phone);
+    public   List<TDollOrder> selectTDollOrderExecl(Integer id,String addrName, String phone,String dollName){
+        return tDollOrderMapper.selectTDollOrderExecl(id,addrName,phone,dollName);
     }
 }

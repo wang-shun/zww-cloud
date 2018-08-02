@@ -121,9 +121,9 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/applylist")
     @ResponseBody
-    public Object applylist(Integer id,String addrName,String phone) {
+    public Object applylist(Integer id,String addrName,String phone,String dollName) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderApply(page,id,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderApply(page,id,addrName,phone,dollName);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -134,9 +134,9 @@ public class TDollOrderController extends BaseController {
      
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer id,String addrName,String phone) {
+    public Object list(Integer id,String addrName,String phone,String dollName) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,id,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrder(page,id,addrName,phone,dollName);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -148,9 +148,9 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/outList")
     @ResponseBody
-    public Object outList(Integer id,String addrName,String phone) {
+    public Object outList(Integer id,String addrName,String phone,String dollName) {
         Page<TDollOrder> page = new PageFactory<TDollOrder>().defaultPage();
-        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,id,addrName,phone);
+        List<Map<String, Object>> result = tDollOrderService.selectTDollOrderOut(page,id,addrName,phone,dollName);
         page.setRecords((List<TDollOrder>)new TDollOrderWarpper(result).warp());
         return super.packForBT(page);
     }
@@ -277,8 +277,8 @@ public class TDollOrderController extends BaseController {
      * @throws IOException
      */
     @RequestMapping(value = "/tDollOrderExecl",method = RequestMethod.GET)
-    public void profitHistory(HttpServletResponse response, String addrName,String phone) throws IOException {
-        List<TDollOrder> result = tDollOrderService.selectTDollOrderExecl(addrName,phone);
+    public void profitHistory(HttpServletResponse response, Integer id,String addrName,String phone,String dollName) throws IOException {
+        List<TDollOrder> result = tDollOrderService.selectTDollOrderExecl(id,addrName,phone,dollName);
 
         String fileName = "未发货数据统计.xls";
 

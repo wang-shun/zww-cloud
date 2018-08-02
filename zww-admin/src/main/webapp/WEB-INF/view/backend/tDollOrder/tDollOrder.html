@@ -10,15 +10,18 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3">
+                                <#NameCon id="dollName" name="娃娃名称" />
+                            </div>
+                            <div class="col-sm-2">
                                 <#NameCon id="id" name="用户id" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <#NameCon id="phone" name="手机" />
                             </div>
                             <div class="col-sm-3">
                                 <#NameCon id="addrName" name="姓名" />
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="TDollOrder.search()"/>
                             </div>
                         </div>
@@ -40,6 +43,8 @@
 <form id="test" style="display: none;" action="${ctxPath}/tDollOrder/tDollOrderExecl">
     <input type="hidden" name="phone" id="phoneForm"/>
     <input type="hidden" name="addrName" id="addrNameForm"/>
+    <input type="hidden" name="id" id="idForm"/>
+    <input type="hidden" name="dollName" id="dollNameForm"/>
 </form>
 
 <script src="${ctxPath}/static/modular/backend/tDollOrder/tDollOrder.js"></script>

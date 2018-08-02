@@ -23,13 +23,13 @@ import java.util.Map;
 public interface ITDollOrderService extends IService<TDollOrder> {
 
     //查询申请发货订单
-    List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,Integer id,String addrName,String phone);
+    List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,Integer id,String addrName,String phone,String dollName);
 
     //待发货
-    List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page,Integer id, String addrName, String phone);
+    List<Map<String, Object>> selectTDollOrder(Page<TDollOrder> page,Integer id, String addrName, String phone,String dollName);
 
     //已发货
-    List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page,Integer id, String addrName, String phone);
+    List<Map<String, Object>> selectTDollOrderOut(Page<TDollOrder> page,Integer id, String addrName, String phone,String dollName);
 
     //按订单编号查询
     TDollOrder selectByorderNum(String orderNum);
@@ -48,5 +48,5 @@ public interface ITDollOrderService extends IService<TDollOrder> {
 
     boolean insertTDollOrder(TDollCatchHistory history,Integer modifiedBy);
 
-    List<TDollOrder> selectTDollOrderExecl(@Param("addrName") String addrName, @Param("phone") String phone);
+    List<TDollOrder> selectTDollOrderExecl(Integer id,String addrName, String phone,String dollName);
 }

@@ -60,6 +60,7 @@ TDollOrderOut.search = function () {
     queryData['id'] = $("#id").val();
     queryData['phone'] = $("#phone").val();
     queryData['addrName'] = $("#addrName").val();
+    queryData['dollName'] = $("#dollName").val();
     TDollOrderOut.table.refresh({query: queryData});
 };
 

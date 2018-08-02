@@ -57,6 +57,8 @@ TDollOrder.goodsDetail = function (title,url,orderUrl,w,h) {
 TDollOrder.execl = function (v_this) {
     $("#phoneForm").val($("#phone").val());
     $("#addrNameForm").val($("#addrName").val());
+    $("#idForm").val($("#id").val());
+    $("#dollNameForm").val($("#dollName").val());
     $(v_this).attr("disabled","true");
     setTimeout(function(){
         $(v_this).removeAttr("disabled");
@@ -128,6 +130,7 @@ TDollOrder.search = function () {
     queryData['id'] = $("#id").val();
     queryData['phone'] = $("#phone").val();
     queryData['addrName'] = $("#addrName").val();
+    queryData['dollName'] = $("#dollName").val();
     TDollOrder.table.refresh({query: queryData});
 };
 
