@@ -41,16 +41,20 @@ public class TaskWork {
                 JSONObject json = jsonArr.getJSONObject(i);
                 String code = json.getString("code");
                 String accessToken = json.getString("accessToken");
-                if(!StringUtils.isEmpty(accessToken)){
+                if(!StringUtils.isEmpty(accessToken) && !StringUtils.isEmpty(code)){
                     List<TMember> members = memberMapper.selectByRegisterChannel(code);
                     for (TMember member: members) {
                             JSONObject userInfoJson = WXUtil.getUserInfo(member.getWeixinId(),accessToken);
                             if (!StringUtils.isEmpty(userInfoJson) && userInfoJson.containsKey("unionid")) {
-                                String nikeName = userInfoJson.getString("nickname");
-                                String headimgurl = userInfoJson.getString("headimgurl");
-                                member.setName(nikeName);
-                                member.setIconRealPath(headimgurl);
-                                memberMapper.updateById(member);
+                                if(userInfoJson.getInt("subscribe") == 1){
+                                    String nikeName = userInfoJson.getString("nickname");
+                                    String headimgurl = userInfoJson.getString("headimgurl");
+                                    member.setName(nikeName);
+                                    member.setIconRealPath(headimgurl);
+                                    memberMapper.updateById(member);
+                                }else{
+                                    logger.warn("该用户未关注公众号={}", userInfoJson);
+                                }
                             } else {
                                 logger.error("获取用户微信信息出错={}", userInfoJson);
                             }
