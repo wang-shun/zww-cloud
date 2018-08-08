@@ -26,12 +26,11 @@ TChargeRules.initColumn = function () {
             {title: '折扣', field: 'discount', visible: true, align: 'center', valign: 'middle'},
             {title: '说明文字', field: 'description', visible: true, align: 'center', valign: 'middle'},
             {title: '期限', field: 'chargeDateLimit', visible: true, align: 'center', valign: 'middle'},
-            // {title: '创建日期', field: 'createdDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '创建人id', field: 'createdBy', visible: true, align: 'center', valign: 'middle'},
-            // {title: '修改日期', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '修改人id', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
-            // {title: '充值类型', field: 'chargeType', visible: true, align: 'center', valign: 'middle'},
-            // {title: '限购次数,-1为无限次', field: 'chargeTimesLimit', visible: true, align: 'center', valign: 'middle'},
+            {title: '图标', field: 'icon', visible: true, align: 'center', valign: 'middle',
+                formatter:function (value,row,index) {
+                    return '<a class="maincolor" href="javascript:;" onclick="TChargeRules.upload(\'图标\',\'tChargeRules\/toUpload\','+row.id+',\'\',\'350\')"><img  src="'+value+'" width="80" class="img-rounded" /></a>';
+                }
+            },
             {title: '礼包状态', field: 'rulesStatus', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     if(value == 1){
@@ -41,7 +40,7 @@ TChargeRules.initColumn = function () {
                     }
                 }
             },
-            // {title: '规则状态', field: 'rulesStatuses', visible: true, align: 'center', valign: 'middle'},
+
     ];
 };
 
@@ -107,12 +106,18 @@ TChargeRules.delete = function () {
     }
 };
 
+
+TChargeRules.upload = function (title,url,id,w,h) {
+    url = url+"?id="+id;
+    layer_show(title,url,w,h);
+}
+
+
 /**
  * 查询充值规则列表列表
  */
 TChargeRules.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
     TChargeRules.table.refresh({query: queryData});
 };
 

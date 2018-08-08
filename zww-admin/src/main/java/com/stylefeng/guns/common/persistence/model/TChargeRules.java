@@ -111,6 +111,11 @@ public class TChargeRules extends Model<TChargeRules> {
 	@TableField("superTicket_offer")
 	private Integer superTicketOffer;
 
+	/**
+	 * 图标
+	 */
+	private String icon;
+
 
 	public Integer getId() {
 		return id;
@@ -264,6 +269,14 @@ public class TChargeRules extends Model<TChargeRules> {
 		this.superTicketOffer = superTicketOffer;
 	}
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -291,6 +304,7 @@ public class TChargeRules extends Model<TChargeRules> {
 			", rulesStatus=" + rulesStatus +
 			", superTicketCharge=" + superTicketCharge +
 			", superTicketOffer=" + superTicketOffer +
+			", icon=" + icon +
 			"}";
 	}
 }

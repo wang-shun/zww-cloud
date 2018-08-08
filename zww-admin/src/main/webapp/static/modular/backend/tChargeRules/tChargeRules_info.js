@@ -121,6 +121,7 @@ TChargeRulesInfoDlg.collectData = function() {
     .set('chargeDateLimit')
     .set('rulesStatus')
     .set('superTicketCharge')
+    .set('icon')
     ;
 }
 

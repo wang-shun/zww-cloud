@@ -23,11 +23,12 @@
 		<result column="rules_status" property="rulesStatus" />
 		<result column="superTicket_charge" property="superTicketCharge" />
 		<result column="superTicket_offer" property="superTicketOffer" />
+		<result column="icon" property="icon" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, charge_price AS chargePrice, coins_charge AS coinsCharge, coins_offer AS coinsOffer, discount, description, created_date AS createdDate, created_by AS createdBy, modified_date AS modifiedDate, modified_by AS modifiedBy, charge_type AS chargeType, charge_name AS chargeName, orderby, cions_first AS cionsFirst, charge_times_limit AS chargeTimesLimit, charge_date_limit AS chargeDateLimit, rules_status AS rulesStatus, superTicket_charge AS superTicketCharge, superTicket_offer AS superTicketOffer
+        id, charge_price AS chargePrice, coins_charge AS coinsCharge, coins_offer AS coinsOffer, discount, description, created_date AS createdDate, created_by AS createdBy, modified_date AS modifiedDate, modified_by AS modifiedBy, charge_type AS chargeType, charge_name AS chargeName, orderby, cions_first AS cionsFirst, charge_times_limit AS chargeTimesLimit, charge_date_limit AS chargeDateLimit, rules_status AS rulesStatus, superTicket_charge AS superTicketCharge, superTicket_offer AS superTicketOffer,icon
     </sql>
 
 	<select id="selectRulesList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
