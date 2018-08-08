@@ -2,7 +2,7 @@
 ##########################################################
 ###################  开发环境的profile  ###################
 ##########################################################
- spring: 
+ spring:
   profiles: dev
   datasource:
     url: jdbc:mysql://101.132.166.121:3306/zww?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
@@ -43,7 +43,7 @@
   mnsAccountEndPoint: http://1792180091275324.mns.cn-shanghai.aliyuncs.com/
   ossBucketName: zww-image-dev
   sts: http://47.100.113.59:7080/app/oss/gettoken
-  smsModelCode: 
+  smsModelCode:
    reg: SMS_121910820
    find: SMS_121910820
    bind: SMS_121910820
