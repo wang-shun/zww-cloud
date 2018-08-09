@@ -12,11 +12,12 @@
 		<result column="bitState" property="bitState" />
 		<result column="growth_value" property="growthValue" />
 		<result column="tester" property="tester" />
+		<result column="lover" property="lover" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id,coins,superTicket,weeksCardState,monthCardState,bitState,growth_value growthValue,tester
+        id,coins,superTicket,weeksCardState,monthCardState,bitState,growth_value growthValue,tester,lover
     </sql>
 
 	<select id="selectAccount" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">

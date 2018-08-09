@@ -47,6 +47,9 @@ public class Account extends Model<Account> implements Serializable {
 	@TableField("tester")
 	private Integer tester;//测试人员标记（0普通用户1测试人员）
 
+	@TableField("lover")
+	private String lover;//测试人员标记（0普通用户1测试人员）
+
 
 	public double getGrowthValue() {
 		return growthValue;
@@ -119,6 +122,14 @@ public class Account extends Model<Account> implements Serializable {
 		this.tester = tester;
 	}
 
+	public String getLover() {
+		return lover;
+	}
+
+	public void setLover(String lover) {
+		this.lover = lover;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -136,6 +147,7 @@ public class Account extends Model<Account> implements Serializable {
 			", addReason=" + addReason +
 			", growthValue=" + growthValue +
 			", tester=" + tester +
+			", lover=" + lover +
 			"}";
 	}
 }

@@ -76,6 +76,9 @@ public class TDollOrder extends Model<TDollOrder> {
      */
 	@TableField("deliver_coins")
 	private Integer deliverCoins;
+
+	@TableField("lover")
+	private String lover;
     /**
      * 发货地址外键 t_member_addr
      */
@@ -357,6 +360,14 @@ public class TDollOrder extends Model<TDollOrder> {
 		this.comment = comment;
 	}
 
+	public String getLover() {
+		return lover;
+	}
+
+	public void setLover(String lover) {
+		this.lover = lover;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -392,6 +403,7 @@ public class TDollOrder extends Model<TDollOrder> {
 			", dollName=" + dollName +
 			", imgUrl=" + imgUrl +
 			", quantity=" + quantity +
+			", lover=" + lover +
 			"}";
 	}
 }
