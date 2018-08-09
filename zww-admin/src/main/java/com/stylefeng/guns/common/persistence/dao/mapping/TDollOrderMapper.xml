@@ -151,7 +151,7 @@
 
 	<select id="selectTDollOrderExecl" resultType="com.stylefeng.guns.common.persistence.model.TDollOrder">
 		select b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
-		b.county county, b.street street,d.doll_name dollName,COUNT(a.id) quantity
+		b.county county, b.street street,d.doll_name dollName,COUNT(a.id) quantity,lover
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
 		LEFT JOIN t_member_addr b ON  a.address_id=b.id
 		where a.status='待发货'

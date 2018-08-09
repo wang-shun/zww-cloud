@@ -78,6 +78,7 @@ public class TDollOrder extends Model<TDollOrder> {
 	private Integer deliverCoins;
 
 	@TableField("lover")
+	@Excel(name = "用户七夕活动", orderNum = "5", isImportField = "street",width = 20.0D)
 	private String lover;
     /**
      * 发货地址外键 t_member_addr
@@ -97,16 +98,16 @@ public class TDollOrder extends Model<TDollOrder> {
 	@Excel(name = "收货手机", orderNum = "4", isImportField = "addrPhone",width = 15.0D)
 	private String addrPhone;//收货手机
 	@TableField(exist=false)
-	@Excel(name = "省", orderNum = "5", isImportField = "province",width = 15.0D)
+	@Excel(name = "省", orderNum = "6", isImportField = "province",width = 15.0D)
 	private String province;//省
 	@TableField(exist=false)
-	@Excel(name = "市", orderNum = "6",  isImportField = "city",width = 15.0D)
+	@Excel(name = "市", orderNum = "7",  isImportField = "city",width = 15.0D)
 	private String city;//市
 	@TableField(exist=false)
-	@Excel(name = "区", orderNum = "7", isImportField = "county",width = 15.0D)
+	@Excel(name = "区", orderNum = "8", isImportField = "county",width = 15.0D)
 	private String county;//区
 	@TableField(exist=false)
-	@Excel(name = "街道", orderNum = "8", isImportField = "street",width = 70.0D)
+	@Excel(name = "街道", orderNum = "9", isImportField = "street",width = 70.0D)
 	private String street;//街道
 
 	@TableField(exist=false)
