@@ -82,23 +82,16 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
     //寄存娃娃违规返币
     @Override
     public boolean dollBackCoins(Integer tDollOrderId,String memberId) {
-        //根据memberId查询
-        Member member = memberMapper.selectIdByMemberId(memberId);
         //查询金币信息
-        Account account = accountMapper.selectById(member.getId());
+        Account account = accountMapper.selectById(Integer.valueOf(memberId));
         //查询订单信息
         TDollOrder tDollOrder = tDollOrderMapper.selectById(tDollOrderId);
-        //查询订单关联
-//        TDollOrderItem tDollOrderItem = tDollOrderItemMapper.selectByOrderId(tDollOrder.getId());
-        //查询娃娃名称
-//        TDoll tDoll = tDollMapper.selectById(tDollOrderItem.getDollId());
         //生成消费记录 返娃娃币
         MemberChargeHistory chargeRecord = new MemberChargeHistory();
         chargeRecord.setChargeDate(new Date());
         chargeRecord.setChargeMethod("违规返币");
         chargeRecord.setCoins(account.getCoins()==null?0:account.getCoins());
         chargeRecord.setCoinsSum(tDollOrder.getDollRedeemCoins()==null?0:tDollOrder.getDollRedeemCoins());
-//        chargeRecord.setDollId(tDollOrderItem.getDollId());
         chargeRecord.setMemberId(account.getId());
         chargeRecord.setType("income");
         memberChargeHistoryMapper.updateMemberCount(chargeRecord);
