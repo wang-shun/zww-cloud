@@ -74,8 +74,7 @@ public class AgentChargeController extends BaseController {
     @ResponseBody
     public Object list() {
         Page<AgentCharge> page = new PageFactory<AgentCharge>().defaultPage();
-        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(ShiroKit.getUser().getId());
         List<Map<String, Object>>  result= agentChargeService.selectAgentCharge(page,tAgent.getId(),tAgent.getLevel());
         page.setRecords((List<AgentCharge>) new AgentChargeWarpper(result).warp());
         return  super.packForBT(page);
@@ -132,8 +131,7 @@ public class AgentChargeController extends BaseController {
     @ResponseBody
     public Map<String, Object> totle() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();
-        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
-        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
+        TAgent tAgent = agentService.selectTAgentByUId(ShiroKit.getUser().getId());
         AgentCharge agentCharge = new AgentCharge();
         if(tAgent.getLevel() == 0){
             agentCharge.setAgentSuperId(tAgent.getId());
