@@ -20,15 +20,15 @@ public class GunsZwwProperties {
 
     //默认多数据源的链接
     @Value("${guns.zww.datasource.url}")
-    private String url = "jdbc:mysql://rm-uf6528juob1nalin3o.mysql.rds.aliyuncs.com:3306/zww?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+    private String url = "jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/zww?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
 
     //默认多数据源的数据库账号
     @Value("${guns.zww.datasource.username}")
-    private String username = "zww_app_user";
+    private String username = "bruce";
 
     //默认多数据源的数据库密码
     @Value("${guns.zww.datasource.password}")
-    private String password = "nxCpVYcnqkrsA6dbqtZV8NUIr3gvtVEk";
+    private String password = "Xlq12345!";
 
     public void config(DruidDataSource dataSource) {
         dataSource.setUrl(url);

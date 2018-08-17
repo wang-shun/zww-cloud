@@ -17,13 +17,13 @@ public class GunsFlowableProperties {
     public static final String GUNS_FLOWABLE_DATASOURCE = "guns.flowable.datasource";
 
     //默认多数据源的链接
-    private String url = "jdbc:mysql://127.0.0.1:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
+    private String url = "jdbc:mysql://rm-wz9ehnln1i88q49g1do.mysql.rds.aliyuncs.com:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false";
 
     //默认多数据源的数据库账号
-    private String username = "root";
+    private String username = "bruce";
 
     //默认多数据源的数据库密码
-    private String password = "admins";
+    private String password = "Xlq12345!";
 
     public void config(DruidDataSource dataSource) {
         dataSource.setUrl(url);
