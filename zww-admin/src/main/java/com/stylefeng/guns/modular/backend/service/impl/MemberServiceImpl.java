@@ -52,8 +52,8 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
 
     @Override
-    public List<Map<String, Object>> selectMember(Page<Member> page,Integer id, String userName, String beginTime, String phoneModel) {
-        return memberMapper.selectMember(page,id,userName,beginTime,phoneModel);
+    public List<Map<String, Object>> selectMember(Page<Member> page,Integer id, String userName,String phone,String beginTime, String phoneModel) {
+        return memberMapper.selectMember(page,id,userName,phone,beginTime,phoneModel);
     }
 
     @Override

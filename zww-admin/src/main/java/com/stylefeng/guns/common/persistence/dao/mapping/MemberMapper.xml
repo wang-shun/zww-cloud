@@ -66,19 +66,22 @@
 		a LEFT JOIN (SELECT  NULLIF(COUNT(id),0) jicun,order_by FROM t_doll_order WHERE STATUS = '寄存中' GROUP BY order_by) b ON a.id = b.order_by
 		LEFT JOIN account c on a.id = c.id
 		where 1=1
-		<if test="id != null and id != ''">
+		<if test="id != null">
 			and a.id = #{id}
 		</if>
 		<if test="userName != null and userName != ''">
-			and name like CONCAT('%',#{userName},'%')
+			and a.name like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="phone != null and phone != ''">
+			and a.mobile = #{phone}
 		</if>
 		<if test="beginTime != null and beginTime != ''">
-			and DATEDIFF(register_date,#{beginTime}) &gt;= 0
+			and DATEDIFF(a.register_date,#{beginTime}) &gt;= 0
 		</if>
 		<if test="phoneModel != null and phoneModel != '' ">
-			AND phone_model = #{phoneModel}
+			AND a.phone_model = #{phoneModel}
 		</if>
-		order by register_date DESC
+		order by a.register_date DESC
 	</select>
 
 	<!--渠道-->

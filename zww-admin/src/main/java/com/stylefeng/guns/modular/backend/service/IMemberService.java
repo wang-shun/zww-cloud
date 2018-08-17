@@ -22,11 +22,11 @@ public interface IMemberService extends IService<Member> {
     Member selectIdByMemberId(String memberId);
 
     //用户列表
-    List<Map<String, Object>> selectMember(@Param("page") Page<Member> page,@Param("id") Integer id,@Param("userName") String userName, @Param("beginTime") String beginTime, @Param("phoneModel") String phoneModel);
+    List<Map<String, Object>> selectMember(Page<Member> page,Integer id, String userName, String phone,String beginTime,String phoneModel);
     //渠道列表
-    List<Map<String, Object>> selectChannel(@Param("page") Page<Member> page,String channelNum, @Param("userName") String userName, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("phoneModel") String phoneModel);
+    List<Map<String, Object>> selectChannel(Page<Member> page,String channelNum,String userName,String beginTime,String endTime, String phoneModel);
     //小妖精渠道
-    List<Map<String, Object>> xiaoyaojingSelectChannel(@Param("page") Page<Member> page,String channelNum, @Param("userId") String userId, @Param("userName") String userName, @Param("beginTime") String beginTime, @Param("endTime") String endTime, @Param("lastLoginFrom") String lastLoginFrom);
+    List<Map<String, Object>> xiaoyaojingSelectChannel(Page<Member> page,String channelNum, String userId,String userName,String beginTime,String endTime,String lastLoginFrom);
 
     Integer updateById(Account account);
 

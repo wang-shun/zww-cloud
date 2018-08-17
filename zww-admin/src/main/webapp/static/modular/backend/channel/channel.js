@@ -24,7 +24,7 @@ Member.initColumn = function () {
                    }
                 }
             },
-            {title: '登陆渠道', field: 'loginChannel', visible: true, align: 'center', valign: 'middle',
+            {title: '最后一次登录渠道', field: 'loginChannel', visible: true, align: 'center', valign: 'middle',
                 formatter:function (value,row,index) {
                     if (value == null || value == ''){
                         return '--';
@@ -33,37 +33,13 @@ Member.initColumn = function () {
                     }
                 }
             },
-           // {title: 'id', field: 'id', visible: true, align: 'center', valign: 'middle'},
-           // {title: '用户id', field: 'memberID', visible: true, align: 'center', valign: 'middle'},
             {title: '用户名', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '手机', field: 'mobile', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'password', visible: true, align: 'center', valign: 'middle'},
-            // {title: '微信id', field: 'weixinId', visible: true, align: 'center', valign: 'middle'},
-            //{title: '性别', field: 'gender', visible: false, align: 'center', valign: 'middle'},
             {title: '性别', field: 'genderName', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'birthday', visible: true, align: 'center', valign: 'middle'},
-            {title: '原金币', field: 'coins', visible: false, align: 'center', valign: 'middle'},
             {title: '金币', field: 'Acoins', visible: true, align: 'center', valign: 'middle'},
-            {title: '钻石', field: 'superTicket', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'points', visible: true, align: 'center', valign: 'middle'},
             {title: '抓取次数', field: 'catchNumber', visible: true, align: 'center', valign: 'middle'},
             {title: '注册时间', field: 'registerDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'modifiedBy', visible: true, align: 'center', valign: 'middle'},
             {title: '最近登录时间', field: 'lastLoginDate', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'lastLogoffDate', visible: true, align: 'center', valign: 'middle'},
-           // {title: '是否在线 ', field: 'onlineFlg', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconContextPath', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconFileName', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'iconRealPath', visible: true, align: 'center', valign: 'middle'},
-            // {title: '环信uuid', field: 'easemobUuid', visible: true, align: 'center', valign: 'middle'},
-            // {title: '账号是否激活', field: 'activeFlg', visible: true, align: 'center', valign: 'middle'},
-            // {title: '是否已输入邀请码', field: 'inviteFlg', visible: true, align: 'center', valign: 'middle'},
-            // {title: '', field: 'inviteFlgWeb', visible: true, align: 'center', valign: 'middle'},
-            // {title: '注册设备', field: 'registerFrom', visible: true, align: 'center', valign: 'middle'},
-           // {title: '登录设备', field: 'lastLoginFrom', visible: true, align: 'center', valign: 'middle'},
-            // {title: '0尚未充值，1已充值', field: 'firstLogin', visible: true, align: 'center', valign: 'middle'},
-            // {title: '0尚未充值过，1已完成过充值', field: 'firstCharge', visible: true, align: 'center', valign: 'middle'},
             {title: '手机机型', field: 'phoneModel', visible: true, align: 'center', valign: 'middle'}
 
     ];
@@ -114,8 +90,12 @@ Member.channelDeduct = function () {
             // alert(ids)
         }
         var ajax = new $ax(Feng.ctxPath + "/member/channelDeduct", function (data) {
-            Feng.success("操作成功!");
-            Member.table.refresh();
+            if(data.code ==200){
+                Feng.success("操作成功!");
+                Member.table.refresh();
+            }else{
+                Feng.error("操作失败!" + data.message + "!");
+            }
         }, function (data) {
             Feng.error("操作失败!" + data.responseJSON.message + "!");
         });

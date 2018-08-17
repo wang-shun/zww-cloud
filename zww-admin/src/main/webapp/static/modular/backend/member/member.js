@@ -229,6 +229,7 @@ Member.search = function () {
     var queryData = {};
     queryData['id'] = $("#id").val();
     queryData['userName'] = $("#userName").val();
+    queryData['phone'] = $("#phone").val();
     queryData['registerDate'] = $("#registerDate").val();
     queryData['phoneModel'] = $("#phoneModel").val();
     Member.load();

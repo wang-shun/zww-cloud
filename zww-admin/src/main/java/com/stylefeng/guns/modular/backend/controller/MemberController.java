@@ -146,9 +146,9 @@ public class MemberController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(Integer id,String userName,String registerDate,String phoneModel) {
+    public Object list(Integer id,String userName,String phone,String registerDate,String phoneModel) {
     	 Page<Member> page = new PageFactory<Member>().defaultPage();
-    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userName,registerDate,phoneModel);
+    	 List<Map<String, Object>> result = memberService.selectMember(page,id,userName,phone,registerDate,phoneModel);
     	 page.setRecords((List<Member>)new MemberWarpper(result).warp());
     	 return super.packForBT(page);
     }
@@ -186,17 +186,14 @@ public class MemberController extends BaseController {
     @RequestMapping(value = "/channelDeduct")
     @ResponseBody
     public Object channelDeduct(@RequestParam String memberIds) {
-
-        String[] idsAll = null;
         Integer result = 0;
         //存放id集合
-        List<String> idsString = new ArrayList<>();
-        if(memberIds != null) {
-            idsAll = memberIds.split(",");
+        if(memberIds == null) {
+            return new ErrorTip(500,"参数错误！");
         }
         Integer id = null;
         //获取扣量信息
-        for (String idd:idsAll) {
+        for (String idd:memberIds.split(",")) {
             if(idd != null){
                 id = Integer.parseInt(idd);
                 //去除已扣量的用户
@@ -211,7 +208,7 @@ public class MemberController extends BaseController {
         if(result>0) {
             return SUCCESS_TIP;
         }else {
-            return new ErrorTip(TipType.UPLOAD_ERROR.getCode(),TipType.UPLOAD_ERROR.getMessage());
+            return new ErrorTip(500,"渠道扣量失败！");
         }
     }
 
