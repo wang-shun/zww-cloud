@@ -167,17 +167,22 @@
 
 	<select id="execlAgentChargeHistoryByAgentId" resultType="com.stylefeng.guns.common.persistence.model.vo.AgentChargeVo" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
 		select	b.charge_name chargeName,b.price price,b.member_name memberName,b.create_date createDate,
-		<if test="level != null and level == 0">
-			a.agent_super_id agentSuperId,a.agent_super_fee agentSuperFee,a.agent_super_income*0.01 agentSuperIncome
+		a.agent_super_id agentSuperId,a.agent_one_id agentOneId,a.agent_two_id agentTwoId,a.agent_three_id agentThreeId,
+		<if test="agentId != null and agentId != 0 and level != null and level == 0">
+			a.agent_super_fee agentSuperFee,a.agent_super_income*0.01 agentSuperIncome,
+			"-" agentOneFee,"-" agentOneIncome,"-" agentTwoFee,"-" agentTwoIncome,"-" agentThreeFee,"-" agentThreeIncome
 		</if>
-		<if test="level != null and level == 1">
-			a.agent_one_id agentSuperId,a.agent_one_fee agentSuperFee,a.agent_one_income*0.01 agentSuperIncome
+		<if test="agentId != null and agentId != 0 and level != null and level == 1">
+			a.agent_one_fee agentOneFee,a.agent_one_income*0.01 agentOneIncome,
+			"-" agentSuperFee,"-" agentSuperIncome,"-" agentTwoFee,"-" agentTwoIncome,"-" agentThreeFee,"-" agentThreeIncome
 		</if>
-		<if test="level != null and level == 2">
-			a.agent_two_id agentSuperId,a.agent_two_fee agentSuperFee,a.agent_two_income*0.01 agentSuperIncome
+		<if test="agentId != null and agentId != 0 and level != null and level == 2">
+			a.agent_two_fee agentTwoFee,a.agent_two_income*0.01 agentTwoIncome,
+			"-" agentSuperFee,"-" agentSuperIncome,"-" agentOneFee,"-" agentOneIncome,"-" agentThreeFee,"-" agentThreeIncome
 		</if>
-		<if test="level != null and level == 3">
-			a.agent_three_id agentSuperId,a.agent_three_fee agentSuperFee,a.agent_three_income*0.01 agentSuperIncome
+		<if test="agentId != null and agentId != 0 and level != null and level == 3">
+			a.agent_three_fee agentThreeFee,a.agent_three_income*0.01 agentThreeIncome,
+			"-" agentSuperFee,"-" agentSuperIncome,"-" agentOneFee,"-" agentOneIncome,"-" agentTwoFee,"-" agentTwoIncome
 		</if>
 		from agent_charge a,charge_order b	where a.order_id = b.id and b.charge_state=1
 		<if test="agentId != null and agentId != 0 and level != null and level == 0">

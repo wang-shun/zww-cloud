@@ -105,6 +105,17 @@ public class AgentWithdrawController extends BaseController {
      * 跳转到修改代理商管理
      */
 
+    @RequestMapping("/agentWithdraw_confirm/{withdrawId}")
+    public String conifrmPage(@PathVariable Integer withdrawId, Model model) {
+        AgentWithdraw withdraw = agentWithdrawService.selectById(withdrawId);
+        model.addAttribute("withdraw",withdraw);
+        return  PREFIX +"/notApproval/agentWithdraw_confirm.html";
+    }
+
+    /**
+     * 跳转到修改代理商管理
+     */
+
     @RequestMapping("/agentWithdraw_upd/{withdrawId}")
     public String tAgentUpdate(@PathVariable Integer withdrawId, Model model) {
         model.addAttribute("withdrawId",withdrawId);
@@ -183,36 +194,37 @@ public class AgentWithdrawController extends BaseController {
     /**
      * 审批成功
      */
-    @PostMapping("/updStatus")
+    @PostMapping("/updateSuccess/{withdrawId}")
     @ResponseBody
-    public synchronized Map<String, Object> updStatus(Integer status ,Integer withdrawId) throws Exception{
-         Map<String, Object> resultMap = new HashedMap<String, Object>();
-         AgentWithdraw agentWithdraw = new AgentWithdraw();
-         agentWithdraw.setId(withdrawId);
-         agentWithdraw.setStatus(status);
-         try {
-             int i = agentWithdrawService.updateStatusById(agentWithdraw);
-             resultMap.put("code", i);
-         }catch (Exception e){
-             resultMap.put("msg", e.getMessage());
-         }
-         return resultMap;
+    public synchronized Object updateSuccess(@PathVariable Integer withdrawId) throws Exception{
+        AgentWithdraw agentWithdraw = agentWithdrawService.selectById(withdrawId);
+        if(agentWithdraw.getStatus() != 0){//需审批的订单状态错误
+            return  new ErrorTip(500,"订单状态失败！");
+        }
+        agentWithdraw.setStatus(1);
+        int i = agentWithdrawService.updateStatusById(agentWithdraw);
+        if(i == 0){
+             return super.ERROR_TIP;
+        }
+        return super.SUCCESS_TIP;
     }
 
     /**
      * 审批失败
      */
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/updateFail")
     @ResponseBody
-    public synchronized Object update(AgentWithdraw agentWithdraw) {
+    public synchronized Object updateFail(AgentWithdraw agentWithdraw) {
+        AgentWithdraw withdraw = agentWithdrawService.selectById(agentWithdraw.getId());
+        if(agentWithdraw == null || withdraw.getStatus() != 0){//需审批的订单状态错误
+            return  new ErrorTip(500,"订单状态失败！");
+        }
         agentWithdraw.setStatus(2);
         int i = agentWithdrawService.updateStatusById(agentWithdraw);
         if(i == 0)return super.ERROR_TIP;
-        agentWithdraw = agentWithdrawService.getAgentWithdrawById(agentWithdraw.getId());
-        if(agentWithdraw == null)return super.ERROR_TIP;
         //退钱  加余额
-        agentService.updateAmount(agentWithdraw.getAmount(),1,agentWithdraw.getAgentId());
+        agentService.updateAmount(withdraw.getAmount(),1,withdraw.getAgentId());
         return super.SUCCESS_TIP;
     }
 
@@ -355,13 +367,15 @@ public class AgentWithdrawController extends BaseController {
         Date date = agentWithdrawService.getDateByAgentIdAndStatus(agentId);
         Date date1 = DateUtil.parseTime(createDate);
         List<AgentChargeVo>  AgentChargeList = agentChargeService.execlAgentChargeHistoryByAgentId(agentId,tAgent.getLevel(),date,date1);
-        AgentChargeList = AgentChargeList.stream().map(agentChargeVo -> {
-            TAgent agentSuper = agentChargeVo.getAgentSuperId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentSuperId());
-            TAgent agentOne = agentChargeVo.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentOneId());
-            TAgent agentTwo = agentChargeVo.getAgentTwoId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentTwoId());
-            TAgent agentThree = agentChargeVo.getAgentThreeId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentThreeId());
-            return  new AgentChargeVo(agentChargeVo,agentSuper,agentOne,agentTwo,agentThree);
-        }).collect(Collectors.toList());
+        if(AgentChargeList.size() > 0){
+            AgentChargeList = AgentChargeList.stream().map(agentChargeVo -> {
+                TAgent agentSuper = agentChargeVo.getAgentSuperId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentSuperId());
+                TAgent agentOne = agentChargeVo.getAgentOneId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentOneId());
+                TAgent agentTwo = agentChargeVo.getAgentTwoId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentTwoId());
+                TAgent agentThree = agentChargeVo.getAgentThreeId() == 0 ? null : tAgentService.selectTAgentById(agentChargeVo.getAgentThreeId());
+                return  new AgentChargeVo(agentChargeVo,agentSuper,agentOne,agentTwo,agentThree);
+            }).collect(Collectors.toList());
+        }
         String fileName = tAgent.getNickName() + "的分润记录统计.xls";
 
         // 告诉浏览器用什么软件可以打开此文件

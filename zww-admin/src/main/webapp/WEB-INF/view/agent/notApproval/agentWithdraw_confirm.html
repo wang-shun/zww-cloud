@@ -1,0 +1,28 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${withdraw.id}">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <#input id="name" name="真实姓名" value="${withdraw.name}" underline="true" readonly="readonly"/>
+                    <#input id="phone" name="手机号" value="${withdraw.phone}" underline="true" readonly="readonly"/>
+                    <#input id="idCardNo" name="身份证号" value="${withdraw.idCardNo}" underline="true" readonly="readonly"/>
+                    <#input id="cardNo" name="卡号" value="${withdraw.cardNo}" underline="true" readonly="readonly"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="margin-left: 35%;">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AgentWithdrawInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AgentWithdrawInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agent/notApproval/agentWithdraw_info.js"></script>
+@}

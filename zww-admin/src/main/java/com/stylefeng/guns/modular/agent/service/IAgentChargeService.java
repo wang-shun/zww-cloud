@@ -25,10 +25,10 @@ public interface IAgentChargeService extends IService<AgentCharge> {
     AgentCharge getSumAmountByYesterday(AgentCharge agentCharge);
 
     //代理商分润列表
-    List<Map<String, Object>> selectAgentCharge(@Param("page") Page<AgentCharge> page, @Param("agentId") Integer agentId,@Param("level") Integer level);
+    List<Map<String, Object>> selectAgentCharge(Page<AgentCharge> page,Integer agentId, Integer level);
 
-    List<AgentChargeVo>  getAgentChargeExecl(@Param("agentId") Integer agentId, @Param("level") Integer level);
+    List<AgentChargeVo>  getAgentChargeExecl(Integer agentId,Integer level);
 
-    List<AgentChargeVo>   execlAgentChargeHistoryByAgentId(@Param("agentId") Integer agentId, @Param("level") Integer level, @Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
+    List<AgentChargeVo>   execlAgentChargeHistoryByAgentId(Integer agentId, Integer level,Date beginTime,Date endTime);
 
 }

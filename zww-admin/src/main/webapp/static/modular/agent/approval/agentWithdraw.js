@@ -35,8 +35,8 @@ AgentWithdraw.initColumn = function () {
         // {title: '卡号', field: 'cardNo', visible: true, align: 'center', valign: 'middle'},
         {title: '提现状态', field: 'statusName', visible: true, align: 'center', valign: 'middle'},
         {title: '审批备注', field: 'remark', visible: true, align: 'center', valign: 'middle'},
-        {title: '创建时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
-        {title: '确认时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'}
+        {title: '提现时间', field: 'createDate', visible: true, align: 'center', valign: 'middle'},
+        {title: '审批时间', field: 'confirmDate', visible: true, align: 'center', valign: 'middle'}
       //  {title: '更新时间', field: 'updateDate', visible: true, align: 'center', valign: 'middle'}
     ];
 };

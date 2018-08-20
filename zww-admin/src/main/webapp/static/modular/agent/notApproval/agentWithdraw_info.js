@@ -46,41 +46,25 @@ AgentWithdrawInfoDlg.close = function() {
 AgentWithdrawInfoDlg.collectData = function() {
     this
     .set('id')
-    .set('tradeNo')
-    .set('agentId')
-    .set('amount')
-    .set('fee')
-    .set('actualAmount')
-    .set('name')
-    .set('phone')
-    .set('idCardNo')
-    .set('cardNo')
     .set('remark')
-    .set('status')
-    .set('createDate')
-    .set('confirmDate')
     ;
 }
 
 /**
  * 提交添加
  */
-/*AgentWithdrawInfoDlg.addSubmit = function() {
+AgentWithdrawInfoDlg.addSubmit = function() {
+    $.post(Feng.ctxPath + "/agentWithdraw/updateSuccess/"+$("#id").val(),function(result){
+        if(result.code == 200){
+            Feng.success("审批成功!");
+            window.parent.AgentWithdraw.table.refresh();
+            AgentWithdrawInfoDlg.close();
+        }else{
+            Feng.error("审批失败!" + result.msg);
+        }
 
-    this.clearData();
-    this.collectData();
-
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.AgentWithdraw.table.refresh();
-        AgentWithdrawInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.agentWithdrawInfoData);
-    ajax.start();
-}*/
+}
 
 /**
  * 提交修改
@@ -91,9 +75,9 @@ AgentWithdrawInfoDlg.editSubmit = function() {
     this.collectData();
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/update", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/agentWithdraw/updateFail", function(data){
         if(data.code == 200 ){
-            Feng.success("修改成功!");
+            Feng.success("操作成功!");
             $("#ensure").removeAttr("disabled");
             window.parent.AgentWithdraw.table.refresh();
             AgentWithdrawInfoDlg.close();
@@ -102,7 +86,7 @@ AgentWithdrawInfoDlg.editSubmit = function() {
             $("#ensure").removeAttr("disabled");
         }
     },function(data){
-        Feng.error("修改失败!" + data.responseJSON.message + "!");
+        Feng.error("操作失败!" + data.responseJSON.message + "!");
         $("#ensure").removeAttr("disabled");
     });
     ajax.set(this.agentWithdrawInfoData);
