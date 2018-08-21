@@ -122,6 +122,7 @@ TDollInfoDlg.collectData = function() {
     .set('dollID')
     .set('machineType')
     .set('dollAddressId')
+    .set('rtmpUrlH5')
     ;
 }
 

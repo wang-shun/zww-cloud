@@ -125,6 +125,9 @@ public class TDoll extends Model<TDoll> {
     private String street;//街道
 	@TableField(exist=false)
     private String person;
+
+	@TableField(exist=false)
+	private String rtmpUrlH5;//摄像头
 	
 	public Integer getId() {
 		return id;
@@ -409,6 +412,14 @@ public class TDoll extends Model<TDoll> {
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
+	}
+
+	public String getRtmpUrlH5() {
+		return rtmpUrlH5;
+	}
+
+	public void setRtmpUrlH5(String rtmpUrlH5) {
+		this.rtmpUrlH5 = rtmpUrlH5;
 	}
 
 	@Override

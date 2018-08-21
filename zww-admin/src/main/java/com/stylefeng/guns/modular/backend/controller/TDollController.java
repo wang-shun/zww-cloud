@@ -203,7 +203,9 @@ public class TDollController extends BaseController {
     @RequestMapping("/tDoll_update/{tDollId}")
     public String tDollUpdate(@PathVariable Integer tDollId, Model model) {
         TDoll tDoll = tDollService.selectById(tDollId);
+        String rtmpUrlH5 = tDollService.getDollH5ByDollId(tDollId);
         model.addAttribute("item", tDoll);
+        model.addAttribute("rtmpUrlH5", rtmpUrlH5);
         LogObjectHolder.me().set(tDoll);
         return PREFIX + "tDoll_edit.html";
     }
@@ -253,18 +255,13 @@ public class TDollController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(TDoll tDoll) {
-       // tDoll.setMachineStatus(MachineStatus.MACHINE_NOT_ONLINE.getMessage());
-        tDoll.setQuantity(99);
-        tDoll.setTbimgRealPath("#");
-        tDoll.setDeleteStatus(1);
-        tDoll.setCreatedDate(new Date());
-        tDoll.setCreatedBy(ShiroKit.getUser().getId());
-        tDoll.setModifiedDate(new Date());
-        tDoll.setModifiedBy(ShiroKit.getUser().getId());
-        tDoll.setMachineIp("devicea_" + tDoll.getMachineCode());
-        tDoll.setMachineUrl("devicea_" + tDoll.getMachineCode());
-        tDoll.setMachineSerialNum("devicea_" + tDoll.getMachineCode());
+        String rtmpUrlH5 = tDoll.getRtmpUrlH5();
         tDollService.insert(tDoll);
+        tDoll = tDollService.getDollByMachineCode(tDoll.getMachineCode());
+        if(tDoll != null){
+            tDollService.updateDollH5ByDollId(rtmpUrlH5,tDoll);
+        }
+
         return SUCCESS_TIP;
     }
 
@@ -291,14 +288,10 @@ public class TDollController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(TDoll tDoll) {
-        TDoll oldtDoll = tDollService.selectById(tDoll.getId());
-        tDoll.setCreatedBy(oldtDoll.getCreatedBy());
-        tDoll.setCreatedDate(oldtDoll.getCreatedDate());
+        String rtmpUrlH5 = tDoll.getRtmpUrlH5();
         tDoll.setModifiedBy(ShiroKit.getUser().getId());
         tDoll.setModifiedDate(new Date());
-        tDoll.setQuantity(99);
         tDoll.setDeleteStatus(1);
-        tDoll.setTbimgRealPath(oldtDoll.getTbimgRealPath());
         boolean result = tDollService.updateById(tDoll);
         DollTopic dollTopic = new DollTopic();
         dollTopic.setDollId(tDoll.getId());
@@ -310,6 +303,7 @@ public class TDollController extends BaseController {
             valOpsStr.set(RedisKeyGenerator.getRoomStatusKey(tDoll.getId()), tDoll.getMachineStatus());
 
         }
+        tDollService.updateDollH5ByDollId(rtmpUrlH5,tDoll);
         return SUCCESS_TIP;
     }
 

@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.backend.service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +20,13 @@ public interface ITDollService extends IService<TDoll> {
 
 	List<Map<String, Object>> selectDolls(Page<TDoll> page,Integer dollId, String name, String machineCode, String machineStates,Integer machineType,Integer modifiedBy);
 
+
+	String getDollH5ByDollId(Integer dollId);
+
+	int updateDollH5ByDollId(String rtmpUrlH5,TDoll doll);
+
+	int insertDoll(TDoll tDoll);
+
+
+	TDoll getDollByMachineCode(String machineCode);
 }

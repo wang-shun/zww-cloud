@@ -38,4 +38,10 @@ public interface TDollMapper extends BaseMapper<TDoll> {
 	List<TDoll> getDollListByProbability(@Param("list") List<MachineProbability> list);
 
 	TDoll getDollByMachineCode(@Param("machineCode") String machineCode);
+
+	String getDollH5ByDollId(@Param("dollId") Integer dollId);
+
+	int updateDollH5ByDollId(@Param("rtmpUrlH5") String rtmpUrlH5,@Param("dollId") Integer dollId);
+
+	int insertDollH5(TDoll tDoll);
 }

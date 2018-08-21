@@ -135,4 +135,14 @@
 		from t_doll
 		where machine_code = #{machineCode}
 	</select>
+
+	<select id="getDollH5ByDollId" resultType="java.lang.String" parameterType="java.lang.Integer">
+		select rtmpUrlH5 from doll_h5 where id = #{dollId}
+	</select>
+	<update id="updateDollH5ByDollId" >
+		update doll_h5 set rtmpUrlH5 = #{rtmpUrlH5}  where id = #{dollId}
+	</update>
+	<update id="insertDollH5" parameterType="TDoll">
+		insert into  doll_h5(id,rtmpUrlH5,name) values(#{id},#{rtmpUrlH5},#{name})
+	</update>
 </mapper>
