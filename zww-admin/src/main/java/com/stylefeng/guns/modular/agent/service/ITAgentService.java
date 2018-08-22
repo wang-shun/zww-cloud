@@ -28,9 +28,9 @@ public interface ITAgentService extends IService<TAgent> {
 
    String selectByValue(String clod);
 
-   List<Map<String, Object>> selectByLevel(@Param("page") Page<TAgent> page, @Param("nickName") String nickName, @Param("username") String  username,@Param("phone") String phone, @Param("createTime") String createTime, @Param("level") Integer level, @Param("type")Integer type,@Param("agentId") Integer agentId);
+   List<Map<String, Object>> selectByLevel(Page<TAgent> page, String nickName,String  username, String phone,String createTime,Integer level,Integer type, Integer agentId);
 
-   List<TAgent> selectAndExecl(@Param("nickName") String nickName,@Param("username") String  username, @Param("phone") String phone, @Param("createTime") String createTime, @Param("level") Integer level, @Param("type")Integer type,@Param("agentId") Integer agentId);
+   List<TAgent> selectAndExecl(String nickName,String  username, String phone,  String createTime,Integer level,Integer type,Integer agentId);
 
-   TAgent selectTAgentByUsername(@Param("username") String username);
+   TAgent selectTAgentByUsername( String username);
 }

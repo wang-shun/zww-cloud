@@ -67,12 +67,8 @@
 		select value from t_system_pref  where code = #{clod}
 	</select>
 
-	<select id="selectTAgentByUsername" resultType="com.stylefeng.guns.common.persistence.model.TAgent"  parameterType="java.lang.String">
-		select <include refid="Base_Column_List" /> from t_agent where username  = #{username}
-	</select>
-
 	<!--根据条件查询-->
-	<select id="selectByLevel" resultType="map" parameterType="com.stylefeng.guns.common.persistence.model.TAgent">
+	<select id="selectByLevel" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select
 		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
 		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS oem
@@ -105,7 +101,7 @@
 			and level = #{level}
 		</if>
 		<if test="createTime != null and createTime !=''">
-			and DATEDIFF(create_time,#{createTime}) &gt;= 0
+			and DATEDIFF(create_time,#{createTime})= 0
 		</if>
 	</select>
 	<!--根据条件查询-->
@@ -142,7 +138,7 @@
 			and level = #{level}
 		</if>
 		<if test="createTime != null and createTime !=''">
-			and DATEDIFF(create_time,#{createTime}) &gt;= 0
+			and DATEDIFF(create_time,#{createTime})= 0
 		</if>
 	</select>
 

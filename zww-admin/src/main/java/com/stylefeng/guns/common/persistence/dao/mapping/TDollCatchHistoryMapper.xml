@@ -112,7 +112,7 @@
 			AND   a.catch_date >= #{beginDate}
 		</if>
 		<if test="endtime != null and endtime != ''">
-			AND  a.catch_date &lt;= #{endtime}
+			AND  a.catch_date &lt; #{endtime}
 		</if>
 		order by a.catch_date desc
 	</select>

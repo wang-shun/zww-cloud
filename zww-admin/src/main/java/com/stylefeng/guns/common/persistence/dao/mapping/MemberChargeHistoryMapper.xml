@@ -35,7 +35,7 @@
 			and c.machine_code = #{machineCode}
 		</if>
 		<if test="chargeDate != null and chargeDate != ''">
-			and DATEDIFF(a.charge_date,#{chargeDate}) &gt;= 0
+			and DATEDIFF(a.charge_date,#{chargeDate}) = 0
 		</if>
 		ORDER BY a.charge_date desc
 	</select>

@@ -76,7 +76,7 @@
 			and a.mobile = #{phone}
 		</if>
 		<if test="beginTime != null and beginTime != ''">
-			and DATEDIFF(a.register_date,#{beginTime}) &gt;= 0
+			and DATEDIFF(a.register_date,#{beginTime}) = 0
 		</if>
 		<if test="phoneModel != null and phoneModel != '' ">
 			AND a.phone_model = #{phoneModel}
