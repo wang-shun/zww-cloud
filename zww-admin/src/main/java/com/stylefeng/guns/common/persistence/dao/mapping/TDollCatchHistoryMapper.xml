@@ -109,10 +109,10 @@
 			and c.name like concat(concat("%",#{memberName,jdbcType=VARCHAR}),"%")
 		</if>
 		<if test="beginDate != null and beginDate != ''">
-			AND   a.catch_date >= #{beginDate}
+			AND  DATEDIFF(a.catch_date,#{beginDate}) &gt;= 0
 		</if>
 		<if test="endtime != null and endtime != ''">
-			AND  a.catch_date &lt; #{endtime}
+			AND  DATEDIFF(a.catch_date,#{endtime})&lt;0
 		</if>
 		order by a.catch_date desc
 	</select>
