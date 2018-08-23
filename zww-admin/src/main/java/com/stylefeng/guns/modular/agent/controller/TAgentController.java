@@ -561,15 +561,15 @@ public class TAgentController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public Object templateAdd(@RequestBody JSONObject jsonObject) throws  Exception{
-        List<TOemTemplate> oemTemplates = (List<TOemTemplate>) JSONArray.toList(JSONArray.fromObject(jsonObject.getJSONArray("templateArr")), TOemTemplate.class);
+        List<TOemTemplate> oemTemplates = (List<TOemTemplate>) JSONArray.toList(jsonObject.getJSONArray("templateArr"), TOemTemplate.class);
         for (TOemTemplate template : oemTemplates) {
+                Date date = new Date();
+                template.setUpdateTime(date);
                 if(template.getId() != 0 && template.getId() != null){
                     itOemTemplateService.updateById(template);
                 }else{
-                    Date date = new Date();
                     template.setId(null);
                     template.setCreateTime(date);
-                    template.setUpdateTime(date);
                     itOemTemplateService.insert(template);
                 }
         }
