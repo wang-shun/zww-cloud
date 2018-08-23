@@ -27,11 +27,13 @@
 		delete from t_oem_banner where oem_id = #{oemId}
 	</delete>
 	<insert id="insertBatch" parameterType="list" >
-		insert into t_oem_banner ( oem_id, url,
+		insert into t_oem_banner (oem_id, url,
 		img_url, sort,status)
 		values
 		<foreach collection ="oemBanner" item="oemBanner" separator =",">
-			(#{oemBanner.oemId}, #{oemBanner.url}, #{oemBanner.imgUrl}, #{oemBanner.sort}, #{oemBanner.status})
+			<if test="oemBanner.imgUrl != null and oemBanner.imgUrl != '' ">
+				(#{oemBanner.oemId}, #{oemBanner.url}, #{oemBanner.imgUrl}, #{oemBanner.sort}, #{oemBanner.status})
+			</if>
 		</foreach >
 	</insert>
 

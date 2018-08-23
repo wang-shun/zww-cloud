@@ -1,0 +1,44 @@
+@layout("/common/_container.html"){
+<style>
+    .oemtext{
+        width: 430px;
+        margin-top: 3%;
+        height: 37px;
+        padding-left: 8px;
+        margin-left: 10px;
+    }
+    .info{
+        width: 69px;
+        height: 38px;
+        margin-left: 5%;
+        background: #18ab8d;
+        color: white;
+        border: 0 solid;
+        border-radius: 3px;
+    }
+    .head-scu-label {
+        margin-top: 7%;
+    }
+</style>
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${tAgentId}" >
+            <input type="hidden" id="addnum" value="1">
+
+            <div id="bannelDiv">
+
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10" style="text-align: center;">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TAgentTemDlg.addtemplate()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TAgentTemDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/agent/tAgent/tAgent_template.js"></script>
+@}

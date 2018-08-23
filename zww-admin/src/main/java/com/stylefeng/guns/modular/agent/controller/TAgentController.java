@@ -16,6 +16,7 @@ import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.agent.service.ITOemTemplateService;
 import com.stylefeng.guns.modular.backend.service.ITSystemPrefService;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
@@ -79,6 +80,9 @@ public class TAgentController extends BaseController {
     @Resource
     private TOemBannerMapper tOemBannerMapper;
 
+    @Resource
+    private ITOemTemplateService itOemTemplateService;
+
     @Autowired
     AliyunService aliyunService;
 
@@ -111,6 +115,17 @@ public class TAgentController extends BaseController {
         model.addAttribute("fee",getFee());
         LogObjectHolder.me().set(tAgent);
         return PREFIX + "tAgent_edit.html";
+    }
+
+
+    /**
+     * 跳转到oem代理商管理
+     */
+
+    @RequestMapping("/templatePage/{tAgentId}")
+    public String templatePage(@PathVariable Integer tAgentId, Model model) {
+        model.addAttribute("tAgentId",tAgentId);
+        return PREFIX + "tAgent_template.html";
     }
 
 
@@ -509,4 +524,55 @@ public class TAgentController extends BaseController {
         workbook.write(response.getOutputStream());
     }
 
+    /**
+     * 得到o单模板列表
+     */
+    @RequestMapping("/getTemplateList")
+    @ResponseBody
+    public Map<String, Object> getTemplateList(Integer  tAgentId) throws Exception{
+        Map<String, Object> resultMap = new HashedMap<String, Object>();
+        List<TOemTemplate>  oemTemplateList =  itOemTemplateService.getOemTemplateByOemId(tAgentId);
+        resultMap.put("oemTemplateList", oemTemplateList);
+        return resultMap;
+    }
+
+    /**
+     * 修改状态，变为失效
+     */
+    @RequestMapping("/delTemplate")
+    @ResponseBody
+    public Map<String, Object> delTemplate(Integer  id) throws Exception{
+        Map<String, Object> resultMap = new HashedMap<String, Object>();
+        TOemTemplate template = new TOemTemplate();
+        template.setId(id);
+        template.setStatus(0);
+        template.setUpdateTime(new Date());
+        boolean flag =  itOemTemplateService.updateById(template);
+        resultMap.put("code", flag);
+        return resultMap;
+    }
+
+
+    /**
+     * 提交模板
+     */
+
+    @PostMapping(value = "/templateAdd")
+    @Permission(Const.ADMIN_NAME)
+    @ResponseBody
+    public Object templateAdd(@RequestBody JSONObject jsonObject) throws  Exception{
+        List<TOemTemplate> oemTemplates = (List<TOemTemplate>) JSONArray.toList(JSONArray.fromObject(jsonObject.getJSONArray("templateArr")), TOemTemplate.class);
+        for (TOemTemplate template : oemTemplates) {
+                if(template.getId() != 0 && template.getId() != null){
+                    itOemTemplateService.updateById(template);
+                }else{
+                    Date date = new Date();
+                    template.setId(null);
+                    template.setCreateTime(date);
+                    template.setUpdateTime(date);
+                    itOemTemplateService.insert(template);
+                }
+        }
+        return super.SUCCESS_TIP;
+    }
 }

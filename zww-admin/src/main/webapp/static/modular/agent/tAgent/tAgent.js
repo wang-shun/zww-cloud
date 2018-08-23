@@ -37,7 +37,8 @@ TAgent.initColumn = function (type) {
         column.push({
             title: '操作', visible: true, align: 'center', valign: 'middle', formatter: function (value, row, index) {
                 if(row.level == 0){
-                    return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.OEM(' + row.id + ')">O单</button>';
+                    return '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.OEM(' + row.id + ')">O单</button>' +
+                        '<button type="button" class="btn btn-primary button-margin" style="margin-left: 9px !important" onclick="TAgent.template(' + row.id + ',\''+ row.nickName + '\')">模板</button>';
                 }else{
                     return '-';
                 }
@@ -59,6 +60,17 @@ TAgent.OEM = function (id) {
         this.layerIndex = index;
 };
 
+TAgent.template = function (id,name) {
+    var index = layer.open({
+        type: 2,
+        title: '添加O单材料(' + name + ")",
+        area: ['100%', '100%'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/tAgent/templatePage/' + id
+    });
+    this.layerIndex = index;
+};
 /**
  * 检查是否选中
  */

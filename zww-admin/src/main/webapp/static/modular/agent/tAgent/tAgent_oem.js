@@ -71,9 +71,6 @@ TAgentInfoDlg.addoem = function() {
         var oems={};
         var imgUrl = $("#showdiv"+i+" #image"+i).val();
         var url = $("#oemtext"+i).val();
-        if(imgUrl == "" && url == ""){
-            continue;
-        }
         oems.imgUrl = imgUrl;
         oems.url = url;
         oems.oemId = oem.id;
