@@ -16,23 +16,21 @@
 
                 <div class="col-sm-6">
                     <#input id="timeout" name="游戏时间" value="30" placeholder="必填"/>
-                    <#input id="watchingNumber" name="排序" />
+                    <#input id="sort" name="排序" />
                     <#input id="description" name="备注" />
                     <#SelectCon id="machineType" name="机器类型" >
-                    <option value="0">普通房</option>
-                    <option value="1">练习房</option>
-                    <option value="2">化妆房</option>
-                    <option value="3">数码房</option>
-                </
-                #SelectCon>
+                          <option value="0">普通房</option>
+                          <option value="1">练习房</option>
+                          <option value="2">化妆房</option>
+                          <option value="3">数码房</option>
+                     </#SelectCon>
                 <#SelectCon id="machineStatus" name="机器状态" >
-                <option value="空闲中">空闲中</option>
-                <option value="游戏中">游戏中</option>
-                <option value="维修中">维修中</option>
-                <option value="未上线">未上线</option>
-                <option value="测试中">测试中</option>
-            </
-            #SelectCon>
+                       <option value="空闲中">空闲中</option>
+                       <option value="游戏中">游戏中</option>
+                       <option value="维修中">维修中</option>
+                       <option value="未上线">未上线</option>
+                       <option value="测试中">测试中</option>
+                </#SelectCon>
         </div>
     </div>
     <div class="row">

@@ -114,6 +114,11 @@ public class TDoll extends Model<TDoll> {
      */
 	@TableField("delete_status")
 	private Integer deleteStatus;
+
+	/**
+	 * 房间排序
+	 */
+	private Integer sort;
 	
 	@TableField(exist=false)
     private String province;//省
@@ -418,6 +423,14 @@ public class TDoll extends Model<TDoll> {
 		return rtmpUrlH5;
 	}
 
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
 	public void setRtmpUrlH5(String rtmpUrlH5) {
 		this.rtmpUrlH5 = rtmpUrlH5;
 	}
@@ -455,6 +468,7 @@ public class TDoll extends Model<TDoll> {
 			", machineType=" + machineType +
 			", dollAddressId=" + dollAddressId +
 			", deleteStatus=" + deleteStatus +
+			", sort=" + sort +
 			"}";
 	}
 }

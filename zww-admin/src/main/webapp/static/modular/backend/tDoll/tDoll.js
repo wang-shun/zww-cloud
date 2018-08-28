@@ -44,7 +44,7 @@ TDoll.initColumn = function () {
                       return value+'秒';  
                   }  
                 },
-            {title: '排序', field: 'watchingNumber', visible: true, align: 'center', valign: 'middle'},
+            {title: '排序', field: 'sort', visible: true, align: 'center', valign: 'middle'},
             {title: '机器类型', field: 'machineType', visible: true, align: 'center', valign: 'middle',
             	formatter:function (value,row,index) {
             		if (value=="0")return '普通房';

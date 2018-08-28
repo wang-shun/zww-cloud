@@ -34,6 +34,7 @@
 		<result column="machine_type" property="machineType" />
 		<result column="doll_address_id" property="dollAddressId" />
 		<result column="delete_status" property="deleteStatus" />
+		<result column="sort" property="sort" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
@@ -45,13 +46,13 @@
             rtmp_url_1 AS rtmpUrl1, rtmp_url_2 AS rtmpUrl2, rtmp_url_3 AS rtmpUrl3, rtmp_push_url AS rtmpPushUrl,
              mns_topic_name AS mnsTopicName, watching_number AS watchingNumber, timeout, pili_room_name AS piliRoomName,
               machine_code AS machineCode, doll_ID AS dollID, machine_type AS machineType,
-               doll_address_id AS dollAddressId, delete_status AS deleteStatus
+               doll_address_id AS dollAddressId, delete_status AS deleteStatus,sort
     </sql>
     
     <select id="selectDolls" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select id,name,description,machine_type machineType, quantity, price, machine_status machineStatus,
 		tbimg_real_path tbimgRealPath,modified_date modifiedDate,
-		modified_by modifiedBy,watching_number watchingNumber,redeem_coins
+		modified_by modifiedBy,sort,redeem_coins
 		redeemCoins, timeout, machine_code machineCode,doll_ID dollID from t_doll
 		where machine_status!="" AND machine_status!="已下架" and delete_status = 1
         <if test="dollId!=null and dollId != ''">

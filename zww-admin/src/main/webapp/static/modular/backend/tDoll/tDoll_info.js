@@ -115,7 +115,7 @@ TDollInfoDlg.collectData = function() {
     .set('rtmpUrl3')
     .set('rtmpPushUrl')
     .set('mnsTopicName')
-    .set('watchingNumber')
+    .set('sort')
     .set('timeout')
     .set('piliRoomName')
     .set('machineCode')
