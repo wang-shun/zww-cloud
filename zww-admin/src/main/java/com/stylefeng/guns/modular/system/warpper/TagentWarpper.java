@@ -22,7 +22,8 @@ public class TagentWarpper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
         map.put("statusName", ConstantFactory.me().getStatusName((Integer) map.get("status")));
-        map.put("levelName", ConstantFactory.me().getleveName((Integer) map.get("level")));
+        Integer level= (Integer) map.get("level");
+        map.put("levelName", ConstantFactory.me().getleveName(level));
 
        Integer agentId= (Integer) map.get("agentId");
        Integer id= (Integer) map.get("id");
@@ -51,6 +52,17 @@ public class TagentWarpper extends BaseControllerWarpper {
             agentTwoName = ConstantFactory.me().getAgentById(agentTwoId);
         }
         map.put("agentTwoName", agentTwoName);
+
+        if((Long) map.get("type") == 10l){
+            map.put("inviteNum", ConstantFactory.me().getInviteNumByAgentIdAndLevel(id,level));//直推人数
+            if(level != 3){
+                map.put("inviteNum1", ConstantFactory.me().getInviteNum1ByAgentIdAndLevel(id,level));//间推人数
+            }else{
+                map.put("inviteNum1", 0);//间推人数
+            }
+
+        }
+
     }
 
 }

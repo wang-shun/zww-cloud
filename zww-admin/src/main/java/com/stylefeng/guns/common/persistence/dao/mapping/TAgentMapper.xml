@@ -71,7 +71,7 @@
 	<select id="selectByLevel" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
 		select
 		id, username, password, phone, nick_name AS nickName, level, status, agent_id AS agentId, agent_one_id AS agentOneId,
-		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS oem
+		agent_two_id AS agentTwoId, create_time AS createTime, update_time AS updateTime, fee,is_oem AS oem,${type} type
 		<if test="type == 10">
 			,(balance-balance_disabled)*0.01 AS balance
 		</if>

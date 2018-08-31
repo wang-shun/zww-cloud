@@ -21,4 +21,7 @@ public interface TMemberMapper extends BaseMapper<TMember> {
 
    List<TMember> selectByRegisterChannel(@Param("registerChannel") String registerChannel);
 
+    Integer getInviteNumByAgentIdAndLevel(@Param("agentId") Integer agentId,@Param("level")  Integer level);
+
+    Integer getInviteNum1ByAgentIdAndLevel(@Param("agentId") Integer agentId, @Param("level") Integer level);
 }

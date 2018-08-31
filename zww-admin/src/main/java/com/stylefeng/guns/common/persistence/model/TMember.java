@@ -114,6 +114,36 @@ public class TMember extends Model<TMember> {
 	@TableField("phone_model")
 	private String phoneModel;
 
+	/**
+	 * 特级代理
+	 */
+	@TableField("agent_super_id")
+	private String agentSuperId;
+
+	/**
+	 * 一级代理
+	 */
+	@TableField("agent_one_id")
+	private String agentOneId;
+
+	/**
+	 * 二级代理
+	 */
+	@TableField("agent_two_id")
+	private String agentTwoId;
+
+	/**
+	 * 三级代理
+	 */
+	@TableField("agent_three_id")
+	private String agentThreeId;
+
+	/**
+	 * 抓取级别
+	 */
+	@TableField("catch_num_level")
+	private String catchNumLevel;
+
 
 	public Integer getId() {
 		return id;
@@ -363,6 +393,46 @@ public class TMember extends Model<TMember> {
 		this.phoneModel = phoneModel;
 	}
 
+	public String getAgentSuperId() {
+		return agentSuperId;
+	}
+
+	public void setAgentSuperId(String agentSuperId) {
+		this.agentSuperId = agentSuperId;
+	}
+
+	public String getAgentOneId() {
+		return agentOneId;
+	}
+
+	public void setAgentOneId(String agentOneId) {
+		this.agentOneId = agentOneId;
+	}
+
+	public String getAgentTwoId() {
+		return agentTwoId;
+	}
+
+	public void setAgentTwoId(String agentTwoId) {
+		this.agentTwoId = agentTwoId;
+	}
+
+	public String getAgentThreeId() {
+		return agentThreeId;
+	}
+
+	public void setAgentThreeId(String agentThreeId) {
+		this.agentThreeId = agentThreeId;
+	}
+
+	public String getCatchNumLevel() {
+		return catchNumLevel;
+	}
+
+	public void setCatchNumLevel(String catchNumLevel) {
+		this.catchNumLevel = catchNumLevel;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -371,37 +441,42 @@ public class TMember extends Model<TMember> {
 	@Override
 	public String toString() {
 		return "TMember{" +
-			"id=" + id +
-			", memberID=" + memberID +
-			", name=" + name +
-			", mobile=" + mobile +
-			", password=" + password +
-			", weixinId=" + weixinId +
-			", gender=" + gender +
-			", birthday=" + birthday +
-			", coins=" + coins +
-			", points=" + points +
-			", catchNumber=" + catchNumber +
-			", registerDate=" + registerDate +
-			", modifiedDate=" + modifiedDate +
-			", modifiedBy=" + modifiedBy +
-			", lastLoginDate=" + lastLoginDate +
-			", lastLogoffDate=" + lastLogoffDate +
-			", onlineFlg=" + onlineFlg +
-			", iconContextPath=" + iconContextPath +
-			", iconFileName=" + iconFileName +
-			", iconRealPath=" + iconRealPath +
-			", easemobUuid=" + easemobUuid +
-			", activeFlg=" + activeFlg +
-			", inviteFlg=" + inviteFlg +
-			", inviteFlgWeb=" + inviteFlgWeb +
-			", registerFrom=" + registerFrom +
-			", lastLoginFrom=" + lastLoginFrom +
-			", firstLogin=" + firstLogin +
-			", firstCharge=" + firstCharge +
-			", registerChannel=" + registerChannel +
-			", loginChannel=" + loginChannel +
-			", phoneModel=" + phoneModel +
-			"}";
+				"id=" + id +
+				", memberID='" + memberID + '\'' +
+				", name='" + name + '\'' +
+				", mobile='" + mobile + '\'' +
+				", password='" + password + '\'' +
+				", weixinId='" + weixinId + '\'' +
+				", gender='" + gender + '\'' +
+				", birthday=" + birthday +
+				", coins=" + coins +
+				", points=" + points +
+				", catchNumber=" + catchNumber +
+				", registerDate=" + registerDate +
+				", modifiedDate=" + modifiedDate +
+				", modifiedBy=" + modifiedBy +
+				", lastLoginDate=" + lastLoginDate +
+				", lastLogoffDate=" + lastLogoffDate +
+				", onlineFlg=" + onlineFlg +
+				", iconContextPath='" + iconContextPath + '\'' +
+				", iconFileName='" + iconFileName + '\'' +
+				", iconRealPath='" + iconRealPath + '\'' +
+				", easemobUuid='" + easemobUuid + '\'' +
+				", activeFlg=" + activeFlg +
+				", inviteFlg=" + inviteFlg +
+				", inviteFlgWeb=" + inviteFlgWeb +
+				", registerFrom='" + registerFrom + '\'' +
+				", lastLoginFrom='" + lastLoginFrom + '\'' +
+				", firstLogin=" + firstLogin +
+				", firstCharge=" + firstCharge +
+				", registerChannel='" + registerChannel + '\'' +
+				", loginChannel='" + loginChannel + '\'' +
+				", phoneModel='" + phoneModel + '\'' +
+				", agentSuperId='" + agentSuperId + '\'' +
+				", agentOneId='" + agentOneId + '\'' +
+				", agentTwoId='" + agentTwoId + '\'' +
+				", agentThreeId='" + agentThreeId + '\'' +
+				", catchNumLevel='" + catchNumLevel + '\'' +
+				'}';
 	}
 }

@@ -20,6 +20,8 @@ TAgent.initColumn = function (type) {
     column.push({title: '代理等级', field: 'levelName', visible: true, align: 'center', valign: 'middle'});
     column.push({title: '费率', field: 'fee', visible: true, align: 'center', valign: 'middle'});
     if(type == 0){
+        column.push({title: '直推人数', field: 'inviteNum', visible: true, align: 'center', valign: 'middle'});
+        column.push({title: '间推人数', field: 'inviteNum1', visible: true, align: 'center', valign: 'middle'});
         column.push({title: '余额(元)', field: 'balance', visible: true, align: 'center', valign: 'middle'});
         column.push({title: '特级代理', field: 'agentName', visible: true, align: 'center', valign: 'middle'});
         column.push({title: '一级代理', field: 'agentOneName', visible: true, align: 'center', valign: 'middle'});

@@ -170,7 +170,6 @@ public class TAgentController extends BaseController {
             type = 10;
         }
         List<Map<String, Object>>  result= tAgentService.selectByLevel(page,name,username,phone,createTime,level,type,agentId);
-
         page.setRecords((List<TAgent>)new TagentWarpper(result).warp());
         return super.packForBT(page);
 

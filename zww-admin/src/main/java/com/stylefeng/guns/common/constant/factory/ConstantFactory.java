@@ -43,6 +43,7 @@ public class ConstantFactory implements IConstantFactory {
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
     private TOemMapper tOemMapper = SpringContextHolder.getBean(TOemMapper.class);
     private TDollInfoMapper tDollInfoMapper = SpringContextHolder.getBean(TDollInfoMapper.class);
+    private TMemberMapper tMemberMapper = SpringContextHolder.getBean(TMemberMapper.class);
      
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -398,4 +399,12 @@ public class ConstantFactory implements IConstantFactory {
       return tDollInfo.getDollTotal();
     }
 
+    @Override
+    public Integer getInviteNumByAgentIdAndLevel(Integer agentId, Integer level) {
+        return tMemberMapper.getInviteNumByAgentIdAndLevel(agentId,level);
+    }
+    @Override
+    public  Integer getInviteNum1ByAgentIdAndLevel(Integer agentId, Integer level){
+        return tMemberMapper.getInviteNum1ByAgentIdAndLevel(agentId,level);
+    }
 }

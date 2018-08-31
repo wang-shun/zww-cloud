@@ -35,11 +35,20 @@
 		<result column="register_channel" property="registerChannel" />
 		<result column="login_channel" property="loginChannel" />
 		<result column="phone_model" property="phoneModel" />
+
+		<result column="agent_super_id" property="agentSuperId" />
+		<result column="agent_one_id" property="agentOneId" />
+		<result column="agent_two_id" property="agentTwoId" />
+		<result column="agent_three_id" property="agentThreeId" />
+		<result column="catch_num_level" property="catchNumLevel" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, memberID, name, mobile, password, weixin_id AS weixinId, gender, birthday, coins, points, catch_number AS catchNumber, register_date AS registerDate, modified_date AS modifiedDate, modified_by AS modifiedBy, last_login_date AS lastLoginDate, last_logoff_date AS lastLogoffDate, online_flg AS onlineFlg, icon_context_path AS iconContextPath, icon_file_name AS iconFileName, icon_real_path AS iconRealPath, easemob_uuid AS easemobUuid, active_flg AS activeFlg, invite_flg AS inviteFlg, invite_flg_web AS inviteFlgWeb, register_from AS registerFrom, last_login_from AS lastLoginFrom, first_login AS firstLogin, first_charge AS firstCharge, register_channel AS registerChannel, login_channel AS loginChannel, phone_model AS phoneModel
+        id, memberID, name, mobile, password, weixin_id AS weixinId, gender, birthday, coins, points, catch_number AS catchNumber, register_date AS registerDate, modified_date AS modifiedDate, modified_by AS modifiedBy, last_login_date AS lastLoginDate,
+         last_logoff_date AS lastLogoffDate, online_flg AS onlineFlg, icon_context_path AS iconContextPath, icon_file_name AS iconFileName, icon_real_path AS iconRealPath, easemob_uuid AS easemobUuid, active_flg AS activeFlg, invite_flg AS inviteFlg,
+         invite_flg_web AS inviteFlgWeb, register_from AS registerFrom, last_login_from AS lastLoginFrom, first_login AS firstLogin, first_charge AS firstCharge, register_channel AS registerChannel, login_channel AS loginChannel, phone_model AS phoneModel,
+         agent_super_id agentSuperId,agent_one_id agentOneId,agent_two_id agentTwoId,agent_three_id agentThreeId,catch_num_level catchNumLevel
     </sql>
 
 
@@ -53,5 +62,36 @@
 		select
 		<include refid="Base_Column_List"/>
 		from t_member where register_channel = #{registerChannel}
+	</select>
+   <!-- 直接邀请人数 -->
+	<select id="getInviteNumByAgentIdAndLevel" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select count(id)
+		from t_member where 1=1
+		<if test="level == 0">
+           and agent_super_id = #{agentId} and agent_one_id=0
+		</if>
+		<if test="level == 1">
+			and agent_one_id = #{agentId}  and agent_two_id=0
+		</if>
+		<if test="level == 2">
+			and agent_two_id = #{agentId}  and agent_three_id=0
+		</if>
+		<if test="level == 3">
+			and agent_three_id = #{agentId}
+		</if>
+	</select>
+	<!-- 间接邀请人数 -->
+	<select id="getInviteNum1ByAgentIdAndLevel" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select count(id)
+		from t_member where 1=1
+		<if test="level == 0">
+			and agent_super_id = #{agentId}  and agent_one_id != 0
+		</if>
+		<if test="level == 1">
+			and agent_one_id = #{agentId}  and agent_two_id != 0
+		</if>
+		<if test="level == 2">
+			and agent_two_id = #{agentId}  and agent_three_id != 0
+		</if>
 	</select>
 </mapper>

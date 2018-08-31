@@ -124,4 +124,7 @@ public interface IConstantFactory {
 
     Integer getStockByDollID(String dollID);
 
+    Integer getInviteNumByAgentIdAndLevel(Integer agentId,Integer level);
+
+    Integer getInviteNum1ByAgentIdAndLevel(Integer agentId, Integer level);
 }
