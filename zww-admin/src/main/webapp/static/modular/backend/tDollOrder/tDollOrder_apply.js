@@ -14,20 +14,23 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', checkbox: true},
-            {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
-            {title: '娃娃头像', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
-                formatter:function (value,row,index) {
-                    return '<img src="'+value+'" width="80" class="img-rounded" />';
-                }
-            },
-            {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle'},
-            {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
-            {title: '收货地址', field: 'address', visible: true, align: 'center', valign: 'middle',
-                formatter:function (value,row,index) {
-                    return row.province+row.city+row.county+row.street;
-                }
-            },
-            {title: '申请发货时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'}
+        {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
+        {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
+        {
+            title: '娃娃头像', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
+            formatter: function (value, row, index) {
+                return '<img src="' + value + '" width="80" class="img-rounded" />';
+            }
+        },
+        {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle', width: 80},
+        {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
+        {
+            title: '收货地址', field: 'address', visible: true, align: 'center', valign: 'middle',
+            formatter: function (value, row, index) {
+                return row.province + row.city + row.county + row.street;
+            }
+        },
+        {title: '申请发货时间', field: 'modifiedDate', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -36,10 +39,10 @@ TDollOrder.initColumn = function () {
  */
 TDollOrder.check = function () {
     var selected = $('#' + this.id).bootstrapTable('getSelections');
-    if(selected.length == 0){
+    if (selected.length == 0) {
         Feng.info("请先选中表格中的某一记录！");
         return false;
-    }else{
+    } else {
         TDollOrder.seItem = selected[0];
         return true;
     }
@@ -50,10 +53,10 @@ TDollOrder.check = function () {
  */
 TDollOrder.order_apply = function () {
     if (this.check()) {
-        var list = $('#' + this.id).bootstrapTable('getSelections'),ids="";
-        for (var i=0;i<list.length;i++){
+        var list = $('#' + this.id).bootstrapTable('getSelections'), ids = "";
+        for (var i = 0; i < list.length; i++) {
             ids += list[i].id;
-            if(i != list.length-1){
+            if (i != list.length - 1) {
                 ids += ",";
             }
         }
@@ -63,7 +66,7 @@ TDollOrder.order_apply = function () {
         }, function (data) {
             Feng.error("揽件失败!" + data.responseJSON.message + "!");
         });
-        ajax.set("tDollOrderIds",ids);
+        ajax.set("tDollOrderIds", ids);
         ajax.start();
     }
 };
@@ -81,8 +84,8 @@ TDollOrder.search = function () {
 };
 
 //jquery实现回车键触发事件
-$(document).keyup(function(event){
-    if(event.keyCode ==13){
+$(document).keyup(function (event) {
+    if (event.keyCode == 13) {
         TDollOrder.search();
     }
 });
