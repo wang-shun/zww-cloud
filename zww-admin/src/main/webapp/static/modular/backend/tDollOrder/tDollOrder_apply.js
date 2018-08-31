@@ -14,7 +14,6 @@ var TDollOrder = {
 TDollOrder.initColumn = function () {
     return [
         {field: 'selectItem', checkbox: true},
-        {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
         {
             title: '娃娃头像', field: 'dollUrl', visible: true, align: 'center', valign: 'middle',
@@ -22,6 +21,7 @@ TDollOrder.initColumn = function () {
                 return '<img src="' + value + '" width="80" class="img-rounded" />';
             }
         },
+        {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle', width: 80},
         {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
         {

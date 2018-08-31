@@ -42,12 +42,6 @@ public class TDollOrder extends Model<TDollOrder> {
      */
 	@TableField("order_by")
 	private Integer orderBy;
-
-	/**
-	 * 用户姓名
-	 */
-	@TableField("name")
-	private String username;
     /**
      * 订单状态
      */
@@ -84,17 +78,19 @@ public class TDollOrder extends Model<TDollOrder> {
 	private Integer deliverCoins;
 
 	@TableField("lover")
-	@Excel(name = "用户七夕活动", orderNum = "5", isImportField = "street",width = 20.0D)
 	private String lover;
     /**
      * 发货地址外键 t_member_addr
      */
 	@TableField("address_id")
 	private Integer addressId;
+
 	@TableField("modified_date")
 	private Date modifiedDate;
+
 	@TableField("modified_by")
 	private Integer modifiedBy;
+
 	private String comment;
 
 	@TableField(exist=false)
@@ -181,14 +177,6 @@ public class TDollOrder extends Model<TDollOrder> {
 
 	@TableField("doll_redeem_coins")
 	private Integer dollRedeemCoins;//返币数
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public Integer getDollRedeemCoins() {
 		return dollRedeemCoins;
