@@ -61,12 +61,12 @@
 
 	<!-- 查询申请发货的订单 -->
 	<select id="selectTDollOrderApply" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select a.id id,a.order_date orderDate,
+		select m.name,a.id id,a.order_date orderDate,
 		a.order_by orderBy,a.status status,a.modified_date modifiedDate,
 		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
 		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,d.quantity quantity
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
-		LEFT JOIN t_member_addr b ON  a.address_id=b.id
+		LEFT JOIN t_member_addr b ON  a.address_id=b.id LEFT JOIN t_member m ON a.order_by=m.id
 		where a.status='申请发货'
 		<if test="id != null">
 			and a.order_by = #{id}
@@ -86,17 +86,17 @@
 
 	<!-- 查询待发货的订单 -->
 	<select id="selectTDollOrder" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select a.id id,a.order_date orderDate,
+		select m.name,a.id id,a.order_date orderDate,
 		a.order_by orderBy,a.status status,a.modified_date modifiedDate,
 		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
 		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,d.quantity quantity
 		from t_doll_order a  LEFT JOIN t_doll_order_item d on a.id = d.order_id
-		LEFT JOIN t_member_addr b ON  a.address_id=b.id
+		LEFT JOIN t_member_addr b ON  a.address_id=b.id LEFT JOIN t_member m ON a.order_by=m.id
 		where a.status='待发货'
 		<if test="id != null">
 			and a.order_by = #{id}
 		</if>
-		<if test="phone != null and phone != '' ">
+		<if test="phone != null and phone != 	'' ">
 			and b.receiver_phone = #{phone}
 		</if>
 		<if test="addrName != null and addrName != '' ">
@@ -110,13 +110,13 @@
 
 	<!-- 查询已发货的订单 -->
 	<select id="selectTDollOrderOut" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
-		select a.id id,a.order_date orderDate,
+		select m.name,a.id id,a.order_date orderDate,
 		a.order_by orderBy,a.status status,a.deliver_date deliverDate,a.deliver_amount deliverAmount,
 		a.deliver_method deliverMethod, a.deliver_number deliverNumber,a.modified_date modifiedDate,
 		b.receiver_phone addrPhone,b.receiver_name addrName, b.province province, b.city city,
 		b.county county, b.street street,d.doll_name dollName,d.doll_url dollUrl,COUNT(a.id) quantity
 		from t_doll_order a LEFT JOIN t_member_addr b ON  a.address_id=b.id
-		LEFT JOIN t_doll_order_item d on a.id = d.order_id
+		LEFT JOIN t_doll_order_item d on a.id = d.order_id LEFT JOIN t_member m ON a.order_by=m.id
 		where a.status='已发货'
 		<if test="id != null">
 			and a.order_by = #{id}

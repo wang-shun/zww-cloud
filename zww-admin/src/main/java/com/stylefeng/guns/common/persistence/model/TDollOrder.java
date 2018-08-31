@@ -42,6 +42,12 @@ public class TDollOrder extends Model<TDollOrder> {
      */
 	@TableField("order_by")
 	private Integer orderBy;
+
+	/**
+	 * 用户姓名
+	 */
+	@TableField("name")
+	private String username;
     /**
      * 订单状态
      */
@@ -176,6 +182,13 @@ public class TDollOrder extends Model<TDollOrder> {
 	@TableField("doll_redeem_coins")
 	private Integer dollRedeemCoins;//返币数
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public Integer getDollRedeemCoins() {
 		return dollRedeemCoins;

@@ -14,7 +14,8 @@ var TDollOrderOut = {
 TDollOrderOut.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle'},
+            {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
+            {title: '收件姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle'},
             {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃名称', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '数量', field: 'quantity', visible: true, align: 'center', valign: 'middle'},
