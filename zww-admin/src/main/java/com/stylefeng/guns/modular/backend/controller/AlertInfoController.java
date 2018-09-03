@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * 抓取弹窗列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-02-06 12:03:19
  */
 @Controller

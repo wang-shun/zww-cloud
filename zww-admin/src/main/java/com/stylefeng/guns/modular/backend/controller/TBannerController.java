@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * banner控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-18 20:54:24
  */
 @Controller

@@ -17,7 +17,7 @@ import java.util.Date;
 /**
  * 娃娃机地址列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-24 21:41:02
  */
 @Controller

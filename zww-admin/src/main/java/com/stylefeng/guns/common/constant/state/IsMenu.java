@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.state;
 /**
  * 是否是菜单的枚举
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年6月1日22:50:11
  */
 public enum IsMenu {

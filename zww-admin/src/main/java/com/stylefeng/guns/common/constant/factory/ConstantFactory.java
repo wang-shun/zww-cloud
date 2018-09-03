@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 常量的生产工厂
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年2月13日 下午10:55:21
  */
 @Component

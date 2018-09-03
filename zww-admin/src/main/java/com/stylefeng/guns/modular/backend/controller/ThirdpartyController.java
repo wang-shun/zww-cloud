@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 第三方接入控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-26 10:58:24
  */
 @Controller

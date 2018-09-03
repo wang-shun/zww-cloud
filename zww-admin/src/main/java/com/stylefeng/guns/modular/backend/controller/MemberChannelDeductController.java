@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * 渠道扣量控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-02 16:45:56
  */
 @Controller

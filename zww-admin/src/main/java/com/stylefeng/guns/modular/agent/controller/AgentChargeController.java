@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 代理商分润控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-06-05 17:52:14
  */
 @Controller

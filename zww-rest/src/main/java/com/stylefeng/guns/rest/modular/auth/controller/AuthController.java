@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 /**
  * 请求验证的
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017/8/24 14:22
  */
 @RestController

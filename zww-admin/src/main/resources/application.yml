@@ -40,7 +40,7 @@ spring:
      max-idle: 8
      min-idle: 0
   profiles:
-    active: produce  # dev  test  produce
+    active: produce # dev  produce
   mvc:
     static-path-pattern: /static/**
     view:

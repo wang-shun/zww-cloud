@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 娃娃机抓取记录控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-06-14 09:53:24
  */
 @Controller

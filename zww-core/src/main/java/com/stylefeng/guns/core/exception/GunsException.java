@@ -3,7 +3,7 @@ package com.stylefeng.guns.core.exception;
 /**
  * 封装guns的异常
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017/12/28 下午10:32
  */
 public class GunsException extends RuntimeException {

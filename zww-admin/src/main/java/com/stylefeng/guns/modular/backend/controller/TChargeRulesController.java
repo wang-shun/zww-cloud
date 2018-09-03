@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 充值规则列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-17 20:12:56
  */
 @Controller

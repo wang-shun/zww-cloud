@@ -5,7 +5,7 @@ import com.stylefeng.guns.rest.modular.auth.validator.dto.Credence;
 /**
  * 认证的请求dto
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017/8/24 14:00
  */
 public class AuthRequest implements Credence {

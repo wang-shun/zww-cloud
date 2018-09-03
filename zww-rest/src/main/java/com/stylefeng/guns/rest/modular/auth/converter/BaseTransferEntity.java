@@ -3,7 +3,7 @@ package com.stylefeng.guns.rest.modular.auth.converter;
 /**
  * 基础的传输bean
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-25 15:52
  */
 public class BaseTransferEntity {

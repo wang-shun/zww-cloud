@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 日志管理控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-20 11:38:30
  */
 @Controller

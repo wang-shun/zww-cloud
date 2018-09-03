@@ -7,7 +7,7 @@ import com.stylefeng.guns.rest.modular.auth.validator.dto.Credence;
  * <p>
  * <p>如果想拓展验证方法只需实现这个接口,然后在AuthenticationRestController类中注意相应实现的本接口的类即可</p>
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-23 11:48
  */
 public interface IReqValidator {
@@ -15,7 +15,7 @@ public interface IReqValidator {
     /**
      * 通过请求参数验证
      *
-     * @author fengshuonan
+     * @author bruce
      * @Date 2017/8/23 11:49
      */
     boolean validate(Credence credence);

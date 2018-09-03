@@ -4,7 +4,7 @@ package com.stylefeng.guns.core.mutidatasource;
  * 
  * 多数据源的枚举
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年3月5日 上午10:15:02
  */
 public interface DSEnum {

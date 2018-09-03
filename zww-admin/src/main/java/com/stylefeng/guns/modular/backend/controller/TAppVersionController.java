@@ -22,7 +22,7 @@ import java.io.InputStream;
 /**
  * 版本管理控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-15 11:49:03
  */
 @Controller

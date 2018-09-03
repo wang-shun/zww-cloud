@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * 对客户端请求的jwt token验证过滤器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017/8/24 14:04
  */
 public class AuthFilter extends OncePerRequestFilter {

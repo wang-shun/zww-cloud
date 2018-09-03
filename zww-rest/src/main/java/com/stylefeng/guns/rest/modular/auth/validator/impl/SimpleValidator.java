@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 /**
  * 直接验证账号密码是不是admin
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-23 12:34
  */
 @Service

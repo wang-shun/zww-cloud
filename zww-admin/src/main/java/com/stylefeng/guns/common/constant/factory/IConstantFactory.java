@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 常量生产工厂的接口
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-06-14 21:12
  */
 public interface IConstantFactory {

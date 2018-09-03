@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * ADI项目模板生成 引擎
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-05-07 22:15
  */
 public abstract class GunsTemplateEngine extends AbstractTemplateEngine {

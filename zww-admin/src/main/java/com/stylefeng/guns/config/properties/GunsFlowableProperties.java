@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * flow的配置
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-12-02 23:18
  */
 @Configuration

@@ -38,7 +38,7 @@ import java.util.Map;
 /**
  * 角色控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年2月12日21:59:14
  */
 @Controller

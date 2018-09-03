@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.state;
 /**
  * 菜单是否打开的状态
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年4月8日10:12:15
  */
 public enum MenuOpenStatus {

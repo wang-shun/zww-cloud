@@ -24,7 +24,7 @@ import java.util.Date;
 /**
  * 文案管理控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-06-08 14:54:12
  */
 @Controller

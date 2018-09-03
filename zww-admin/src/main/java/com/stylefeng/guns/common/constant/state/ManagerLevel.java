@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.state;
 /**
  * 管理员的状态
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年1月10日 下午9:54:13
  */
 public enum ManagerLevel {

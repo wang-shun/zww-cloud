@@ -3,7 +3,7 @@ package com.stylefeng.guns.generator.engine.config;
 /**
  * 页面 模板生成的配置
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-05-07 22:12
  */
 public class PageConfig {

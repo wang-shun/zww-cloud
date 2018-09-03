@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 模板种类构建器
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-12-04-下午2:59
  */
 public class DefaultTemplateFactory {

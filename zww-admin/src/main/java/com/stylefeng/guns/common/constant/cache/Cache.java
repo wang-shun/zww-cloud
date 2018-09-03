@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.cache;
 /**
  * 所有缓存名称的集合
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-04-24 21:56
  */
 public interface Cache {

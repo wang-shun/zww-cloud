@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 库存记录控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-07-23 17:11:29
  */
 @Controller

@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * 占卜图片控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-02-02 14:52:28
  */
 @Controller

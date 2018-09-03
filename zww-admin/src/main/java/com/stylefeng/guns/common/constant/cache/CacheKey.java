@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.cache;
 /**
  * 缓存的key集合
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-04-25 9:37
  */
 public interface CacheKey {

@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 娃娃机概率列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-29 15:44:08
  */
 @Controller

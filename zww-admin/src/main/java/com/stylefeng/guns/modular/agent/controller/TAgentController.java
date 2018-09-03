@@ -50,7 +50,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 代理商管理控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-05-31 16:40:48
  */
 @Controller

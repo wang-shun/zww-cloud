@@ -4,7 +4,7 @@ import com.stylefeng.guns.core.exception.ServiceExceptionEnum;
 
 /**
  * @Description 所有业务异常的枚举
- * @author fengshuonan
+ * @author bruce
  * @date 2016年11月12日 下午5:04:51
  */
 public enum BizExceptionEnum implements ServiceExceptionEnum{

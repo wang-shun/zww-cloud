@@ -3,7 +3,7 @@ package com.stylefeng.guns.common.constant.state;
 /**
  * 日志类型
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年1月22日 下午12:14:59
  */
 public enum LogType {

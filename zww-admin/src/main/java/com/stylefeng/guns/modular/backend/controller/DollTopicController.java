@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * 娃娃机主题列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-24 21:39:55
  */
 @Controller

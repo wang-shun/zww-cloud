@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * 邀请人列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-26 09:50:48
  */
 @Controller

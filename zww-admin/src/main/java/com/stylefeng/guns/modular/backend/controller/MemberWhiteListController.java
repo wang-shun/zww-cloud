@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * 用户白名单列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-03 16:01:34
  */
 @Controller

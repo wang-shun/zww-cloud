@@ -32,7 +32,7 @@ import static com.stylefeng.guns.core.support.HttpKit.getRequest;
 /**
  * 全局的的异常拦截器（拦截所有的控制器）（带有@RequestMapping注解的方法上都会拦截）
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2016年11月12日 下午3:19:56
  */
 @ControllerAdvice
@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
     /**
      * 拦截业务异常
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(GunsException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
     /**
      * 用户未登录
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
     /**
      * 账号被冻结
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(DisabledAccountException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -84,7 +84,7 @@ public class GlobalExceptionHandler {
     /**
      * 账号密码错误
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(CredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
     /**
      * 验证码错误
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(InvalidKaptchaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -112,7 +112,7 @@ public class GlobalExceptionHandler {
     /**
      * 用户参数错误
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(UserException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -125,7 +125,7 @@ public class GlobalExceptionHandler {
     /**
      * 无权访问该资源
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(UndeclaredThrowableException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
@@ -139,7 +139,7 @@ public class GlobalExceptionHandler {
     /**
      * 拦截未知的运行时异常
      *
-     * @author fengshuonan
+     * @author bruce
      */
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

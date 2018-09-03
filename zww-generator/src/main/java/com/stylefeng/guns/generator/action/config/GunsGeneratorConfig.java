@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 /**
  * 默认的代码生成的配置
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-10-28-下午8:27
  */
 public class GunsGeneratorConfig extends AbstractGeneratorConfig {
@@ -18,7 +18,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
         globalConfig.setBaseResultMap(true);
         globalConfig.setBaseColumnList(true);
         globalConfig.setOpen(false);
-        globalConfig.setAuthor("fengshuonan");
+        globalConfig.setAuthor("bruce");
     }
 
     protected void dataSourceConfig() {

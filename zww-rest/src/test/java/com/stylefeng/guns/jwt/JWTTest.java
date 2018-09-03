@@ -10,7 +10,7 @@ import java.security.Key;
 /**
  * jwt测试
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-21 16:34
  */
 public class JWTTest {

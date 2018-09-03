@@ -3,7 +3,7 @@ package com.stylefeng.guns.modular.system.service;
 /**
  * 角色相关业务
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年1月10日 下午9:11:57
  */
 public interface IRoleService {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 常规控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-23 16:02
  */
 @RestController

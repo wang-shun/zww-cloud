@@ -35,7 +35,7 @@ import com.stylefeng.guns.core.xss.XssFilter;
 /**
  * web 配置类
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2016年11月12日 下午5:03:32
  */
 @Configuration

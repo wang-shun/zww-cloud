@@ -3,7 +3,7 @@ package com.stylefeng.guns.core.page;
 /**
  * 分页参数类（for BootStrap Table）
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年1月21日 下午2:21:35
  */
 public class PageBT {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 设置vip等级权限控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-28 11:42:27
  */
 @Controller

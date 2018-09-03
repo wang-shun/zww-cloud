@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * 机器物理概率控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-02-11 10:39:08
  */
 @Controller

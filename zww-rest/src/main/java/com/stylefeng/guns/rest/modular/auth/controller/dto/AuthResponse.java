@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 认证的响应结果
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017/8/24 13:58
  */
 public class AuthResponse implements Serializable {

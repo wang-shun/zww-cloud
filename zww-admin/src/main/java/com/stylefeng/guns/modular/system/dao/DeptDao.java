@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 部门dao
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年2月17日20:28:58
  */
 public interface DeptDao {

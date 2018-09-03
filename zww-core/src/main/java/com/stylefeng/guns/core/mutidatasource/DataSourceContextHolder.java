@@ -3,7 +3,7 @@ package com.stylefeng.guns.core.mutidatasource;
 /**
  * datasource的上下文
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年3月5日 上午9:10:58
  */
 public class DataSourceContextHolder {

@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 全局配置
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-05-08 20:21
  */
 public class SqlConfig {

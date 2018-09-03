@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
 /**
  * 带签名的http信息转化器
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-25 15:42
  */
 public class WithSignMessageConverter extends FastJsonHttpMessageConverter4 {

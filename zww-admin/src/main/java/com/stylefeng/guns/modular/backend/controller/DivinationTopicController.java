@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 占卜主题控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-02-02 11:32:58
  */
 @Controller

@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * 娃娃机批量上下线控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-03-16 11:17:37
  */
 @Controller

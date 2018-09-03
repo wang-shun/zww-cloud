@@ -50,7 +50,7 @@ import java.util.Map;
 /**
  * 系统管理员控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2017年1月11日 下午1:08:17
  */
 @Controller

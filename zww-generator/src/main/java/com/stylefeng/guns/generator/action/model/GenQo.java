@@ -3,7 +3,7 @@ package com.stylefeng.guns.generator.action.model;
 /**
  * 代码生成的查询参数
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-11-30-下午2:05
  */
 public class GenQo {

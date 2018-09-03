@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 机器占卜主题控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-02-09 11:03:23
  */
 @Controller

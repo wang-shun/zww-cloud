@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * 工作流配置
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-12-02 22:28
  */
 @Configuration

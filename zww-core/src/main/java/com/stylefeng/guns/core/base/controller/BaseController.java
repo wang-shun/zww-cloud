@@ -105,7 +105,7 @@ public class BaseController {
     /**
      * 返回前台文件流
      *
-     * @author fengshuonan
+     * @author bruce
      * @date 2017年2月28日 下午2:53:19
      */
     protected ResponseEntity<byte[]> renderFile(String fileName, String filePath) {
@@ -116,7 +116,7 @@ public class BaseController {
     /**
      * 返回前台文件流
      *
-     * @author fengshuonan
+     * @author bruce
      * @date 2017年2月28日 下午2:53:19
      */
     protected ResponseEntity<byte[]> renderFile(String fileName, byte[] fileBytes) {

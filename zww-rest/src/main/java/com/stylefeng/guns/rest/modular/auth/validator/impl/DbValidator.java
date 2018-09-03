@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 账号密码验证
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017-08-23 12:34
  */
 @Service

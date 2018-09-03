@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 代理商的包装类
  *
- * @author fengshuonan
+ * @author bruce
  * @date 2017年2月13日 下午10:47:03
  */
 public class TagentWarpper extends BaseControllerWarpper {

@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * 娃娃机背景图片列表控制器
  *
- * @author fengshuonan
+ * @author bruce
  * @Date 2018-01-24 21:38:53
  */
 @Controller
