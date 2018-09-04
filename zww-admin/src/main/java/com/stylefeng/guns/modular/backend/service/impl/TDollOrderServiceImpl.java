@@ -108,7 +108,7 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         if(account.getTester() == 0){
             TDollOrderItem tDollOrderItem = tDollOrderItemMapper.selectByOrderId(tDollOrderId);
             TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(tDollOrderItem.getDollCode());
-            TDollInfoHistory tDollInfoHistory = new TDollInfoHistory(tDollInfo,tDollInfo.getDollTotal(), 1,userId,now,"(" + member.getName() + ")兑换成币，返回库存");
+            TDollInfoHistory tDollInfoHistory = new TDollInfoHistory(tDollInfo, 1,userId,now,"(" + member.getName() + ")兑换成币，返回库存");
             tDollInfoHistoryMapper.insert(tDollInfoHistory);
             tDollInfo.setDollTotal(tDollInfo.getDollTotal() + 1);
             tDollInfoMapper.updateById(tDollInfo);
