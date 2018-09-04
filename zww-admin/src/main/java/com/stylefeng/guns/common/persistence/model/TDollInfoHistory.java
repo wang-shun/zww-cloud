@@ -100,6 +100,20 @@ public class TDollInfoHistory extends Model<TDollInfoHistory> {
 		this.createTime = new Date();
 	}
 
+	public TDollInfoHistory(TDollInfo tDollInfo,Integer numStart,Integer num,Integer userId,Date date,String note) {
+		this.dollCode = tDollInfo.getDollCode();
+		this.dollTotal = num;
+		this.numStart = numStart;
+		this.numEnd = numStart + num;
+		this.price = tDollInfo.getDollCoins();
+		this.stockDate = tDollInfo.getStockDate();
+		this.dollName = tDollInfo.getDollName();
+		this.imgUrl = tDollInfo.getImgUrl();
+		this.note = note;
+		this.modifyer = userId;
+		this.createTime = date;
+	}
+
 	public Integer getId() {
 		return id;
 	}

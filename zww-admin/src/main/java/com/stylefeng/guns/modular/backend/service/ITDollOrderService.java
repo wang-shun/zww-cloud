@@ -35,7 +35,7 @@ public interface ITDollOrderService extends IService<TDollOrder> {
     TDollOrder selectByorderNum(String orderNum);
 
     //违规返币
-    boolean dollBackCoins(Integer tDollOrderId, String memberId);
+    boolean dollBackCoins(Integer tDollOrderId, Integer memberId);
 
     //反娃娃
     boolean backDoll(TDollOrder tDollOrder);

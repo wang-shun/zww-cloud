@@ -190,7 +190,7 @@ public class TDollOrderController extends BaseController {
 
     @RequestMapping(value = "/dollBackCoins")
     @ResponseBody
-    public Object dollBackCoins(@RequestParam Integer tDollOrderId,@RequestParam String memberId) {
+    public Object dollBackCoins(@RequestParam Integer tDollOrderId,@RequestParam Integer memberId) {
         tDollOrderService.dollBackCoins(tDollOrderId,memberId);
         return super.SUCCESS_TIP;
     }

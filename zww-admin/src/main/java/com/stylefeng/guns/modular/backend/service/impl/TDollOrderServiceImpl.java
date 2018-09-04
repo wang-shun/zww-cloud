@@ -56,6 +56,10 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
 
     @Autowired
     private TDollMapper dollMapper;
+    @Autowired
+    private TDollInfoMapper tDollInfoMapper;
+    @Autowired
+    private TDollInfoHistoryMapper tDollInfoHistoryMapper;
 
     @Override
     public List<Map<String, Object>> selectTDollOrderApply(Page<TDollOrder> page,Integer id,String addrName,String phone,String dollName){
@@ -81,25 +85,38 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
 
     //寄存娃娃违规返币
     @Override
-    public boolean dollBackCoins(Integer tDollOrderId,String memberId) {
+    public boolean dollBackCoins(Integer tDollOrderId,Integer memberId) {
         //查询金币信息
-        Account account = accountMapper.selectById(Integer.valueOf(memberId));
+        Account account = accountMapper.selectById(memberId);
         //查询订单信息
         TDollOrder tDollOrder = tDollOrderMapper.selectById(tDollOrderId);
+        Integer userId = ShiroKit.getUser().getId();
+        Member member = memberMapper.selectById(memberId);
+        Date now = new Date();
         //生成消费记录 返娃娃币
         MemberChargeHistory chargeRecord = new MemberChargeHistory();
-        chargeRecord.setChargeDate(new Date());
+        chargeRecord.setChargeDate(now);
         chargeRecord.setChargeMethod("违规返币");
         chargeRecord.setCoins(account.getCoins()==null?0:account.getCoins());
         chargeRecord.setCoinsSum(tDollOrder.getDollRedeemCoins()==null?0:tDollOrder.getDollRedeemCoins());
-        chargeRecord.setMemberId(account.getId());
+        chargeRecord.setMemberId(memberId);
         chargeRecord.setType("income");
         memberChargeHistoryMapper.updateMemberCount(chargeRecord);
         memberChargeHistoryMapper.insertChargeHistory(chargeRecord);
 
+        //非测试人员添加库存
+        if(account.getTester() == 0){
+            TDollOrderItem tDollOrderItem = tDollOrderItemMapper.selectByOrderId(tDollOrderId);
+            TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(tDollOrderItem.getDollCode());
+            TDollInfoHistory tDollInfoHistory = new TDollInfoHistory(tDollInfo,tDollInfo.getDollTotal(), 1,userId,now,"(" + member.getName() + ")兑换成币，返回库存");
+            tDollInfoHistoryMapper.insert(tDollInfoHistory);
+            tDollInfo.setDollTotal(tDollInfo.getDollTotal() + 1);
+            tDollInfoMapper.updateById(tDollInfo);
+        }
+
         tDollOrder.setStatus("已兑换");
-        tDollOrder.setModifiedDate(new Date());
-        tDollOrder.setModifiedBy(ShiroKit.getUser().getId());
+        tDollOrder.setModifiedDate(now);
+        tDollOrder.setModifiedBy(userId);
         return retBool(tDollOrderMapper.updateById(tDollOrder));
     }
 
