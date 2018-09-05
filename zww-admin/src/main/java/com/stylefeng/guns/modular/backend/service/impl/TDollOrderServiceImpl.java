@@ -107,13 +107,15 @@ public class TDollOrderServiceImpl extends ServiceImpl<TDollOrderMapper, TDollOr
         //非测试人员添加库存
         if(account.getTester() == 0){
             TDollOrderItem tDollOrderItem = tDollOrderItemMapper.selectByOrderId(tDollOrderId);
-            TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(tDollOrderItem.getDollCode());
-            TDollInfoHistory tDollInfoHistory = new TDollInfoHistory(tDollInfo, 1,userId,now,"(" + member.getName() + ")兑换成币，返回库存");
-            tDollInfoHistoryMapper.insert(tDollInfoHistory);
-            tDollInfo.setDollTotal(tDollInfo.getDollTotal() + 1);
-            tDollInfoMapper.updateById(tDollInfo);
+            TDoll tDoll = dollMapper.selectById(tDollOrderItem.getDollId());
+            if(tDollOrderItem.getDollCode().equals(tDoll.getDollID())){
+                TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(tDollOrderItem.getDollCode());
+                TDollInfoHistory tDollInfoHistory = new TDollInfoHistory(tDollInfo, 1,userId,now,"(" + member.getName() + ")兑换成币，返回库存");
+                tDollInfoHistoryMapper.insert(tDollInfoHistory);
+                tDollInfo.setDollTotal(tDollInfo.getDollTotal() + 1);
+                tDollInfoMapper.updateById(tDollInfo);
+            }
         }
-
         tDollOrder.setStatus("已兑换");
         tDollOrder.setModifiedDate(now);
         tDollOrder.setModifiedBy(userId);

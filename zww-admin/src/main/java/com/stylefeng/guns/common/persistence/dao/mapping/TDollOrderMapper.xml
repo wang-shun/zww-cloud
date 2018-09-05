@@ -54,7 +54,7 @@
 			('%',#{phone},'%')
 		</if>
 		<if test="memberId!=null and memberId != '' ">
-			and c.memberID = #{memberId}
+			and c.id = #{memberId}
 		</if>
 		order by a.modified_date DESC
 	</select>

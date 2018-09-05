@@ -28,7 +28,7 @@
 		</if>
 	</select>
 
-	<select id="selectByOrderId" resultType="map">
+	<select id="selectByOrderId" resultType="com.stylefeng.guns.common.persistence.model.TDollOrderItem">
 		select
 		<include refid="Base_Column_List"/>
 		from t_doll_order_item where order_id = #{orderId}

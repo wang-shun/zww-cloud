@@ -37,7 +37,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/member")
-public class MemberController extends BaseController {
+public class  MemberController extends BaseController {
 
     private String PREFIX = "/backend/member/";
     private String PREFIXS = "/backend/channel/";
