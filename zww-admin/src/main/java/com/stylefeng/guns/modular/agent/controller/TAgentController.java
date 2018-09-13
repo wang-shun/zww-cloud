@@ -218,7 +218,7 @@ public class TAgentController extends BaseController {
         UserDto user = new UserDto();
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         //cji管理员添加费率
-        if(!"agent".equals(role.getTips().substring(0,5))){
+        if(!role.getTips().contains("agent")){
             double defaultFee = getFee();
             if (defaultFee < tAgent.getFee() || tAgent.getFee() < 0){
                 return  new ErrorTip(500,"添加失败!扣率必须在0-" + defaultFee + "之间");
@@ -339,7 +339,7 @@ public class TAgentController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         Integer type = null;
-        if(!"agent".equals(role.getTips().substring(0,5))){
+        if(!role.getTips().contains("agent")){
             type =0;
         }else{
             TAgent tAgent = tAgentService.selectTAgentByUId(userdto.getId());

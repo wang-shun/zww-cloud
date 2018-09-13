@@ -17,7 +17,7 @@ import com.stylefeng.guns.common.persistence.model.ChargeOrder;
  */
 public interface IChargeOrderService extends IService<ChargeOrder> {
 
-    List<Map<String, Object>> selectList(Page<ChargeOrder> page, String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime);
+    List<Map<String, Object>> selectList(Page<ChargeOrder> page, String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime,Integer agentId,Integer level);
 
     //渠道
     List<Map<String, Object>> selectListChannel(Page<ChargeOrder> page,String channelNum, String lastLoginFrom,String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime);

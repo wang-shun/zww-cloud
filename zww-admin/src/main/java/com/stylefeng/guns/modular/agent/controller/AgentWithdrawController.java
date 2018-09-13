@@ -323,7 +323,7 @@ public class AgentWithdrawController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         Integer agentId = null,level = null;
-        if("agent".equals(role.getTips().substring(0,5))){
+        if(role.getTips().contains("agent")){
             TAgent tAgent =tAgentService.selectTAgentByUId(userdto.getId());
             if(tAgent != null){
                 agentId = tAgent.getId();
@@ -361,7 +361,7 @@ public class AgentWithdrawController extends BaseController {
         User userdto =(User) ShiroKit.getSession().getAttribute("userL");
         Role role = roleMapper.selectId(Integer.valueOf(userdto.getRoleid()));
         TAgent tAgent =tAgentService.selectTAgentById(agentId);
-        if("agent".equals(role.getTips().substring(0,5))){
+        if(role.getTips().contains("agent")){
             return;
         }
         Date date = agentWithdrawService.getDateByAgentIdAndStatus(agentId);

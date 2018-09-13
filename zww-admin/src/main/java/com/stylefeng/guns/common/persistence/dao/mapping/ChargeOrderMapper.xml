@@ -35,6 +35,20 @@
 		b.memberID memberNum
 		from charge_order a LEFT JOIN t_member b on a.member_id = b.id
 		where 1=1
+		<if test="level != null  and agentId != null">
+			<if test="level == 0">
+                and b.agent_super_id = #{agentId} and b.agent_one_id = 0
+			</if>
+			<if test="level == 1">
+				and b.agent_one_id = #{agentId} and b.agent_two_id = 0
+			</if>
+			<if test="level == 2">
+				and b.agent_two_id = #{agentId} and b.agent_three_id = 0
+			</if>
+			<if test="level == 3">
+				and b.agent_three_id = #{agentId}
+			</if>
+		</if>
 		<if test="memberName != null and memberName != ''">
 			AND b.name like concat('%',#{memberName},'%')
 		</if>

@@ -82,7 +82,7 @@ public class LoginController extends BaseController {
 
         Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
         //cji管理员添加费率
-        if(role.getTips().length()>5 && "agent".equals(role.getTips().substring(0,5))){
+        if(role.getTips().contains("agent")){
             TAgent tAgent = agentMapper.selectTAgentByUId(user.getId());
             if (tAgent.getStatus() == 3) {
                 ShiroKit.getSubject().logout();

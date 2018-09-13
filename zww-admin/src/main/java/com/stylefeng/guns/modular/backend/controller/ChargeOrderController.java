@@ -2,10 +2,12 @@ package com.stylefeng.guns.modular.backend.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.common.constant.factory.PageFactory;
-import com.stylefeng.guns.common.persistence.model.ChargeOrder;
-import com.stylefeng.guns.common.persistence.model.Member;
+import com.stylefeng.guns.common.persistence.dao.RoleMapper;
+import com.stylefeng.guns.common.persistence.model.*;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.modular.agent.service.ITAgentService;
 import com.stylefeng.guns.modular.backend.service.IChargeOrderService;
 import com.stylefeng.guns.modular.backend.service.IMemberService;
 import com.stylefeng.guns.modular.backend.warpper.ChargeOrderWarpper;
@@ -38,6 +40,11 @@ public class ChargeOrderController extends BaseController {
 
     @Autowired
     private IMemberService iMemberService;
+    @Autowired
+    RoleMapper roleMapper;
+
+    @Autowired
+    private ITAgentService tAgentService;
     /**
      * 跳转到orderManage首页
      */
@@ -83,7 +90,15 @@ public class ChargeOrderController extends BaseController {
     @ResponseBody
     public Object list(String memberName,Integer chargeruleid,Integer chargeState,String registeDate,String endtime) {
         Page<ChargeOrder> page = new PageFactory<ChargeOrder>().defaultPage();
-        List<Map<String, Object>> result = chargeOrderService.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime);
+        User user = (User) ShiroKit.getSession().getAttribute("userL");
+        Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
+        Integer level = null,agentId = null;
+        if(role.getTips().contains("agent")){
+              TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
+              agentId = tAgent.getId();
+              level = tAgent.getLevel();
+        }
+        List<Map<String, Object>> result = chargeOrderService.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime,agentId,level);
         page.setRecords((List<ChargeOrder>)new ChargeOrderWarpper(result).warp());
         return super.packForBT(page);
     }

@@ -144,7 +144,7 @@ public class UserMgrController extends BaseController {
         User user = this.userMapper.selectById(userId);
         Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
         model.addAttribute("rate", "-");
-        if("agent".equals(role.getTips().substring(0,5))){
+        if(role.getTips().contains("agent")){
             TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
             if(tAgent !=null){
                 model.addAttribute("rate", tAgent.getFee());
@@ -189,7 +189,7 @@ public class UserMgrController extends BaseController {
             user.updateById();
 
             Role role = roleMapper.selectId(Integer.valueOf(user.getRoleid()));
-            if("agent".equals(role.getTips().substring(0,5))){
+            if(role.getTips().contains("agent")){
                 TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
                 if(tAgent != null){
                     tAgent.setUpdateTime(new Date());
@@ -272,7 +272,7 @@ public class UserMgrController extends BaseController {
                 this.userMapper.updateById(UserFactory.createUser(user));
 
                 Role role = roleMapper.selectId(shiroUser.getRoleList().get(0));
-                if("agent".equals(role.getTips().substring(0,5))){
+                if(role.getTips().contains("agent")){
                     TAgent tAgent = tAgentService.selectTAgentByUId(user.getId());
                     if(tAgent != null){
                         tAgent.setUpdateTime(new Date());

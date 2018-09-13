@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public interface ChargeOrderMapper extends BaseMapper<ChargeOrder> {
 
-    List<Map<String, Object>> selectList(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
+    List<Map<String, Object>> selectList(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime,@Param("agentId") Integer agentId,@Param("level") Integer level);
 
     //某个用户充值
     List<Map<String, Object>> selectListOneMember(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName, @Param("memberId")Integer memberId, @Param("chargeruleid")Integer chargeruleid, @Param("chargeState")Integer chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);

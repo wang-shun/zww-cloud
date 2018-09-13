@@ -26,9 +26,9 @@ public class ChargeOrderServiceImpl extends ServiceImpl<ChargeOrderMapper, Charg
     private ChargeOrderMapper chargeOrderMapper;
 
     @Override
-    public List<Map<String, Object>> selectList(Page<ChargeOrder> page,String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime)
+    public List<Map<String, Object>> selectList(Page<ChargeOrder> page,String memberName,Integer chargeruleid, Integer chargeState, String registeDate, String endtime,Integer agentId,Integer level)
     {
-        return chargeOrderMapper.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime);
+        return chargeOrderMapper.selectList(page,memberName,chargeruleid,chargeState,registeDate,endtime,agentId,level);
     }
 
     @Override
