@@ -33,14 +33,14 @@
                                 <#button name="搜索" icon="fa-search" clickFun="ChargeOrder.search()"/>
                             </div>
                         </div>
-                        <div class="row">
+               <!--         <div class="row">
                             <div class="col-sm-3">
                                 <#NameCon id="allMoney" name="总金额" readonly="readonly" value=""/>
                             </div>
                             <div class="col-sm-3">
                                 <#NameCon id="allPerson" name="充值人数" readonly="readonly" value=""/>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="hidden-xs" id="ChargeOrderTableToolbar" role="group">
                             @if(shiro.hasPermission("/chargeOrder/add")){
                                 <!--<#button name="添加" icon="fa-plus" clickFun="ChargeOrder.openAddChargeOrder()"/>-->
