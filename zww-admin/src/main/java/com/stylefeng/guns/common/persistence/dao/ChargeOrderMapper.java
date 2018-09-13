@@ -51,4 +51,6 @@ public interface ChargeOrderMapper extends BaseMapper<ChargeOrder> {
     //小妖精渠道总人数
     Integer xiaoyaojingSelectAllPerson(@Param("channelNum")String channelNum,@Param("lastLoginFrom")String lastLoginFrom,@Param("memberName")String memberName, @Param("memberId")String memberId, @Param("chargeName")String chargeName, @Param("chargeState")String chargeState, @Param("registeDate")String registeDate, @Param("endtime")String endtime);
 
+
+    List<Map<String, Object>>  selectListByOem(@Param("page") Page<ChargeOrder> page, @Param("memberName")String memberName,@Param("uid")String uid,@Param("orderNo") String orderNo,@Param("chargeState") Integer chargeState,@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("registerChannel") String registerChannel);
 }

@@ -127,20 +127,31 @@ TAgentTemDlg.del = function(num,id){
 
 $(function() {
     $.post(Feng.ctxPath + "/tAgent/getTemplateList?tAgentId=" + TAgentTemDlg.get("id"),function(data){
-        var list = data.oemTemplateList;
-        $("#addnum").val(list.length);
-        for(var i=0;i<list.length;i++){
-            var html = "<div class='row'  id='row" + i + "'>";
-               html += '<div class="col-sm-12"><input type="hidden" id="temid'+ i + '" value="' + list[i].id + '"/>';
-               html += '<input type="text" class="oemtext" id="title'+i+'" placeholder="标题" value="' + list[i].title + '"/>';
-               html += '<input type="text" class="oemtext" id="type'+i+'" placeholder="类型" value="' + list[i].type + '"/>';
-               html += '<input type="text" class="oemtext" id="template'+i+'" placeholder="模板id" value="' + list[i].templateId + '"/>';
-            if(i==0){
-                html += '<button class="info" onclick="TAgentTemDlg.add()">+</button></div></div>';
-            }else{
-                html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentTemDlg.del(' + i + ',' + list[i].id + ')">-</button></div></div>';
+        var list = data.oemTemplateList,length = list.length;
+        $("#addnum").val(length);
+        if(length > 0){
+            for(var i=0;i<length;i++){
+                var html = "<div class='row'  id='row" + i + "'>";
+                html += '<div class="col-sm-12"><input type="hidden" id="temid'+ i + '" value="' + list[i].id + '"/>';
+                html += '<input type="text" class="oemtext" id="title'+i+'" placeholder="标题" value="' + list[i].title + '"/>';
+                html += '<input type="text" class="oemtext" id="type'+i+'" placeholder="类型" value="' + list[i].type + '"/>';
+                html += '<input type="text" class="oemtext" id="template'+i+'" placeholder="模板id" value="' + list[i].templateId + '"/>';
+                if(i==0){
+                    html += '<button class="info" onclick="TAgentTemDlg.add()">+</button></div></div>';
+                }else{
+                    html += '<button class="info" style="background-color: #ed5565;" onclick="TAgentTemDlg.del(' + i + ',' + list[i].id + ')">-</button></div></div>';
+                }
+                $("#bannelDiv").append(html);
             }
+        }else{
+            var html = "<div class='row'  id='row0'>";
+            html += '<div class="col-sm-12"><input type="hidden" id="temid0"/>';
+            html += '<input type="text" class="oemtext" id="title0" placeholder="标题"/>';
+            html += '<input type="text" class="oemtext" id="type0" placeholder="类型"/>';
+            html += '<input type="text" class="oemtext" id="template0" placeholder="模板id"/>';
+            html += '<button class="info" onclick="TAgentTemDlg.add()">+</button></div></div>';
             $("#bannelDiv").append(html);
         }
+
     });
 });

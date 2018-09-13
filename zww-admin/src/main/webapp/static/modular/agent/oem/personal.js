@@ -33,12 +33,6 @@ OEMInfoDlg.get = function(key) {
     return $("#" + key).val();
 }
 
-/**
- * 关闭此对话框
- */
-OEMInfoDlg.close = function() {
-    parent.layer.close(window.parent.OEM.layerIndex);
-}
 
 /**
  * 收集数据
@@ -46,16 +40,7 @@ OEMInfoDlg.close = function() {
 OEMInfoDlg.collectData = function() {
     this
     .set('id')
-    .set('name')
-    .set('code')
-    .set('appid')
-    .set('appsecret')
-    .set('company')
-    .set('url')
-    .set('smsCode')
-    .set('smsName')
     .set('callbackUrl')
-    .set('status')
     ;
 }
 
@@ -72,8 +57,6 @@ OEMInfoDlg.editSubmit = function() {
         if(data.code == 200 ){
             Feng.success("修改成功!");
             $("#ensure").removeAttr("disabled");
-            window.parent.OEM.table.refresh();
-            OEMInfoDlg.close();
         }else{
             Feng.error(data.message);
             $("#ensure").removeAttr("disabled");
@@ -87,10 +70,5 @@ OEMInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-    var statusValue = $("#statusValue").val();
-    if(statusValue == undefined || statusValue == null){
-        $("#status").val(1);
-    }else{
-        $("#status").val(statusValue);
-    }
+
 });

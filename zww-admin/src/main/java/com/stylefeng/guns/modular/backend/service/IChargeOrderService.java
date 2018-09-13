@@ -42,4 +42,5 @@ public interface IChargeOrderService extends IService<ChargeOrder> {
     //渠道总人数
     Integer xiaoyaojingSelectAllPersonChannel(String channelNum,String lastLoginFrom,String memberName, String memberId, String chargeName, String chargeState, String registeDate, String endtime);
 
+    List<Map<String, Object>>  selectListByOem(Page<ChargeOrder> page, String memberName,String uid,String orderNo, Integer chargeState, String startDate, String endDate,String registerChannel);
 }

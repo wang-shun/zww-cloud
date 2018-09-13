@@ -77,4 +77,9 @@ public class ChargeOrderServiceImpl extends ServiceImpl<ChargeOrderMapper, Charg
         return chargeOrderMapper.xiaoyaojingSelectAllPerson(channelNum,lastLoginFrom,memberName,memberId,chargeName,chargeState,registeDate,endtime);
     }
 
+    @Override
+    public List<Map<String, Object>> selectListByOem(Page<ChargeOrder> page, String memberName, String uid, String orderNo, Integer chargeState, String startDate, String endDate,String registerChannel) {
+        return chargeOrderMapper.selectListByOem(page,memberName,uid,orderNo,chargeState,startDate,endDate,registerChannel);
+    }
+
 }

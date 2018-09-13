@@ -80,6 +80,13 @@ public class TOem extends Model<TOem> {
      * 状态（0未启用  1启用）
      */
 	private Integer status;
+
+	/**
+	 * 隧道地址
+	 */
+	@TableField("callback_url")
+	private String callbackUrl;
+
     /**
      * 创建时间
      */
@@ -238,6 +245,14 @@ public class TOem extends Model<TOem> {
 		this.icon = icon;
 	}
 
+	public String getCallbackUrl() {
+		return callbackUrl;
+	}
+
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
+	}
+
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
@@ -263,6 +278,7 @@ public class TOem extends Model<TOem> {
 			", updateTime=" + updateTime +
 			", isDollMerge=" + isDollMerge +
 			", icon=" + icon +
+			", callbackUrl=" + callbackUrl +
 			"}";
 	}
 }

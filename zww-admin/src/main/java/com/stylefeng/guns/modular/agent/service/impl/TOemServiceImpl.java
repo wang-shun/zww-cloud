@@ -4,6 +4,7 @@ import com.stylefeng.guns.common.persistence.model.TOem;
 import com.stylefeng.guns.common.persistence.dao.TOemMapper;
 import com.stylefeng.guns.modular.agent.service.ITOemService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TOemServiceImpl extends ServiceImpl<TOemMapper, TOem> implements ITOemService {
-	
+    @Autowired
+    private  TOemMapper tOemMapper;
+
+
+    @Override
+    public TOem getOemByCode(String code) {
+        return tOemMapper.getOemByCode(code);
+    }
 }

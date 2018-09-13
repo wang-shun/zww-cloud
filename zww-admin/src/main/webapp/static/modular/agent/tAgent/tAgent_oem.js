@@ -56,6 +56,7 @@ TAgentInfoDlg.collectData = function() {
     .set('smsName')
     .set('isDollMerge')
     .set('icon')
+    .set('callbackUrl')
     ;
 }
 
@@ -137,6 +138,7 @@ $(function() {
         $("#smsName").val(oem.smsName);
         $("#isDollMerge").val(oem.isDollMerge);
         $("#icon").val(oem.icon);
+        $("#callbackUrl").val(oem.callbackUrl);
         $("#iconPreId img").attr("src", oem.icon);
 
         $("#addnum").val(list.length);

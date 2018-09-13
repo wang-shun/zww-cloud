@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-06-21
  */
 public interface ITOemService extends IService<TOem> {
-	
+
+    public TOem getOemByCode(String code);
 }
