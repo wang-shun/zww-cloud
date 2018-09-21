@@ -24,6 +24,7 @@ TDollOrder.initColumn = function () {
         {title: '用户昵称', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '姓名', field: 'addrName', visible: true, align: 'center', valign: 'middle', width: 80},
         {title: '电话', field: 'addrPhone', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户身份', field: 'testerName', visible: true, align: 'center', valign: 'middle'},
         {
             title: '收货地址', field: 'address', visible: true, align: 'center', valign: 'middle',
             formatter: function (value, row, index) {

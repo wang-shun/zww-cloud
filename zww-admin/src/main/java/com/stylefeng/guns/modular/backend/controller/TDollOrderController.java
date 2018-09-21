@@ -280,7 +280,7 @@ public class TDollOrderController extends BaseController {
     public void profitHistory(HttpServletResponse response, Integer id,String addrName,String phone,String dollName) throws IOException {
         List<TDollOrder> result = tDollOrderService.selectTDollOrderExecl(id,addrName,phone,dollName);
 
-        String fileName = "未发货数据统计.xls";
+        String fileName = "待发货数据列表.xls";
 
         // 告诉浏览器用什么软件可以打开此文件
         response.setHeader("content-Type", "application/vnd.ms-excel");
