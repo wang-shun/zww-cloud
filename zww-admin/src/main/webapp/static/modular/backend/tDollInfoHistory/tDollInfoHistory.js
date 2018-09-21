@@ -16,7 +16,7 @@ TDollInfoHistory.initColumn = function () {
         {field: 'selectItem', radio: true},
             {title: '娃娃名', field: 'dollName', visible: true, align: 'center', valign: 'middle'},
             {title: '娃娃编码', field: 'dollCode', visible: true, align: 'center', valign: 'middle'},
-            {title: '库存数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
+            {title: '存入数', field: 'dollTotal', visible: true, align: 'center', valign: 'middle'},
             {title: '存入前数量', field: 'numStart', visible: true, align: 'center', valign: 'middle'},
             {title: '存入后数量', field: 'numEnd', visible: true, align: 'center', valign: 'middle'},
             {title: '图片', field: 'imgUrl', visible: true, align: 'center', valign: 'middle',
