@@ -17,6 +17,7 @@ import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.core.util.StringUtils;
 import com.stylefeng.guns.core.util.ToolUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,10 @@ public class ConstantFactory implements IConstantFactory {
     private TOemMapper tOemMapper = SpringContextHolder.getBean(TOemMapper.class);
     private TDollInfoMapper tDollInfoMapper = SpringContextHolder.getBean(TDollInfoMapper.class);
     private TMemberMapper tMemberMapper = SpringContextHolder.getBean(TMemberMapper.class);
+    @Autowired
+    private AgentWithdrawMapper agentWithdrawMapper;
+    @Autowired
+    private AgentChargeMapper agentChargeMapper;
      
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -385,11 +390,6 @@ public class ConstantFactory implements IConstantFactory {
     }
 
 
-
-    /**
-     * 获取菜单名称
-     */
-
     @Override
     public Integer getStockByDollID(String dollID) {
       TDollInfo tDollInfo = tDollInfoMapper.selectDollInfoByDollCode(dollID);
@@ -406,5 +406,15 @@ public class ConstantFactory implements IConstantFactory {
     @Override
     public  Integer getInviteNum1ByAgentIdAndLevel(Integer agentId, Integer level){
         return tMemberMapper.getInviteNum1ByAgentIdAndLevel(agentId,level);
+    }
+
+    @Override
+    public AgentWithdraw sumAmountFromAgentWithdrawByAgentId(Integer agentId) {
+        return agentWithdrawMapper.getSumAmountByAgentId(agentId);
+    }
+
+    @Override
+    public AgentCharge sumAmountFromAgentChargeByAgentIdAndLevel(AgentCharge agentCharge) {
+        return agentChargeMapper.getSumAmountByAgentId(agentCharge);
     }
 }

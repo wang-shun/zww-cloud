@@ -143,7 +143,7 @@
 		a.agent_three_fee agentThreeFee,a.agent_three_income*0.01 agentThreeIncome,
 		"-" agentSuperFee,"-" agentSuperIncome,"-" agentOneFee,"-" agentOneIncome,"-" agentTwoFee,"-" agentTwoIncome
 	</if>
-	<if test="agentId == null and agentId != 0 and level == null">
+	<if test="agentId == null and level == null">
 		a.agent_super_fee agentSuperFee,a.agent_super_income*0.01 agentSuperIncome,
 		a.agent_one_fee agentOneFee,a.agent_one_income*0.01 agentOneIncome,
 		a.agent_two_fee agentTwoFee,a.agent_two_income*0.01 agentTwoIncome,

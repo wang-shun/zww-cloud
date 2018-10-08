@@ -1,5 +1,7 @@
 package com.stylefeng.guns.common.constant.factory;
 
+import com.stylefeng.guns.common.persistence.model.AgentCharge;
+import com.stylefeng.guns.common.persistence.model.AgentWithdraw;
 import com.stylefeng.guns.common.persistence.model.Dict;
 
 import java.util.List;
@@ -127,4 +129,8 @@ public interface IConstantFactory {
     Integer getInviteNumByAgentIdAndLevel(Integer agentId,Integer level);
 
     Integer getInviteNum1ByAgentIdAndLevel(Integer agentId, Integer level);
+
+    AgentWithdraw sumAmountFromAgentWithdrawByAgentId(Integer agentId);
+
+    AgentCharge sumAmountFromAgentChargeByAgentIdAndLevel(AgentCharge agentCharge);
 }

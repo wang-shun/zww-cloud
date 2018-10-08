@@ -127,11 +127,12 @@ public class AgentChargeController extends BaseController {
      * 总数据
      */
     @PostMapping("/totle")
-    @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
+   // @Permission({Const.AGENT_SUPER,Const.AGENT_ONE,Const.AGENT_TWO,Const.AGENT_three})
     @ResponseBody
     public Map<String, Object> totle() throws Exception{
         Map<String, Object> resultMap = new HashedMap<String, Object>();
-        TAgent tAgent = agentService.selectTAgentByUId(ShiroKit.getUser().getId());
+        User userdto =(User) ShiroKit.getSession().getAttribute("userL");
+        TAgent tAgent = agentService.selectTAgentByUId(userdto.getId());
         AgentCharge agentCharge = new AgentCharge();
         if(tAgent.getLevel() == 0){
             agentCharge.setAgentSuperId(tAgent.getId());
